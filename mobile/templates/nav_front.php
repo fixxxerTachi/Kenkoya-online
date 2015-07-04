@@ -26,6 +26,7 @@
 <?php endif;?>
 				<li><a href='<?php echo base_url('front_cart/show_cart') ?>'><img src='<?php echo base_url('images/menu/cart.jpg')?>' width='90' height='47' alt='カートを見る'></a></li>
 				<div id='cart_count'><?php echo $cart_count ?></div>
+			</ul>
 		</div>
 	</div>
 </div>

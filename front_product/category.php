@@ -24,6 +24,11 @@
 	<?php endif;?>
 	<?php if(!empty($result)):?>
 		<?php foreach($result as $row):?>
+			<?php //個別商品の販売期間が設定されているものは表示しない ?>
+			<?php $today = new DateTime(); ?>
+			<?php $ssdatetime = $row->sale_start_datetime ? new DateTime($row->sale_start_datetime) : new DateTime('1000-01-01 00:00:00');?>
+			<?php $sedatetime = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : new DateTime('9999-12-31 23:59:59');?>
+			<?php if($ssdatetime <= $today && $sedatetime > $today): ?>
 				<div class='outer-information'>
 					<ul class='inner-information'>
 						<li><span class='logo_pink_large'><?php echo $row->title ?> 掲載</span></li>
@@ -34,6 +39,7 @@
 						<li>税抜 <?php echo number_format($row->sale_price) ?>円</li>
 					</ul>
 				</div>
+			<?php endif;?>	
 		<?php endforeach;?>
 	<?php else:?>
 			<p>商品がありません</p>
