@@ -40,10 +40,6 @@
 					</tr>
 				<?php endif;?>
 					<tr>
-						<th><label for='temp_zone'>配送区分</label></th>
-						<td><?php echo form_dropdown('temp_zone',$list_temp_zone,$form_data->temp_zone_id) ?></td>
-					</tr>
-					<tr>
 						<th><label for='weight'>重量</label></th>
 						<td><input type='text' name='weight' id='weight' value='<?php echo $form_data->weight ?>'>g</td>
 					</tr>
@@ -69,6 +65,7 @@
 		<div class='contents'>
 			<h2>商品コードからCSVファイルをアップロード</h2>
 			<?php if(!empty($upload_file_message)):?><p><?php echo $upload_file_message ?></p><?php endif; ?>
+			<p><?php echo form_checkbox('truncate','1') ?>既存のテーブルを削除して新たに登録しなおす場合はチェックして下さい</p>
 			<p>1:商品コード 2:温度帯　3:重量 4:高さ 5:幅　6:深さ 7:体積</p>
 			<table class='detail'>
 				<?php echo form_open_multipart() ?>
@@ -81,6 +78,7 @@
 				</form>
 			</table>
 		</div>
+		<!--
 		<div class='contents'>
 			<h2>商品台帳からCSVファイルをアップロード</h2>
 			<?php if(!empty($upload_file_message)):?><p><?php echo $upload_file_message ?></p><?php endif; ?>
@@ -98,11 +96,13 @@
 				</form>
 			</table>
 		</div>
+		-->
 		<div class='contents'>
 			<h2>商品サイズが未登録のデータをダウンロードする</h2>
 			<table class='detail'>
 				<?php echo form_open() ?>
 				<tr>
+					<td><input type='checkbox' name='empty_data' value='empty_data' checked='checked' id='empty_data'><label for='empty_data'>サイズデータがない商品のみを出力</label></td>
 					<td><?php echo form_dropdown('ad_id_no_size',$ad_list) ?></td>
 					<td><input type='submit' name='no_size' value='csvダウンロード'></td>
 				</tr>

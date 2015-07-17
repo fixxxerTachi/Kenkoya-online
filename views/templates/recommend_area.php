@@ -6,7 +6,10 @@
 		<ul class='inner-information'>
 		<?php if(!empty($item->advertise_id)):?>
 			<li><?php if(!empty($item->title)):?><span class='logo_pink_large'><?php echo $item->title ?> 掲載</span><?php endif;?></li>
+			<!--
 			<li><a href='<?php echo base_url("index/detail_product/{$item->product_id}") ?>'><img src='<?php echo base_url(show_image($item->product_code, 120)) ?>' width='120' height='120' alt='<?php echo $item->ad_pro_product_name ?>'></a></li>
+			-->
+			<li><a href='<?php echo base_url("index/detail_product/{$item->product_id}") ?>'><img src='<?php echo base_url("images/products/ak{$item->product_code}.jpg") ?>' width='120' height='120' alt='<?php echo $item->ad_pro_product_name ?>'></a></li>
 			<li><?php echo $item->maker ?></li>
 			<li><?php echo $item->ad_pro_product_name ?></li>
 			<li><?php echo number_format($item->ad_pro_sale_price) ?>円</li>

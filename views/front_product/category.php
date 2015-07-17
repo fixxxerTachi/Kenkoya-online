@@ -32,14 +32,17 @@
 				<div class='outer-information'>
 					<ul class='inner-information'>
 						<li><span class='logo_pink_large'><?php echo $row->title ?> 掲載</span></li>
+						<!--
 						<li><a href='<?php echo base_url("index/detail_product/{$row->id}")?>'><img src='<?php echo base_url(show_image($row->product_code, 150)) ?>' width = '150' height='150'></a></li>
+						-->
+						<li><a href='<?php echo base_url("index/detail_product/{$row->id}")?>'><img src='<?php echo base_url("images/products/ak{$row->product_code}.jpg") ?>' width = '150' height='150'></a></li>
 						<li class='logo number'><?php echo $row->code ?></li>
 						<li><?php echo $row->maker ?></li>
 						<li><?php echo $row->product_name ?></li>
 						<li>税抜 <?php echo number_format($row->sale_price) ?>円</li>
 					</ul>
 				</div>
-			<?php endif;?>	
+			<?php endif;?>
 		<?php endforeach;?>
 	<?php else:?>
 			<p>商品がありません</p>

@@ -22,7 +22,7 @@
 					<table class='detail detail-left'>
 						<caption>商品台帳</caption>
 						<tr>
-							<th>商品番号</th>
+							<th>注文番号</th>
 							<td><input type='text' name='code' value='<?php echo $form_data->code ?>'></td>
 						<tr>
 							<th>商品コード</th>
@@ -33,12 +33,20 @@
 							<td><input type='text' name='branch_code' value='<?php echo $form_data->branch_code ?>'></td>
 						</tr>
 						<tr>
+							<th>製造元</th>
+							<td><input type='text' name='vendor_code' value='<?php echo $form_data->maker ?>'>
+						</tr>
+						<tr>
 							<th>商品名</th>
 							<td><input type='text' name='product_name' value='<?php echo $form_data->product_name ?>'></td>
 						</tr>
 						<tr>
 							<th>規格</th>
 							<td><input type='text' name='size' value='<?php echo $form_data->size ?>'></td>
+						</tr>
+						<tr>
+							<th>仕入原価</th>
+							<td><input type='text' name='cost_price' value='<?php echo $form_data->cost_price ?>'></td>
 						</tr>
 						<tr>
 							<th>販売単価</th>
@@ -60,6 +68,9 @@
 							<th>カロリー</th>
 							<td><input type='text' name='calorie' value='<?php echo $form_data->calorie ?>'></td>
 						</tr>
+					</table>
+					<table class='detail detail-right'>
+						<caption>その他情報</caption>
 						<tr>
 							<th><label for='on_sale'>販売中</label></th>
 							<td>
@@ -137,7 +148,12 @@
 								<?php echo form_dropdown('delivery_end_time',$hour_list,$detime) ?>:00前に終了
 							</td>
 						</tr>	
+						<tr>
+							<th class='no-border'></th>
+							<td><input type='submit' name='submit' value='登録する'><a class='edit_back' href='<?php echo base_url('admin_advertise/list_product/' . $form_data->advertise_id) ?>'>戻る</a></td>
+						</tr>
 					</table>
+<!--
 					<table class='detail detail-right'>
 						<caption>商品マスタ</caption>
 						<tr>
@@ -175,15 +191,12 @@
 						<tr>
 							<th><label for='on_sale'>販売中</label></th>
 							<td>
-							<!--
 								<select name='p_on_sale'>
 									<?php foreach($on_sale as $key => $value):?>
 									<option value=<?php echo $key?> <?php if($key == $form_data->p_on_sale) echo 'selected=selected' ?>>
 										<?php echo $value ?>
 									</option>
 									<?php endforeach; ?>
-								</select>
-							-->	
 								<?php $list = array(0=>'終売','販売中');?>
 								<?php echo $list[$form_data->p_on_sale]; ?>
 							</td>
@@ -201,12 +214,13 @@
 								<label for='allergen_<?php echo $a->id ?>'><?php echo $a->name ?></label>
 								<?php endforeach; ?>
 							</td>
-						</tr>
+						</tr
 						<tr>
 							<th class='no-border'></th>
 							<td><input type='submit' name='submit' value='登録する'><a class='edit_back' href='<?php echo base_url('admin_advertise/list_product/' . $ad_id) ?>'>戻る</a></td>
 						</tr>
 					</table>
+-->
 				</form>
 		</div>
 	</div>

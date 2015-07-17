@@ -46,8 +46,16 @@
 				<input type='hidden' name='sale_price' value='<?php echo $row->sale_price ?>'>
 				<input type='hidden' name='product_code' value='<?php echo $row->product_code ?>'>
 				<input type='hidden' name='branch_code' value='<?php echo $row->branch_code ?>'>
+	<?php //個別商品の販売期間が設定されているものはカートに入れるを表示しない?>
+	<?php $today = new DateTime();?>
+	<?php $ssdatetime = $row->sale_start_datetime ? new DateTime($row->sale_start_datetime) : new DateTime('1000-01-01 00:00:00');?>
+	<?php $sedatetime = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : new DateTime('9999-12-31 23:59:59');?>
+	<?php if($ssdatetime <= $today && $sedatetime > $today):?>
 				<li>数量 <?php echo form_dropdown('quantity',$select_quantity) ?></li>
 				<li><input class='cart_button' name='submit' type='submit' value='カートに入れる'></li>
+	<?php else:?>
+				<li>申し訳ありません。現在お取扱いしておりません。</li>
+	<?php endif;?>
 			</form>
 			</ul>
 		</div>

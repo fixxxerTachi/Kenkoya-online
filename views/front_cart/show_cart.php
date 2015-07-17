@@ -25,7 +25,10 @@
 			<table>
 			<?php foreach($list_product as $k => $p):?>
 			<tr>
+			<!--
 				<td><img src='<?php echo base_url(show_image($p->product_code,50)) ?>' width='50' height='50'></td>
+			-->
+				<td><img src='<?php echo base_url("images/products/ak{$p->product_code}.jpg") ?>' width='50' height='50'></td>
 				<td class='long'><?php echo $p->product_name ?></td>
 				<td><?php echo number_format($p->sale_price) ?>円</td>
 				<td>数量:<?php echo $p->quantity ?></td>
@@ -64,4 +67,3 @@
 </div>
 </body>
 </html>
-<pre><?php var_dump($this->session->userdata('carts')) ?></pre>

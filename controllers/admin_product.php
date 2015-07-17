@@ -534,7 +534,7 @@ class Admin_product extends CI_Controller{
 	
 	public function product_charge()
 	{
-		$this->data['h2title'] = '商品サイズ情報登録';
+		$this->data['h2title'] = '商品サイズ情報登録/変更';
 		$form_data = new StdClass();
 		$form_data = $this->Product_size;
 		$update_flag = False;
@@ -563,7 +563,7 @@ class Admin_product extends CI_Controller{
 			{
 				$db_data = array(
 					'product_code'=>$form_data->product_code,
-					'temp_zone_id'=>(int)$form_data->temp_zone,
+					//'temp_zone_id'=>(int)$form_data->temp_zone,
 					'weight'=>(float)$form_data->weight,
 					'width'=>$form_data->width,
 					'height'=>$form_data->height,
@@ -613,11 +613,11 @@ class Admin_product extends CI_Controller{
 				$dbh = getDb();
 				if($this->input->post('trancate'))
 				{
-					$dbh->query('TRUNCATE takuhai_product_size');
+					$dbh->query("TRUNCATE {$this->new_tablename}");
 				}
-				$stmt = $dbh->prepare('insert into takuhai_product_size(
+				/*
+				$stmt= $dbh->prepare('insert into takuhai_product_size(
 					product_code
-					,temp_zone_id
 					,weight
 					,height
 					,width
@@ -625,18 +625,49 @@ class Admin_product extends CI_Controller{
 					,volume
 				)values(
 					:product_code
-					,:temp_zone_id
 					,:weight
 					,:height
 					,:width
 					,:depth
 					,:volume
 				)');
+				*/
+				$stmt_insert = $dbh->prepare("insert into {$this->new_tablename}(
+					product_code
+					,weight
+					,height
+					,width
+					,depth
+					,volume
+				)values(
+					:product_code
+					,:weight
+					,:height
+					,:width
+					,:depth
+					,:volume
+				)");
+				$stmt_update = $dbh->prepare("update {$this->new_tablename} set 
+					weight = :weight
+					,height = :height
+					,width = :width
+					,depth = :depth
+					,volume = :volume 
+					where product_code = :product_code
+				");
+				
 				$error_arr = array();
 				foreach($csv as $row)
 				{
+					if($this->Product_size->check_duplicate($row[0]))
+					{
+						$stmt = $stmt_update;
+					}else{
+						$stmt = $stmt_insert;
+					}
+					
 					$stmt->bindValue(':product_code',$row[0]);
-					$stmt->bindValue(':temp_zone_id',$row[1]);
+					//$stmt->bindValue(':jancode',$row[1]);
 					$stmt->bindValue(':weight',$row[2]);
 					$stmt->bindValue(':height',$row[3]);
 					$stmt->bindValue(':width',$row[4]);
@@ -668,7 +699,7 @@ class Admin_product extends CI_Controller{
 			}
 			$dbh = null;
 		}
-		
+/*
 		if(isset($_FILES['csvfile2']))
 		{
 			try{
@@ -688,31 +719,35 @@ class Admin_product extends CI_Controller{
 				$dbh = getDb();
 				if($this->input->post('truncate2'))
 				{
-					$dbh->query('TRUNCATE takuhai_product_size');
+					$dbh->query("TRUNCATE {$this->new_tablename}");
 				}
-				$stmt = $dbh->prepare('insert into takuhai_product_size(
+				$stmt_insert = $dbh->prepare("insert into {$this->new_tablename}(
 					product_code
-					,temp_zone_id
 					,weight
 					,height
 					,width
 					,depth
 					,volume
-					,create_datetime
 				)values(
 					:product_code
-					,:temp_zone_id
 					,:weight
 					,:height
 					,:width
 					,:depth
 					,:volume
-					,:create_datetime
-				)');
+				)");
+				$stmt_update = $dbh->prepare("update {$this->new_tablename} set 
+					weight = :weight
+					,height = :height
+					,width = :width
+					,depth = :depth
+					,volume = :volume 
+					where product_code = :product_code
+				");
 				$error_arr = array();
 				foreach($csv as $row)
 				{
-					/** product_code検索処理を行う **/
+					// product_code検索処理を行う 
 					$product_code = $this->Advertise_product->get_by_product_code($ad_id,$row[0]);
 					$stmt->bindValue(':product_code',(int)$product_code);
 					$stmt->bindValue(':temp_zone_id',$row[1]);
@@ -748,7 +783,8 @@ class Admin_product extends CI_Controller{
 			}
 			$dbh = null;
 		}
-		
+*/
+
 		//チラシデータからサイズが登録されていない商品リストをダウンロードする
 		if($this->input->post('no_size'))
 		{
@@ -757,18 +793,25 @@ class Admin_product extends CI_Controller{
 				if(empty($ad_id)){
 					throw new Exception('対象となるチラシを入力してください');
 				}
+				$size_data = '';
+				if($this->input->post('empty_data'))
+				{
 				//広告から商品サイズが登録されていないデータの一覧をダウンロードする
-				$no_list = $this->Product_size->get_list_no_size($ad_id);
-				
+					$size_data = $this->Product_size->get_list_no_size($ad_id);
+				}
+				else
+				{
+					$size_data = $this->Product_size->get_list_all_size($ad_id);
+				}
 				//csvを生成してみる
-				$this->load->dbutil();
+				//$this->load->dbutil();
 				$this->load->helper('download');
 				//$csv = $this->dbutil->csv_from_result($no_list);
 				//$csv = mb_convert_encoding($csv,'Shift_JIS','UTF-8');
 				$filename = mb_convert_encoding('商品サイズ未登録リスト.csv','Shift_JIS','UTF-8');
 				//force_download($filename,$csv);
 				$this->load->library('csv');
-				$this->csv->setData($no_list);
+				$this->csv->setData($size_data);
 				$this->csv->getCsvMs($filename);
 				header('Content-Type: application/octet-stream');
 				header('Content-Disposition: attachment; filename=' . $filename);

@@ -125,27 +125,9 @@
 </div>
 </body>
 <script>
-/*
-var check = document.getElementById('user_email');
-var email = document.getElementById('email_confirm');
-var username = document.getElementById('username');
-check.addEventListener('click',function(){
-	if(check.checked == true){
-		username.value = email.value;
-	}else{
-		username.value = '';
-	}
-},false);
-*/
-//var prefecture = document.getElementById('prefecture');
-//var address1 = document.getElementById('address1');
-//AjaxZip3.zip2addr(this,'','prefecture','street');
 var search_zip = document.getElementById('search_zip');
 search_zip.onclick = function(){
 	AjaxZip3.zip2addr('zipcode1','zipcode2','prefecture','address1')
 };
 </script>
 </html>
-<?php echo 'cart:';var_dump($this->session->userdata('carts'));?>
-<?php echo 'customer:';var_dump($this->session->userdata('customer'));?>
-<?php echo 'address:';var_dump($this->session->userdata('address'));?>

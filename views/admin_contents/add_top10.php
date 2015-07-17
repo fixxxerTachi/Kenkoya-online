@@ -16,7 +16,15 @@
 <?php if(count($result) > 0):?>
 			<?php echo form_open() ?>
 			<table class='list'>
-			<tr><th>画像</th><th>広告名</th><th>商品コード<th>商品名</th><th>価格</th><th>並び順</th><th></th><th></th><th></th></tr>
+			<tr>
+				<th>画像</th>
+				<th>広告名</th>
+				<th>商品コード</th>
+				<th>商品名</th>
+				<th>価格</th>
+				<th>並び順</th>
+				<th></th><th></th><th></th>
+			</tr>
 	<?php foreach($result as $row):?>
 			<tr>
 				<td><img src='<?php echo base_url(show_image($row->ad_pro_code)) ?>' width='25' height='25' alt='<?php echo $row->ad_pro_product_name ?>'></td>

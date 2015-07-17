@@ -36,6 +36,7 @@ class Box extends CI_Model{
 			$product = $this->Advertise_product->get_product_with_size($c->product_id);
 			$product->quantity = $c->quantity;
 			$list_product[] = $product;
+var_dump($product);
 		}
 //echo '<pre>'; print_r($list_product); echo '</pre>';
 		//総重量、総体積を取得するためにそれぞれを配列に格納(温度帯別)
@@ -125,7 +126,7 @@ echo '==============================================<br>';
 	{
 		$data = $this->get_size_data($temp_zone_id,$obj);
 		$value_box_arr = array();
-		$weight_box_arr = array();	
+		$weight_box_arr = array();
 //////***********************体積から箱計算*************************////////
 		//半端の体積数を計算する,一番大きな箱に入るかどうか確かめる
 		$left_volume = $data->total_volume - ($data->max_volume_size * $data->volume_quantity);
@@ -185,7 +186,7 @@ echo '==============================================<br>';
 				return $this->convert_zone_id($value_box_arr);
 			}else{
 				return $this->convert_zone_id($weight_box_arr);
-			}			
+			}
 		}
 		else
 		{

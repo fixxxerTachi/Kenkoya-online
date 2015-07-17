@@ -1,14 +1,5 @@
 <?php
 class Advertise_product extends CI_Model{
-	/*
-	public $tablename;
-	public $id;
-	public $title;
-	public $description;
-	public $start_datetime;
-	public $end_datetime;
-	public $def_flag;
-	*/
 	public $code;
 	public $product_code;
 	public $branch_code;
@@ -44,7 +35,7 @@ class Advertise_product extends CI_Model{
 		$this->load->database();
 		$this->tablename = 'advertise_product';
 	}
-	
+		
 	/**　チラシ記載の商品番号から商品コードを取得する
 	*@param int code
 	*@return int product_code
@@ -105,13 +96,13 @@ class Advertise_product extends CI_Model{
 			ad_p.product_name,
 			ad_p.sale_price,
 			ad_p.advertise_id,
-			ad_p.sale_start_datetime,
-			ad_p.sale_end_datetime,
+			ad_p.sale_start_datetime as sale_start_datetime,
+			ad_p.sale_end_datetime as sale_end_datetime,
 			ad.title,
 		');
 		$this->db->from($this->tablename . ' as ad_p');
 		$this->db->join('advertise as ad','ad_p.advertise_id = ad.id','left');
-		$this->db->join('master_products as p','p.product_code = ad_p.product_code','left');
+		//$this->db->join('master_products as p','p.product_code = ad_p.product_code','left');
 		$this->db->where('ad_p.category_id',$category_id);
 		$this->db->where('ad_p.on_sale',1);
 		$this->db->where('ad.del_flag',0);
@@ -119,7 +110,7 @@ class Advertise_product extends CI_Model{
 		$date = $datetime->format('Y-m-d');
 		$this->db->where('ad.start_datetime <= ',$date);
 		$this->db->where('ad.end_datetime > ',$date);
-		$this->db->where('p.branch_code = ad_p.branch_code');
+		//$this->db->where('p.branch_code = ad_p.branch_code');
 		if($limit){
 			$this->db->limit($limit,$offset);
 		}
@@ -139,6 +130,8 @@ class Advertise_product extends CI_Model{
 			ad_p.advertise_id,
 			ad_p.product_code,
 			ad_p.branch_code,
+			ad_p.sale_start_datetime as sale_start_datetime,
+			ad_p.sale_end_datetime as sale_end_datetime,
 			ad.title,
 			p.product_code as p_code,
 			p.branch_code as p_branch_code,
@@ -197,12 +190,16 @@ class Advertise_product extends CI_Model{
 			ad_p.freshness_date,
 			ad_p.allergen,
 			ad_p.note,
+			ad_p.sale_start_datetime as sale_start_datetime,
+			ad_p.sale_end_datetime as sale_end_datetime,
+			ad_p.delivery_start_datetime as delivery_start_datetime,
+			ad_p.delivery_end_datetime as delivery_end_datetime,
 			ad.title,
 			ad_p.category_id,
 		');
 		$this->db->from($this->tablename . ' as ad_p');
 		$this->db->join('advertise as ad','ad_p.advertise_id = ad.id','left');
-		$this->db->join('master_products as p','ad_p.product_code = p.product_code','left');
+		//$this->db->join('master_products as p','ad_p.product_code = p.product_code','left');
 		$this->db->where('ad_p.id',$id);
 		$this->db->where('ad_p.on_sale',1);
 		$this->db->where('ad.del_flag',0);
@@ -223,7 +220,7 @@ class Advertise_product extends CI_Model{
 	{
 		$this->db->select('ap.id');
 		$this->db->from($this->tablename . ' as ap');
-		$this->db->join('master_products as mp','ap.product_code = mp.product_code','left');
+		//$this->db->join('master_products as mp','ap.product_code = mp.product_code','left');
 		$this->db->join('advertise as ad','ap.advertise_id = ad.id','left');
 		$datetime = new DateTime();
 		$date = $datetime->format('Y-m-d H:i:s');
@@ -231,10 +228,10 @@ class Advertise_product extends CI_Model{
 		$this->db->where('ad.start_datetime <= ' , $date);
 		$this->db->where('ad.end_datetime > ' , $date);
 		//販売中チェック
-		$this->db->where('mp.on_sale',1);
+		//$this->db->where('mp.on_sale',1);
 		$this->db->where('ap.on_sale',1);
 		//$this->db->where('ap.advertise_id', $advertise_id);
-		$this->db->where('mp.branch_code = ap.branch_code');
+		//$this->db->where('mp.branch_code = ap.branch_code');
 		$this->db->where('ap.id',$product_id);
 		$result = $this->db->get($this->tablename)->row();
 		if(!empty($result))
@@ -257,8 +254,26 @@ class Advertise_product extends CI_Model{
 		$row = $this->db->get()->row();
 		$today = new DateTime();
 		$ssdatetime = $row->sale_start_datetime ? new DateTime($row->sale_start_datetime) : new DateTime('1000-01-01 00:00:00');
-		$sedatetime = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : new DateTime('9999-12-31 00:00:00');
+		$sedatetime = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : new DateTime('9999-12-31 11:59:59');
 		if($ssdatetime <= $today && $today < $sedatetime)
+		{
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+		
+	/***** お届け日限定商品の場合配達日が有効期限内かどうか
+	*/
+	public function check_delivery_limit_date($dateobj,$product_id)
+	{
+		$this->db->select('delivery_start_datetime,delivery_end_datetime');
+		$this->db->from($this->tablename);
+		$this->db->where('id',$product_id);
+		$row = $this->db->get()->row();
+		$dsdatetime = $row->delivery_start_datetime ? new DateTime($row->delivery_start_datetime) : new DateTime('1000-01-01 00:00:00');
+		$dedatetime = $row->delivery_end_datetime ? new DateTime($row->delivery_end_datetime) : new DateTime('9999-12-31 11:59:59');
+		if($dsdatetime <= $dateobj && $dateobj < $dedatetime)
 		{
 			return TRUE;
 		}else{
@@ -301,7 +316,7 @@ class Advertise_product extends CI_Model{
 	{
 		$this->db->select('ap.*');
 		$this->db->from($this->tablename . ' as ap');
-		$this->db->join('master_products as mp','mp.product_code = ap.product_code','left');
+		//$this->db->join('master_products as mp','mp.product_code = ap.product_code','left');
 		$this->db->join('advertise as ad','ap.advertise_id = ad.id','left');
 		$datetime = new DateTime();
 		$date = $datetime->format('Y-m-d');
@@ -309,7 +324,7 @@ class Advertise_product extends CI_Model{
 		$this->db->where('ad.end_datetime > ',$date);
 		$this->db->where('ap.image_group',$image_group);
 		$this->db->where('ap.advertise_id',$advertise_id);
-		$this->db->where('mp.branch_code = ap.branch_code');
+		//$this->db->where('mp.branch_code = ap.branch_code');
 		//販売中
 		$this->db->where('ap.on_sale',ONSALE);
 		//商品に販売期間がある場合

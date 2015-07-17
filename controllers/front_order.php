@@ -49,9 +49,42 @@ class Front_order extends CI_Controller{
 	public function delivery_info()
 	{
 		try{
-			if(!$this->session->userdata('carts')){
+			if(!$carts = $this->session->userdata('carts')){
 				return redirect('front_cart/show_cart');
 			}
+			$messages = array();
+			//お届け日限定商品があるかどうか
+			foreach($carts as $cart)
+			{
+				$c = unserialize($cart);
+				$product = $this->Advertise_product->get_by_product_id($c->product_id);
+				//お届け日限定商品がある場合、期間を表示する
+				if(!empty($product->delivery_start_datetime) || !empty($product->delivery_end_datetime))
+				{
+					$sdate = new DateTime($product->delivery_start_datetime);
+					$edate = new DateTime($product->delivery_end_datetime);
+					if(!empty($sdate))
+					{
+						$startstr = $sdate->format('m月d日') . 'から';
+					}else{
+						$startstr = '';
+					}
+					if(!empty($edate))
+					{
+						$endstr = $edate->format('m月d日') . 'までに';
+					}
+					else
+					{
+						$endstr = '';
+					}
+					$messages[] = "{$product->product_name}は{$startstr}{$endstr}お届けする商品です。配送日指定する際はご注意ください。";
+				}
+			}
+			if(count($messages)>0)
+			{
+				$this->data['error_message'] = $messages;
+			}
+			
 			//sessionからorder_infoを取得
 			$order_info = $this->session->userdata('order_info');
 			//配達予定日の選択リストを取得
@@ -206,6 +239,8 @@ class Front_order extends CI_Controller{
 		$this->data['account'] = $this->Master_type_account->account;
 		//$this->data['order_info'] = $order_info;
 		$this->data['flow_info'] = true;
+		//非会員は口座引落しない
+		unset($payments[PAYMENT_MEMBER]);
 		$this->data['payments'] = $payments;
 		$this->load->view('front_order/delivery_info',$this->data);
 	}
@@ -374,6 +409,7 @@ class Front_order extends CI_Controller{
 			return redirect(base_url('front_order/delivery_info'));
 		}
 		
+		
 		//お支払がクレジットカードなのにカード情報がsessionになかったら戻る
 		if($order_info->payment == PAYMENT_CREDIT){
 			if(!$card_info = $this->session->userdata('card_info')){
@@ -451,6 +487,36 @@ class Front_order extends CI_Controller{
 			$this->data['total'] = $total;
 			$this->data['list_product'] = $total->list_product;
 		}
+		
+		//個々の商品が販売可能かどうかしらべる。もし販売対象以外のがあればエラーメッセージ
+		//配達日が指定されている場合で、商品に配達期間が指定されている場合のチェック
+		$error_messages = array();
+		foreach($this->data['list_product'] as $item)
+		{
+			//商品販売可能かどうか販売期間かどうか
+			if(!$this->Advertise_product->check_on_sale($item->id) || !$this->Advertise_product->validate_sale_period($item->id))
+			{
+				$error_messages[] = "{$item->product_name}は現在お取扱いしていません。カートから削除してください。";
+			}
+			//配達期間かどうか
+			if($order_info->delivery_date!=0) //配達日が指定されている
+			{
+				$deli_date = new DateTime($order_info->delivery_date);
+				if(!$this->Advertise_product->check_delivery_limit_date($deli_date,$item->id))
+				{
+					$sddate = new DateTime($item->delivery_start_datetime);
+					$eddate = new DateTime($item->delivery_end_datetime);
+					$sstr = $sddate ? $sddate->format('Y年m月d日') : '';
+					$estr = $eddate ? $eddate->format('Y年m月d日') : '';
+					$error_messages[] = "{$item->product_name}の配達指定期間内({$sstr}~{$estr})に配達日を指定してください";
+				}
+			}
+		}
+		if(count($error_messages)>0)
+		{
+			$this->data['error_messages'] = $error_messages;
+		}
+		
 		//カード情報がある場合カード番号の下4桁表示
 		if($order_info->payment == PAYMENT_CREDIT){
 			$bottom_number = substr($card_info->card_no,-4);
@@ -485,6 +551,30 @@ class Front_order extends CI_Controller{
 				}
 			}
 			
+			//商品個別の販売可否情報を取得する
+			foreach($carts as $cart)
+			{
+				$c = unserialize($cart);
+				if(!$this->Advertise_product->check_on_sale($c->product_id) || !$this->Advertise_product->check_on_sale($c->product_id))
+				{
+					$this->session->set_flashdata('error','ご購入いただけない商品があります。カートから削除してください。');
+					return redirect('front_order/confirm_order');
+				}
+				if($order_info->delivery_date!= 0)
+				{
+					$deli_date = new DateTime($order_info->delivery_date);
+					if(!$this->Advertise_product->check_delivery_limit_date($deli_date,$c->product_id))
+					{
+						$product = $this->Advertise_product->get_by_product_id($c->product_id);
+						$sdate = new DateTime($product->delivery_start_datetime);
+						$edate = new DateTime($product->delivery_end_datetime);
+						$sstr = $sdate ? $sdate->format('m月d日') : '';
+						$estr = $edate ? $edate->format('m月d日') : '';
+						$this->session->set_flashdata('error',"{$product->product_name}は{$sstr}~{$estr}の間にお届けする商品です。配達指定日を変更して下さい。");
+						return redirect('front_order/confirm_order');
+					}
+				}
+			}
 			$point = isset($order_info->point) ? $order_info->point : 0;
 
 			

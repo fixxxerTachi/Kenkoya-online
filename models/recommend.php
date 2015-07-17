@@ -43,8 +43,6 @@ class Recommend extends CI_Model{
 			r.product_code,
 			r.advertise_id,
 			r.advertise_product_code,
-			p.product_name as p_product_name,
-			p.sale_price as p_sale_price,
 			ad.title as title,
 			ad_pro.product_name as ad_pro_product_name,
 			ad_pro.product_code,
@@ -56,10 +54,10 @@ class Recommend extends CI_Model{
 		$this->db->from($this->tablename . ' as r');
 		$this->db->join('advertise_product as ad_pro','ad_pro.code = r.advertise_product_code','left');
 		$this->db->join('advertise as ad','ad.id = ad_pro.advertise_id','left');
-		$this->db->join('master_products as p','p.product_code = ad_pro.product_code','left');
+		//$this->db->join('master_products as p','p.product_code = ad_pro.product_code','left');
 		//$this->db->group_by('r.id');
 		$this->db->where('r.advertise_id = ad.id');
-		$this->db->where('p.branch_code = ad_pro.branch_code');
+		//$this->db->where('p.branch_code = ad_pro.branch_code');
 		$this->db->where('r.del_flag',0);
 		$this->db->where('r.show_flag',1);
 		$this->db->where('ad_pro.on_sale',1);
@@ -79,8 +77,6 @@ class Recommend extends CI_Model{
 	public function show_list_with_advertise_and_product($del_flag = true)
 	{
 		$this->db->select('r.*
-			,p.product_name as p_product_name
-			,p.sale_price as p_sale_price
 			,ad.id as ad_id
 			,ad.title as ad_title
 			,ad_pro.code as ad_code
@@ -92,12 +88,13 @@ class Recommend extends CI_Model{
 		$this->db->from($this->tablename . ' as r');
 		$this->db->join('advertise_product as ad_pro','ad_pro.code = r.advertise_product_code','left');
 		$this->db->join('advertise as ad','ad.id = r.advertise_id','left');
-		$this->db->join('master_products as p','p.product_code = ad_pro.product_code','left');
+		//$this->db->join('master_products as p','p.product_code = ad_pro.product_code','left');
 		//$this->db->where('ad_pro.code = r.advertise_product_code');
-		$this->db->group_by('r.id');
+		$this->db->where('r.advertise_id = ad_pro.advertise_id');
 		if($del_flag){
 			$this->db->where('r.del_flag',0);
 		}
+		$this->db->group_by('r.id');
 		$this->db->order_by('sort_order','asc');
 		$query= $this->db->get();
 		return $query->result();

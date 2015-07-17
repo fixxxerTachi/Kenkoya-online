@@ -184,6 +184,7 @@ class Advertise extends CI_Model{
 	
 	public function get_product_by_id_with_product($product_id = null)
 	{
+		/*
 		$this->db->select("a.*
 			,p.id as product_id
 			,p.category_code as p_category_code
@@ -202,6 +203,8 @@ class Advertise extends CI_Model{
 			,p.create_date as p_create_date
 			,p.update_date as p_update_date
 			");
+		*/
+		$this->db->select("a.*");
 		$this->db->from($this->product_tablename . ' as a');
 		$this->db->where('a.id' , $product_id);
 		$this->db->join('master_products as p','a.product_code = p.product_code','left');

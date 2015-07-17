@@ -22,6 +22,7 @@ class Admin_advertise extends CI_Controller{
 		$this->load->model('Master_hour');
 		$this->load->model('Banner');
 		$this->load->model('Master_show_flag');
+		$this->load->model('Takuhai_charge');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
@@ -431,9 +432,10 @@ class Admin_advertise extends CI_Controller{
 		$product_id = $this->uri->segment(3);
 		$ad_result = $this->Advertise->get_by_id($ad_id);
 		$product_result = $this->Advertise->get_product_by_id_with_product($product_id);
+		$this->data['temp_zone_list'] = $this->Takuhai_charge->list_temp_zone();
 		$this->data['ad_result'] = $ad_result;
 		$this->data['result'] = $product_result;
-		$this->data['allergen'] = $this->Product->get_allergen_by_id($product_result->product_id);
+		//$this->data['allergen'] = $this->Product->get_allergen_by_id($product_result->product_id);
 		$this->data['h2title'] = "{$this->data['ad_result']->title}: 商品情報の詳細";
 		$this->load->view('admin_advertise/detail_product.php',$this->data);
 	}
@@ -447,13 +449,13 @@ class Admin_advertise extends CI_Controller{
 		$this->data['hour_list'] = $this->Master_hour->hour;
 		$id = $this->uri->segment(3);
 		$ad_id = $this->uri->segment(4);
-		$this->data['ad_id'] = $ad_id;
+		//$this->data['ad_id'] = $ad_id;
 		//advertieseのproducts(master_productsと連結したもの)取得
 		$ad_result = $this->Advertise->get_product_by_id_with_product($id);
-		$product_id =$ad_result->product_id;
+		//$product_id =$ad_result->product_id;
 
-		$allergen_arr = $this->Product->get_allergen_by_id($ad_result->product_id);
-
+		//$allergen_arr = $this->Product->get_allergen_by_id($ad_result->product_id);
+		/*
 		$allergens=array();
 		$pa_middle_ids = array();
 		foreach($allergen_arr as $a){
@@ -464,6 +466,7 @@ class Admin_advertise extends CI_Controller{
 		//$pa_middle_ids 中間テーブルのid
 		
 		$ad_result->allergens = $allergens;
+		*/
 		$this->data['form_data'] = $ad_result;
 		
 		if($this->input->post('submit')){

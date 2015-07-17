@@ -23,6 +23,11 @@
 			<?php if(!empty($error_message)):?>
 			<p class='error'><?php echo $error_message ?></p>
 			<?php endif; ?>	
+			<?php if(!empty($error_messages)):?>
+			<?php foreach($error_messages as $err):?>
+			<p class='error'><?php echo $err ?></p>
+			<?php endforeach;?>
+			<?php endif;?>
 			<?php echo form_open('front_order/order_process') ?>
 <?php if(!empty($list_product)):?>
 				<h3>カートに入れた商品</h3>
@@ -61,6 +66,7 @@
 				<p>何も入っていません</p>
 <?php endif;?>
 				<h3>配達先</h3>
+	<?php //宅急便と宅配を区別するため'takuhai'パラメータを送信する ?>
 				<table class='contact_form' cellpadding='0' cellspacing='10'>
 					<tr>
 						<th><label for='name' name='name'>お名前</label></th>
@@ -109,7 +115,7 @@
 				<table class='contact_form' id='cart_menu'>
 					<tr>
 						<td class='no-border'></td>
-						<td><input type='submit' name='submit' value='購入する'><a class='edit_back' href='<?php echo base_url("front_order/delivery_info{$param}") ?>'>戻る</a></td>
+						<td><input type='submit' name='submit' value='購入する' ><a class='edit_back' href='<?php echo base_url("front_order/delivery_info{$param}") ?>'>戻る</a></td>
 					</tr>
 				</table>
 			</form>
@@ -139,12 +145,12 @@ $('input[type=submit]').on('click',function(){
 });
 </script>
 </html>
-<?php echo 'carts:';var_dump($this->session->userdata('carts'));echo '<br>'; ?>
-<?php foreach($this->session->userdata('carts') as $cart):?>
-<?php var_dump(unserialize($cart));?>
-<?php endforeach;?>
-<?php echo 'card_info:';var_dump($this->session->userdata('card_info'));echo '<br>';?>
+<?php //echo 'carts:';var_dump($this->session->userdata('carts'));echo '<br>'; ?>
+<?php //foreach($this->session->userdata('carts') as $cart):?>
+<?php //var_dump(unserialize($cart));?>
+<?php //endforeach;?>
+<?php //echo 'card_info:';var_dump($this->session->userdata('card_info'));echo '<br>';?>
 <?php echo 'order_info:';var_dump($this->session->userdata('order_info')); echo '<br>';?>
-<?php echo 'customer:';var_dump($this->session->userdata('customer')); echo '<br>';?>
-<?php echo 'destination:';var_dump($this->session->userdata('destination')); echo '<br>';?>
-<?php echo 'no-member:';var_dump($this->session->userdata('no-member')); echo '<br>';?>
+<?php //echo 'customer:';var_dump($this->session->userdata('customer')); echo '<br>';?>
+<?php //echo 'destination:';var_dump($this->session->userdata('destination')); echo '<br>';?>
+<?php //echo 'no-member:';var_dump($this->session->userdata('no-member')); echo '<br>';?>

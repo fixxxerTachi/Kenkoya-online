@@ -34,12 +34,13 @@ class Category extends CI_Model{
 	{
 		$this->db->insert($this->tablename, $data);
 	}
+	
 	public function get_category_by_id($id=null)
 	{
 		$this->db->where('id',$id);
 		$query = $this->db->get($this->tablename);
-		$result =  $query->result();
-		return $result[0];
+		$result =  $query->row();
+		return $result;
 	}
 	
 	public function change_category($id=null,$data=array())
