@@ -471,6 +471,9 @@ class Front_order extends CI_Controller{
 			if($order_info->takuhai){
 				//配送料金計算
 				$boxes = $this->Box->get_boxes($carts);
+				//箱の種類名を取得
+				$this->data['boxnames'] = $this->Box->get_box_name($boxes);
+//var_dump($boxes);
 				//$pref_id = $this->Customer->get_pref_id($userdata);
 				$pref_id = $userdata->pref_id;
 				$charge_price = $this->Takuhai_charge->get_total_charge($boxes,$pref_id);
@@ -792,5 +795,6 @@ class Front_order extends CI_Controller{
 		if((int)$str > (int)$total){
 			throw new Exception('ポイントが購入金額を超えています');
 		}
-	}		
+	}
+	
 }

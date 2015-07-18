@@ -17,6 +17,7 @@ class Test_charge extends CI_Controller {
 		$this->load->model('Master_address');
 		$this->load->model('Nohin');
 		$this->load->model('Customer');
+		$this->tablename = 'boxes';
 	}
 	
 	public function index()
@@ -149,7 +150,7 @@ echo 'box by weight:' . $weight_qt;
 		$volume = $volume - $left;
 		foreach($keys as $key)
 		{
-			$vol = $this->get_left($boxes,$left,$key);			
+			$vol = $this->get_left($boxes,$left,$key);
 		}	
 	}
 	
@@ -173,5 +174,460 @@ echo 'box by weight:' . $weight_qt;
 		echo '<pre>';print_r($order_info);echo '</pre>';
 		var_dump($this->Nohin->is_Nohin($userdata,$order_info));
 	}
+	
+	public function test_charge_price()
+	{
+		header('content-type: text/html; charset=utf-8');
+		//商品情報をセット
+		$carts = array();
+		
+		$cold = new StdClass();
+		$cold->product_id = 2033;
+		$cold->advertise_id = 8;
+		$cold->sale_price = 300;
+		$cold->branch_code = 5;
+		$cold->product_code = 924;
+		$cold->quantity = 2;
 
+		$col = new StdClass();
+		$col->product_id = 2073;
+		$col->advertise_id = 8;
+		$col->sale_price = 300;
+		$col->branch_code = 8;
+		$col->product_code = 1186;
+		$col->quantity = 2;
+		
+		$normal = new StdClass();
+		$normal->product_id = 2329;
+		$normal->advertise_id = 8;
+		$normal->sale_price = 700;
+		$normal->branch_code = 3;
+		$normal->product_code = 581;
+		$normal->quantity = 1;
+		
+		//$carts[] = serialize($cold);
+		//$carts[] = serialize($col);
+		$carts[] = serialize($normal);
+		
+echo 'カートの中身';var_dump($carts);echo '<hr>';
+		//Box::get_box
+		$boxes = $this->Box->get_boxes($carts);
+echo '結果：'; var_dump($boxes);echo '<hr>';
+echo '<p>Box::get_boxの処理過程</p>';
+		
+		/***get_boxesの処理過程***/
+		$list_product = array();
+		foreach($carts as $cart)
+		{
+			$c = unserialize($cart);
+			$product = $this->Advertise_product->get_product_with_size($c->product_id);
+			$product->quantity = $c->quantity;
+$product->volume = 128000002;
+			$list_product[] = $product;
+		}
+echo '商品のサイズ情報などを取得する:<pre>'; print_r($list_product); echo '</pre>';
+		//総重量、総体積を取得するためにそれぞれを配列に格納(温度帯別)
+		//$weights = array();
+		//$volumes = array();
+		//温度帯別クラス
+		$normal_obj = array();
+		$cold_obj = array();
+		$freeze_obj = array();
+		$ice_obj = array();
+		$box_obj = array();
+		
+		//箱を格納する配列を宣言
+		$box_arr = array();
+		//カートの中身を温度帯別に精査してみる
+		//バラ商品(他商品と混在可は箱、ケース売りは商品を配列に格納
+		foreach($list_product as $p)
+		{
+			if($p->temp_zone_id == TEMP_NORMAL)
+			{
+				$normal_obj[] = $p;
+			}
+			elseif($p->temp_zone_id == TEMP_COLD)
+			{
+				$cold_obj[] = $p;
+			}
+			elseif($p->temp_zone_id == TEMP_FREEZE)
+			{
+				$freeze_obj[] = $p;
+			}
+			elseif($p->temp_zone_id == TEMP_ICE)
+			{
+				$ice_obj[] = $p;
+			}
+			else{
+				$box_obj[] = $p;
+			}
+		}
+
+echo '===========温度帯ごとに格納する================================================================<br>';
+echo '通常 : ';var_dump($normal_obj);echo '<br>';
+echo '冷蔵 : ';var_dump($cold_obj);echo '<br>';
+echo '冷凍 : ';var_dump($freeze_obj);echo '<br>';
+echo 'アイス : ';var_dump($ice_obj);echo '<br>';
+echo '==========================================================================================<br>';
+
+		//冷蔵と常温が混在している場合冷蔵に常温混入可
+		if(!empty($normal_obj) && !empty($cold_obj)){
+			$box_arr[] = $this->get_box_with_normal_and_cold($normal_obj,$cold_obj);
+		}else{
+			if(!empty($normal_obj))
+			{
+				$box_arr[] = $this->get_box_by_temp_zone(TEMP_NORMAL,$normal_obj);
+			}
+			if(!empty($cold_obj))
+			{
+				$box_arr[] = $this->get_box_by_temp_zone(TEMP_COLD,$cold_obj);
+			}
+		}
+		if(!empty($freeze_obj))
+		{
+			$box_arr[] = $this->get_box_by_temp_zone(TEMP_FREEZE,$freeze_obj);
+		}
+		if(!empty($ice_obj))
+		{
+			$box_arr[] = $this->get_box_by_temp_zone(TEMP_ICE,$ice_obj);
+		}
+		if(!empty($box_obj))
+		{
+			$box_arr[] = $this->convert_zone_id($box_obj);
+		}
+//echo '最終的な箱：<pre>'; print_r($box_arr);echo '</pre>';
+		//return $this->myclass->array_flatten($box_arr);
+		$result = array();
+        array_walk_recursive($box_arr, function($v) use (&$result){
+            $result[] = $v;
+        });
+//var_dump( $result );
+	}
+
+	public function get_box_by_temp_zone($temp_zone_id, array $obj)
+	{
+echo '================================= Box::get_box_by_temp_zone ==========================<br>';
+		/* 温度帯に属した箱一覧 */
+		$data = $this->get_size_data($temp_zone_id,$obj);
+//echo '箱情報(get_box_by_temp_zone):<pre>';print_r($data);echo '</pre>';
+		$value_box_arr = array();
+		$weight_box_arr = array();
+//////***********************体積から箱計算*************************////////
+		//半端の体積数を計算する,一番大きな箱に入るかどうか確かめる
+		$left_volume = $data->total_volume - ($data->max_volume_size * $data->volume_quantity);
+echo '半端の体積数:<pre>';var_dump($left_volume); echo '</pre>';
+		//最大の箱の個数分を格納
+		for($i=0; $i < $data->volume_quantity; $i++)
+		{
+			$value_box_arr[] = $data->max_box;
+		}
+echo '最大の箱の個数分(1箱に収まる場合は空):<pre>';print_r($value_box_arr);echo '</pre>';
+		//半端があれば残りを入れる箱を格納
+		if(!empty($left_volume))
+		{
+			//半端の体積に収まる箱を取得する
+			$left_box = $this->get_box($data->boxes,$left_volume);
+			$value_box_arr[] = $left_box;
+		}
+////***********************重さから箱計算******************************//////
+		$left_weight = $data->total_weight - (MAX_WEIGHT * $data->weight_quantity);
+		for($i=0; $i < $data->weight_quantity; $i++)
+		{
+			$weight_box_arr[] = $data->weight_box;
+			//$weight_value_total += $data->weight_box->volume;
+		}
+		if(!empty($left_weight))
+		{
+			//半端の重さにあった箱を取得する
+			$weight_left_box = $this->get_box_from_weight($temp_zone_id,$left_weight);
+			$weight_box_arr[] = $weight_left_box;
+			//$weight_value_total += $weight_left_box->volume;
+		}
+		
+//echo 'normal、cold,アイスのバラ';
+//echo '<pre>';print_r($value_box_arr);echo '</pre>';
+//echo '<pre>';print_r($weight_box_arr);echo '</pre>';
+//echo '<hr>';		
+////////////volume,weight箱数の多い方を選択して返す	
+		if(count($value_box_arr) > count($weight_box_arr))
+		{
+			return $this->convert_zone_id($value_box_arr);
+		}
+		//箱数が同じ場合はそれぞれの体積を計算して大きい方を返す
+		elseif(count($value_box_arr) == count($weight_box_arr))
+		{
+			$total_vol = array();
+			$weight_vol = array();
+			foreach($value_box_arr as $item)
+			{
+				$vol_vol[] = $item->volume;
+			}
+			foreach($weight_box_arr as $item)
+			{
+				$weight_vol[] = $item->volume;
+			}
+			$vol_total_vol = array_sum($vol_vol);
+			$weight_total_vol = array_sum($weight_vol);
+			if($vol_total_vol >= $weight_total_vol)
+			{
+				return $this->convert_zone_id($value_box_arr);
+			}else{
+				return $this->convert_zone_id($weight_box_arr);
+			}
+		}
+		else
+		{
+			return $this->convert_zone_id($weight_box_arr);
+		}
+	}
+
+	/*** 計算に必要なサイズデータを算出する
+	*@param array ProductClass
+	*@param id temp_zone_id
+	*@return object StdClass
+	*/
+	public function get_size_data($temp_zone_id,$objects)
+	{
+echo '=======================================　Box::get_size_data============================================<br>';
+//echo 'get_size_dataに渡されるobjects:<pre>';print_r($objects);echo '</pre>';
+		//温度帯別の箱を取得する
+		$boxes = $this->get_by_temp_zone($temp_zone_id);
+echo '温度帯の箱一覧(get_size_data):<pre>';print_r($boxes);echo '</pre><br>';
+		//MAX_WEIGHTから基準となる箱を取得する
+		$weight_box = $this->get_box_from_weight($temp_zone_id,MAX_WEIGHT);
+echo '最大重量(15kg)で計算した箱のサイズ:<pre>';print_r($weight_box);echo '</pre>';
+		//最大の箱を取得する
+		$max_box = end($boxes);
+echo '最大の箱:<pre>';print_r($max_box);echo '</pre>';
+		//最小の箱を取得する
+		$min_box = reset($boxes);
+echo '最小の箱:<pre>';print_r($min_box);echo '</pre>';
+		//体積計算の基準を取得する（一番大きいサイズ)
+		$max_volume_size = $max_box->volume;
+echo '最大の箱の体積:<pre>';print_r(number_format($max_volume_size));echo '</pre>';
+		//総重量、総体積を取得する
+		$weights = array();
+		$volumes = array();
+		foreach($objects as $obj)
+		{
+			$weights[] = $obj->weight * $obj->quantity;
+			$volumes[] = $obj->volume * $obj->quantity;
+		}
+//echo '商品の重量の配列:<pre>';print_r($weights);echo '</pre>';
+		$total_weight = array_sum($weights);
+//$total_weight = 24000;
+echo '温度帯別商品総重量:<pre>';print_r(number_format($total_weight));echo '</pre>';
+		$total_volume = array_sum($volumes);
+echo '温度帯別商品体積:<pre>';print_r(number_format($total_volume));echo '</pre>';
+		//体積、重さで箱数を計算してみる
+		$weight_qt = (int)floor($total_weight / MAX_WEIGHT);
+		$vol_qt = (int)floor($total_volume / $max_volume_size);
+		//配列で返す
+		$data = array(
+			'weight_quantity'=>$weight_qt,
+			'volume_quantity'=>$vol_qt,
+			'total_weight'=>$total_weight,
+			'total_volume'=>$total_volume,
+			'max_volume_size'=>$max_volume_size,
+			'max_box'=>$max_box,
+			'min_box'=>$min_box,
+			'weight_box'=>$weight_box,
+			'boxes'=>$boxes,
+		);
+echo 'get_size_dataで返される情報:<pre>';print_r($data);echo '</pre>';
+echo '=======================================End:get_size_data==================================<br>';
+		return (object)$data;
+	}
+	
+	/** 温度帯から箱を取得して体積の少ない順にソートする
+	* @param int temp_zone_id
+	* @return object Box
+	*/
+	public function get_by_temp_zone($temp_zone_id)
+	{
+		$this->db->select('*')->from($this->tablename);
+		$this->db->where('temp_zone_id',$temp_zone_id);
+		$result = $this->db->get()->result();
+		//volumeの昇順に並べる
+		asort($result);
+		return $result;
+	}
+	
+	//最高梱包重量から適した箱を取得する
+	public function get_box_from_weight($temp_zone_id,$weight)
+	{
+		$this->db->where('temp_zone_id',$temp_zone_id);
+		$this->db->where('weight >=' , $weight);
+		$this->db->order_by('weight asc');
+		$result = $this->db->get($this->tablename)->row();
+//var_dump($result);
+		if(!empty($result))
+		{
+			return $result;
+		}
+		else{
+			$this->db->select_min('weight');
+			$this->db->where('temp_zone_id',$temp_zone_id);
+			return $this->db->get($this->tablename)->row();
+		}
+	}
+
+	/** バラ梱包箱のboxデータからzone_idのみを取り出して配列に格納
+	*@param array BoxClass or ProductClass
+	*@retrun array zone_id
+	*/
+	public function convert_zone_id(array $boxes)
+	{
+	//バラ専用箱Boxesには(temp_zone_id が　5-8)zone_idが入っているのでそれを販売個数分格納
+		$zone_ids = array();
+		foreach($boxes as $box)
+		{
+			if($box->temp_zone_id >= TEMP_NORMAL && $box->temp_zone_id <= TEMP_ICE)
+			{
+				if(isset($box->zone_id)){
+					$zone_ids[] = $box->zone_id;
+				}
+			}
+			elseif($box->temp_zone_id < TEMP_NORMAL)
+			{
+				if(!empty($box->quantity))
+				{
+					$quantity = $box->quantity;
+					for($i = 0; $i < $quantity; $i++)
+					{
+						$zone_ids[] = $box->temp_zone_id;
+					}
+				}
+			}
+		}
+		return $zone_ids;
+	}
+	
+	public function get_box_with_normal_and_cold(array $normal_obj, array $cold_obj)
+	{
+		$normal_data = $this->get_size_data(TEMP_NORMAL,$normal_obj);
+		$cold_data = $this->get_size_data(TEMP_COLD,$cold_obj);
+		$value_box_arr = array();
+		$weight_box_arr = array();
+		///////////////体積から箱計算//////////////////////////
+		//////cold 半端の体積数を計算
+		$left_volume = $cold_data->total_volume - ($cold_data->max_volume_size * $cold_data->volume_quantity);
+		//最大の箱の個数分を計算
+		for($i=0; $i < $cold_data->volume_quantity; $i++)
+		{
+			$value_box_arr[] = $cold_data->max_box;
+		}
+		//半端があれば残りを入れる箱を格納
+		if(!empty($left_volume))
+		{
+			//半端の体積に収まる箱を取得する
+			$cold_left_box = $this->get_box($cold_data->boxes, $left_volume);
+			$value_box_arr[] = $cold_left_box;
+			//coldの半端の箱の容量を取得する
+			$cold_left_box_value = $cold_left_box->volume - $left_volume;
+		}
+		/////normal 箱の計算
+		//cold箱にnormalが全部入る場いいは上記left_boxに全て入るので何もしない
+		//そうでない場合normalの半端の個数分を格納
+		if($cold_left_box_value < $normal_data->total_volume)
+		{
+			//cold箱に入れた場合の残りのnormalの容量
+			$normal_total_volume = $normal_data->total_volume - $cold_left_box_value;
+			//normalの最大箱に入れた場合の残りの容量
+			$normal_left_volume = $normal_total_volume - ($normal_data->max_volume_size * $normal_data->volume_quantity);
+			//normalの最大の箱の個数分を格納
+			for($i = 0; $i < $normal_data->volume_quantity; $i++)
+			{
+				$value_box_arr[] = $normal_data->max_box;
+			}
+			//normal半端があれば残りを入れる箱を取得
+			if(!empty($normal_left_volume))
+			{
+				//normal半端に収まる箱を取得する
+				$normal_left_box = $this->get_box($normal_data->boxes, $normal_left_volume);
+				$value_box_arr[] = $normal_left_box;
+			}
+		}
+		//////////////////////重さから箱計算///////////////////////
+		//重量から考えて、最大梱包数量で箱を計算した場合の残りの重量
+		$left_weight = $cold_data->total_weight - (MAX_WEIGHT * $cold_data->weight_quantity);
+		//MaxWeightの箱を格納
+		for($i=0; $i<$cold_data->weight_quantity; $i++)
+		{
+			$weight_box_arr[] = $cold_data->weight_box;
+		}
+		if(!empty($left_weight))
+		{
+			//半端の重さにあった箱を取得する
+			$weight_left_box = $this->get_box_from_weight(TEMP_COLD,$left_weight);
+			$weight_box_arr[] = $weight_left_box;
+			//coldの半端の箱の残りの重量を取得する
+			$cold_left_box_weight = $weight_left_box->weight - $left_weight;
+		}
+		////normalの計算
+		//cold箱にnormalが全部入る場合は上記left_boxにすべて入るので何もしない
+		//そうでない場合normalの半端の個数を格納
+		if($cold_left_box_weight < $normal_data->total_weight)
+		{
+			//cold箱に入れた場合の残りのnormalの重量
+			$normal_total_weight = $normal_data->total_weight - $cold_left_box_weight;
+			//normalの最大箱に入れた場合の残りの容量
+			$normal_left_weight = $normal_total_weight - (MAX_WEIGHT * $normal_data->weight_quantity);
+			//normalの最大の箱の個数分を格納
+			for($i=0; $i < $normal_data->weight_quantity; $i++)
+			{
+				$weight_box_arr[] = $normal_data->weight_box;
+			}
+			//normal半端があれば残りを入れる箱を取得
+			if(!empty($normal_left_weight))
+			{
+				//normal半端に収まる箱を取得する
+				$normal_left_box = $this->get_box_from_weight(TEMP_NORMAL,$normal_left_weight);
+				$weight_box_arr[] = $normal_left_box;
+			}
+		}
+//echo 'normal、cold混在';
+//echo '<pre>';print_r($value_box_arr);echo '</pre>';
+//echo '<pre>';print_r($weight_box_arr);echo '</pre>';
+//echo '<hr>';
+		
+		//volume,weight箱数の多い方を選択して返す
+		if(count($value_box_arr) > count($weight_box_arr)){
+			return $this->convert_zone_id($value_box_arr);
+		}elseif(count($value_box_arr) == count($weight_box_arr)){
+			$total_vol = array();
+			$weight_vol = array();
+			foreach($value_box_arr as $item)
+			{
+				$vol_vol[] = $item->volume;
+			}
+			foreach($weight_box_arr as $item)
+			{
+				$weight_vol[] = $item->volume;
+			}
+			$vol_total_vol = array_sum($vol_vol);
+			$weight_total_vol = array_sum($weight_vol);
+			if($vol_total_vol >= $weight_total_vol)
+			{	
+				return $this->convert_zone_id($value_box_arr);
+			}else{
+				return $this->convert_zone_id($weight_box_arr);
+			}
+		}else{
+			return $this->convert_zone_id($weight_box_arr);
+		}
+			
+	}
+
+	/** box_idの配列 から箱の種類名を取得する
+	*@param int box_id
+	*@return string boxname
+	*/
+	public function get_box_name()
+	{
+		$ids = array(1,4,7);
+		$box_str = $this->Box->get_box_name($ids);
+		var_dump($box_str);
+		echo $this->unit->run($box_str,'常温80サイズ,冷蔵80サイズ,冷凍80サイズ');
+	}
 }

@@ -62,9 +62,11 @@ class Advertise_product extends CI_Model{
 	*/
 	public function get_product_with_size($product_id)
 	{
-		$this->db->select("s.*")->from($this->tablename . ' as ap');
-		$this->db->join('product_size as s','s.product_code = ap.product_code','left');
-		$this->db->join('temp_zone as tmp','tmp.id = s.temp_zone_id','left');
+		$this->db->select("s.*,ap.temp_zone_id")->from($this->tablename . ' as ap');
+		//$this->db->join('product_size as s','s.product_code = ap.product_code','left');
+		//$this->db->join('temp_zone as tmp','tmp.id = s.temp_zone_id','left');
+		$this->db->join('jan_size as s','s.product_code = ap.product_code','left');
+		$this->db->join('temp_zone as tmp','tmp.id = ap.temp_zone_id','left');
 		$this->db->where('ap.id',$product_id);
 		return $this->db->get()->row();
 	}		

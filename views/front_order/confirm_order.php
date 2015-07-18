@@ -58,7 +58,7 @@
 ------------------------->
 				</tr>
 				<tr><td></td><td></td><td></td><td>消費税</td><td><?php echo number_format($total->tax_price) ?>円</td></tr>
-				<tr><td></td><td></td><td></td><td>配達料金</td><td><?php echo number_format($total->charge_price) ?>円</td></tr>
+				<tr><td></td><td></td><td></td><td>配達料金</td><td><?php echo number_format($total->charge_price) ?>円</td><td>(<?php echo $boxnames ?>)</td></tr>
 				<tr><td></td><td></td><td></td><td>合計</td><td><?php echo number_format($total->amount) ?>円</td></tr>
 				<!--<tr><td></td><td></td><td></td><td>獲得予定ポイント</td><td><?php echo $total->get_point ?>ポイント</td></tr>-->
 				</table>

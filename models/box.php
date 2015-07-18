@@ -36,7 +36,6 @@ class Box extends CI_Model{
 			$product = $this->Advertise_product->get_product_with_size($c->product_id);
 			$product->quantity = $c->quantity;
 			$list_product[] = $product;
-var_dump($product);
 		}
 //echo '<pre>'; print_r($list_product); echo '</pre>';
 		//総重量、総体積を取得するためにそれぞれを配列に格納(温度帯別)
@@ -89,7 +88,7 @@ echo '==============================================<br>';
 		}else{
 			if(!empty($normal_obj))
 			{
-				$box_arr[] = $this->get_box_by_temp_zone(TEMP_NORMAL,$normal_obj);		
+				$box_arr[] = $this->get_box_by_temp_zone(TEMP_NORMAL,$normal_obj);
 			}
 			if(!empty($cold_obj))
 			{
@@ -108,6 +107,7 @@ echo '==============================================<br>';
 		{
 			$box_arr[] = $this->convert_zone_id($box_obj);
 		}
+//echo '最終的な箱：<pre>'; print_r($box_arr);echo '</pre>';
 		//return $this->myclass->array_flatten($box_arr);
 		$result = array();
         array_walk_recursive($box_arr, function($v) use (&$result){
@@ -116,15 +116,13 @@ echo '==============================================<br>';
         return $result;
 
 	}
-	
-	public function get_no_box_by_temp_zone($temp_zone_id, array $obj)
-	{
 		
-	}
-	
+	/* 温度帯、サイズから箱を取得する*/
 	public function get_box_by_temp_zone($temp_zone_id, array $obj)
 	{
+		/* 温度帯に属した箱一覧 */
 		$data = $this->get_size_data($temp_zone_id,$obj);
+//echo '箱情報:<pre>';print_r($data);echo '</pre>';
 		$value_box_arr = array();
 		$weight_box_arr = array();
 //////***********************体積から箱計算*************************////////
@@ -394,14 +392,19 @@ echo '==============================================<br>';
 	{
 		//温度帯別の箱を取得する
 		$boxes = $this->get_by_temp_zone($temp_zone_id);
+//echo '温度帯の箱一覧:<pre>';print_r($boxes);echo '</pre><br>';
 		//MAX_WEIGHTから基準となる箱を取得する
 		$weight_box = $this->get_box_from_weight($temp_zone_id,MAX_WEIGHT);
+//echo '最大重量で計算した箱のサイズ:<pre>';print_r($weight_box);echo '</pre>';
 		//最大の箱を取得する
 		$max_box = end($boxes);
+//echo '最大の箱:<pre>';print_r($max_box);echo '</pre>';
 		//最小の箱を取得する
 		$min_box = reset($boxes);
+//echo '最小の箱:<pre>';print_r($min_box);echo '</pre>';
 		//体積計算の基準を取得する（一番大きいサイズ)
 		$max_volume_size = $max_box->volume;
+//echo '最大の箱の体積:<pre>';print_r(number_format($max_volume_size));echo '</pre>';
 		//総重量、総体積を取得する
 		$weights = array();
 		$volumes = array();
@@ -412,7 +415,9 @@ echo '==============================================<br>';
 		}
 		$total_weight = array_sum($weights);
 //$total_weight = 24000;
+//echo '商品重量:<pre>';print_r(number_format($total_weight));echo '</pre>';
 		$total_volume = array_sum($volumes);
+//echo '商品体積:<pre>';print_r(number_format($total_volume));echo '</pre>';
 		//体積、重さで箱数を計算してみる
 		$weight_qt = (int)floor($total_weight / MAX_WEIGHT);
 		$vol_qt = (int)floor($total_volume / $max_volume_size);
@@ -466,5 +471,23 @@ echo '==============================================<br>';
 	{	
 		$this->db->where('id',$id);
 		$this->db->update($this->tablename,$data);
+	}
+	
+	/** idから箱の種類名を取得する
+	*@param int box_id
+	*@return string boxname
+	*/
+	public function get_box_name(array $id_list)
+	{
+		$boxnames = array();
+		foreach($id_list as $id)
+		{
+			$this->db->select('name')->from($this->tablename);
+			$this->db->where('id',(int)$id);
+			$row = $this->db->get()->row();
+			$boxnames[] = $row->name;
+		}
+		$box_str = implode(',',$boxnames);
+		return $box_str;
 	}
 }

@@ -125,6 +125,10 @@ class Front_cart extends CI_Controller{
 		$key = $this->uri->segment(3);
 		$from = $this->uri->segment(4);
 		$carts = $this->session->userdata('carts');
+		if(empty($carts))
+		{
+			return redirect(site_url('front_cart/show_cart'));
+		}
 		$item = unserialize($carts[$key]);
 		$product_result = $this->Advertise->get_product_by_id_with_product($item->product_id);
 		if($this->input->post('submit')){
