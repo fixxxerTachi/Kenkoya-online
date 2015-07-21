@@ -184,17 +184,17 @@ echo 'box by weight:' . $weight_qt;
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 1;
+		$normal_v->quantity = 9;
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
 		$normal_w->product_code=9998;
-		$normal_w->quantity=10;
+		$normal_w->quantity=1;
 
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 29;
+		$cool_v->quantity = 1;
 		
 		$cool_w = new StdClass();
 		$cool_w->product_id = 2908;
@@ -211,8 +211,11 @@ echo 'box by weight:' . $weight_qt;
 		$cold_w->product_code = 9994;
 		$cold_w->quantity = 10;
 		
-		$carts[] = serialize($cool_v);
 		$carts[] = serialize($normal_v);
+		$carts[] = serialize($cool_v);
+		//$carts[] = serialize($cool_v);
+		//$carts[] = serialize($normal_v);
+		//$carts[] = serialize($cool_v);
 		
 echo '1.カートの中身';var_dump($carts);echo '<hr>';
 		//Box::get_box
@@ -319,7 +322,7 @@ echo '================== Box::get_box_by_temp_zone( ==========================<b
 		$value_box_arr = array();
 		$weight_box_arr = array();
 //////***********************体積から箱計算*************************////////
-/*
+/***** 古いコード**********
 		//半端の体積数を計算する,一番大きな箱に入るかどうか確かめる
 		$left_volume = $data->total_volume - ($data->max_volume_size * $data->volume_quantity);
 echo '半端の体積数:<pre>';var_dump($left_volume); echo '</pre>';
@@ -336,14 +339,20 @@ echo '最大の箱の個数分(1箱に収まる場合は空):<pre>';print_r($val
 			$left_box = $this->get_box($data->boxes,$left_volume);
 			$value_box_arr[] = $left_box;
 		}
-*/
 echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
+**************** ここまで古いコード ***************/
 
+/****************　新しいコード***************/
+		/*商品サイズ*/
 		$left_volume = $data->total_volume;
+		/*最小の箱の容量*/
 		$min_volume = min($data->boxes)->volume;
 echo '箱の最小体積数:<pre>';print_r($min_volume);echo '</pre>';
 		$data_key = '';
 		$count = count($data->boxes);
+		/**
+		*商品容量が箱最小容量以下になるまで箱に詰め込む
+		*/
 		while($left_volume >= $min_volume)
 		{
 			for($i=0; $i < $count; $i++)
@@ -356,7 +365,6 @@ echo '箱の最小体積数:<pre>';print_r($min_volume);echo '</pre>';
 					$data_key = $count-1;
 				}
 			}
-echo '箱のkey:<pre>';print_r($data_key);echo '</pre>';
 			
 			if($left_volume >= $min_volume)
 			{
@@ -369,13 +377,16 @@ echo '箱のkey:<pre>';print_r($data_key);echo '</pre>';
 			}
 		}
 		//半端があれば残りを入れる箱を格納
-		if(!empty($left_volume))
+		if($left_volume > 0)
 		{
 			$left_box = $this->get_box($data->boxes,$left_volume);
 			$value_box_arr[] = $left_box;
 		}
+		
 echo 'left_volume:<pre>'; print_r($left_volume); echo '</pre>';
 echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
+/****************** ここまで新しいコード **************************/
+
 ////***********************重さから箱計算******************************//////
 		$left_weight = $data->total_weight - (MAX_WEIGHT * $data->weight_quantity);
 		for($i=0; $i < $data->weight_quantity; $i++)
@@ -554,12 +565,99 @@ echo '=======================================End:get_size_data==================
 	public function get_box_with_normal_and_cold(array $normal_obj, array $cold_obj)
 	{
 		$normal_data = $this->get_size_data(TEMP_NORMAL,$normal_obj);
+//echo 'normal_data<pre>';var_dump($normal_data);echo '</pre>';
 		$cold_data = $this->get_size_data(TEMP_COLD,$cold_obj);
+//echo 'cold_data<pre>';print_r($cold_data);echo '</pre>';
 		$value_box_arr = array();
 		$weight_box_arr = array();
 		///////////////体積から箱計算//////////////////////////
 		//////cold 半端の体積数を計算
+		/** ここから新しく記述**/
+		/** まず冷凍から計算**/
+		$cold_left_volume = $cold_data->total_volume;
+		$cold_min_volume = min($cold_data->boxes)->volume;
+		$normal_left_volume = $normal_data->total_volume;
+		$normal_min_volume = min($normal_data->boxes)->volume;
 		
+		$cold_data_key = '';
+		$count = count($cold_data->boxes);
+		while($cold_left_volume >= $cold_min_volume)
+		{
+			//対象となる温度帯の箱を小さい物から精査してvalue_box_arrに格納
+			for($i = 0; $i < $count; $i++)
+			{
+				//箱に入る場合はその箱配列のキーを取得
+				if($cold_left_volume <= $cold_data->boxes[$i]->volume)
+				{
+					$cold_data_key = $i;
+					break;
+				}else{
+				//箱に入らない場合は次の箱配列のキーに移動
+					$cold_data_key = $count-1;
+				}
+			}
+			
+			//とりあえず何らかの箱に入る場合その箱をvalue_box_arrに格納、商品体積から箱体積を引く
+			if($cold_left_volume >= $cold_min_volume)
+			{
+				$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
+				$value_box_arr[] = $cold_data->boxes[$cold_data_key];
+			}
+			else
+			{
+				break;
+			}
+		}
+		//残りがある場合その残りが入る箱を取得する
+		if($cold_left_volume > 0)
+		{
+			$cold_left_box = $this->get_box($cold_data->boxes,$cold_left_volume);
+			$value_box_arr[] = $cold_left_box;
+			//その箱の余りのスペースに常温を格納するため箱の余りを取得
+			$cold_box_left = $cold_left_box->volume - $cold_left_volume;
+		}else{
+			$cold_box_left = 0;
+		}
+		
+		/*** 次に通常を計算　***/
+		//冷蔵の箱の余分に通常が入らない場合、新たに通常の箱を用意する
+		if($normal_left_volume > $cold_box_left)
+		{
+			$normal_left_volume = $normal_left_volume - $cold_box_left;
+			$normal_data_key = '';
+			$count = count($normal_data->boxes);
+			while($normal_left_volume >= $normal_min_volume)
+			{
+				for($i=0; $i < $count; $i++)
+				{
+					if($normal_left_volume <= $normal_data->boxes[$i]->volume)
+					{
+						$normal_data_key = $i;
+						break;
+					}else{
+						$normal_data_key = $count-1;
+					}
+				}
+				
+				if($normal_left_volume >= $normal_min_volume)
+				{
+					$normal_left_volume = $normal_left_volume - $normal_data->boxes[$normal_data_key]->volume;
+					$value_box_arr[] = $normal_data->boxes[$normal_data_key];
+					echo $normal_left_volume;
+				}
+			}
+			if($normal_left_volume > 0)
+			{
+				$normal_left_box = $this->get_box($normal_data->boxes,$normal_left_volume);
+				$value_box_arr[] = $normal_left_box;;
+			}
+		}
+echo 'value_box_arr:<pre>';print_r($value_box_arr);echo '</pre>';
+		
+		/** ここまで新しい記述 **/
+		
+		/** ここから古い記述**/
+		/*
 		$left_volume = $cold_data->total_volume - ($cold_data->max_volume_size * $cold_data->volume_quantity);
 		//最大の箱の個数分を計算
 		for($i=0; $i < $cold_data->volume_quantity; $i++)
@@ -597,14 +695,19 @@ echo '=======================================End:get_size_data==================
 				$value_box_arr[] = $normal_left_box;
 			}
 		}
+		*/
+		/** ここまで古い記述 **/
 		//////////////////////重さから箱計算///////////////////////
 		//重量から考えて、最大梱包数量で箱を計算した場合の残りの重量
 		$left_weight = $cold_data->total_weight - (MAX_WEIGHT * $cold_data->weight_quantity);
+echo 'total_weight<pre>';print_r($cold_data->total_weight);echo '</pre>';
+echo 'left_weight<pre>';print_r($left_weight);echo '</pre>';
 		//MaxWeightの箱を格納
 		for($i=0; $i<$cold_data->weight_quantity; $i++)
 		{
 			$weight_box_arr[] = $cold_data->weight_box;
 		}
+		/*** ここから古いコード****/
 		if(!empty($left_weight))
 		{
 			//半端の重さにあった箱を取得する
@@ -635,6 +738,10 @@ echo '=======================================End:get_size_data==================
 				$weight_box_arr[] = $normal_left_box;
 			}
 		}
+		/** ここまで古いコード ****/
+echo 'weight_box_arr:<pre>:';print_r($weight_box_arr);echo '</pre>';
+
+
 //echo 'normal、cold混在';
 //echo '<pre>';print_r($value_box_arr);echo '</pre>';
 //echo '<pre>';print_r($weight_box_arr);echo '</pre>';
@@ -643,7 +750,9 @@ echo '=======================================End:get_size_data==================
 		//volume,weight箱数の多い方を選択して返す
 		if(count($value_box_arr) > count($weight_box_arr)){
 			return $this->convert_zone_id($value_box_arr);
-		}elseif(count($value_box_arr) == count($weight_box_arr)){
+		}
+		elseif(count($value_box_arr) == count($weight_box_arr))
+		{
 			$total_vol = array();
 			$weight_vol = array();
 			foreach($value_box_arr as $item)
@@ -662,10 +771,11 @@ echo '=======================================End:get_size_data==================
 			}else{
 				return $this->convert_zone_id($weight_box_arr);
 			}
-		}else{
+		}
+		else
+		{
 			return $this->convert_zone_id($weight_box_arr);
 		}
-			
 	}
 
 	/** box_idの配列 から箱の種類名を取得する
