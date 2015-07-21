@@ -646,6 +646,7 @@ echo '=======================================End:get_size_data==================
 					echo $normal_left_volume;
 				}
 			}
+			
 			if($normal_left_volume > 0)
 			{
 				$normal_left_box = $this->get_box($normal_data->boxes,$normal_left_volume);
