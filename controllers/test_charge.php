@@ -567,6 +567,7 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		///////////////体積から箱計算//////////////////////////
 		//////cold 半端の体積数を計算
 		/** ここから新しく記述**/
+		/** 常温がある場合の処理修正*/
 		/** まず冷凍から計算**/
 		$cold_left_volume = $cold_data->total_volume;
 		$cold_min_volume = min($cold_data->boxes)->volume;
