@@ -113,7 +113,7 @@ echo 'box by weight:' . $weight_qt;
 				$index++;
 			}
 			elseif($index >= $count)
-			{			
+			{
 				$left_volume = $this->left_volume($boxes,$volume,$count);
 				return $left_volume;
 			}
@@ -184,7 +184,7 @@ public function test_charge_price()
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 2;
+		$normal_v->quantity = 8;
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
@@ -194,7 +194,7 @@ public function test_charge_price()
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 32;
+		$cool_v->quantity = 8;
 		
 		$cool_w = new StdClass();
 		$cool_w->product_id = 2908;
@@ -574,14 +574,14 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		
 		$cold_data_key = '';
 		$count = count($cold_data->boxes);
-		/** normal,coldの合計で全箱数の配列をnormalで取得 **/
+		/** normal,coldの合計で全箱数の配列をcoldで取得 **/
 		while($total_left_volume > 0)
 		{
 			//対象となる温度帯の箱を小さい物から精査してvalue_box_arrに格納
 			for($i = 0; $i < $count; $i++)
 			{
 				//箱に入る場合はその箱配列のキーを取得
-				if($total_left_volume <= $normal_data->boxes[$i]->volume)
+				if($total_left_volume <= $cold_data->boxes[$i]->volume)
 				{
 					$cold_data_key = $i;
 					break;
@@ -591,17 +591,18 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 					$cold_data_key = $count-1;
 				}
 			}
-			$total_left_volume = $total_left_volume - $normal_data->boxes[$cold_data_key]->volume;
-			$value_box_arr[] = $normal_data->boxes[$cold_data_key];
+			$total_left_volume = $total_left_volume - $cold_data->boxes[$cold_data_key]->volume;
+			$value_box_arr[] = $cold_data->boxes[$cold_data_key];
 		}
 echo 'value_box_arr:<pre>;';print_r($value_box_arr);echo '</pre>';
 echo 'total_left_volume:<pre>';print_r($total_left_volume);echo '</pre>';
 
-		while($cold_left_volume > 0)
+		/** normalの箱数を計算する **/
+		while($normal_left_volume > 0)
 		{
 			for($i=0; $i < $count; $i++)
 			{
-				if($cold_left_volume <= $cold_data->boxes[$i]->volume)
+				if($normal_left_volume <= $normal_data->boxes[$i]->volume)
 				{
 					$cold_data_key = $i;
 					break;
@@ -611,19 +612,22 @@ echo 'total_left_volume:<pre>';print_r($total_left_volume);echo '</pre>';
 					$cold_data_key = $count-1;
 				}
 			}
-			$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
-			$cold_box_arr[] = $cold_data->boxes[$cold_data_key];
+			$normal_left_volume = $normal_left_volume - $normal_data->boxes[$cold_data_key]->volume;
+			$cold_box_arr[] = $normal_data->boxes[$cold_data_key];
 		}
-echo 'cold_box_arr:<pre>';print_r($cold_box_arr);echo '</pre>';
-echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
+echo 'normal_box_arr:<pre>';print_r($cold_box_arr);echo '</pre>';
+echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
 		
 		if(!empty($cold_box_arr) && !empty($value_box_arr))
 		{
 			//先頭からnormalの箱をcoldの箱に置き換える
 			foreach($cold_box_arr as $cold)
 			{
-				array_shift($value_box_arr);
-				$value_box_arr[] = $cold;
+				if($cold->volume > $value_box_arr[0]->volume)
+				{
+					array_shift($value_box_arr);
+					$value_box_arr[] = $cold;
+				}
 			}
 		}
 echo 'coldに置き換え後のvalue_box_arr:<pre>';print_r($value_box_arr);echo '</pre>';
@@ -712,6 +716,14 @@ echo 'coldに置き換え後のvalue_box_arr:<pre>';print_r($value_box_arr);echo
 		
 		//////////////////////重さから箱計算///////////////////////
 		//重量から考えて、最大梱包数量で箱を計算した場合の残りの重量
+		/*** ここから新しいコード **
+		
+		
+		
+		
+		*** ここまで新しいコード ***/
+		/*** ここから古いコード ***/
+		/*
 		$left_weight = $cold_data->total_weight - (MAX_WEIGHT * $cold_data->weight_quantity);
 		//MaxWeightの箱を格納
 		for($i=0; $i<$cold_data->weight_quantity; $i++)
@@ -719,6 +731,7 @@ echo 'coldに置き換え後のvalue_box_arr:<pre>';print_r($value_box_arr);echo
 			$weight_box_arr[] = $cold_data->weight_box;
 		}
 		/*** ここから古いコード****/
+		/*
 		if(!empty($left_weight))
 		{
 			//半端の重さにあった箱を取得する
@@ -749,6 +762,7 @@ echo 'coldに置き換え後のvalue_box_arr:<pre>';print_r($value_box_arr);echo
 				$weight_box_arr[] = $normal_left_box;
 			}
 		}
+		*/
 		/** ここまで古いコード ****/
 //echo 'weight_box_arr:<pre>:';print_r($weight_box_arr);echo '</pre>';
 
