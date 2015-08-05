@@ -184,7 +184,7 @@ public function test_charge_price()
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 8;
+		$normal_v->quantity = 1;
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
@@ -194,7 +194,7 @@ public function test_charge_price()
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 8;
+		$cool_v->quantity = 1;
 		
 		$cool_w = new StdClass();
 		$cool_w->product_id = 2908;
@@ -310,6 +310,7 @@ public function test_charge_price()
         });
 //var_dump( $result );
 	}
+	
 	public function get_box_by_temp_zone($temp_zone_id, array $obj)
 	{
 //echo '================== Box::get_box_by_temp_zone( ==========================<br>';
@@ -567,14 +568,23 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		/** ここから新しく記述**/
 		/** normal,coldの合計でnormalの箱で計算した場合の箱を取得しそれからcoldの場合の箱に置き換える **/
 		$cold_left_volume = $cold_data->total_volume;
-		$cold_min_volume = min($cold_data->boxes)->volume;
+		$cold_max_box = max($cold_data->boxes)->volume;
 		$normal_left_volume = $normal_data->total_volume;
-		$normal_min_volume = min($normal_data->boxes)->volume;
+		$normal_max_box = max($normal_data->boxes)->volume;
 		$total_left_volume = $cold_left_volume + $normal_left_volume;
+echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
+echo 'cold_max_box:<pre>';print_r($cold_max_box);echo '</pre>';
+echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
+echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
+echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
+
+		if($total_left_volume <= $cold_max_box)
 		
+		
+		/*
 		$cold_data_key = '';
 		$count = count($cold_data->boxes);
-		/** normal,coldの合計で全箱数の配列をcoldで取得 **/
+		// normal,coldの合計で全箱数の配列をcoldで取得
 		while($total_left_volume > 0)
 		{
 			//対象となる温度帯の箱を小さい物から精査してvalue_box_arrに格納
@@ -594,10 +604,8 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 			$total_left_volume = $total_left_volume - $cold_data->boxes[$cold_data_key]->volume;
 			$value_box_arr[] = $cold_data->boxes[$cold_data_key];
 		}
-echo 'value_box_arr:<pre>;';print_r($value_box_arr);echo '</pre>';
-echo 'total_left_volume:<pre>';print_r($total_left_volume);echo '</pre>';
 
-		/** normalの箱数を計算する **/
+		// normalの箱数を計算する
 		while($normal_left_volume > 0)
 		{
 			for($i=0; $i < $count; $i++)
@@ -615,8 +623,6 @@ echo 'total_left_volume:<pre>';print_r($total_left_volume);echo '</pre>';
 			$normal_left_volume = $normal_left_volume - $normal_data->boxes[$cold_data_key]->volume;
 			$cold_box_arr[] = $normal_data->boxes[$cold_data_key];
 		}
-echo 'normal_box_arr:<pre>';print_r($cold_box_arr);echo '</pre>';
-echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
 		
 		if(!empty($cold_box_arr) && !empty($value_box_arr))
 		{
@@ -630,7 +636,7 @@ echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
 				}
 			}
 		}
-echo 'coldに置き換え後のvalue_box_arr:<pre>';print_r($value_box_arr);echo '</pre>';
+		*/
 		/*
 		//残り(最小の箱以下)がある場合その残りが入る箱を取得する
 		if($cold_left_volume > 0)
