@@ -184,19 +184,19 @@ public function test_charge_price()
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 10;
+		$normal_v->quantity = 30;
 		//volume 189550
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
 		$normal_w->product_code=9998;
-		$normal_w->quantity=1;
+		$normal_w->quantity = 4;
 		//volume 189300 
 		
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 32;
+		$cool_v->quantity = 4;
 		//volume 189550
 		
 		$cool_w = new StdClass();
