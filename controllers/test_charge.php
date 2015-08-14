@@ -577,25 +577,25 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		$cold_max_box = max($cold_data->boxes)->volume;
 		$normal_left_volume = $normal_data->total_volume;
 		$normal_max_box = max($normal_data->boxes)->volume;
-		$total_left_volume = $cold_left_volume + $normal_left_volume;
-		$count = count($cold_data->boxes);
+		//$total_left_volume = $cold_left_volume + $normal_left_volume;
+		$cold_box_count = count($cold_data->boxes);
 echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
 echo 'cold_max_box:<pre>';print_r($cold_max_box);echo '</pre>';
 echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
 echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
-echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
+//echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
 
 		//まずは冷凍で考えてみる
 		while($cold_left_volume >= 0)
 		{
-			for($i = 0; $i < $count; $i++)
+			for($i = 0; $i < $cold_box_count; $i++)
 			{
 				//一箱に入る場合その箱のキーを取得する
 				if($cold_left_volume <= $cold_data->boxes[$i]->volume)
 				{
 					$cold_normal_left_volume = $cold_left_volume + $normal_left_volume;
 //echo 'cold_normal_left_volume:<pre>';print $cold_normal_left_volume; echo '</pre>';
-					for($j = 0; $j < $count; $j++)
+					for($j = 0; $j < $cold_box_count; $j++)
 					{
 						if($cold_normal_left_volume <= $cold_data->boxes[$j]->volume)
 						{
@@ -604,7 +604,7 @@ echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
 						}
 						else
 						{
-							$cold_data_key = $count -1;
+							$cold_data_key = $cold_box_count -1;
 						}
 					}
 					//$cold_data_key = $i;
@@ -613,7 +613,7 @@ echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
 				else
 				{
 				//一箱に入らない場合最大の箱を返す
-					$cold_data_key = $count - 1;
+					$cold_data_key = $cold_box_count - 1;
 				}
 			}
 			$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
@@ -648,12 +648,44 @@ echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
 		
 		//////////////////////重さから箱計算///////////////////////
 		//重量から考えて、最大梱包数量で箱を計算した場合の残りの重量
-		/*** ここから新しいコード **
+		/*** ここから新しいコード **/
+		$cold_left_weight = $cold_data->total_weight;
+		$normal_left_weight = $normal_data->total_weight;
+echo 'cold_left_weight:';print_r($cold_left_weight);echo '</pre>';
+echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
+		//まずは冷凍で考えてみる
+		while($cold_left_weight >= 0)
+		{
+			for($i = 0; $i < $cold_box_count; $i++)
+			{
+				if($cold_left_volume <= $cold_data->boxes[$i]->weight)
+				{
+					$cold_normal_left_weight = $cold_left_weight + $normal_left_weight;
+					for($j = 0; $j < $cold_box_count; $j++)
+					{
+						if($cold_normal_left_weight <= $cold_data->boxes[$j]->weight)
+						{
+							$cold_data_key = $j;
+							break;
+						}
+						else
+						{
+							$cold_data_key = $cold_box_count -1;
+						}
+					}
+				}
+				else
+				{
+					$cold_data_key = $cold_box_count-1;
+				}
+			}
+			$cold_left_weight = $cold_left_weight - $cold_data->boxes[$cold_data_key]->weight;
+			$weight_box_arr[] = $cold_data->boxes[$cold_data_key];
+		}
+echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
 		
 		
-		
-		
-		*** ここまで新しいコード ***/
+		/*** ここまで新しいコード ***/
 		/*** ここから古いコード ***/
 		/*
 		$left_weight = $cold_data->total_weight - (MAX_WEIGHT * $cold_data->weight_quantity);
