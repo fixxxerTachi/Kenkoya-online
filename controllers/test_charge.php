@@ -184,32 +184,38 @@ public function test_charge_price()
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 1;
+		$normal_v->quantity = 10;
+		//volume 189550
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
 		$normal_w->product_code=9998;
 		$normal_w->quantity=1;
+		//volume 189300 
 		
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 1;
+		$cool_v->quantity = 32;
+		//volume 189550
 		
 		$cool_w = new StdClass();
 		$cool_w->product_id = 2908;
 		$cool_w->product_code = 9996;
 		$cool_w->quantity = 1;
+		//volume 189300
 		
 		$cold_v = new StdClass();
 		$cold_v->product_id = 2909;
 		$cold_v->product_code = 9995;
 		$cold_v->quantity = 2;
+		//volume 189550
 		
 		$cold_w = new StdClass();
 		$cold_w->product_id = 2910;
 		$cold_w->product_code = 9994;
 		$cold_w->quantity = 10;
+		//volume 189300
 		
 		$carts[] = serialize($normal_v);
 		$carts[] = serialize($cool_v);
@@ -572,15 +578,72 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		$normal_left_volume = $normal_data->total_volume;
 		$normal_max_box = max($normal_data->boxes)->volume;
 		$total_left_volume = $cold_left_volume + $normal_left_volume;
+		$count = count($cold_data->boxes);
 echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
 echo 'cold_max_box:<pre>';print_r($cold_max_box);echo '</pre>';
 echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
 echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
 echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
 
-		if($total_left_volume <= $cold_max_box)
-		
-		
+		//まずは冷凍で考えてみる
+		while($cold_left_volume >= 0)
+		{
+			for($i = 0; $i < $count; $i++)
+			{
+				//一箱に入る場合その箱のキーを取得する
+				if($cold_left_volume <= $cold_data->boxes[$i]->volume)
+				{
+					$cold_normal_left_volume = $cold_left_volume + $normal_left_volume;
+//echo 'cold_normal_left_volume:<pre>';print $cold_normal_left_volume; echo '</pre>';
+					for($j = 0; $j < $count; $j++)
+					{
+						if($cold_normal_left_volume <= $cold_data->boxes[$j]->volume)
+						{
+							$cold_data_key = $j;
+							break;
+						}
+						else
+						{
+							$cold_data_key = $count -1;
+						}
+					}
+					//$cold_data_key = $i;
+					//break;
+				}
+				else
+				{
+				//一箱に入らない場合最大の箱を返す
+					$cold_data_key = $count - 1;
+				}
+			}
+			$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
+			$value_box_arr[] = $cold_data->boxes[$cold_data_key];
+		}
+echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
+		//次に常温で考える
+		//coldの半端の箱にnormalを入れているため、その分を差し引く
+		//現在$cold_left_boxにはマイナスで箱の余分が格納されいるのでその分をnormal_left_boxにプラスする
+		$normal_left_volume = $normal_left_volume + $cold_left_volume;
+		$normal_box_count = count($normal_data->boxes);
+		while($normal_left_volume >= 0)
+		{
+			for($i = 0; $i < $normal_box_count; $i++)
+			{
+				if($normal_left_volume <= $normal_data->boxes[$i]->volume)
+				{
+					$normal_data_key = $i;
+					break;
+				}
+				else
+				{
+					$normal_data_key = $normal_box_count -1;
+				}
+			}
+			$normal_left_volume = $normal_left_volume - $normal_data->boxes[$normal_data_key]->volume;
+			$value_box_arr[] = $normal_data->boxes[$normal_data_key];
+		}
+echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
+		//if($total_left_volume <= $cold_max_box)
 		/*
 		$cold_data_key = '';
 		$count = count($cold_data->boxes);
