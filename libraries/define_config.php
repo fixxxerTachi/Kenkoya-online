@@ -1,0 +1,10 @@
+<?php
+define('IMAGE_PATH','products/');
+define('PRODUCT_IMAGE_PATH','images/products/');
+define('ICON_PATH','icon/');
+define('AD_IMAGE_PATH','images/advertise/');
+define('DELIVERY_IMAGE_PATH','images/delivery/');
+define('MAINVISUAL_IMAGE_PATH','images/mainvisual/');
+define('BANNER_IMAGE_PATH','images/banner/');
+define('INFORMATION_IMAGE_PATH','images/information/');
+define('AD_PRODUCT_IMAGE_PATH','images/ad_products/');

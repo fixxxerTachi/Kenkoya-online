@@ -1,4 +1,5 @@
 <?php
+include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_flag.php';
 include __DIR__.'/../libraries/common.php';
@@ -10,7 +11,7 @@ class Admin_advertise extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->library(array('session','form_validation','pagination'));
-		$this->load->library(array('myclass'));
+		$this->load->library(array('my_class'));
 		$this->load->helper(array('form'));
 		$this->load->model('Advertise');
 		$this->load->model('Advertise_product');
@@ -523,7 +524,7 @@ class Admin_advertise extends CI_Controller{
 					'branch_code'=>$this->data['form_data']->branch_code,
 					'product_name'=>$this->data['form_data']->product_name,
 					'size'=>$this->data['form_data']->size,
-					'sale_price'=>$this->myclass->convert_alpha($this->data['form_data']->sale_price),
+					'sale_price'=>$this->my_class->convert_alpha($this->data['form_data']->sale_price),
 					'freshness_date'=>$this->data['form_data']->freshness_date,
 					'additive'=>$this->data['form_data']->additive,
 					'allergen'=>$this->data['form_data']->allergen,

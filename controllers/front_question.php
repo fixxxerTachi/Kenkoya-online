@@ -1,5 +1,6 @@
 <?php
 include __DIR__.'/../libraries/define.php';
+include __DIR__.'/../libraries/define_config.php';
 class Front_question extends CI_Controller {
 	public $data;
 	public function __construct()

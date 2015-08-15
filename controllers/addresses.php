@@ -5,7 +5,7 @@ class Addresses extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination','myclass','encrypt'));
+		$this->load->library(array('session','form_validation','pagination','my_class','encrypt'));
 		$this->load->library('my_validation');
 		$this->load->helper('form');
 		$this->load->model('Customer');
@@ -14,7 +14,7 @@ class Addresses extends CI_Controller{
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->data['cart_count'] = $this->session->userdata('carts') ? count($this->session->userdata('carts')) : 0;
-		$this->customer = $this->myclass->_checklogin($this->data['customer']);
+		$this->customer = $this->my_class->_checklogin($this->data['customer']);
 	}
 		
 	public function select_address()

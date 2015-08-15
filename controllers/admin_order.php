@@ -1,5 +1,6 @@
 <?php
 include __DIR__.'/../libraries/define.php';
+include __DIR__.'/../libraries/define_config.php';
 //include __DIR__.'/../libraries/common.php';
 //include __DIR__.'/../libraries/Csv.php';
 
@@ -38,8 +39,8 @@ class Admin_order extends CI_Controller{
 
 		$where = '';
 		$checked = 'today';
-		$this->load->library('myclass');
-		$dbh = $this->myclass->getDb();
+		$this->load->library('my_class');
+		$dbh = $this->my_class->getDb();
 		$where = 'where ad_pro.branch_code = p.branch_code and o.csv_flag = ? and o.status_flag = ?';
 		$sql = 'select o.id,o.order_number,o.create_date,od.id as order_id,od.advertise_id,od.advertise_product_id,od.quantity,od.delivery_date,c.code,c.name,c.zipcode,a.cource_name,a.takuhai_day,ad_pro.product_code,ad_pro.product_name,ad_pro.sale_price ';
 		$sql.= 'from takuhai_order as o left join takuhai_order_detail as od on od.order_number = o.order_number ';

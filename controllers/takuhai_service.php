@@ -1,5 +1,6 @@
 <?php
 include __DIR__.'/../libraries/define.php';
+include __DIR__.'/../libraries/define_config.php';
 class Takuhai_service extends CI_Controller {
 	public $data;
 	

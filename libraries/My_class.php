@@ -1,12 +1,11 @@
 <?php
-class MyClass{
-	/* 全角英数字を半角にする */
+class My_class{
+	/* 英数字変換 */
 	public function convert_alpha($str)
 	{
 		$result = mb_convert_kana($str,'a','UTF-8');
 		return $result;
 	}
-	
 	/*　カタカナ変換 */
 	public function convert_kana($str)
 	{
@@ -19,8 +18,6 @@ class MyClass{
 		$result = mb_convert_kana($str,'S','UTF-8');
 		return $result;
 	}
-	
-	
 	public function getDb(){
 		try{
 			$dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8';
@@ -46,13 +43,9 @@ class MyClass{
 		}
 	}
 	
-	public function array_flatten($array){
-        $result = array();
-        array_walk_recursive($array, function($v) use (&$result){
-            $result[] = $v;
-        });
-        return $result;
-    }
-
+	public function _test()
+	{
+		echo 'this is MyClass';
+	}
 
 }

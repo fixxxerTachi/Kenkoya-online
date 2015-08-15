@@ -1,6 +1,7 @@
 <?php
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_mail.php';
+include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
 include __DIR__.'/../libraries/csv.php';
@@ -11,7 +12,8 @@ class Front_order extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination','myclass','encrypt'));
+		$this->load->library(array('session','form_validation','pagination','encrypt'));
+		$this->load->library('my_class');
 		$this->load->library('my_mail');
 		$this->load->library('my_validation');
 		$this->load->helper('form');
@@ -23,12 +25,9 @@ class Front_order extends CI_Controller{
 		$this->load->model('Advertise_product');
 		$this->load->model('Master_days');
 		$this->load->model('Customer_info');
-		//$this->load->model('Master_mail_magazine');
 		$this->load->model('Master_hour');
 		$this->load->model('Order');
 		$this->load->model('Master_type_account');
-		//$this->load->model('Mail_template');
-		//$this->load->model('Admin_mail');
 		$this->load->model('Cource');
 		$this->load->model('Master_takuhai_hours');
 		$this->load->model('Order_info');
@@ -42,6 +41,7 @@ class Front_order extends CI_Controller{
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->data['cart_count'] = $this->session->userdata('carts') ? count($this->session->userdata('carts')) : 0;
+
 //var_dump($this->session->userdata('customer'));
 //var_dump($this->session->userdata('no-member'));
 	}
@@ -89,8 +89,7 @@ class Front_order extends CI_Controller{
 			$order_info = $this->session->userdata('order_info');
 			//配達予定日の選択リストを取得
 			$takuhai_select_days  = $this->Area->delivery_select_date_for_takuhai($this->deliver_possible_day,$this);
-			
-			$customer = $this->myclass->_checklogin($this->data['customer']);
+			$customer = $this->my_class->_checklogin($this->data['customer']);
 			if($customer->username == 'no-member'){
 				return redirect('front_order/delivery_info_no_member');
 			}
@@ -323,7 +322,7 @@ class Front_order extends CI_Controller{
 	
 	public function input_payment()
 	{
-		$customer = $this->myclass->_checklogin($this->data['customer']);
+		$customer = $this->my_class->_checklogin($this->data['customer']);
 		//$carts = $this->session->userdata('carts');
 		//$total = $this->Advertise->get_total($carts);
 		$this->load->model('Master_expire');
@@ -364,7 +363,7 @@ class Front_order extends CI_Controller{
 		{
 			return redirect('front_order/delivery_info');
 		}
-		$customer = $this->myclass->_checklogin($this->data['customer']);
+		$customer = $this->my_class->_checklogin($this->data['customer']);
 		$userdata = $this->Customer->get_by_username($customer);
 		$this->data['h2title'] = 'ポイントを使う';
 		$this->data['title'] = 'ポイントを使う';
@@ -395,7 +394,7 @@ class Front_order extends CI_Controller{
 		
 	public function confirm_order()
 	{
-		$customer = $this->myclass->_checklogin($this->data['customer']);
+		$customer = $this->my_class->_checklogin($this->data['customer']);
 		$this->data['h2title'] = 'ご注文の最終確認画面';
 		$this->data['title'] = 'ご注文確認';
 		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
@@ -536,7 +535,7 @@ class Front_order extends CI_Controller{
 	public function order_process()
 	{
 		try{
-			$customer = $this->myclass->_checklogin($this->data['customer']);
+			$customer = $this->my_class->_checklogin($this->data['customer']);
 			if(!$carts = $this->session->userdata('carts')){
 				$this->session->set_flashdata('error','カートにはなにも入っていません');
 				return redirect('front_cart/show_cart');
@@ -772,7 +771,7 @@ class Front_order extends CI_Controller{
 	public function complete()
 	{
 		$this->session->unset_userdata('carts');
-		$customer = $this->myclass->_checklogin($this->data['customer']);
+		$customer = $this->my_class->_checklogin($this->data['customer']);
 		$this->data['h2tilte'] = 'ご注文完了';
 		$this->data['title'] = '注文完了';
 		$order = $this->session->userdata('order');

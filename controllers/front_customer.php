@@ -1,5 +1,6 @@
 <?php
 include __DIR__.'/../libraries/define.php';
+include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/define_mail.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
@@ -18,7 +19,7 @@ class Front_customer extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination','myclass','my_validation','my_mail','encrypt'));
+		$this->load->library(array('session','form_validation','pagination','my_class','my_validation','my_mail','encrypt'));
 		$this->load->helper('form');
 		$this->load->helper('captcha');
 		$this->load->model('Customer');
@@ -188,8 +189,8 @@ class Front_customer extends CI_Controller{
 			//フリガナ変換
 			//$form_data->furigana = $this->myclass->convert_kana($form_data->furigana);
 			//$from_data->email = $this->myclass->convert_alpha($form_data->email);
-			$form_data->email_confirm = $this->myclass->convert_alpha($form_data->email_confirm);
-			$form_data->name = $this->myclass->convert_space($form_data->name);
+			$form_data->email_confirm = $this->my_class->convert_alpha($form_data->email_confirm);
+			$form_data->name = $this->my_class->convert_space($form_data->name);
 			
 			$this->my_validation->validation_rules();
 			if($no_member != 'no-member'){
@@ -570,7 +571,7 @@ class Front_customer extends CI_Controller{
 		
 	public function add_mail()
 	{
-		$customer = $this->myclass->_checklogin($this->data['customer']);
+		$customer = $this->my_class->_checklogin($this->data['customer']);
 		$this->data['h2title'] = 'メールアドレスの新規登録';
 		$form_data = array(
 			'email'=>'',

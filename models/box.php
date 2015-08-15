@@ -17,7 +17,6 @@ class Box extends CI_Model{
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->library('myclass');
 		$this->tablename = 'boxes';
 	}
 	
@@ -34,6 +33,10 @@ class Box extends CI_Model{
 		{
 			$c = unserialize($cart);
 			$product = $this->Advertise_product->get_product_with_size($c->product_id);
+			if(empty($product))
+			{
+				return show_error('不正な操作がおこなわれました。お手数ですが最初からやりなおしてください。');
+			}
 			$product->quantity = $c->quantity;
 			$list_product[] = $product;
 		}
@@ -167,7 +170,7 @@ echo '==============================================<br>';
 		//箱数が同じ場合はそれぞれの体積を計算して大きい方を返す
 		elseif(count($value_box_arr) == count($weight_box_arr))
 		{
-			$total_vol = array();
+			$vol_vol = array();
 			$weight_vol = array();
 			foreach($value_box_arr as $item)
 			{
@@ -331,10 +334,10 @@ echo '==============================================<br>';
 		{
 			return $this->convert_zone_id($weight_box_arr);
 		}
+	}
 
 
-
-		/*** 体積にあった箱を取得する
+	/*** 体積にあった箱を取得する
 	*@param object Boxes
 	*@param int volume
 	*@return obect box
@@ -554,8 +557,31 @@ echo '==============================================<br>';
 		$volumes = array();
 		foreach($objects as $obj)
 		{
-			$weights[] = $obj->weight * $obj->quantity;
-			$volumes[] = $obj->volume * $obj->quantity;
+			if($obj->weight != 0 and $obj->volume != 0)
+			{
+				$weight = $obj->weight;
+				$volume = $obj->volume;
+			}
+			if($obj->weight == 0)
+			{
+				$weigtht = SAMPLE_WEIGHT;
+				$volume = $obj->volume;
+			}
+			if($obj->volume == 0)
+			{
+				if($obj->width !=0 && $obj->height !=0 && $obj->depth !=0)
+				{
+					$volume = $obj->width * $obj->height * $obj->depth;
+					$weight = $obj->weight;
+				}
+				else
+				{
+					$volume = SAMPLE_VOLUME;
+					$weight = $obj->weight;
+				}
+			}
+			$weights[] = $weight * $obj->quantity;
+			$volumes[] = $volume * $obj->quantity;
 		}
 		$total_weight = array_sum($weights);
 //$total_weight = 24000;

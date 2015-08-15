@@ -26,3 +26,4 @@
 </div>
 </body>
 </html>
+<?php test_helper();?>

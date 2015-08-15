@@ -1,7 +1,9 @@
 <?php
 include __DIR__.'/../libraries/define.php';
+include __DIR__.'/../libraries/define_size.php';
 class Test_charge extends CI_Controller {
 	public $data;
+	public $talblename;
 	
 	public function __construct()
 	{
@@ -41,6 +43,10 @@ class Test_charge extends CI_Controller {
 		{
 			$c = unserialize($cart);
 			$product = $this->Advertise_product->get_product_with_size($c->product_id);
+			if(empty($product))
+			{
+				return show_error();
+			}
 			$product->quantity = $c->quantity;
 			$list_product[] = $product;
 		}
@@ -181,10 +187,15 @@ public function test_charge_price()
 		//商品情報をセット
 		$carts = array();
 		
+		$normal_zero = new StdClass();
+		$normal_zero->product_id = 2072;
+		$normal_zero->product_code = 278;
+		$normal_zero->quantity = 11;
+		
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
-		$normal_v->product_code = 9999;
-		$normal_v->quantity = 16;
+		$normal_v->product_code =9999;
+		$normal_v->quantity = 1;
 		//volume 189550
 		
 		$normal_w = new StdClass();
@@ -196,7 +207,7 @@ public function test_charge_price()
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 21;
+		$cool_v->quantity = 1;
 		//volume 189550
 		
 		$cool_w = new StdClass();
@@ -217,7 +228,7 @@ public function test_charge_price()
 		$cold_w->quantity = 10;
 		//volume 189300
 		
-		$carts[] = serialize($normal_v);
+		$carts[] = serialize($normal_zero);
 		$carts[] = serialize($cool_v);
 		//$carts[] = serialize($cool_v);
 		//$carts[] = serialize($normal_v);
@@ -225,7 +236,7 @@ public function test_charge_price()
 		
 //echo '1.カートの中身';var_dump($carts);echo '<hr>';
 		//Box::get_box
-		$boxes = $this->Box->get_boxes($carts);
+		//$boxes = $this->Box->get_boxes($carts);
 //echo '2.最終結果：(Box::get_boxes)'; var_dump($boxes);echo '<hr>';
 //echo '<p>Box::get_boxの処理過程</p>';
 		
@@ -322,7 +333,7 @@ public function test_charge_price()
 //echo '================== Box::get_box_by_temp_zone( ==========================<br>';
 		/* 温度帯に属した箱一覧 */
 		$data = $this->get_size_data($temp_zone_id,$obj);
-//echo '箱情報(get_box_by_temp_zone):<pre>';print_r($data);echo '</pre>';
+echo '箱情報(get_box_by_temp_zone):<pre>';print_r($data);echo '</pre>';
 		$value_box_arr = array();
 		$weight_box_arr = array();
 //////***********************体積から箱計算*************************////////
@@ -387,7 +398,7 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		}
 		
 //echo 'left_volume:<pre>'; print_r($left_volume); echo '</pre>';
-//echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
+echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
 /****************** ここまで新しいコード **************************/
 ////***********************重さから箱計算******************************//////
 		$left_weight = $data->total_weight - (MAX_WEIGHT * $data->weight_quantity);
@@ -403,12 +414,36 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 			$weight_box_arr[] = $weight_left_box;
 			//$weight_value_total += $weight_left_box->volume;
 		}
-		
+
 //echo 'normal、cold,アイスのバラ';
 //echo '<pre>';print_r($value_box_arr);echo '</pre>';
-//echo 'weight_box_arr<pre>';print_r($weight_box_arr);echo '</pre>';
+echo 'weight_box_arr<pre>';print_r($weight_box_arr);echo '</pre>';
 //echo '<hr>';		
 ////////////volume,weight箱数の多い方を選択して返す
+		$value_values = array();
+		$weight_values = array();
+		foreach($value_box_arr as $v)
+		{
+			$value_values[] = $v->value;
+		}
+		foreach($weight_box_arr as $v)
+		{
+			$weight_values[] = $v->value;
+		}
+		$value_value = array_sum($value_values);
+		$weight_value = array_sum($weight_values);
+//echo 'value_value:<pre>';print_r($value_value);echo '</pre>';
+//echo 'weight_value:<pre>';print_r($weight_value); echo '</pre>';
+		if($value_value >= $weight_value)
+		{
+			return $this->convert_zone_id($value_box_arr);
+		}
+		else
+		{
+			return $this->convert_zone_id($weight_box_arr);
+		}
+			
+		/*
 		if(count($value_box_arr) > count($weight_box_arr))
 		{
 //echo 'convert_zone_id<pre>';print_r($value_box_arr);echo '</pre>';
@@ -440,6 +475,7 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		{
 			return $this->convert_zone_id($weight_box_arr);
 		}
+		*/
 	}
 	/*** 計算に必要なサイズデータを算出する
 	*@param array ProductClass
@@ -470,8 +506,31 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		$volumes = array();
 		foreach($objects as $obj)
 		{
-			$weights[] = $obj->weight * $obj->quantity;
-			$volumes[] = $obj->volume * $obj->quantity;
+			if($obj->weight != 0 and $obj->volume != 0)
+			{
+				$weight = $obj->weight;
+				$volume = $obj->volume;
+			}
+			else
+			{
+				if($obj->weight == 0)
+				{
+					$weight = SAMPLE_WEIGHT;
+				}
+				if($obj->volume == 0)
+				{
+					if($obj->width !=0 && $obj->height !=0 && $obj->depth !=0)
+					{
+						$volume = $obj->width * $obj->height * $obj->depth;
+					}
+					else
+					{
+						$volume = SAMPLE_VOLUME;
+					}
+				}
+			}
+			$weights[] = $weight * $obj->quantity;
+			$volumes[] = $volume * $obj->quantity;
 		}
 //echo '商品の重量の配列:<pre>';print_r($weights);echo '</pre>';
 		$total_weight = array_sum($weights);
@@ -574,15 +633,15 @@ echo '箱の種類:<pre>';print_r($data->boxes);echo '</pre>';
 		/** ここから新しく記述**/
 		/** normal,coldの合計でnormalの箱で計算した場合の箱を取得しそれからcoldの場合の箱に置き換える **/
 		$cold_left_volume = $cold_data->total_volume;
-		$cold_max_box = max($cold_data->boxes)->volume;
+		//$cold_max_box = max($cold_data->boxes)->volume;
 		$normal_left_volume = $normal_data->total_volume;
-		$normal_max_box = max($normal_data->boxes)->volume;
+		//$normal_max_box = max($normal_data->boxes)->volume;
 		//$total_left_volume = $cold_left_volume + $normal_left_volume;
 		$cold_box_count = count($cold_data->boxes);
-echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
-echo 'cold_max_box:<pre>';print_r($cold_max_box);echo '</pre>';
-echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
-echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
+//echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
+//echo 'cold_max_box:<pre>';print_r($cold_max_box);echo '</pre>';
+//echo 'normal_left_volume:<pre>';print_r($normal_left_volume);echo '</pre>';
+//echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
 //echo 'total_left_volume:<pre>';print_r($total_left_volume); echo '</pre>';
 
 		//まずは冷凍で考えてみる
@@ -619,7 +678,7 @@ echo 'normal_max_box:<pre>';print_r($normal_max_box);echo '</pre>';
 			$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
 			$value_box_arr[] = $cold_data->boxes[$cold_data_key];
 		}
-echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
+//echo 'cold_left_volume:<pre>';print_r($cold_left_volume);echo '</pre>';
 		//次に常温で考える
 		//coldの半端の箱にnormalを入れているため、その分を差し引く
 		//現在$cold_left_boxにはマイナスで箱の余分が格納されいるのでその分をnormal_left_boxにプラスする
@@ -651,8 +710,8 @@ echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
 		/*** ここから新しいコード **/
 		$cold_left_weight = $cold_data->total_weight;
 		$normal_left_weight = $normal_data->total_weight;
-echo 'cold_left_weight:';print_r($cold_left_weight);echo '</pre>';
-echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
+//echo 'cold_left_weight:';print_r($cold_left_weight);echo '</pre>';
+//echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
 		//まずは冷凍で考えてみる
 		while($cold_left_weight > 0)
 		{
@@ -682,10 +741,10 @@ echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
 			$cold_left_weight = $cold_left_weight - $cold_data->boxes[$cold_data_key]->weight;
 			$weight_box_arr[] = $cold_data->boxes[$cold_data_key];
 		}
-echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
-echo 'cold_left_weight:<pre>';print_r($cold_left_weight);echo '</pre>';
+//echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
+//echo 'cold_left_weight:<pre>';print_r($cold_left_weight);echo '</pre>';
 		$normal_left_weight = $normal_left_weight + $cold_left_weight;
-echo 'normal_left_weight:<pre>';print_r($normal_left_weight);echo '</pre>';
+//echo 'normal_left_weight:<pre>';print_r($normal_left_weight);echo '</pre>';
 		while($normal_left_weight > 0)
 		{
 			for($i = 0; $i < $normal_box_count; $i++)

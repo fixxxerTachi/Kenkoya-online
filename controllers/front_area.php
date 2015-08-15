@@ -11,7 +11,7 @@ class Front_area extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination','myclass','encrypt'));
+		$this->load->library(array('session','form_validation','pagination','my_class','encrypt'));
 		$this->load->helper('form');
 		$this->load->model('Customer');
 		$this->load->model('Area');
@@ -136,7 +136,7 @@ class Front_area extends CI_Controller{
 		$is_area = null;
 		if($this->input->post('search_zip')){
 			$form_data = array(
-				'zipcode'=>$this->myclass->convert_alpha($this->input->post('zipcode1').$this->input->post('zipcode2')),
+				'zipcode'=>$this->my_class->convert_alpha($this->input->post('zipcode1').$this->input->post('zipcode2')),
 			);
 			$form_data = (object)$form_data;
 			if(!$this->validation_zip($form_data->zipcode) == FALSE){
