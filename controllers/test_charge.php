@@ -184,19 +184,19 @@ public function test_charge_price()
 		$normal_v = new StdClass();
 		$normal_v->product_id = 2905;
 		$normal_v->product_code = 9999;
-		$normal_v->quantity = 30;
+		$normal_v->quantity = 16;
 		//volume 189550
 		
 		$normal_w = new StdClass();
 		$normal_w->product_id = 2906;
 		$normal_w->product_code=9998;
-		$normal_w->quantity = 4;
+		$normal_w->quantity = 0;
 		//volume 189300 
 		
 		$cool_v = new StdClass();
 		$cool_v->product_id = 2907;
 		$cool_v->product_code = 9997;
-		$cool_v->quantity = 4;
+		$cool_v->quantity = 21;
 		//volume 189550
 		
 		$cool_w = new StdClass();
@@ -654,7 +654,7 @@ echo 'value_box_arr:<pre>'; print_r($value_box_arr); echo '</pre>';
 echo 'cold_left_weight:';print_r($cold_left_weight);echo '</pre>';
 echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
 		//まずは冷凍で考えてみる
-		while($cold_left_weight >= 0)
+		while($cold_left_weight > 0)
 		{
 			for($i = 0; $i < $cold_box_count; $i++)
 			{
@@ -683,7 +683,27 @@ echo 'normal_lefrt_weight:';print_r($normal_left_weight);echo '</pre>';
 			$weight_box_arr[] = $cold_data->boxes[$cold_data_key];
 		}
 echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
-		
+echo 'cold_left_weight:<pre>';print_r($cold_left_weight);echo '</pre>';
+		$normal_left_weight = $normal_left_weight + $cold_left_weight;
+echo 'normal_left_weight:<pre>';print_r($normal_left_weight);echo '</pre>';
+		while($normal_left_weight > 0)
+		{
+			for($i = 0; $i < $normal_box_count; $i++)
+			{
+				if($normal_left_weight <= $normal_data->boxes[$i]->weight)
+				{
+					$normal_data_key = $i;
+					break;
+				}
+				else
+				{
+					$normal_data_key = $normal_box_count -1;
+				}
+			}
+			$normal_left_weight = $normal_left_weight - $normal_data->boxes[$normal_data_key]->weight;
+			$weight_box_arr[] = $normal_data->boxes[$normal_data_key];
+		}
+echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
 		
 		/*** ここまで新しいコード ***/
 		/*** ここから古いコード ***/
@@ -736,7 +756,32 @@ echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
 //echo '<pre>';print_r($weight_box_arr);echo '</pre>';
 //echo '<hr>';
 		
-		//volume,weight箱数の多い方を選択して返す
+		//volume,weightのvalueの合計の多い方を選択して返す
+		$value_values = array();
+		$weight_values = array();
+		foreach($value_box_arr as $v)
+		{
+			$value_values[] = $v->value;
+		}
+		foreach($weight_box_arr as $v)
+		{
+			$weight_values[] = $v->value;
+		}
+		$value_value = array_sum($value_values);
+		$weight_value = array_sum($weight_values);
+echo 'value_value:<pre>';print_r($value_value);echo '</pre>';
+echo 'weight_value:<pre>';print_r($weight_value); echo '</pre>';
+		if($value_value >= $weight_value)
+		{
+			return $this->convert_zone_id($value_box_arr);
+		}
+		else
+		{
+			return $this->convert_zone_id($weight_box_arr);
+		}
+	
+		
+		/*
 		if(count($value_box_arr) > count($weight_box_arr)){
 			return $this->convert_zone_id($value_box_arr);
 		}
@@ -765,6 +810,7 @@ echo 'weight_box_arr:<pre>';print_r($weight_box_arr);echo '</pre>';
 		{
 			return $this->convert_zone_id($weight_box_arr);
 		}
+		*/
 	}
 
 	/** box_idの配列 から箱の種類名を取得する
