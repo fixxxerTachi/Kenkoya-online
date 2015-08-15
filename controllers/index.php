@@ -155,7 +155,8 @@ class Index extends CI_Controller {
 		$this->load->view('takuhai_service/guidance',$this->data);
 	}
 	
-	/* 画像の表示　show_image::displayに記述
+	/*画像の表示　show_image::displayに記述*/
+	/*
 	public function show_image($product_code, $size)
 	{
 		$img = ImageCreateFromJpeg('images/products/ak' . $product_code . '.jpg');

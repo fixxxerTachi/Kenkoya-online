@@ -16,7 +16,7 @@
 			<li><?php echo number_format($item->ad_pro_sale_price) ?>円</li>
 		<?php else:?>
 			<li><img src='<?php echo base_url("images/icon/rank0" . $count) . ".gif" ?>' width='28' height='48'></li>
-			<li><a href='<?php echo base_url("index/detail_product/{$item->product_id}") ?>'><img src='<?php echo base_url(show_product_image($item->p_image_name,120)) ?>' width='120' height='120' alt='<?php echo $item->ad_pro_product_name ?>'></a></li>
+			<li><a href='<?php echo base_url("index/detail_product/{$item->product_id}") ?>'><img src='<?php echo base_url(show_image($item->p_image_name,120)) ?>' width='120' height='120' alt='<?php echo $item->ad_pro_product_name ?>'></a></li>
 			<li><?php echo $item->p_product_name ?></li>
 			<li><?php echo number_format($item->ad_pro_sale_price) ?>円</li>
 		<?php endif;?>
