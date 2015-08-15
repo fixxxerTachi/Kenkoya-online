@@ -192,7 +192,149 @@ echo '==============================================<br>';
 		}
 	}
 	
-	/*** 体積にあった箱を取得する
+	/*** 常温と冷蔵が混在する場***/
+	/* @param array normal_obj
+	/* @return object 
+	**/
+	public function get_box_with_normal_and_cold(array $normal_obj, array $cold_obj)
+	{
+		$normal_data = $this->get_size_data(TEMP_NORMAL,$normal_obj);
+		$cold_data = $this->get_size_data(TEMP_COLD,$cold_obj);
+		$value_box_arr = array();
+		$weight_box_arr = array();
+		$cold_left_volume = $cold_data->total_volume;
+		$normal_left_volume = $normal_data->total_volume;
+		$cold_box_count = count($cold_data->boxes);
+		/*** 体積から箱計算 ***/
+		while($cold_left_volume >= 0)
+		{
+			for($i = 0; $i < $cold_box_count; $i++)
+			{
+				//一箱に入る場合通常と一緒に入れるため通常と併せて入る箱を取得する
+				if($cold_left_volume <= $cold_data->boxes[$i]->volume)
+				{
+					$cold_normal_left_volume = $cold_left_volume + $normal_left_volume;
+					for($j = 0; $j < $cold_box_count; $j++)
+					{
+						if($cold_normal_left_volume <= $cold_data->boxes[$j]->volume)
+						{
+							$cold_data_key = $j;
+							break;
+						}
+						else
+						{
+							$cold_data_key = $cold_box_count -1;
+						}
+					}
+				}
+				else
+				{
+				//一箱に入らない場合最大の箱を返す
+					$cold_data_key = $cold_box_count - 1;
+				}
+			}
+			$cold_left_volume = $cold_left_volume - $cold_data->boxes[$cold_data_key]->volume;
+			$value_box_arr[] = $cold_data->boxes[$cold_data_key];
+		}
+		//次に常温で考える
+		//coldの半端の箱にnormalを入れているため、その分を差し引く
+		//現在$cold_left_boxにはマイナスで箱の余分が格納されいるのでその分をnormal_left_boxにプラスする
+		$normal_left_volume = $normal_left_volume + $cold_left_volume;
+		$normal_box_count = count($normal_data->boxes);
+		while($normal_left_volume >= 0)
+		{
+			for($i = 0; $i < $normal_box_count; $i++)
+			{
+				if($normal_left_volume <= $normal_data->boxes[$i]->volume)
+				{
+					$normal_data_key = $i;
+					break;
+				}
+				else
+				{
+					$normal_data_key = $normal_box_count -1;
+				}
+			}
+			$normal_left_volume = $normal_left_volume - $normal_data->boxes[$normal_data_key]->volume;
+			$value_box_arr[] = $normal_data->boxes[$normal_data_key];
+		}
+		//////////////////////重さから箱計算///////////////////////
+		//重量から考えて、最大梱包数量で箱を計算した場合の残りの重量
+		/*** ここから新しいコード **/
+		$cold_left_weight = $cold_data->total_weight;
+		$normal_left_weight = $normal_data->total_weight;
+		//まずは冷凍で考えてみる
+		while($cold_left_weight > 0)
+		{
+			for($i = 0; $i < $cold_box_count; $i++)
+			{
+				if($cold_left_volume <= $cold_data->boxes[$i]->weight)
+				{
+					$cold_normal_left_weight = $cold_left_weight + $normal_left_weight;
+					for($j = 0; $j < $cold_box_count; $j++)
+					{
+						if($cold_normal_left_weight <= $cold_data->boxes[$j]->weight)
+						{
+							$cold_data_key = $j;
+							break;
+						}
+						else
+						{
+							$cold_data_key = $cold_box_count -1;
+						}
+					}
+				}
+				else
+				{
+					$cold_data_key = $cold_box_count-1;
+				}
+			}
+			$cold_left_weight = $cold_left_weight - $cold_data->boxes[$cold_data_key]->weight;
+			$weight_box_arr[] = $cold_data->boxes[$cold_data_key];
+		}
+		$normal_left_weight = $normal_left_weight + $cold_left_weight;
+		while($normal_left_weight > 0)
+		{
+			for($i = 0; $i < $normal_box_count; $i++)
+			{
+				if($normal_left_weight <= $normal_data->boxes[$i]->weight)
+				{
+					$normal_data_key = $i;
+					break;
+				}
+				else
+				{
+					$normal_data_key = $normal_box_count -1;
+				}
+			}
+			$normal_left_weight = $normal_left_weight - $normal_data->boxes[$normal_data_key]->weight;
+			$weight_box_arr[] = $normal_data->boxes[$normal_data_key];
+		}
+		//volume,weightのvalueの合計の多い方を選択して返す
+		$value_values = array();
+		$weight_values = array();
+		foreach($value_box_arr as $v)
+		{
+			$value_values[] = $v->value;
+		}
+		foreach($weight_box_arr as $v)
+		{
+			$weight_values[] = $v->value;
+		}
+		$value_value = array_sum($value_values);
+		$weight_value = array_sum($weight_values);
+		if($value_value >= $weight_value)
+		{
+			return $this->convert_zone_id($value_box_arr);
+		}
+		else
+		{
+			return $this->convert_zone_id($weight_box_arr);
+		}
+
+
+
+		/*** 体積にあった箱を取得する
 	*@param object Boxes
 	*@param int volume
 	*@return obect box
@@ -210,6 +352,7 @@ echo '==============================================<br>';
 	}
 	
 	
+	/*
 	public function get_box_with_normal_and_cold(array $normal_obj, array $cold_obj)
 	{
 		$normal_data = $this->get_size_data(TEMP_NORMAL,$normal_obj);
@@ -325,6 +468,7 @@ echo '==============================================<br>';
 		}
 			
 	}
+	*/
 	
 	//最高梱包重量から適した箱を取得する
 	public function get_box_from_weight($temp_zone_id,$weight)
