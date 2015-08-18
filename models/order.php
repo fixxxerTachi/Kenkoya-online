@@ -423,6 +423,11 @@ class Order extends CI_Model{
 		//$this->db->update($this->tablename . '_detail',$data);
 		$this->db->update($this->tablename,$data);
 	}
+	public function update_by_order_number($order_number = null,$date = array())
+	{
+		$this->db->where('order_number',$order_number);
+		$this->db->update($this->tablename,$data);
+	}
 	
 	public function update_order_detail($id,$data)
 	{

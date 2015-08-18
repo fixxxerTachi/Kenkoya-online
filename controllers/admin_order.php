@@ -1,6 +1,9 @@
 <?php
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_config.php';
+include __DIR__.'/../libraries/Classes/PHPExcel.php';
+include __DIR__.'/../libraries/Classes/PHPExcel/IOFactory.php';
+
 //include __DIR__.'/../libraries/common.php';
 //include __DIR__.'/../libraries/Csv.php';
 
@@ -102,6 +105,7 @@ class Admin_order extends CI_Controller{
 		$status_arr = $this->input->post('status');
 		$deli_start = $this->input->post('deliver_start_date');
 		$deli_end = $this->input->post('deliver_end_date');
+		$no_deli_date = $this->input->post('no_deli_date');
 		//受付中にチェック
 		if(!$status_arr) $status_arr=array(
 			'0',
@@ -117,19 +121,17 @@ class Admin_order extends CI_Controller{
 			'status_arr'=>$status_arr,
 		);
 		$this->data['form_data'] = (object)$form_data;
-		$sdate = new DateTime($start);
-		$edate = new DateTime($end);
-		$dsdate = new DateTime($deli_start);
-		$dedate = new DateTime($deli_end);
-		$start_datetime = $sdate->format('Y-m-d 00:00:00');
-		$end_date = $edate->modify('1 days');
-		$end_datetime = $edate->format('Y-m-d 00:00:00');
-		$deli_start_datetime = $dsdate->format('Y-m-d 00:00:00');
-		$deli_end_date = $dedate->modify('1 days');
-		$deli_end_datetime = $dedate->format('Y-m-d 00:00:00');
+		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('1000-01-01 00:00:00');
+		$end_datetime = !empty($end) ? new DateTime($end) : new DateTime('9999-12-30 23:59:59');
+		$deli_start_datetime = !empty($dsdate) ? new DateTime($sdate) : new DateTime('1000-01-01 00:00:00');
+		$deli_end_datetime = !empty($dedate) ? new DateTime($dedate) : new DateTime('9999-12-30 23:59:59');
+		$start_datetime = $start_datetime->format('Y-m-d 00:00:00');
+		$end_datetime = $end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
+		$deli_start_datetime = $deli_start_datetime->format('Y-m-d 00:00:00');
+		$deli_end_datetime = $deli_end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
 		$this->db->select("
-			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,o.payment,
-			od.id as order_id,od.product_code,od.branch_code,od.sale_price,od.quantity,od.status_flag,od.delivery_date,od.delivery_hour,
+			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,o.payment,o.status_flag as order_status,
+			od.id as order_id,od.order_id as orderid,od.product_code,od.branch_code,od.sale_price,od.quantity,od.status_flag,od.delivery_date,od.delivery_hour,
 			c.code as customer_code,c.name,
 			ad_pro.product_name,
 			ca.cource_name,
@@ -146,6 +148,7 @@ class Admin_order extends CI_Controller{
 		$this->db->order_by('o.id','desc');
 		
 		//条件絞り込み
+		//orderのステータス
 		if(count($status_arr) > 0) $this->db->where_in('o.status_flag',$status_arr);
 		if($order_number) $this->db->where('o.order_number',$order_number);
 		if($customer_code) $this->db->where('c.code',$customer_code);
@@ -153,19 +156,78 @@ class Admin_order extends CI_Controller{
 			$this->db->like('c.name',$customer_name);
 			$this->db->or_like('c.furigana',$customer_name);
 		}
-		if($start) $this->db->where('o.create_date >=' ,$start_datetime);
-		if($end) $this->db->where('o.create_date <' , $end_datetime);
-		if($deli_start) $this->db->where('od.delivery_date >=' , $deli_start_datetime);
-		if($deli_end) $this->db->where('od.delivery_date <' , $deli_end_datetime);
-		$result = $this->db->get()->result();
-		$subtotal = array();
-		foreach($result as $row){
+		
+		//日付け指定なしが含まれる場合
+		if($no_deli_date)
+		{
+			$date_where = "(o.create_date >= '{$start_datetime}'
+					and o.create_date < '{$end_datetime}'
+					and (od.delivery_date >= '{$deli_start_datetime}'
+					and od.delivery_date < '{$deli_end_datetime}'
+					or od.delivery_date = '0000-00-00 00:00:00')
+			)";
+		}
+		else
+		{
+			$date_where = "(o.create_date >= '{$start_datetime}'
+					and o.create_date < '{$end_datetime}'
+					and od.delivery_date >= '{$deli_start_datetime}'
+					and od.delivery_date < '{$deli_end_datetime}'
+			)";
+
+		}
+		$this->db->where($date_where);
+		if($this->input->post('submit'))
+		{
+			$result = $this->db->get()->result();
+			$this->data['result'] = $result;
+			$subtotal = array();
+			foreach($result as $row){
 			$total = $row->sale_price * $row->quantity;
 			$subtotal[] = $total;
+			$this->data['total_price'] = array_sum($subtotal);
+		}
+
+		}
+		if($this->input->post('makecsv'))
+		{
+				$result = $this->db->get()->result_array();
+				$csv = '';
+				$downloadCsvDir = 'download_csv/';
+				$filename = 'order' . date('Y-m-d-H-i-s') . '.csv';
+				$makeCsvFilename = $downloadCsvDir . $filename;
+				//ファイル名にディレクトリを含めるとダウンロードされるときファイル名に変換される
+				$this->load->library('csv');
+				$this->csv->setData($result);
+				$this->csv->getCsvMs($makeCsvFilename);
+				
+				////受付中は受付澄みにする
+				foreach($result as $item)
+				{
+					if($item['order_status'] == 0)
+					{
+						if($item['status_flag'] == 0)
+						{
+							$status = array('status_flag'=>1,'csv_flag' =>1);
+							$this->Order->update($item['orderid'],$status);
+							$update = array('status_flag'=>1);
+							$this->Order->update_order_detail($item['order_id'],$update);
+						}
+					}
+				}
+				
+				header('Content-Type: application/octet-stream');
+				header('Content-Disposition: attachment; filename=' . $filename);
+				$this->csv->getCsvMs('php://output');
+				exit();
+				//return redirect('admin_order/list_order');
+		}
+		
+		if($this->input->post('makeOrderItems'))
+		{
+			$excel = new PHPExcel();
 		}
 		$this->data['shops'] = $this->Master_area->list_area;
-		$this->data['total_price'] = array_sum($subtotal);
-		$this->data['result'] = $result;
 		$this->data['payments'] = $this->Master_payment->method;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_order/list_order',$this->data);

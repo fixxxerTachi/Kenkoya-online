@@ -56,45 +56,35 @@
 				</table>
 				</form>
 				<?php if(!empty($result)): ?>
-				<!--
 				<p>売上高:<?php echo number_format($total_price) ?>円</p>
-				-->
-					<?Php $count = count($result);?>
-				<table>
-					<tr>
-						<th>購入日</th><th>注文番号</th><th>お客様コード</th><th>お客様名</th><th>配送先</th>
-					</tr>
-					<tr>
-						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th>
-					</tr>
-					<tr>
-						<th>購入金額</th><th>お支払方法</th><th>状態</th><th>変更</th>
-					</tr>
-					<?php for($i=0;$i < $count; $i++): ?>
-						<?php $create_date = new DateTime($result[$i]->create_date);?>
-						<?php if(($i == 0) || ($i != 0 && $result[$i]->order_number != $result[$i-1]->order_number)):?>
-					<tr>
-						<td><?php echo $create_date->format('Y/m/d');?></td>
-						<td><?php echo $result[$i]->order_number ?></td>
-						<td><?php echo $result[$i]->customer_code ?></td>
-						<td><?php echo $result[$i]->name ?></td>
-						<td><?php echo $result[$i]->address ?></td>
-					</tr>
-						<?php endif;?>
-					<tr>
-						<td><?php echo $result[$i]->product_code ?></td>
-						<td><?php echo $result[$i]->branch_code ?></td>
-						<td><?php echo $result[$i]->product_name ?></td>
-						<td><?php echo $result[$i]->quantity ?>個</td>
-						<td><?php echo $result[$i]->sale_price ?>円</td>
-					</tr><tr>
-						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
-						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
-						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
-						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$row->order_id}") ?>'>変更</a></td>
-					</tr>
-					<?php endfor;?>
-				</table>
+					<table class='list'>
+						<tr><th>受注日</th><th>注文番号</th><th>店舗</th><th>お客様コード</th><th>お名前</th><th>住所</th><th>コース名</th><th>配達日</th><th>配達時間</th></tr>
+						<tr><th>商品名</th><th>商品コード</th><th>枝番</th><th>金額</th><th>数量</th><th>合計金額</th><th>状態</th><th>お支払方法</th><th>売上</th><th></th></tr>
+					<?php foreach($result as $row): ?>
+						<?php $create_date = new DateTime($row->create_date);?>
+						<tr>
+							<td><?php echo $create_date->format('Y/m/d') ?></td>
+							<td><?php echo $row->order_number ?></a></td>
+							<td><?php echo $shops[$row->shop_code] ?></td>
+							<td><?php echo $row->customer_code ?></td>
+							<td><?php echo $row->name ?></td>
+							<td><?php echo $row->address ?></td>
+							<td><?php echo $row->cource_name ?></td>
+							<td><?php echo format_date($row->delivery_date,'日付指定なし') ?></td>
+							<td><?php echo $takuhai_hours[$row->delivery_hour] ?></td>
+						</tr><tr>
+							<td><?php echo $row->product_name ?></td>
+							<td><?php echo $row->product_code ?></td>
+							<td><?php echo $row->branch_code ?></td>
+							<td><?php echo number_format($row->sale_price) ?>円</td>
+							<td><?php echo $row->quantity ?></td>
+							<td><?php echo number_format($row->quantity * $row->sale_price) ?>円</td>
+							<td><?php echo $order_status[$row->status_flag] ?></td>
+							<td><?php echo $payments[$row->payment]->method_name ?></td>
+							<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$row->order_id}") ?>'>変更</a></td>	
+						</tr>
+					<?php endforeach;?>
+					</table>
 				<?php else: ?>
 					<p>登録されていません</p>
 				<?php endif; ?>
