@@ -395,7 +395,7 @@ class Mypage extends CI_Controller{
 		$customer = $this->_checklogin($this->data['customer']);
 		$this->data['h2title'] = 'ご注文履歴';
 		$sess_customer = $this->session->userdata('customer');
-		$orders  = $this->Order->get_by_customer_id($sess_customer->id);
+		$orders  = $this->Order->get_by_customer_id($sess_customer->id,null,5);
 		$form_data = new StdClass();
 		$form_data->start_date ='';
 		$form_data->end_date = '';
@@ -693,6 +693,8 @@ class Mypage extends CI_Controller{
 			$this->data['error_message'] = $e->getMessage();
 		}
 		$this->data['order'] = $result;
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
 		$this->load->view('mypage/cancel',$this->data);
 	}
 	

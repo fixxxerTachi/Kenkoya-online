@@ -228,7 +228,7 @@ class Order extends CI_Model{
 		return $this->db->get()->row();
 	}
 	
-	public function get_by_customer_id($customer_id = null,$formobj=null)
+	public function get_by_customer_id($customer_id = null,$formobj=null,$limit = null)
 	{
 		$this->db->select(
 			'o.*,c.name'
@@ -249,6 +249,10 @@ class Order extends CI_Model{
 				$end_date = $end_datetime->format('Y-m-d H:i:s');
 				$this->db->where('o.create_date <= ' , $end_date);
 			}
+		}
+		if($limit)
+		{
+			$this->db->limit($limit);
 		}
 		$this->db->order_by('create_date','desc');
 		$query = $this->db->get();

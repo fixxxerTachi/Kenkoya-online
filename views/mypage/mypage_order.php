@@ -40,7 +40,7 @@
 									<tr><th>注 文 日</th><td><?php echo $create_date->format('Y年m月d日') ?></td></tr>
 									<tr><th>お支払方法</th><td><?php echo $payments[$order->payment]->method_name ?></td></tr>
 									<tr><th>配達予定日</th><td><?php echo format_date($order->delivery_date,'日付指定なし') ?> <?php echo $takuhai_hours[$order->delivery_hour] ?></td></tr>
-									<tr><th>ご請求額</th><td><?php echo number_format((int)$order->total_price + (int)$order->tax) ?>円</td></tr>
+									<tr><th>ご請求額</th><td><?php echo number_format((int)$order->total_price + (int)$order->tax) ?>円(税　<?php echo number_format($order->tax) ?>円)</td></tr>
 								</table>
 							</th>
 							<td rowspan='<?php echo $count ?>'>
@@ -70,7 +70,7 @@
 						<?php endforeach;?>
 					</table>
 				<?php else: ?>
-					<p>登録されていません</p>
+					<p class='error'>購入履歴がありません</p>
 				<?php endif; ?>	
 		</div>
 	</div>

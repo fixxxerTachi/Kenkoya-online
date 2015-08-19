@@ -42,7 +42,7 @@
 			</ul>
 		</div>
 	</div>
-	
+	<!--
 	<div class='body point'>
 		<div class='content'>
 			<div id='mypage_point'>
@@ -51,8 +51,8 @@
 			</div>
 		</div>
 	</div>
+	-->
 	</div>
-
 	
 	<div class='body clearfix'>
 		<div class='content'>
@@ -76,6 +76,7 @@
 					<li><a href='<?php echo site_url('mypage/change_auth/password') ?>'>パスワード変更</a></li>
 				</ul>
 			</div>
+			<!--
 			<div class='mypage right'>
 				<h3><span class='logo'>point</span> ポイント情報</h3>
 				<ul>
@@ -84,6 +85,7 @@
 					<li>ポイント景品交換</li>
 				</ul>
 			</div>
+			-->
 		</div>
 	</div>
 </div>

@@ -34,8 +34,8 @@
 								<table class='order_info'>
 									<tr><th>ご注文番号</th><td><?php echo $order[0]->order_number ?></td>
 									<tr><th>注 文 日</th><td><?php echo $create_date->format('Y年m月d日') ?></td>
-									<tr><th>お支払方法</th><td><?php echo $order[0]->payment ?></td>
-									<tr><th>配達日</th><td><?php echo $delivery_date->format('Y年m月d日') ?></td>
+									<tr><th>お支払方法</th><td><?php echo $payments[$order[0]->payment]->method_name ?></td>
+									<tr><th>配達日</th><td><?php echo format_date($order[0]->delivery_date,'日付指定なし') ?>	<?php echo $takuhai_hours[$order[0]->delivery_hour] ?></td>
 								</table>
 							</th>
 							<td rowspan='<?php echo $count ?>'>
