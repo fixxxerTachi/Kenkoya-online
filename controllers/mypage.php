@@ -421,6 +421,30 @@ class Mypage extends CI_Controller{
 		$this->load->view('mypage/mypage_order',$this->data);
 	}
 	
+	/** 領収書の表示　**/
+	public function receipt()
+	{
+		$this->load->model('Base_info');
+		$base_info = $this->Base_info->get_info();
+		if(!$order_id = $this->uri->segment(3))
+		{
+			return show_error('不正な画面操作です');
+		}
+		$this->data['title'] = '領収書の表示';
+		$customer = $this->_checklogin($this->data['customer']);
+		$order = $this->Order->get_by_id_customer((int)$order_id,$customer->id);
+		$details = $this->Order->get_detail_by_order_id($order_id);
+		$customer = $this->Customer->get_by_id($customer->id);
+		$this->data['h2title'] = "{$customer->name} 様";
+		$this->data['customer'] = $customer;
+		$this->data['details'] = $details;
+		$this->data['order'] = $order;
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
+		$this->data['shop_info'] = $base_info;
+		$this->load->view('mypage/reciept',$this->data);
+	}
+	
 	public function select_address()
 	{
 		$form_data = new StdClass();

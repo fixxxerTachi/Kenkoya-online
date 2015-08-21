@@ -6,7 +6,7 @@
 	<div id="body">
 		<h2><?php echo $h2title ?></h2>
 		<div>
-			<form aciton='' method='post' enctype='multipart/form-data'>
+			<form action='' method='post' enctype='multipart/form-data'>
 			<dl>
 				<dt class='message'><?php echo $message ?></dt>
 				<dd><input type='file' name='csvfile'></dd>

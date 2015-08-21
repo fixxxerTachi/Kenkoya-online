@@ -2,6 +2,7 @@
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_mail.php';
 include __DIR__.'/../libraries/define_config.php';
+include __DIR__.'/../libraries/define_size.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
 include __DIR__.'/../libraries/csv.php';
@@ -630,6 +631,7 @@ class Front_order extends CI_Controller{
 						'delivery_date'=>$order_info->delivery_date,
 						'delivery_hour'=>$order_info->delivery_hour,
 						'delivery_method'=>$order_info->takuhai,
+						'delivery_charge'=>$total->charge_price,
 					);
 			//非会員はsessionからデータを取り出す 情報をdbに格納
 					}else{
@@ -666,6 +668,7 @@ class Front_order extends CI_Controller{
 							'delivery_date'=>$order_info->delivery_date,
 							'delivery_hour'=>$order_info->delivery_hour,
 							'delivery_method'=>$order_info->takuhai,
+							'delivery_charge'=>$total->charge_price,
 						);
 				}
 			//transaction

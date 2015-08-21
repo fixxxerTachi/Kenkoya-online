@@ -259,6 +259,7 @@ class Customer extends CI_Model{
 				$customer->username = $result->username;
 				$customer->name = $result->name;
 				$customer->email = $result->email;
+				$csutomer->code = $result->code;
 				$this->session->set_userdata('customer',$customer);
 				//ログイン時session no-memberがあったら削除する
 				if($this->session->userdata('no-member')){

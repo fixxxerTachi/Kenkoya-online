@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang='ja'>
 <head>
+<?php include __DIR__ . '/../../libraries/define_flag.php' ?>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
 <link rel='stylesheet' href='<?php echo base_url('css/mypage.css') ?>'>
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
@@ -40,21 +41,28 @@
 									<tr><th>注 文 日</th><td><?php echo $create_date->format('Y年m月d日') ?></td></tr>
 									<tr><th>お支払方法</th><td><?php echo $payments[$order->payment]->method_name ?></td></tr>
 									<tr><th>配達予定日</th><td><?php echo format_date($order->delivery_date,'日付指定なし') ?> <?php echo $takuhai_hours[$order->delivery_hour] ?></td></tr>
-									<tr><th>ご請求額</th><td><?php echo number_format((int)$order->total_price + (int)$order->tax) ?>円(税　<?php echo number_format($order->tax) ?>円)</td></tr>
+									<tr><th>ご請求額</th><td><?php echo number_format((int)$order->total_price + (int)$order->tax + (int)$order->delivery_charge) ?>円(税　<?php echo number_format($order->tax) ?>円)</td></tr>
 								</table>
 							</th>
 							<td rowspan='<?php echo $count ?>'>
 								<ul>
 						<?php if($order->csv_flag == 0): ?>
-							<?php if($order->status_flag == 0):?>
-										<li>受付中</li>
-										<li><a class='edit_menu' href='<?php echo site_url("/mypage/cancel/{$order->id}/") ?>'>注文キャンセル</a></li>
+							<?php if($order->status_flag == NOORDER):?>
+									<li>受付中</li>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/cancel/{$order->id}/") ?>'>注文キャンセル</a></li>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
-							<?php if($order->status_flag == 2):?>
-										<li>ご注文取り消し</li>
+							<?php if($order->status_flag == CANCELED):?>
+									<li>ご注文取り消し</li>
 							<?php endif;?>
-						<?php else:?>
+						<?php elseif($order->csv_flag == 1):?>
+							<?php if($order->status_flag == ORDERED):?>
 									<li>受付済み</li>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
+							<?php elseif($order->status_flag == DELIVERED):?>
+									<li>配送済み</li>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
+							<?php endif;?>
 						<?php endif;?>
 								</ul>
 							</td>

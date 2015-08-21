@@ -1,5 +1,5 @@
 <?php
-class My_class{
+class My_Class{
 	/* 英数字変換 */
 	public function convert_alpha($str)
 	{

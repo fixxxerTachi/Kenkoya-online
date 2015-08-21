@@ -112,6 +112,39 @@ class Order extends CI_Model{
 		}
 		return $result;
 	}
+	
+	/** order_idとcustomerから購入商品情報を取得する **/
+	/* @param int order_id
+	/* @params int customer_id
+	/* @return object
+	*/
+	public function get_by_id_customer($order_id , $customer_id)
+	{
+		$this->db->select("
+			o.order_number,
+			o.create_date,
+			o.shop_code,
+			o.address,
+			o.cource_code,
+			o.payment,
+			o.total_price,
+			o.tax,
+			o.delivery_date,
+			o.delivery_hour,
+			o.delivery_charge,
+			c.code,
+			ca.cource_name,
+		");
+		$this->db->from('order as o');
+		$this->db->join('order_detail as od','od.order_id = o.id','left');
+		$this->db->join('customers as c','c.id = o.customer_id','left');
+		$this->db->join('master_cource as ca','ca.cource_code = o.cource_code');
+		$this->db->where('c.shop_code = ca.shop_code');
+		$this->db->where('o.id ',$order_id);
+		$this->db->where('o.customer_id',$customer_id);
+		$row = $this->db->get()->row();
+		return $row;
+	}
 
 	public function show_list($del_flag=TRUE)
 	{
@@ -290,6 +323,7 @@ class Order extends CI_Model{
 		$result = $query->result();
 		return $result;
 	}
+	
 	
 	public function get_detail_by_order_id($order_id = Null)
 	{

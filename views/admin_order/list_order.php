@@ -91,7 +91,7 @@
 						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
 						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
 						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
-						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$row->order_id}") ?>'>変更</a></td>
+						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->order_id}") ?>'>変更</a></td>
 					</tr>
 					<?php endfor;?>
 				</table>
