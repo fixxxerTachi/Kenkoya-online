@@ -130,7 +130,7 @@ class Admin_order extends CI_Controller{
 		$deli_start_datetime = $deli_start_datetime->format('Y-m-d 00:00:00');
 		$deli_end_datetime = $deli_end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
 		$this->db->select("
-			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,o.payment,o.status_flag as order_status,
+			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,o.payment,o.status_flag as order_status,o.delivery_charge,
 			od.id as order_id,od.order_id as orderid,od.product_code,od.branch_code,od.sale_price,od.quantity,od.status_flag,od.delivery_date,od.delivery_hour,
 			c.code as customer_code,c.name,
 			ad_pro.product_name,
@@ -225,7 +225,38 @@ class Admin_order extends CI_Controller{
 		
 		if($this->input->post('makeOrderItems'))
 		{
-			$excel = new PHPExcel();
+			//shop情報の読み込み
+			$this->load->model('Base_info');
+			//商品情報の読み込み
+			$result = $this->db->get()->result();
+			//テンプレートの読み込み
+			//$file = __DIR__.'/../third_party/test.xls';
+			$file = $this->config->item('excel_template');
+			$reader = PHPExcel_IOFactory::createReader('Excel5');
+			$book = $reader->load($file);
+			
+			//シートの設定
+			$book->setActiveSheetIndex(0);
+			$sheet = $book->getActiveSheet();
+			$sheet->setTitle('月');
+			
+			//セルを指定して書き込み
+			//$sheet->setCellValue('A1','test_A1');
+			//$sheet->setCellValueByColumnAndRow(1,1,'test_B1');
+			$sheet->setCellValue('B4',$this->Base_info->shop_name);
+			$sheet->setCellValue('B5',$this->Base_info->tel);
+			
+			/*** 出力処理 ***/
+			$output = '発注明細書.xls';
+			//$writer = PHPExcel_IOFactory::createWriter($book,'Excel5');
+			//$writer->save($output);
+			
+			header('Content-Type: application/vnd.ms-excel');
+			ob_end_clean();
+			header("Content-Disposition: attachment;filename={$output}");
+			header("Cache-Control: max-age=0");
+			$writer = PHPExcel_IOFactory::createWriter($book,"Excel5");
+			$writer->save('php://output');
 		}
 		$this->data['shops'] = $this->Master_area->list_area;
 		$this->data['payments'] = $this->Master_payment->method;

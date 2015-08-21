@@ -62,13 +62,13 @@
 					<?Php $count = count($result);?>
 				<table>
 					<tr>
-						<th>購入日</th><th>注文番号</th><th>お客様コード</th><th>お客様名</th><th>配送先</th>
+						<th>購入日</th><th>注文番号</th><th>お客様コード</th><th>お客様名</th><th>配送先</th><th>配送料</th><th>お支払方法</th>
 					</tr>
 					<tr>
-						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th>
+						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th>
 					</tr>
 					<tr>
-						<th>購入金額</th><th>お支払方法</th><th>状態</th><th>変更</th>
+						<th>状態</th><th>変更</th>
 					</tr>
 					<?php for($i=0;$i < $count; $i++): ?>
 						<?php $create_date = new DateTime($result[$i]->create_date);?>
@@ -79,6 +79,8 @@
 						<td><?php echo $result[$i]->customer_code ?></td>
 						<td><?php echo $result[$i]->name ?></td>
 						<td><?php echo $result[$i]->address ?></td>
+						<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
+						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
 					</tr>
 						<?php endif;?>
 					<tr>
@@ -87,9 +89,9 @@
 						<td><?php echo $result[$i]->product_name ?></td>
 						<td><?php echo $result[$i]->quantity ?>個</td>
 						<td><?php echo $result[$i]->sale_price ?>円</td>
-					</tr><tr>
 						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
 						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
+					</tr><tr>
 						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
 						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->order_id}") ?>'>変更</a></td>
 					</tr>

@@ -357,6 +357,8 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*ExcelTemplatePath*/
+$config['excel_template'] = __DIR__.'/../third_party/test.xls';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
