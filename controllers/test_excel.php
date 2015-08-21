@@ -15,7 +15,7 @@ class Test_excel extends CI_Controller {
 	{
 		//テンプレートの読み込み
 		//$file = __DIR__.'/../third_party/test.xls';
-		$file = $this->config->item('excel_template');
+		$file = __DIR__.'/../third_party/test.xls';
 		$reader = PHPExcel_IOFactory::createReader('Excel5');
 		$book = $reader->load($file);
 		
@@ -26,7 +26,7 @@ class Test_excel extends CI_Controller {
 		
 		//セルを指定して書き込み
 		$sheet->setCellValue('A1','test_A1');
-		$sheet->setCellValueByColumnAndRow(1,1,'test_B1');
+		$sheet->setCellValueByColumnAndRow(1,2,'test_B1');
 		
 		/*** 出力処理 ***/
 		$output = '発注明細書.xls';

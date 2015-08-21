@@ -16,7 +16,7 @@ class Base_info extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->tablename = 'base_info';
-		$info = $this->get_info();
+		$info = $this->get_base_info();
 		$this->shop_name = $info->shop_name;
 		$this->zipcode = $info->zipcode;
 		$this->address = $info->address;
@@ -28,7 +28,7 @@ class Base_info extends CI_Model{
 		$this->logo = $info->logo_url;
 	}
 	
-	public function get_info()
+	public function get_base_info()
 	{
 		return $this->db->get($this->tablename)->row();
 	}

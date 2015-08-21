@@ -14,6 +14,7 @@ class Admin_order extends CI_Controller{
 		parent::__construct();
 		$this->load->library(array('session','form_validation'));
 		$this->load->helper('form');
+		$this->load->model('Base_info');
 		$this->load->model('Order');
 		$this->load->model('Master_order_status');
 		$this->load->model('Master_area');
@@ -225,13 +226,11 @@ class Admin_order extends CI_Controller{
 		
 		if($this->input->post('makeOrderItems'))
 		{
-			//shop情報の読み込み
-			$this->load->model('Base_info');
 			//商品情報の読み込み
 			$result = $this->db->get()->result();
 			//テンプレートの読み込み
-			//$file = __DIR__.'/../third_party/test.xls';
-			$file = $this->config->item('excel_template');
+			$file = __DIR__.'/../third_party/test.xls';
+			//$file = $this->config->item('excel_template');
 			$reader = PHPExcel_IOFactory::createReader('Excel5');
 			$book = $reader->load($file);
 			
@@ -245,6 +244,12 @@ class Admin_order extends CI_Controller{
 			//$sheet->setCellValueByColumnAndRow(1,1,'test_B1');
 			$sheet->setCellValue('B4',$this->Base_info->shop_name);
 			$sheet->setCellValue('B5',$this->Base_info->tel);
+			
+			$count = count($result);
+			for($i = 0; $i < $count; $i++)
+			{
+				$sheet->setCellValueByColumnAndRow(1,$i+7,$i);
+			}
 			
 			/*** 出力処理 ***/
 			$output = '発注明細書.xls';
