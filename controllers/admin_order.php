@@ -131,11 +131,30 @@ class Admin_order extends CI_Controller{
 		$deli_start_datetime = $deli_start_datetime->format('Y-m-d 00:00:00');
 		$deli_end_datetime = $deli_end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
 		$this->db->select("
-			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,o.payment,o.status_flag as order_status,o.delivery_charge,
-			od.id as order_id,od.order_id as orderid,od.product_code,od.branch_code,od.sale_price,od.quantity,od.status_flag,od.delivery_date,od.delivery_hour,
-			c.code as customer_code,c.name,
-			ad_pro.product_name,
-			ca.cource_name,
+			o.id as orderId
+			,o.order_number
+			,o.create_date
+			,o.shop_code
+			,o.address
+			,o.cource_code
+			,o.payment
+			,o.status_flag as order_status
+			,o.delivery_charge
+			,o.total_price
+			,o.tax
+			,od.id as order_id
+			,od.order_id as orderid
+			,od.product_code
+			,od.branch_code
+			,od.sale_price
+			,od.quantity
+			,od.status_flag
+			,od.delivery_date
+			,od.delivery_hour
+			,c.code as customer_code
+			,c.name
+			,ad_pro.product_name
+			,ca.cource_name,
 		 ");
 		$this->db->from('order as o');
 		//$this->db->join('order_detail as od','od.order_number = o.order_number','left');
@@ -237,19 +256,78 @@ class Admin_order extends CI_Controller{
 			//シートの設定
 			$book->setActiveSheetIndex(0);
 			$sheet = $book->getActiveSheet();
-			$sheet->setTitle('月');
-			
-			//セルを指定して書き込み
-			//$sheet->setCellValue('A1','test_A1');
-			//$sheet->setCellValueByColumnAndRow(1,1,'test_B1');
-			$sheet->setCellValue('B4',$this->Base_info->shop_name);
-			$sheet->setCellValue('B5',$this->Base_info->tel);
-			
+			//$sheet->setTitle('月');
+			//用紙サイズをA4に設定
+			$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+			$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 			$count = count($result);
+			//商品の行を格納、order_idが変わったら0
+			$counter = 0;
+			//1シートのどのページに格納するか
+			$page = 0;
+			//シートを追加するか
+			$lb_flag = 0;
 			for($i = 0; $i < $count; $i++)
 			{
-				$sheet->setCellValueByColumnAndRow(1,$i+7,$i);
-			}
+				$sheet->setCellValue('B4',$this->Base_info->shop_name);
+				$sheet->setCellValue('B5',$this->Base_info->tel);
+				if(!empty($result[$i]))
+				{
+				/* 初回だけ入力すればよい */
+					if($counter == 0)
+					{
+						$sheet->setTitle($result[$i]->order_number);
+						$sheet->setCellValueByColumnAndRow($page + 2,2,$result[$i]->customer_code);
+						$sheet->setCellValueByColumnAndRow($page + 3,2,$result[$i]->name);
+						$sheet->setCellValueByColumnAndRow($page + 1,3,$result[$i]->address);
+						$sheet->setCellValueByColumnAndRow($page + 5,35,$result[$i]->tax);
+						$sheet->setCellValueByColumnAndRow($page + 5,36,$result[$i]->delivery_charge);
+						$sheet->setCellValueByColumnAndRow($page + 5,37,$result[$i]->total_price);
+					}
+				/*********************/
+					//$sheet->setCellValueByColumnAndRow($page + 0,$counter+8,$result[$i]->orderId);
+					$sheet->setCellValueByColumnAndRow($page + 1,$counter+8,$counter+1);
+					$sheet->setCellValueByColumnAndRow($page + 2,$counter+8,$result[$i]->product_name);
+					$sheet->setCellValueByColumnAndRow($page + 3,$counter+8,$result[$i]->sale_price);
+					$sheet->setCellValueByColumnAndRow($page + 4,$counter+8,$result[$i]->quantity);
+					$sheet->setCellValueByColumnAndRow($page + 5,$counter+8,$result[$i]->sale_price * $result[$i]->quantity);
+				}
+				$counter++;
+				//次の行があって違うオーダーなら違うセルに入力　もしくは　新しいシートを挿入する
+				if(!empty($result[$i+1]))
+				{
+					if($result[$i]->orderId != $result[$i+1]->orderId)
+					{
+						//改行フラグlb_flagを入れ替え
+						$lb_flag = ($lb_flag == 0) ? 1 : 0;
+						//lb_flagが1同一セルの2ページ目に入力
+						if($lb_flag == 1)
+						{
+							$counter = 0;
+							$page = $page + 7;
+						}
+						//lb_flagが0なら新しいシートを追加
+						elseif($lb_flag == 0)
+						{
+							$firstSheet = $book->getSheet(0);
+							$copied = $firstSheet->copy();
+							$copied->setTitle('');
+							$sheet = $book->addSheet($copied,null);
+							for($j=8; $j<=17; $j++)
+							{
+								$sheet->setCellValueByColumnAndRow(0,$j,'');
+								$sheet->setCellValueByColumnAndRow(2,$j,'');
+								$sheet->setCellValueByColumnAndRow(3,$j,'');
+								$sheet->setCellValueByColumnAndRow(7,$j,'');
+								$sheet->setCellValueByColumnAndRow(9,$j,'');
+								$sheet->setCellValueByColumnAndRow(10,$j,'');
+							}
+							$counter=0;
+							$page = 0;
+						}
+					}
+				}
+			}/* endfor */
 			
 			/*** 出力処理 ***/
 			$output = '発注明細書.xls';

@@ -240,12 +240,25 @@ class Order extends CI_Model{
 	public function get_by_order_id($order_id = null)
 	{
 		$this->db->select("
-			o.order_number,o.create_date,o.shop_code,o.address,o.cource_code,
-			od.id as order_id,od.product_code,od.branch_code,od.sale_price,od.quantity,od.status_flag,od.delivery_date,od.delivery_hour,
-			c.code as customer_code,c.name,
-			ad_pro.product_name,
-			ca.cource_name,ca.takuhai_day,
-			ct.takuhai_day,
+			o.order_number
+			,o.create_date
+			,o.shop_code
+			,o.address
+			,o.cource_code,
+			od.id as order_id
+			,od.product_code
+			,od.branch_code
+			,od.sale_price
+			,od.quantity
+			,od.status_flag
+			,od.delivery_date
+			,od.delivery_hour
+			,c.code as customer_code
+			,c.name
+			,ad_pro.product_name
+			,ca.cource_name
+			,ca.takuhai_day
+			,ct.takuhai_day
 		");
 		$this->db->from('order as o');
 		$this->db->join('order_detail as od','od.order_id = o.id','left');
