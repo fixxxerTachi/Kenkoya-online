@@ -277,9 +277,9 @@ class Admin_order extends CI_Controller{
 					if($counter == 0)
 					{
 						$sheet->setTitle($result[$i]->order_number);
-						$sheet->setCellValueByColumnAndRow($page + 2,2,$result[$i]->customer_code);
-						$sheet->setCellValueByColumnAndRow($page + 3,2,$result[$i]->name);
-						$sheet->setCellValueByColumnAndRow($page + 1,3,$result[$i]->address);
+						$sheet->setCellValueByColumnAndRow($page + 3,2,$result[$i]->customer_code);
+						$sheet->setCellValueByColumnAndRow($page + 4,2,$result[$i]->name);
+						$sheet->setCellValueByColumnAndRow($page + 2,3,$result[$i]->address);
 						$sheet->setCellValueByColumnAndRow($page + 5,35,$result[$i]->tax);
 						$sheet->setCellValueByColumnAndRow($page + 5,36,$result[$i]->delivery_charge);
 						$sheet->setCellValueByColumnAndRow($page + 5,37,$result[$i]->total_price);
