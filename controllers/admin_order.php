@@ -279,18 +279,19 @@ class Admin_order extends CI_Controller{
 						$sheet->setTitle($result[$i]->order_number);
 						$sheet->setCellValueByColumnAndRow($page + 3,2,$result[$i]->customer_code);
 						$sheet->setCellValueByColumnAndRow($page + 4,2,$result[$i]->name);
-						$sheet->setCellValueByColumnAndRow($page + 2,3,$result[$i]->address);
-						$sheet->setCellValueByColumnAndRow($page + 5,35,$result[$i]->tax);
-						$sheet->setCellValueByColumnAndRow($page + 5,36,$result[$i]->delivery_charge);
-						$sheet->setCellValueByColumnAndRow($page + 5,37,$result[$i]->total_price);
+						$sheet->setCellValueByColumnAndRow($page + 1,3,$result[$i]->address);
+						$sheet->setCellValueByColumnAndRow($page + 6,35,$result[$i]->tax);
+						$sheet->setCellValueByColumnAndRow($page + 6,36,$result[$i]->delivery_charge);
+						$total_price = $result[$i]->total_price + $result[$i]->tax + $result[$i]->delivery_charge;
+						$sheet->setCellValueByColumnAndRow($page + 6,37,$total_price);
 					}
 				/*********************/
 					//$sheet->setCellValueByColumnAndRow($page + 0,$counter+8,$result[$i]->orderId);
 					$sheet->setCellValueByColumnAndRow($page + 1,$counter+8,$counter+1);
 					$sheet->setCellValueByColumnAndRow($page + 2,$counter+8,$result[$i]->product_name);
-					$sheet->setCellValueByColumnAndRow($page + 3,$counter+8,$result[$i]->sale_price);
-					$sheet->setCellValueByColumnAndRow($page + 4,$counter+8,$result[$i]->quantity);
-					$sheet->setCellValueByColumnAndRow($page + 5,$counter+8,$result[$i]->sale_price * $result[$i]->quantity);
+					$sheet->setCellValueByColumnAndRow($page + 4,$counter+8,$result[$i]->sale_price);
+					$sheet->setCellValueByColumnAndRow($page + 5,$counter+8,$result[$i]->quantity);
+					$sheet->setCellValueByColumnAndRow($page + 6,$counter+8,$result[$i]->sale_price * $result[$i]->quantity);
 				}
 				$counter++;
 				//次の行があって違うオーダーなら違うセルに入力　もしくは　新しいシートを挿入する
@@ -304,7 +305,7 @@ class Admin_order extends CI_Controller{
 						if($lb_flag == 1)
 						{
 							$counter = 0;
-							$page = $page + 7;
+							$page = $page + 8;
 						}
 						//lb_flagが0なら新しいシートを追加
 						elseif($lb_flag == 0)
@@ -362,25 +363,39 @@ class Admin_order extends CI_Controller{
 		$this->data['message'] = '内容を修正して登録ボタンを押してください';
 		$this->data['status_flag'] = $this->Master_order_status->order_status;
 		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
-		$order_detail_id = $this->uri->segment(3);
-		$result = $this->Order->get_by_order_id($order_detail_id);
+		$this->data['order_status'] = $this->Master_order_status->order_status;
+		$orderId = $this->uri->segment(3);
+		$result = $this->Order->get_by_orderId($orderId);
+		$products = $this->Order->get_detail_by_order_id($orderId);
 		$this->data['result'] = $result;
+		$this->data['products'] = $products;
 		if($this->input->post('submit')){
-			$input_data = array(
-				'quantity' => $this->input->post('quantity'),
+			$order_data = array(
 				'delivery_date' => $this->input->post('delivery_date'),
 				'delivery_hour' => $this->input->post('delivery_hour'),
+				'address' => $this->input->post('address'),
+				'delivery_charge' => $this->input->post('delivery_charge'),
+				'payment'=>$this->input->post('payment'),
+				'status_flag'=>$this->input->post('status_flag'),
+			);
+			$product_data = array(
+				'quantity' => $this->input->post('quantity'),
+				'sale_price' => $this->input->post('sale_price'),
 				'status_flag' => $this->input->post('status_flag'),
 			);
+
 //			if($this->form_validation->run() === FALSE){
 //				$this->data['error_message'] = '未入力項目があります';
 //			}else{
 				$db_data = $input_data;
-				$this->Order->update_order_detail($order_detail_id,$db_data);
+				$this->Order->update_order_detail($orderId,$db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_order/list_order'));
+				//redirect(base_url('/admin_order/list_order'));
 //			}
 		}
+		$this->data['success_messgae'] = $this->session->flashdata('success');
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['payments_arr'] = $this->Master_payment->show_list_arr();
 		$this->load->view('admin_order/edit_order.php',$this->data);
 		
 	}

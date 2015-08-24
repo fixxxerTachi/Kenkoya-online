@@ -3,6 +3,11 @@
 <head>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
 <link rel='stylesheet' href='<?php echo base_url('css/order.css') ?>'>
+<link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
+<script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
+<script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
+<script src="<?php echo base_url('js/calender.js')?>"></script>
 </head>
 <body>
 <div id='wrapper'>

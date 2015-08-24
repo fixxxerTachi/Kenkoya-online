@@ -33,6 +33,15 @@ class Master_payment extends CI_Model{
 		$this->method = $this->show_list();
 	}
 	
+	/*
+	public function show_list_arr()
+	{
+		$this->db->where('del_flag',0);
+		$result = $this->db->get($this->tablename)->result_array();
+		return $result;
+	}
+	*/
+	
 	public function show_list()
 	{
 		$this->db->where('del_flag',0);

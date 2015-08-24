@@ -61,39 +61,43 @@
 				-->
 					<?Php $count = count($result);?>
 				<table>
-					<tr>
-						<th>購入日</th><th>注文番号</th><th>お客様コード</th><th>お客様名</th><th>配送先</th><th>配送料</th><th>お支払方法</th>
+					<tr class='base_info'>
+						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th>配送料</th><th>合計(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th>
 					</tr>
-					<tr>
-						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th>
-					</tr>
-					<tr>
-						<th>状態</th><th>変更</th>
+					<tr class='product_info'>
+						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th><th></th>
 					</tr>
 					<?php for($i=0;$i < $count; $i++): ?>
 						<?php $create_date = new DateTime($result[$i]->create_date);?>
 						<?php if(($i == 0) || ($i != 0 && $result[$i]->order_number != $result[$i-1]->order_number)):?>
-					<tr>
+					<tr class='base_info'>
 						<td><?php echo $create_date->format('Y/m/d');?></td>
+					<?php $d_date = new DateTime($result[$i]->delivery_date) ?>
+					<?php $d_date = ($d_date > new DateTime('1900-01-1-01 00:00:00')) ? $d_date->format('Y/m/d') : '日付け指定なし'; ?>
+						<td><?php echo $d_date ?></td>
+						<td><?php echo $takuhai_hours[$result[$i]->delivery_hour] ?></td>
 						<td><?php echo $result[$i]->order_number ?></td>
 						<td><?php echo $result[$i]->customer_code ?></td>
 						<td><?php echo $result[$i]->name ?></td>
 						<td><?php echo $result[$i]->address ?></td>
 						<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
+						<td><?php echo number_format($result[$i]->total_price + $result[$i]->delivery_charge) ?>円</td>
+						<td><?php echo number_format($result[$i]->tax) ?>円</td>
 						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
+						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
+						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->orderId}") ?>'>変更</a></td>
 					</tr>
 						<?php endif;?>
-					<tr>
+					<tr class=product_info>
 						<td><?php echo $result[$i]->product_code ?></td>
 						<td><?php echo $result[$i]->branch_code ?></td>
 						<td><?php echo $result[$i]->product_name ?></td>
 						<td><?php echo $result[$i]->quantity ?>個</td>
 						<td><?php echo $result[$i]->sale_price ?>円</td>
 						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
-						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
-					</tr><tr>
-						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
-						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->order_id}") ?>'>変更</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<?php endfor;?>
 				</table>
@@ -105,4 +109,29 @@
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
+<style type='text/css'>
+	tr.base_info{
+		background: #DBE2E1;
+		font-size: 0.9em;
+	}
+	tr.product_info{
+		background: #D2F1ED;
+		font-size: 0.9em;
+	}
+	tr.status{
+		font-size: 0.9em;
+	}
+	#side{
+		width: 10%;
+	}
+	#body{
+		width: 87%;
+	}
+	#side ul li{
+		width: 150px;
+	}
+	#side ul li a{
+		font-size: 0.8em;
+	}
+</style>
 </html>

@@ -337,6 +337,20 @@ class Order extends CI_Model{
 		return $result;
 	}
 	
+	public function get_by_orderId($orderId)
+	{
+		$this->db->select('
+			o.*
+			,c.name
+			,c.code
+			,c.tel
+			,c.email
+		')->from($this->tablename .' as o');
+		$this->db->join('customers as c','c.id = o.customer_id','left');
+		$this->db->where('o.id',$orderId);
+		$result = $this->db->get()->result();
+		return $result;
+	}
 	
 	public function get_detail_by_order_id($order_id = Null)
 	{
@@ -352,6 +366,7 @@ class Order extends CI_Model{
 			,ap.id as product_id
 			,ap.product_name
 			,ap.product_code
+			,ap.branch_code
 		');
 		$this->db->from('order_detail as od');
 		$this->db->join('advertise_product as ap','ap.id = od.advertise_product_id','left');
