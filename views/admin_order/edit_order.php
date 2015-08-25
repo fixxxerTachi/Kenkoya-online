@@ -1,5 +1,6 @@
 <?php include __DIR__ . '/../templates/meta.php' ?>
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
+<link href="<?php echo base_url() ?>css/admin_order.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
@@ -22,13 +23,13 @@
 				<?php if($result): ?>
 				<?php echo form_open() ?>
 				<table>
-					<tr class='base_info'>
+					<tr class='base_info_header'>
 						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th>
 					</tr>
-					<tr class='base_info'>
+					<tr class='base_info_header'>
 						<th>配送料</th><th>合計(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th>
 					</tr>
-					<tr class='product_info'>
+					<tr class='product_info_header'>
 						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th>
 					</tr>
 					<?php foreach($result as $item): ?>
@@ -56,16 +57,19 @@
 						<td><?php echo $product->product_code ?></td>
 						<td><?php echo $product->branch_code ?></td>
 						<td><?php echo $product->product_name ?></td>
-						<td><input type='text' name="quantity_{$i}" value='<?php echo $product->quantity ?>' size='3' maxlength='3'>個</td>
-						<td><input type='text' name="sale_price_{$i}" value='<?php echo $product->sale_price ?>' size='5' maxlength='5'>円</td>
+						<td><input type='text' name="quantity_<?php echo $i ?>" value='<?php echo $product->quantity ?>' size='3' maxlength='3'>個</td>
+						<td><input type='text' name="sale_price_<?php echo $i ?>" value='<?php echo $product->sale_price ?>' size='5' maxlength='5'>円</td>
 						<td><?php echo number_format($product->quantity * $product->sale_price) ?>円</td>
-						<td><input type='hidden' name="order_detail_id_{$i}" value='<?php echo $product->order_detail_id ?>'></td>
-					<?php $i++;?>
+						<td><input type='hidden' name="order_detail_id_<?php echo $i ?>" value='<?php echo $product->order_detail_id ?>'></td>
 						<td><input type='hidden' name='count' value='<?php echo $i ?>'>
+					<?php $i++;?>
 					</tr>
 					<?php endforeach;?>
 					<?php endforeach;?>
-					<tr><td></td><td><input type='submit' name='submit' value='変更する'></td></tr>
+					<tr>
+						<td></td><td><input type='submit' name='submit' value='変更する'></td>
+						<td></td><td><a href='<?php echo site_url('admin_order/list_order') ?>' class='edit'>戻る</a></td>
+					</tr>
 				</table>
 				</form>
 				<?php else: ?>
@@ -76,36 +80,4 @@
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
-<style type='text/css'>
-	tr.base_info{
-		background: #DBE2E1;
-		font-size: 0.9em;
-	}
-	tr.product_info{
-		background: #D2F1ED;
-		font-size: 0.9em;
-	}
-	tr.status{
-		font-size: 0.9em;
-	}
-	#side{
-		width: 10%;
-	}
-	#body{
-		width: 87%;
-	}
-	#side ul li{
-		width: 150px;
-	}
-	#side ul li a{
-		font-size: 0.8em;
-	}
-</style>
-
-<script>
-$('#deliver_date').datepicker({
-	dateFormat:'yy/mm/dd',
-});
-</script>
 </html>
-<?php var_dump($result)?>

@@ -138,7 +138,7 @@ class Admin_order extends CI_Controller{
 			,o.address
 			,o.cource_code
 			,o.payment
-			,o.status_flag as order_status
+			,o.status_flag as status_flag
 			,o.delivery_charge
 			,o.total_price
 			,o.tax
@@ -148,7 +148,7 @@ class Admin_order extends CI_Controller{
 			,od.branch_code
 			,od.sale_price
 			,od.quantity
-			,od.status_flag
+			,od.status_flag as detail_status_flag
 			,od.delivery_date
 			,od.delivery_hour
 			,c.code as customer_code
@@ -197,18 +197,21 @@ class Admin_order extends CI_Controller{
 
 		}
 		$this->db->where($date_where);
+		
+		//検索処理
 		if($this->input->post('submit'))
 		{
 			$result = $this->db->get()->result();
 			$this->data['result'] = $result;
 			$subtotal = array();
 			foreach($result as $row){
-			$total = $row->sale_price * $row->quantity;
-			$subtotal[] = $total;
-			$this->data['total_price'] = array_sum($subtotal);
+				$total = $row->sale_price * $row->quantity;
+				$subtotal[] = $total;
+				$this->data['total_price'] = array_sum($subtotal);
+			}
 		}
-
-		}
+		
+		//csvの作成
 		if($this->input->post('makecsv'))
 		{
 				$result = $this->db->get()->result_array();
@@ -243,6 +246,25 @@ class Admin_order extends CI_Controller{
 				//return redirect('admin_order/list_order');
 		}
 		
+		//出荷済み登録
+		if($this->input->post('save_shipped'))
+		{
+			$result = $this->db->get()->result();
+			$this->data['result'] = $result;
+			$ids = $this->input->post('shipped');
+			$message = $this->Order->change_shipped($ids);
+			if(!empty($message))
+			{
+				$this->data['error_message'] = $message;
+			}
+			else
+			{
+				$this->session->set_flashdata('success','更新しました');
+				return redirect('admin_order/list_order');
+			}
+		}
+		
+		//納品書の印刷
 		if($this->input->post('makeOrderItems'))
 		{
 			//商品情報の読み込み
@@ -370,6 +392,8 @@ class Admin_order extends CI_Controller{
 		$this->data['result'] = $result;
 		$this->data['products'] = $products;
 		if($this->input->post('submit')){
+		//orderとorder_detailの更新処理
+			/*
 			$order_data = array(
 				'delivery_date' => $this->input->post('delivery_date'),
 				'delivery_hour' => $this->input->post('delivery_hour'),
@@ -378,22 +402,28 @@ class Admin_order extends CI_Controller{
 				'payment'=>$this->input->post('payment'),
 				'status_flag'=>$this->input->post('status_flag'),
 			);
-			$product_data = array(
-				'quantity' => $this->input->post('quantity'),
-				'sale_price' => $this->input->post('sale_price'),
-				'status_flag' => $this->input->post('status_flag'),
-			);
-
-//			if($this->form_validation->run() === FALSE){
-//				$this->data['error_message'] = '未入力項目があります';
-//			}else{
-				$db_data = $input_data;
-				$this->Order->update_order_detail($orderId,$db_data);
+			$this->Order->update($orderId,$order_data);
+			$count = $this->input->post('count');
+			for($i = 0; $i <= $count; $i++)
+			{
+				$product_data = array(
+					'quantity' => $this->input->post("quantity_{$i}"),
+					'sale_price' => $this->input->post("sale_price_{$i}"),
+					'status_flag' => $this->input->post("status_flag"),
+				);
+				$detail_id = $this->input->post("order_detail_id_{$i}");
+				$this->Order->update_order_detail($detail_id , $product_data);
+			}
+			*/
+			
+			$result = $this->Order->update_order($orderId,$this->input->post());
+			if($result)
+			{
 				$this->session->set_flashdata('success','登録しました');
-				//redirect(base_url('/admin_order/list_order'));
-//			}
+				redirect(base_url("admin_order/edit_order/{$orderId}"));
+			}
 		}
-		$this->data['success_messgae'] = $this->session->flashdata('success');
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->data['payments'] = $this->Master_payment->method;
 		$this->data['payments_arr'] = $this->Master_payment->show_list_arr();
 		$this->load->view('admin_order/edit_order.php',$this->data);

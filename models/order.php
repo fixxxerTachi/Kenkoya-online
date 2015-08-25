@@ -1,6 +1,7 @@
 <?php
 class Order extends CI_Model{
 	public $tablename;
+	public $detail_tablename;
 	public $id;
 	public $order_number;
 	public $customer_id;
@@ -23,29 +24,9 @@ class Order extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->tablename = 'takuhai_order';
+		$this->detail_tablename = 'takuhai_order_detail';
 		$this->account_number = '';
 	}
-
-	/** 出荷済みにする stauts_flag = 3
-	 *@param array order_id
-	 *@return 
-	 */
-	 /*
-	public function change_shipped(array $ids)
-	{
-		$this->db->trans_begin();
-		$this->db->where_in('id',$ids);
-		$this->db->update($this->tablename,array('status_flag'=>3));
-		$this->db->where_in('order_id',$ids);
-		$this->db->update('order_detail',array('status_flag'=>3));
-		if($this->db->trans_status() === FALSE)
-		{
-			$this->db->trans_rollback();
-			return show_error('更新できません');
-		}else{
-			$this->db->trans_commit();
-		}
-	}*/
 	
 	/** 出荷済みにする
 	* @param array ids
@@ -78,7 +59,49 @@ class Order extends CI_Model{
 				}
 			}
 	}
-			
+	
+	/** Orderの更新修正処理
+	* @param int order_id
+	* @param array postdata
+	* @param array product_data
+	*/
+	public function update_order($order_id,$post_data)
+	{
+		$data = (object)$post_data;
+		$order_data = array(
+			'delivery_date'=>$data->delivery_date,
+			'delivery_hour'=>$data->delivery_hour,
+			'address'=>$data->address,
+			'delivery_charge'=>$data->delivery_charge,
+			'payment'=>$data->payment,
+			'status_flag'=>$data->status_flag,
+		);
+		$this->db->trans_begin();
+		$this->db->where('id',$order_id);
+		$this->db->update($this->tablename, $order_data);
+		$count = $data->count;
+		for($i = 0; $i <= $count; $i++)
+		{
+			$product_data = array(
+				'quantity'=>$data->quantity_{$i},
+				'sale_price'=>$data->sale_price_{$i},
+				'status_flag'=>$data->status_flag,
+			);
+			$detail_id = $data->order_detail_id_{$i};
+			$this->db->where('id',$detail_id);
+			$this->db->update($this->detail_tablename,$product_data);
+		}
+		if($this->db->trans_status === FALSE)
+		{
+			$this->db->trans_rollback();
+			return show_error('failed');
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return TRUE;
+		}
+	}
 	
 	/** 受付済みで未発送一覧を取得する
 	* @return object 受付済みのorder
@@ -161,29 +184,7 @@ class Order extends CI_Model{
 			$this->db->where('del_flag','0');
 		}
 	}
-/*
-	public function show_list_with_image()
-	{
-		$this->db->select("{$this->tablename}.id as id,product_code,branch_code,product_name,short_name,sale_price,on_sale,cost_price,image_name");
-		$this->db->from($this->tablename);
-		$this->db->join('product_image',"product_image.product_id = {$this->tablename}.id",'left');
-		$query = $this->db->get();
-		return $query->result();
-	}
-*/
-/*
-	public function show_list_with_personal($del_flag=TRUE)
-	{
-		$this->db->select("c.id as id ,c.name,p.user_id,p.username,p.password,p.point,p.rank,p.bank_name,p.type_account,p.account_number");
-		$this->db->from($this->tablename . ' as c');
-		$this->db->join('personal as p',"p.user_id = c.id",'left');
-		if($del_flag ){
-			$this->db->where("c.del_flag",0);
-		}
-		$query = $this->db->get();
-		return $query->result();
-	}
-*/
+	
 	public function show_list_with_detail()
 	{
 		$this->db->select("o.order_number,o.create_date,od.id as order_id,od.product_id,od.quantity,od.cancel_flag,p.product_code,p.product_name,p.sale_price,c.name,c.zipcode,a.cource_name,a.takuhai_day");
@@ -194,28 +195,6 @@ class Order extends CI_Model{
 		$this->db->join('master_area as a','a.zipcode = c.zipcode','left');	
 		return $this->db->get()->result();
 	}
-	/*
-	public function get_by_order_number($order_number=null)
-	{	
-		$this->db->select("
-			o.order_number,o.create_date,
-			od.id as order_id,od.product_id,od.quantity,od.status_flag,od.delivery_date,od.sale_price,
-			p.product_code,
-			c.name,c.zipcode,
-			ca.cource_name,ca.takuhai_day,
-			ap.product_name,
-		");
-		$this->db->from('order as o');
-		$this->db->where('o.order_number',$order_number);
-		$this->db->join('order_detail as od','od.order_number = o.order_number','left');
-		$this->db->join('advertise_product as ap','ap.id = od.advertise_product_id','left');
-		$this->db->join('master_products as p','p.id = od.product_id','left');
-		$this->db->join('customers as c','c.id = o.customer_id','left');
-		$this->db->join('master_area as a','a.zipcode = c.zipcode','left');
-		$this->db->join('master_cource as ca','ca.cource_id = a.cource_id','left');
-		return $this->db->get()->result();
-	}
-	*/
 	
 	public function get_by_order_number($order_number)
 	{
@@ -418,25 +397,6 @@ class Order extends CI_Model{
 	
 	public function save_order($data = array())
 	{
-	/*
-		$datetime = date('Ymd-His');
-		$data=array(
-			'customer_id'=>$customer_id,
-			'order_number'=>$datetime,
-		);
-		$this->db->insert($this->tablename,$data);
-		$last_id = $this->db->insert_id();
-		$this->db->select('id')->from($this->tablename);
-		$query = $this->db->get();
-		$result  = $query->result();
-		if(!empty($reult)){
-			throw new Exception('失敗しました');
-		}
-		$db_data = array(
-			'order_id'=>$last_id,
-			'order_number'=>$datetime,
-		);
-	*/
 		$this->db->insert('order_detail',$data);
 	}
 	
@@ -515,4 +475,4 @@ class Order extends CI_Model{
 		$data = array('del_flag'=> 1);
 		$this->db->update($this->tablename,$data);
 	}
-}		
+}

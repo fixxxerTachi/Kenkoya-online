@@ -1,5 +1,6 @@
 <?php include __DIR__ . '/../templates/meta.php' ?>
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
+<link href="<?php echo base_url() ?>css/admin_order.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
@@ -44,28 +45,33 @@
 				<input type='checkbox' name='status[]' id='wait' value='0' <?php if(in_array(0,$form_data->status_arr)) echo 'checked=checked' ?>><label for='wait'>受付中</label>
 				<input type='checkbox' name='status[]' id='done' value='1'  <?php if(in_array(1,$form_data->status_arr)) echo 'checked=checked' ?>><label for='done'>受付済</label>
 				<input type='checkbox' name='status[]' id='cancel' value='2'  <?php if(in_array(2,$form_data->status_arr)) echo 'checked=checked' ?>><label for='cancel'>キャンセル</label>
+				<input type='checkbox' name='status[]' id='shipped' value='3' <?php if(in_array(3,$form_data->status_arr)) echo 'checked=checked' ?>><label for='shipped'>出荷済み</label>
 				</td></tr>
 				<tr>
-					<td></td>
-					<td><input type='submit' name='submit' value='検索'></td>
-					<td><input type='submit' name='makecsv' value='CSV作成'></td>
-					<td></td>
-					<td></td>
-					<td><input type='submit' name='makeOrderItems' value='注文明細書作成'></td>
+					<table>
+						<td></td>
+						<td></td>
+						<td><input type='submit' name='submit' value='検索'></td>
+						<td><input type='submit' name='makecsv' value='CSV作成'></td>
+						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'></td>
+						<td></td>
+						<td><input type='submit' name='save_shipped' value='出荷済み登録'></td>
+					</table>
 				</tr>
 				</table>
-				</form>
 				<?php if(!empty($result)): ?>
 				<!--
 				<p>売上高:<?php echo number_format($total_price) ?>円</p>
 				-->
 					<?Php $count = count($result);?>
 				<table>
-					<tr class='base_info'>
-						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th>配送料</th><th>合計(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th>
+					<tr class='base_info_header'>
+						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th>
+					</tr><tr class='base_info_header'>
+						<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th><th>配達済み<br>登録</th>
 					</tr>
-					<tr class='product_info'>
-						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th><th></th>
+					<tr class='product_info_header'>
+						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th>
 					</tr>
 					<?php for($i=0;$i < $count; $i++): ?>
 						<?php $create_date = new DateTime($result[$i]->create_date);?>
@@ -80,15 +86,17 @@
 						<td><?php echo $result[$i]->customer_code ?></td>
 						<td><?php echo $result[$i]->name ?></td>
 						<td><?php echo $result[$i]->address ?></td>
+					</tr><tr class='base_info'>
 						<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->total_price + $result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->tax) ?>円</td>
 						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
 						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
 						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->orderId}") ?>'>変更</a></td>
+						<td><input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>'><label for='shipped_<?php echo $result[$i]->orderId ?>'>出荷済みにする</label></td>
 					</tr>
 						<?php endif;?>
-					<tr class=product_info>
+					<tr class='product_info'>
 						<td><?php echo $result[$i]->product_code ?></td>
 						<td><?php echo $result[$i]->branch_code ?></td>
 						<td><?php echo $result[$i]->product_name ?></td>
@@ -96,42 +104,16 @@
 						<td><?php echo $result[$i]->sale_price ?>円</td>
 						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
 						<td></td>
-						<td></td>
-						<td></td>
 					</tr>
 					<?php endfor;?>
 				</table>
 				<?php else: ?>
 					<p>登録されていません</p>
 				<?php endif; ?>
+			</form>
 		</div>
 	</div>
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
-<style type='text/css'>
-	tr.base_info{
-		background: #DBE2E1;
-		font-size: 0.9em;
-	}
-	tr.product_info{
-		background: #D2F1ED;
-		font-size: 0.9em;
-	}
-	tr.status{
-		font-size: 0.9em;
-	}
-	#side{
-		width: 10%;
-	}
-	#body{
-		width: 87%;
-	}
-	#side ul li{
-		width: 150px;
-	}
-	#side ul li a{
-		font-size: 0.8em;
-	}
-</style>
 </html>
