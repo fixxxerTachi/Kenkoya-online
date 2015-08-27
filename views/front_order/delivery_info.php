@@ -93,7 +93,7 @@
 		<?php endforeach;?>
 					<tr>
 						<td class='no-border'></td>
-						<td><input type='submit' name='submit' value='ご注文の最終確認画面へ'><a class='edit_back' href='<?php echo site_url("front_customer/login_action/proceed") ?>'>戻る</a></td>
+						<td><input type='submit' name='submit' value='ご注文の最終確認画面へ' id='submit'><a class='edit_back' href='<?php echo site_url("front_customer/login_action/proceed") ?>'>戻る</a></td>
 					</tr>
 				</table>
 			</form>
@@ -127,6 +127,19 @@
 			$('.takuhai_menu').hide();
 			$('#dropdown').val('0');
 			$('.kenkoya_menu').fadeIn();
+		}
+	});
+</script>]
+<script>
+	$('input[name="payment"]').on('change',function(){
+		var value = $('input[name="payment"]:checked').val();
+		if(value == <?php echo PAYMENT_CREDIT ?>)
+		{
+			$('#submit').val('クレジットカード情報入力');
+		}
+		else
+		{
+			$('#submit').val('ご注文の最終確認へ');
 		}
 	});
 </script>

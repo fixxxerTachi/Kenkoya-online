@@ -5,6 +5,7 @@ include __DIR__.'/../libraries/define_mail.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
 include __DIR__.'/../libraries/csv.php';
+include __DIR__.'/../libraries/define_flag.php';
 
 class Mypage extends CI_Controller{
 	public $data = array();
@@ -425,7 +426,7 @@ class Mypage extends CI_Controller{
 	public function receipt()
 	{
 		$this->load->model('Base_info');
-		$base_info = $this->Base_info->get_info();
+		$base_info = $this->Base_info->get_base_info();
 		if(!$order_id = $this->uri->segment(3))
 		{
 			return show_error('不正な画面操作です');
@@ -646,7 +647,7 @@ class Mypage extends CI_Controller{
 			$customer = $this->_checklogin($this->data['customer']);
 			//order情報取得
 			$order_id = $this->uri->segment(3);
-			$result = $this->Order->get_by_id($order_id);			
+			$result = $this->Order->get_by_id($order_id);
 			//$order_detail_id = $this->uri->segment(3);
 			//$result = $this->Order->get_detail_by_id($order_detail_id);
 			//detail_orderを取得
@@ -664,15 +665,15 @@ class Mypage extends CI_Controller{
 				if($this->input->post('submit')){
 					if($this->input->post('cancel')){
 						//クレジット取消処理
-						if($result[0]->payment == 'credit'){
+						if((int)$result[0]->payment == PAYMENT_CREDIT){
 							$output = $this->Credit->alter_tran($result[0]->order_number);
 							if($output->isErrorOccurred()){
 								$message = $this->Credit->getAlterErrorMessages($output);
 								throw new Exception($message[0]);
-							}							
+							}
 						}
 						$db_data = array(
-							'status_flag'=>2
+							'status_flag'=>CANCELED
 						);
 						$this->Order->update($order_id,$db_data);
 						$this->Order->update_order_detail_flag($result,$db_data);

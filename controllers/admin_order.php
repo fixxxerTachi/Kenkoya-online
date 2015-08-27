@@ -3,6 +3,7 @@ include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/Classes/PHPExcel.php';
 include __DIR__.'/../libraries/Classes/PHPExcel/IOFactory.php';
+include __DIR__.'/../libraries/define_flag.php';
 
 //include __DIR__.'/../libraries/common.php';
 //include __DIR__.'/../libraries/Csv.php';
@@ -19,12 +20,14 @@ class Admin_order extends CI_Controller{
 		$this->load->model('Master_order_status');
 		$this->load->model('Master_area');
 		$this->load->model('Master_payment');
+		$this->load->model('Credit');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
 		$this->data['user'] = $this->Admin_login->check_login();
 		$this->load->model('Master_takuhai_hours');
 		$this->load->model('Admin_urls');
+		$this->load->model('Tax');
 		if(!empty($this->data['user'])){
 			$this->Admin_urls->get_user_site_menu($this->data['user']->id,$this);
 			$this->Admin_urls->is_access_url($this->data['user']->id,$this);
@@ -98,6 +101,7 @@ class Admin_order extends CI_Controller{
 		$this->data['h2title'] = '受注リスト';
 		$this->data['order_status'] = $this->Master_order_status->order_status;
 		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
+		$this->data['credit'] = $this->Credit;
 		$order_number = $this->input->post('order_number');
 		$customer_code = $this->input->post('customer_code');
 		$customer_name = $this->input->post('customer_name');
@@ -124,8 +128,8 @@ class Admin_order extends CI_Controller{
 		$this->data['form_data'] = (object)$form_data;
 		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('1000-01-01 00:00:00');
 		$end_datetime = !empty($end) ? new DateTime($end) : new DateTime('9999-12-30 23:59:59');
-		$deli_start_datetime = !empty($dsdate) ? new DateTime($sdate) : new DateTime('1000-01-01 00:00:00');
-		$deli_end_datetime = !empty($dedate) ? new DateTime($dedate) : new DateTime('9999-12-30 23:59:59');
+		$deli_start_datetime = !empty($deli_start) ? new DateTime($deli_start) : new DateTime('1000-01-01 00:00:00');
+		$deli_end_datetime = !empty($deli_end) ? new DateTime($deli_end) : new DateTime('9999-12-30 23:59:59');
 		$start_datetime = $start_datetime->format('Y-m-d 00:00:00');
 		$end_datetime = $end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
 		$deli_start_datetime = $deli_start_datetime->format('Y-m-d 00:00:00');
@@ -182,8 +186,8 @@ class Admin_order extends CI_Controller{
 		{
 			$date_where = "(o.create_date >= '{$start_datetime}'
 					and o.create_date < '{$end_datetime}'
-					and (od.delivery_date >= '{$deli_start_datetime}'
-					and od.delivery_date < '{$deli_end_datetime}'
+					and ((od.delivery_date >= '{$deli_start_datetime}'
+					and od.delivery_date < '{$deli_end_datetime}')
 					or od.delivery_date = '0000-00-00 00:00:00')
 			)";
 		}
@@ -197,7 +201,6 @@ class Admin_order extends CI_Controller{
 
 		}
 		$this->db->where($date_where);
-		
 		//検索処理
 		if($this->input->post('submit'))
 		{
@@ -214,6 +217,9 @@ class Admin_order extends CI_Controller{
 		//csvの作成
 		if($this->input->post('makecsv'))
 		{
+				//発注済みにするorderIDのリスト
+				$orderIds = $this->input->post('ordered');
+				$this->db->where_in('o.id',$orderIds);
 				$result = $this->db->get()->result_array();
 				$csv = '';
 				$downloadCsvDir = 'download_csv/';
@@ -223,18 +229,20 @@ class Admin_order extends CI_Controller{
 				$this->load->library('csv');
 				$this->csv->setData($result);
 				$this->csv->getCsvMs($makeCsvFilename);
-				
 				////受付中は受付澄みにする
 				foreach($result as $item)
 				{
-					if($item['order_status'] == 0)
+					if($item['status_flag'] == RECIEVED)
 					{
-						if($item['status_flag'] == 0)
+						if($item['detail_status_flag'] == RECIEVED)
 						{
-							$status = array('status_flag'=>1,'csv_flag' =>1);
-							$this->Order->update($item['orderid'],$status);
-							$update = array('status_flag'=>1);
-							$this->Order->update_order_detail($item['order_id'],$update);
+							if(in_array($item['orderId'],$orderIds))
+							{
+								$status = array('status_flag'=>ORDERED,'csv_flag' =>1);
+								$this->Order->update($item['orderid'],$status);
+								$update = array('status_flag'=>ORDERED);
+								$this->Order->update_order_detail($item['order_id'],$update);
+							}
 						}
 					}
 				}
@@ -244,6 +252,17 @@ class Admin_order extends CI_Controller{
 				$this->csv->getCsvMs('php://output');
 				exit();
 				//return redirect('admin_order/list_order');
+		}
+		
+		//受付済み登録
+		if($this->input->post('reg_order'))
+		{
+			$result = $this->db->get()->result();
+			$this->data['result'] = $result;
+			$ids = $this->input->post('recieved');
+			$message = $this->Order->change_recieved($ids);
+			$this->session->set_flashdata('success','更新しました');
+			return redirect('admin_order/list_order');
 		}
 		
 		//出荷済み登録
@@ -393,7 +412,7 @@ class Admin_order extends CI_Controller{
 		$this->data['products'] = $products;
 		if($this->input->post('submit')){
 		//orderとorder_detailの更新処理
-			/*
+			//Orderの更新処理
 			$order_data = array(
 				'delivery_date' => $this->input->post('delivery_date'),
 				'delivery_hour' => $this->input->post('delivery_hour'),
@@ -404,6 +423,7 @@ class Admin_order extends CI_Controller{
 			);
 			$this->Order->update($orderId,$order_data);
 			$count = $this->input->post('count');
+			//Order_detailの更新処理
 			for($i = 0; $i <= $count; $i++)
 			{
 				$product_data = array(
@@ -414,14 +434,26 @@ class Admin_order extends CI_Controller{
 				$detail_id = $this->input->post("order_detail_id_{$i}");
 				$this->Order->update_order_detail($detail_id , $product_data);
 			}
-			*/
-			
-			$result = $this->Order->update_order($orderId,$this->input->post());
-			if($result)
+			//Orderの合計と消費税の更新処理
+			$order_products = $this->Order->get_detail_by_order_id($orderId);
+//var_dump($order_products);exit;
+			$total = array();
+			foreach($order_products as $op)
 			{
-				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url("admin_order/edit_order/{$orderId}"));
+				$total[] = $op->sale_price * $op->quantity;
 			}
+			$total_price = array_sum($total);
+			$current_tax = $this->Tax->get_current_tax();
+			$tax = $total_price * $current_tax;
+			$change_data= array(
+				'total_price' => $total_price,
+				'tax' => $tax,
+			);
+			$this->Order->update($orderId,$change_data);
+			
+			//$result = $this->Order->update_order($orderId,$this->input->post());
+			$this->session->set_flashdata('success','登録しました');
+			redirect(base_url("admin_order/edit_order/{$orderId}"));
 		}
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->data['payments'] = $this->Master_payment->method;

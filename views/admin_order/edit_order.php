@@ -13,6 +13,7 @@
 		<div class='contents'>
 				<?php if(!empty($h2title)):?>
 				<h2><?php echo $h2title ?></h2>
+				<p class='error' style='width:1000px'>クレジット決済にかかる決済方法や金額の変更があった場合、必ずGMO　PAYMENT GETWAYの処理も忘れずに行ってください。</P>
 				<?php endif; ?>
 				<?php if(!empty($success_message)):?>
 				<p class='success'><?php echo $success_message; ?></p>

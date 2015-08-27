@@ -1,4 +1,3 @@
-<?php include __DIR__ . '/../../libraries/define_flag.php' ?>
 <!doctype html>
 <html lang='ja'>
 <head>

@@ -42,19 +42,20 @@
 					<td><label for='no_deli_date'>日付指定なしを含める</label></td>
 				</tr>
 				<tr><th>受付状態</th><td>
-				<input type='checkbox' name='status[]' id='wait' value='0' <?php if(in_array(0,$form_data->status_arr)) echo 'checked=checked' ?>><label for='wait'>受付中</label>
-				<input type='checkbox' name='status[]' id='done' value='1'  <?php if(in_array(1,$form_data->status_arr)) echo 'checked=checked' ?>><label for='done'>受付済</label>
-				<input type='checkbox' name='status[]' id='cancel' value='2'  <?php if(in_array(2,$form_data->status_arr)) echo 'checked=checked' ?>><label for='cancel'>キャンセル</label>
-				<input type='checkbox' name='status[]' id='shipped' value='3' <?php if(in_array(3,$form_data->status_arr)) echo 'checked=checked' ?>><label for='shipped'>出荷済み</label>
+				<input type='checkbox' name='status[]' id='wait' value='0' <?php if(in_array(NOORDER,$form_data->status_arr)) echo 'checked=checked' ?>><label for='wait'>受付中</label>
+				<input type='checkbox' name='status[]' id='done' value='1'  <?php if(in_array(RECIEVED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='done'>受付済</label>
+				<input type='checkbox' name='status[]' id='cancel' value='2'  <?php if(in_array(CANCELED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='cancel'>キャンセル</label>
+				<input type='checkbox' name='status[]' id='ordered' value='3' <?php if(in_array(ORDERED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='ordered'>発注リスト発行済み</label>
+				<input type='checkbox' name='status[]' id='shipped' value='4' <?php if(in_array(DELIVERED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='shipped'>出荷済み</label>
 				</td></tr>
 				<tr>
 					<table>
-						<td></td>
-						<td></td>
+						<td width='100px'></td>
 						<td><input type='submit' name='submit' value='検索'></td>
-						<td><input type='submit' name='makecsv' value='CSV作成'></td>
+						<td width='200px'></td>
+						<td><input type='submit' name='reg_order' value='受付登録'></td>
+						<td><input type='submit' name='makecsv' value='発注用CSV作成'></td>
 						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'></td>
-						<td></td>
 						<td><input type='submit' name='save_shipped' value='出荷済み登録'></td>
 					</table>
 				</tr>
@@ -90,10 +91,23 @@
 						<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->total_price + $result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->tax) ?>円</td>
-						<td><?php echo $payments[$result[$i]->payment]->method_name ?></td>
+						<td><?php echo $payments[$result[$i]->payment]->method_name ?> <?php if($result[$i]->payment == PAYMENT_CREDIT) echo '(' . $credit->get_statuses()[$credit->search_trade($result[$i]->order_number)->status] . ')'; ?></td>
 						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
 						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->orderId}") ?>'>変更</a></td>
-						<td><input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>'><label for='shipped_<?php echo $result[$i]->orderId ?>'>出荷済みにする</label></td>
+						<td>
+					<?php if($result[$i]->status_flag == NOORDER):?>
+							<input type='checkbox' name='recieved[]' id='recieved_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked'>
+							<label for='recieved_<?php echo $result[$i]->orderId ?>'>受付済みにする</label>
+					<?php endif;?>
+					<?php if($result[$i]->status_flag == RECIEVED):?>
+							<input type='checkbox' name='ordered[]' id='ordered_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked'>
+							<label for='ordered_<?php echo $result[$i]->orderId ?>'>発注済みにする</label>
+					<?php endif;?>
+					<?php if($result[$i]->status_flag == ORDERED):?>
+							<input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>'>
+							<label for='shipped_<?php echo $result[$i]->orderId ?>'>出荷済みにする</label>
+					<?php endif;?>
+							</td>
 					</tr>
 						<?php endif;?>
 					<tr class='product_info'>

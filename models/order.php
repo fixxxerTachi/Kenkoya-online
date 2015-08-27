@@ -1,4 +1,5 @@
 <?php
+//include __DIR__.'/../libraries/define_flag.php';
 class Order extends CI_Model{
 	public $tablename;
 	public $detail_tablename;
@@ -37,7 +38,7 @@ class Order extends CI_Model{
 		$this->load->model('Credit');
 			foreach($ids as $id){
 				$order = $this->get_by_id($id);
-				if($order->payment == 'credit')
+				if($order->payment == PAYMENT_CREDIT)
 				{
 					$output = $this->Credit->change_tran($order->order_number);
 					if($output->isErrorOccurred())
@@ -48,9 +49,9 @@ class Order extends CI_Model{
 				}
 				$this->db->trans_begin();
 				$this->db->where('id',$id);
-				$this->db->update($this->tablename,array('status_flag'=>3));
+				$this->db->update($this->tablename,array('status_flag'=>4));
 				$this->db->where('order_id',$id);
-				$this->db->update('order_detail',array('status_flag'=>3));
+				$this->db->update('order_detail',array('status_flag'=>4));
 				if($this->db->trans_status() === FALSE)
 				{
 					$this->db->trans_rollback();
@@ -58,6 +59,32 @@ class Order extends CI_Model{
 					$this->db->trans_commit();
 				}
 			}
+	}
+	
+	/** 受付ずみにする
+	* @param array ids
+	* @return string ErrorMessage
+	*/
+	public function change_recieved(array $ids)
+	{
+		$this->db->trans_begin();
+		foreach($ids as $id)
+		{
+			$order = $this->get_by_id($id);
+			$this->db->where('id',$id);
+			$this->db->update($this->tablename,array('status_flag'=>1));
+			$this->db->where('order_id',$id);
+			$this->db->update($this->detail_tablename,array('status_flag'=>1));
+			if($this->db->trans_status() === FALSE)
+			{
+				$this->db->trans_rollback();
+				return show_error('Error has occured');
+			}
+			else
+			{
+				$this->db->trans_commit();
+			}
+		}
 	}
 	
 	/** Orderの更新修正処理

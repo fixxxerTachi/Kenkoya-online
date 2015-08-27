@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang='ja'>
 <head>
-<?php include __DIR__ . '/../../libraries/define_flag.php' ?>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
 <link rel='stylesheet' href='<?php echo base_url('css/mypage.css') ?>'>
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
@@ -46,24 +45,20 @@
 							</th>
 							<td rowspan='<?php echo $count ?>'>
 								<ul>
-						<?php if($order->csv_flag == 0): ?>
-							<?php if($order->status_flag == NOORDER):?>
-									<li>受付中</li>
+									<li><?php echo $order_status[$order->status_flag] ?></li>
+							<?php if($order->status_flag == NOORDER): //受付中はキャンセルボタン表示 ?>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/cancel/{$order->id}/") ?>'>注文キャンセル</a></li>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
-							<?php if($order->status_flag == CANCELED):?>
-									<li>ご注文取り消し</li>
+							<?php if($order->status_flag == RECIEVED): //受付済みは明細ボタン表示 ?>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$oder->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
-						<?php elseif($order->csv_flag == 1):?>
-							<?php if($order->status_flag == ORDERED):?>
-									<li>受付済み</li>
-									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
-							<?php elseif($order->status_flag == DELIVERED):?>
-									<li>配送済み</li>
+							<?php if($order->status_flag == ORDERED): //発注済みは明細ボタン表示 ?>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
-						<?php endif;?>
+							<?php if($order->status_flag == DELIVERED): //発注済みは明細ボタン表示 ?>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
+							<?php endif;?>
 								</ul>
 							</td>
 							<?php foreach($order->details as $row):?>
@@ -74,7 +69,7 @@
 								<?php echo $row->product_name ?><br>商品単価：<?php echo number_format($row->sale_price) ?>円<br>注文個数：<?php echo $row->quantity ?>
 							</td>
 						</tr>
-						<?php endforeach;?>
+							<?php endforeach;?>
 						<?php endforeach;?>
 					</table>
 				<?php else: ?>

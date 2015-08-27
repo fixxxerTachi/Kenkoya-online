@@ -19,6 +19,20 @@ class Credit extends CI_Model{
 	{
 		parent::__construct();
 	}
+	
+	public function get_statuses()
+	{
+		return array(
+			'CHECK'=>'有効性チェック',
+			'CAPTURE'=>'売上計上(CAPTURE)',
+			'AUTH'=>'与信確保(AUTH)',
+			'SALES'=>'売上計上',
+			'VOID'=>'取消',
+			'RETURN'=>'返品',
+			'RETURNX'=>'月跨ぎ返品',
+			'SAUTH'=>'与信確保(SAUTH)',
+		);
+	}
 
 	/** クレジット決済取引から実行まで行う
 	 * @return object ExecTranOutput
