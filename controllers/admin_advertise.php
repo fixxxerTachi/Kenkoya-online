@@ -447,6 +447,7 @@ class Admin_advertise extends CI_Controller{
 		//$this->data['allergen'] = $this->Product->get_allergen_by_id($product_result->product_id);
 		$this->data['h2title'] = "{$this->data['ad_result']->title}: 商品情報の詳細";
 		$this->data['temp_names'] = $this->Temp_zone->get_names();
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_advertise/detail_product.php',$this->data);
 	}
 
@@ -591,14 +592,14 @@ class Admin_advertise extends CI_Controller{
 					}
 				}
 				//redirect(base_url('admin_advertise/list_product/' . $ad_id));
-				if($redirect_url = $this->session->userdata('referer'))
-				{
-					redirect($this->session->userdata('referer'));
-				}
-				else
-				{
-					redirect(base_url('admin_advertise/list_product/' . $ad_id));
-				}
+				//if($redirect_url = $this->session->userdata('referer'))
+				//{
+			//		redirect($this->session->userdata('referer'));
+				//}
+				//else
+				//{
+					redirect(base_url("admin_advertise/detail_product/{$id}/{$ad_id}"));
+				//}
 			}
 		}else{
 			//postされない場合遷移元(list_productを保存

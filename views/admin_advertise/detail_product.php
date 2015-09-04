@@ -6,7 +6,16 @@
 	<div id="body">
 		<div class='contents'>
 			<h2><?php echo $h2title ?></h2>
-				<p><?php if(isset($message)) echo $message ?></p>
+				<?php if(isset($message)): ?>
+				<p><?php echo $message ?></p>
+				<?php endif;?>
+				<?php if(!empty($success_message)):?>
+				<p class='success'><?php echo $success_message; ?></p>
+				<?php endif; ?>
+				<?php if(!empty($error_message)):?>
+				<p class='error'><?php echo $error_message ?></p>
+				<?php endif; ?>
+
 					<table class='detail detail-left'>
 						<caption>商品台帳</caption>
 						<tr>

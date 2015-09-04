@@ -176,3 +176,263 @@ ERROR - 2015-09-04 14:00:23 --> 404 Page Not Found --> css
 ERROR - 2015-09-04 14:00:32 --> 404 Page Not Found --> css
 ERROR - 2015-09-04 14:00:38 --> 404 Page Not Found --> css
 ERROR - 2015-09-04 14:00:57 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:03:42 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:04:02 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:04:14 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:04:18 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:04:18 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:04:38 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:04:57 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:05:05 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:05:05 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:05:28 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:05:33 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:05:41 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:05:47 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:10 --> SELECT `id`
+FROM (`takuhai_advertise_product`)
+WHERE `advertise_id` =  '4'
+ERROR - 2015-09-04 14:23:10 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:14 --> SELECT `id`
+FROM (`takuhai_advertise_product`)
+WHERE `advertise_id` =  '4'
+ERROR - 2015-09-04 14:23:14 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:17 --> SELECT `id`
+FROM (`takuhai_advertise_product`)
+WHERE `advertise_id` =  '4'
+ERROR - 2015-09-04 14:23:17 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:19 --> SELECT `id`
+FROM (`takuhai_advertise_product`)
+WHERE `advertise_id` =  '8'
+ERROR - 2015-09-04 14:23:19 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:23 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:36 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:23:40 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:23:40 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:08 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:14 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:24:17 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:24:17 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:21 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:29 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:24:33 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:24:33 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:38 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:45 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:24:48 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:24:48 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:25:05 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:26:20 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:26:20 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:26:32 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:26:38 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:26:38 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:26:43 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:26:49 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:01 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:27:04 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:27:04 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:17 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:27 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:27:40 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:27:40 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 186
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 190
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 194
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 198
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 202
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 206
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 210
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 214
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 221
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined property: stdClass::$p_on_sale D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined index:  D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 226
+ERROR - 2015-09-04 14:27:44 --> Severity: Notice  --> Undefined variable: ad_id D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\edit_product.php 245
+ERROR - 2015-09-04 14:27:44 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:27:50 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:27:50 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:27:55 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 137
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 141
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 145
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 149
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 153
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 157
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 161
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 165
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 169
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 173
+ERROR - 2015-09-04 14:29:00 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 177
+ERROR - 2015-09-04 14:29:01 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 181
+ERROR - 2015-09-04 14:29:01 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 185
+ERROR - 2015-09-04 14:29:01 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 189
+ERROR - 2015-09-04 14:29:01 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:43:29 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 146
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 150
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 154
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 158
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 162
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 166
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 170
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 174
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 178
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 182
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 186
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 190
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 194
+ERROR - 2015-09-04 14:44:20 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 198
+ERROR - 2015-09-04 14:44:20 --> 404 Page Not Found --> css
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_category_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 146
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_category_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 150
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 154
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_vendor_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 158
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_product_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 162
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_branch_code D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 166
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_product_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 170
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_short_name D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 174
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_sale_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 178
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_cost_price D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 182
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_adddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 186
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_moddate D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 190
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_create_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 194
+ERROR - 2015-09-04 14:44:29 --> Severity: Notice  --> Undefined property: stdClass::$p_update_date D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\views\admin_advertise\detail_product.php 198
+ERROR - 2015-09-04 14:44:29 --> 404 Page Not Found --> css
