@@ -24,6 +24,7 @@
 						<tr>
 							<th>注文番号</th>
 							<td><input type='text' name='code' value='<?php echo $form_data->code ?>'></td>
+						</tr>
 						<tr>
 							<th>商品コード</th>
 							<td><input type='text' name='product_code' value='<?php echo $form_data->product_code ?>'></td>
@@ -67,6 +68,30 @@
 						<tr>
 							<th>カロリー</th>
 							<td><input type='text' name='calorie' value='<?php echo $form_data->calorie ?>'></td>
+						</tr>
+						<tr>
+							<th>温度帯</th>
+							<td><?php echo form_dropdown('temp_zone',$temp_names,$form_data->temp_zone_id,"id='temp_zone'");?></td>
+						</tr>
+						<tr>
+							<th>重量</th>
+							<td><input type='text' name='weight' value='<?php echo $form_data->weight ?>'></td>
+						</tr>
+						<tr>
+							<th>幅</th>
+							<td><input type='text' name='width' value='<?php echo $form_data->width ?>'></td>
+						</tr>
+						<tr>
+							<th>高さ</th>
+							<td><input type='text' name='height' value='<?php echo $form_data->height ?>'></td>
+						</tr>
+						<tr>
+							<th>奥行</th>
+							<td><input type='text' name='depth' value='<?php echo $form_data->depth ?>'></td>
+						</tr>
+						<tr>
+							<th>体積</th>
+							<td><?php echo number_format($form_data->volume) ?>g</td>
 						</tr>
 					</table>
 					<table class='detail detail-right'>

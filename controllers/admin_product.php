@@ -6,6 +6,7 @@ include __DIR__.'/../libraries/csv.php';
 
 class Admin_product extends CI_Controller{
 	public $data = array();
+	public $new_tablename = 'takuhai_jan_size';
 	public function __construct()
 	{
 		parent::__construct();

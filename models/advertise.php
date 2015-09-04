@@ -142,27 +142,27 @@ class Advertise extends CI_Model{
 			,a.note
 			,a.page
 			,a.category_id
-			,p.id as product_id
-			,p.product_code as p_code
-			,p.branch_code as p_branch_code
-			,p.product_name as p_name
-			,p.short_name
 			,a.sale_start_datetime
 			,a.sale_end_datetime
 			,a.delivery_start_datetime
 			,a.delivery_end_datetime
+			,s.weight
 		");
 		$this->db->from($this->product_tablename . ' as a');
-		$this->db->join('master_products as p','p.product_code = a.product_code','left');
+//		$this->db->join('master_products as p','p.product_code = a.product_code','left');
 //		$this->db->join('product_image as i','i.product_id = p.id','left');
+		$this->db->join('jan_size as s','s.product_code = a.product_code','left');
 		$this->db->where('a.advertise_id' , $advertise_id);
-		$this->db->where('p.branch_code','a.branch_code');
+//		$this->db->where('p.branch_code','a.branch_code');
 		if($obj){
 			if($obj->category_id){
 				$this->db->where('a.category_id',$obj->category_id);
 			}
 			if($obj->code){
 				$this->db->where('a.code',$obj->code);
+			}
+			if($obj->product_code){
+				$this->db->where('a.product_code',(int)$obj->product_code);
 			}
 			if($obj->product_name){
 				$this->db->like('a.product_name',$obj->product_name);
@@ -184,32 +184,20 @@ class Advertise extends CI_Model{
 	
 	public function get_product_by_id_with_product($product_id = null)
 	{
-		/*
-		$this->db->select("a.*
-			,p.id as product_id
-			,p.category_code as p_category_code
-			,p.category_name as p_category_name
-			,p.vendor_code as p_vendor_code
-			,p.vendor_name as p_vendor_name
-			,p.product_code as p_product_code
-			,p.branch_code as p_branch_code
-			,p.product_name as p_product_name
-			,p.short_name as p_short_name
-			,p.sale_price as p_sale_price
-			,p.cost_price as p_cost_price
-			,p.on_sale as p_on_sale
-			,p.adddate as p_adddate
-			,p.moddate as p_moddate
-			,p.create_date as p_create_date
-			,p.update_date as p_update_date
-			");
-		*/
-		$this->db->select("a.*");
+		$this->db->select("
+			a.*
+			,s.width
+			,s.weight
+			,s.height
+			,s.depth
+			,s.volume
+		");
 		$this->db->from($this->product_tablename . ' as a');
 		$this->db->where('a.id' , $product_id);
-		$this->db->join('master_products as p','a.product_code = p.product_code','left');
+		$this->db->join('jan_size as s','a.product_code = s.product_code','left');
+		//$this->db->join('master_products as p','a.product_code = p.product_code','left');
 		//$this->db->join('product_image as i','i.product_id = p.id','left');
-		$this->db->where('p.branch_code = a.branch_code');
+		//$this->db->where('p.branch_code = a.branch_code');
 		$query=$this->db->get();
 		return $query->row();
 	}

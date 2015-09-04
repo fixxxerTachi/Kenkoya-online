@@ -31,6 +31,7 @@ class Admin_admin extends CI_Controller{
 		$this->load->model('Admin_mail');
 		$this->load->model('Takuhai_charge');
 		$this->load->model('Box');
+		$this->load->model('Payment');
 		//$this->load->model('Payment');
 		//$this->load->model('Master_temp_zone');
 		$this->load->model('Master_payment');

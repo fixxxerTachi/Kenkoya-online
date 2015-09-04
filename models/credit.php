@@ -67,6 +67,7 @@ class Credit extends CI_Model{
 		$input->setEntryTranInput($entryinput);
 		$input->setExecTranInput($execinput);
 		$exe = new EntryExecTran();
+
 		$output = $exe->exec($input);
 
 		/* 例外にするか画面を用意する*/
@@ -85,7 +86,8 @@ class Credit extends CI_Model{
 			}
 			foreach($errorList as $errorInfo)
 			{
-				$message = $errorHandle->getMessage($errorInfo->getErrInfo());
+				$message = $errorHandle->getMessage($errorInfo->getErrInfo()).'('.$errorInfo->getErrInfo().')';
+//var_dump($this->expire);var_dump($errorInfo->getErrInfo());exit;
 				$classname =  $this->router->fetch_class();
 				$methodname = $this->router->fetch_method();
 				log_message('error',$message.':'.$classname.':'.$methodname.':'.__LINE__);

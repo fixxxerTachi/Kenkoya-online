@@ -24,6 +24,8 @@ class Admin_advertise extends CI_Controller{
 		$this->load->model('Banner');
 		$this->load->model('Master_show_flag');
 		$this->load->model('Takuhai_charge');
+		$this->load->model('Temp_zone');
+		$this->load->model('Size');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
@@ -370,30 +372,35 @@ class Admin_advertise extends CI_Controller{
 		$category_id = $this->uri->segment(4);
 		$code=$this->uri->segment(5);
 		$product_name = $this->uri->segment(6);
+		$product_code = $this->uri->segment(7);
 		
 		$category_id = $category_id ?: '-';
 		$code = $code ?: '-';
 		$product_name=$product_name ?: '-';
+		$product_code = $product_code ?: '-';
 		
 		$f_category_id = (is_numeric($category_id)) ? $category_id : '';
 		$f_code=(is_numeric($code)) ? $code :'';
 		$f_product_name=(is_numeric($product_name)) ? $product_name : '';
+		$f_product_code = (is_numeric($product_code)) ? $product_code : '';
 		
 		$this->data['ad_id'] = $advertise_id;
 		$form_data = array(
 			'category_id'=>$f_category_id,
 			'code'=>$f_code,
 			'product_name'=>$f_product_name,
+			'product_code'=>$f_product_code,
 		);
 		$form_data = (object)$form_data;
-		$config['uri_segment'] = 7;
+		$config['uri_segment'] = 8;
 		$config['per_page'] = 20;
-		$config['base_url'] = base_url("admin_advertise/list_product/{$advertise_id}/{$category_id}/{$code}/{$product_name}/");
+		$config['base_url'] = base_url("admin_advertise/list_product/{$advertise_id}/{$category_id}/{$code}/{$product_name}/{$product_code}");
 		if($this->input->post('search')){
 			$form_data=array(
 				'category_id'=>$this->input->post('category_id'),
 				'code'=>$this->input->post('code'),
 				'product_name'=>$this->input->post('product_name'),
+				'product_code'=>$this->input->post('product_code'),
 			);
 			$form_data = (object)$form_data;
 			$offset=0;
@@ -401,14 +408,15 @@ class Admin_advertise extends CI_Controller{
 			$category_id = ($form_data->category_id) ?: '-';
 			$code=($form_data->code) ?: '-';
 			$product_name=($form_data->product_name) ?: '-';
-			$param = "{$category_id}/{$code}/{$product_name}";
+			$product_code = ($form_data->product_code) ?: '-';
+			$param = "{$category_id}/{$code}/{$product_name}/{$product_code}";
 			$config['base_url'] = base_url("admin_advertise/list_product/{$advertise_id}/{$param}");
 			$result = $this->Advertise->get_products_by_advertise_id_with_image($advertise_id,$form_data,$config['per_page'],$offset);
 			$all_result = $this->Advertise->get_products_by_advertise_id_with_image($advertise_id,$form_data);
 			$config['total_rows'] = count($all_result);
 			$this->data['result'] = $result;
 		}else{
-			$offset = $this->uri->segment(7) ? $this->uri->segment(7) : 0;
+			$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 0;
 			$result = $this->Advertise->get_products_by_advertise_id_with_image($advertise_id,$form_data,$config['per_page'],$offset);
 			$all_result = $this->Advertise->get_products_by_advertise_id_with_image($advertise_id,$form_data);
 			$config['total_rows'] = count($all_result);
@@ -438,6 +446,7 @@ class Admin_advertise extends CI_Controller{
 		$this->data['result'] = $product_result;
 		//$this->data['allergen'] = $this->Product->get_allergen_by_id($product_result->product_id);
 		$this->data['h2title'] = "{$this->data['ad_result']->title}: 商品情報の詳細";
+		$this->data['temp_names'] = $this->Temp_zone->get_names();
 		$this->load->view('admin_advertise/detail_product.php',$this->data);
 	}
 
@@ -448,11 +457,13 @@ class Admin_advertise extends CI_Controller{
 		$this->data['on_sale'] = $this->Master_on_sale->on_sale;
 		$this->data['allergens'] = $this->Allergen->show_list();
 		$this->data['hour_list'] = $this->Master_hour->hour;
+		$this->data['temp_names'] = $this->Temp_zone->get_names();
 		$id = $this->uri->segment(3);
 		$ad_id = $this->uri->segment(4);
 		//$this->data['ad_id'] = $ad_id;
 		//advertieseのproducts(master_productsと連結したもの)取得
 		$ad_result = $this->Advertise->get_product_by_id_with_product($id);
+		$product_code = $ad_result->product_code;
 		//$product_id =$ad_result->product_id;
 
 		//$allergen_arr = $this->Product->get_allergen_by_id($ad_result->product_id);
@@ -539,6 +550,13 @@ class Admin_advertise extends CI_Controller{
 					//'sale_end_time'=>$this->data['form_data']->sale_end_time,
 					//'image_description'=>$this->data['form_data']->image_description,
 				);
+				$size_data = array(
+					'weight'=>$this->data['form_data']->weight,
+					'width'=>$this->data['form_data']->width,
+					'height'=>$this->data['form_data']->height,
+					'depth'=>$this->data['form_data']->depth,
+					'volume'=>$this->data['form_data']->width * $this->data['form_data']->height * $this->data['form_data']->depth,
+				);
 				$ad_product_data=(object)$ad_product_data;
 				//制限日時
 				if(!empty($this->data['form_data']->sale_start_date))
@@ -558,8 +576,9 @@ class Admin_advertise extends CI_Controller{
 					$ad_product_data->delivery_end_datetime = $this->data['form_data']->delivery_end_date . ' ' . $this->data['form_data']->delivery_end_time;
 				}
 				$allergens = $this->input->post('allergens');
-				$this->Product->update_allergen($product_id,$pa_middle_ids,$allergens);
+				//$this->Product->update_allergen($product_id,$pa_middle_ids,$allergens);
 				$this->Advertise_product->update_product($id,$ad_product_data);
+				$this->Size->update($product_code,$size_data);
 				$this->session->set_flashdata('success','登録しました');
 				/*** 画像がある場合の処理 ***/
 				$image_name = 'images/products/ak' . $ad_product_data->product_code . '.jpg';

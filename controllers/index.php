@@ -19,6 +19,7 @@ class Index extends CI_Controller {
 				'Mainvisual',
 				'Banner',
 				'Bread',
+				'Temp_zone',
 			)
 		);
 		$this->load->helper(array('form'));
@@ -132,6 +133,7 @@ class Index extends CI_Controller {
 			$bread2 = new StdClass();
 			$bread2->text = $this->data->h2title;
 			$this->data->breads = $this->Bread->create_bread($bread1,$bread2);
+			$this->data->short_names = $this->Temp_zone->get_short_names();
 			$this->load->view('front_product/detail_product',$this->data);
 		}catch(Exception $e){
 			show_404();

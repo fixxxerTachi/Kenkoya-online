@@ -24,6 +24,7 @@
 				</tr>
 				<tr>
 					<th><label for='code'>注文番号</label></th><td><input type='text' name='code' id='code' value='<?php echo $form_data->code ?>'></td>
+					<th><label for='product_code'>商品コード</th><td><input type='text' name='product_code' id='product_code' value='<?php echo $form_data->product_code ?>'></td>
 					<th><label for='product_name'>商品名</label></th><td><input type='text' id='product_name' name='product_name' value='<?php echo $form_data->product_name ?>'></td>
 				</tr>
 				<tr><th class='no-border'></th><td><input type='submit' name='search' value='検索'></td></tr>
@@ -31,7 +32,7 @@
 			<?php if(!empty($result) > 0):?>
 				<p class='links'><?php echo $links ?></p>
 				<table class='list'>
-					<tr><th>画像</th><th>商品番号</th><th>商品コード</th><th>枝番</th><th>商品名</th><th>販売価格</th><th>販売開始</th><th>販売終了</th><th>お届け開始</th><th>お届け終了</th><th></th><th></th></tr>
+					<tr><th>画像</th><th>商品番号</th><th>商品コード</th><th>枝番</th><th>商品名</th><th>販売価格</th><th>サイズ登録</th><th>販売開始</th><th>販売終了</th><th>お届け開始</th><th>お届け終了</th><th></th><th></th></tr>
 					<?php foreach($result as $row): ?>
 					<tr>
 						<td><img src='<?php echo base_url(show_image($row->product_code))?>' width='25' height='25'></td>
@@ -42,6 +43,7 @@
 							<a href='<?php echo base_url("/admin_advertise/detail_product/{$row->id}/{$ad_id}") ?>'><?php echo mb_strimwidth($row->product_name,0,30,'...') ?></a>
 						</td>
 						<td><?php echo number_format($row->sale_price) ?>円</td>
+						<td><?php if($row->weight){ echo $row->weight; }else{ echo '<span style="color:orange">未登録</span>';} ?></td>
 			<?php $ssflg = $row->sale_start_datetime ? new DateTime($row->sale_start_datetime) : null;?>
 			<?php $seflg = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : null;?>
 			<?php $dsflg = $row->delivery_start_datetime ? new DateTime($row->delivery_start_datetime) : null;?>

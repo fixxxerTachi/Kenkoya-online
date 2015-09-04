@@ -343,7 +343,7 @@ class Front_order extends CI_Controller{
 				$card_info = new StdClass();
 				$card_info->card_no = $form_data->card_no;
 				$card_info->method = '1';
-				$card_info->expire = $form_data->expire_month . $form_data->expire_year;
+				$card_info->expire = $form_data->expire_year . $form_data->expire_month;
 				$card_info->security_code = $form_data->security_code;
 				$this->session->set_userdata('card_info',$card_info);
 				return redirect('front_order/confirm_order');

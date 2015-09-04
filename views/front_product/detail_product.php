@@ -31,13 +31,14 @@
 				<?php endif;?>
 			</p>
 			<table class='detail-information3'>
-				<tr><th><span class='logo'>メーカー―</span></th><td><?php echo $row->maker ?></td></tr>
+				<tr><th><span class='logo'>メーカー</span></th><td><?php echo $row->maker ?></td></tr>
 				<tr><th><span class='logo'>商品名</span></th><td><?php echo $row->product_name ?></td></tr>
 				<tr><th><span class='logo'>内容量</span></th><td><?php echo $row->size ?></td></tr>
 				<tr><th><span class='logo'>賞味期限</span></th><td><?php echo $row->freshness_date ?></td></tr>
 				<tr><th><span class='logo'>カロリー</span></th><td><?php echo $row->note ?></td></tr>
 				<tr><th><span class='logo'>アレルゲン</span></th><td><?php echo $row->allergen ?></td></tr>
 				<tr><th><span class='logo'>価格(税抜)</span></th><td><?php echo number_format($row->sale_price) ?>円</td></tr>
+				<tr><th><span class='logo'>配送</span></th><td><?php echo $short_names[$row->temp_zone_id] ?></td></tr>
 			</table>
 			<ul class='cart clearfix'>
 			<?php echo form_open('front_cart/input_cart') ?>

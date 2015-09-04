@@ -56,6 +56,30 @@
 							<th>カロリー</th>
 							<td><?php echo $result->calorie ?></td>
 						</tr>
+						<tr>
+							<th>温度帯</th>
+							<td><?php echo $temp_names[$result->temp_zone_id];?></td>
+						</tr>
+						<tr>
+							<th>重量</th>
+							<td><?php echo $result->weight ?></td>
+						</tr>
+						<tr>
+							<th>幅</th>
+							<td><?php echo $result->width ?></td>
+						</tr>
+						<Tr>
+							<th>高さ</th>
+							<td><?php echo $result->height ?></td>
+						</tr>
+						<tr>
+							<th>奥行</th>
+							<td><?php echo $result->depth ?></td>
+						</tr>
+						<tr>
+							<th>体積</th>
+							<td><?php echo $result->volume ?></td>
+						</tr>
 					</table>
 					<table class='detail detail-right'>
 						<caption>その他情報</caption>
@@ -98,10 +122,6 @@
 						<tr>
 							<th>画像</th>
 							<td><img src='<?php echo base_url(show_image($result->product_code)) ?>' width='100' height='100'></td>
-						</tr>
-						<tr>
-							<th>温度帯</th>
-							<td><?php echo $temp_zone_list[$result->temp_zone_id] ?></td>
 						</tr>
 						<tr>
 							<th class='no-border'></th>

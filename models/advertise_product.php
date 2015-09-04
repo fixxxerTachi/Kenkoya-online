@@ -196,6 +196,7 @@ class Advertise_product extends CI_Model{
 			ad_p.sale_end_datetime as sale_end_datetime,
 			ad_p.delivery_start_datetime as delivery_start_datetime,
 			ad_p.delivery_end_datetime as delivery_end_datetime,
+			ad_p.temp_zone_id,
 			ad.title,
 			ad_p.category_id,
 		');

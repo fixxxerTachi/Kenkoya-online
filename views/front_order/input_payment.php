@@ -62,6 +62,3 @@
 	}
 </script>
 </html>
-<?php echo var_dump($this->session->userdata('carts')); echo '<br>'; ?>
-<?php// echo var_dump($this->session->userdata('card_info'));echo '<br>';?>
-<?php echo var_dump($this->session->userdata('order_info'));?>
