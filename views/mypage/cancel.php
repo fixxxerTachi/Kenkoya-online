@@ -23,7 +23,7 @@
 				<?php if(!empty($error_message)):?>
 				<p class='error'><?php echo $error_message ?></p>
 				<?php endif; ?>
-				<?php if(!$order[0]->csv_flag == 1): ?>
+				<?php if($order[0]->status_flag == 0): ?>
 					<?php echo form_open() ?>
 					<table class='contact_form'>
 						<?php $create_date = new DateTime($order[0]->create_date)?>

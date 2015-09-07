@@ -8831,3 +8831,187 @@ ERROR - 2015-09-07 14:51:04 --> 404 Page Not Found --> css
 ERROR - 2015-09-07 14:51:19 --> 404 Page Not Found --> css
 ERROR - 2015-09-07 14:51:28 --> 404 Page Not Found --> css
 ERROR - 2015-09-07 15:00:48 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:44:03 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:03 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:03 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:03 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:03 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:04 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:05 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:44:06 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:45:47 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:45:52 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:45:53 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:46:15 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:21 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:21 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:46:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:46:32 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:47:49 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:47:49 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:47:54 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:48:05 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:53:54 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:55:25 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:55:30 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:55:52 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 15:57:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:35 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 15:57:35 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 16:06:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:34 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:06:34 --> Severity: 4096  --> Argument 1 passed to Order::update_order_detail_flag() must be an instance of object, array given, called in D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\mypage.php on line 679 and defined D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\models\order.php 493
+ERROR - 2015-09-07 16:06:34 --> Severity: Warning  --> Attempt to assign property of non-object D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\mypage.php 680
+ERROR - 2015-09-07 16:06:34 --> Severity: Notice  --> Undefined property: My_mail::$Mail_template D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\My_mail.php 234
+ERROR - 2015-09-07 16:06:34 --> Severity: Notice  --> Trying to get property of non-object D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\My_mail.php 234
+ERROR - 2015-09-07 16:06:44 --> Severity: Notice  --> Undefined property: My_mail::$Mail_template D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\My_mail.php 245
+ERROR - 2015-09-07 16:06:44 --> Severity: Notice  --> Trying to get property of non-object D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\My_mail.php 245
+ERROR - 2015-09-07 16:07:12 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 16:07:13 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:07:17 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:07:17 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 16:27:27 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 16:28:32 --> 404 Page Not Found --> test_gmo_member/save_member
+ERROR - 2015-09-07 16:28:47 --> 404 Page Not Found --> test_gmo_member/save_member
+ERROR - 2015-09-07 16:30:23 --> Severity: Warning  --> require_once(com/gmo_pg/client/input/SaveMemer.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\test_gmo_member.php 21
+ERROR - 2015-09-07 16:31:23 --> 404 Page Not Found --> test_gmo/test_entry
+ERROR - 2015-09-07 16:31:32 --> 404 Page Not Found --> test_gmo/style
+ERROR - 2015-09-07 16:31:45 --> 404 Page Not Found --> test_gmo/style
+ERROR - 2015-09-07 16:32:02 --> 404 Page Not Found --> test_gmo/style
+ERROR - 2015-09-07 16:32:12 --> 404 Page Not Found --> test_gmo/style
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:30 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:32:34 --> 404 Page Not Found --> test_gmo/index.html
+ERROR - 2015-09-07 16:33:58 --> Severity: Warning  --> require_once(com/gmo_pg/client/input/SaveMemer.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\test_gmo_member.php 21
+ERROR - 2015-09-07 16:37:11 --> Severity: Warning  --> require_once(com/gmo_pg/client/tran/SaveMemer.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\test_gmo_member.php 21
+ERROR - 2015-09-07 16:37:12 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:37:27 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-07 16:37:28 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-07 16:46:41 --> 404 Page Not Found --> css
+ERROR - 2015-09-07 16:46:51 --> 404 Page Not Found --> css

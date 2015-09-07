@@ -653,7 +653,7 @@ class Mypage extends CI_Controller{
 			//detail_orderを取得
 			$result = $this->Order->get_by_id_with_detail($order_id);
 			//status_flagが0でなかったらキャンセルできない
-			if($result[0]->status_flag != 0 || $result[0]->csv_flag != 0){
+			if($result[0]->status_flag != 0){
 				$this->session->set_flashdata('error','キャンセルできません。');
 				return redirect('mypage/mypage_order');
 			}else{
