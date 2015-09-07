@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://sixcore.localhost.com';
+$config['base_url']	= 'https://sixcore.localhost.com';
 
 /*
 |--------------------------------------------------------------------------

@@ -5,6 +5,7 @@
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
 <script src="<?php echo base_url('js/calender.js')?>"></script>
+<script src="<?php echo base_url('js/alert.js') ?>"></script>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
 <div id="container">
@@ -22,7 +23,9 @@
 				<?php endif; ?>
 				<?php echo form_open() ?>
 				<table class='detail'>
-				<tr><th><label for='order_number'>注文番号</label></th><td><input type='text' name='order_number' id='order_number' value='<?php echo $form_data->order_number ?>'></td></tr>
+				<tr>
+					<th><label for='order_number'>注文番号</label></th><td><input type='text' name='order_number' id='order_number' value='<?php echo $form_data->order_number ?>'></td>
+				</tr>
 				<tr>
 					<th><label for='customer_name'>お客様名</label></th><td><input type='text' name='customer_name' id='customer_name' value='<?php echo $form_data->customer_name ?>'></td>
 					<th><label for='customer_code'>お客様コード</label></th><td><input type='text' name='customer_code' id='customer_code' value='<?php echo $form_data->customer_code ?>'></td>
@@ -53,10 +56,11 @@
 						<td width='100px'></td>
 						<td><input type='submit' name='submit' value='検索'></td>
 						<td width='200px'></td>
-						<td><input type='submit' name='reg_order' value='受付登録'></td>
-						<td><input type='submit' name='makecsv' value='発注用CSV作成'></td>
-						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'></td>
-						<td><input type='submit' name='save_shipped' value='出荷済み登録'></td>
+						<td><input type='submit' name='reg_order' value='受付登録'><br><a class='desc_btn' id='recieved_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='makecsv' value='発注用CSV作成'><br><a class='desc_btn' id='order_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
+						<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
 					</table>
 				</tr>
 				</table>
@@ -69,7 +73,7 @@
 					<tr class='base_info_header'>
 						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th>
 					</tr><tr class='base_info_header'>
-						<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th><th>配達済み<br>登録</th>
+						<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th><th>状態変更</th>
 					</tr>
 					<tr class='product_info_header'>
 						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th>
@@ -106,6 +110,10 @@
 					<?php if($result[$i]->status_flag == ORDERED):?>
 							<input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>'>
 							<label for='shipped_<?php echo $result[$i]->orderId ?>'>出荷済みにする</label>
+					<?php endif;?>
+					<?php if($result[$i]->status_flag == DELIVERED):?>
+							<?php $date = new DateTime($result[$i]->shipped_date) ?>
+							<?php echo $date->format('Y年m月d日') ?>出荷済み
 					<?php endif;?>
 							</td>
 					</tr>

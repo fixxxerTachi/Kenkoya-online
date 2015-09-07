@@ -44,7 +44,7 @@ class Master_payment extends CI_Model{
 	
 	public function show_list()
 	{
-		$this->db->where('del_flag',0);
+		/*$this->db->where('del_flag',0);*/
 		$result = $this->db->get($this->tablename)->result();
 		return $result;
 	}
@@ -84,6 +84,5 @@ class Master_payment extends CI_Model{
 		}
 		return $arr;
 	}
-	
-	
+
 }

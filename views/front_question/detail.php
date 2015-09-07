@@ -13,8 +13,8 @@
 		<div id='container-inner'>
 			<div class='content'>
 				<h2><span class='logo_pink_large'>FAQ</span> よくあるご質問(FAQ)</h2>
-				<h3><span class='logo_q'>Q</span> <?php echo $result->question ?></h3>
 			<?php if(!empty($result)):?>
+				<h3><span class='logo_q'>Q</span> <?php echo $result->question ?></h3>
 				<div class='answer'>
 					<span class='logo_a'>A</span> <?php echo nl2br($result->answer) ?>
 				</div>

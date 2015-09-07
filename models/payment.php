@@ -57,4 +57,15 @@ class Payment extends CI_Model{
 		}
 		return $arr;
 	}
+	
+	public function dropdown_list()
+	{
+		$rows = $this->db->get($this->tablename)->result();
+		$arr = array();
+		foreach($rows as $row)
+		{
+			$arr[$row->id] = $row->method_name;
+		}
+		return $arr;
+	}
 }

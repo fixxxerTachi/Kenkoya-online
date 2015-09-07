@@ -49,13 +49,15 @@ class Order extends CI_Model{
 				}
 				$this->db->trans_begin();
 				$this->db->where('id',$id);
-				$this->db->update($this->tablename,array('status_flag'=>4));
+				$this->db->update($this->tablename,array('status_flag'=>4,'shipped_date'=>date('Y-m-d')));
 				$this->db->where('order_id',$id);
 				$this->db->update('order_detail',array('status_flag'=>4));
 				if($this->db->trans_status() === FALSE)
 				{
 					$this->db->trans_rollback();
-				}else{
+				}
+				else
+				{
 					$this->db->trans_commit();
 				}
 			}

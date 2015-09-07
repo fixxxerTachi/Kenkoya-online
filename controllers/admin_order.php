@@ -144,6 +144,7 @@ class Admin_order extends CI_Controller{
 			,o.payment
 			,o.status_flag as status_flag
 			,o.delivery_charge
+			,o.shipped_date
 			,o.total_price
 			,o.tax
 			,od.id as order_id
@@ -372,7 +373,9 @@ class Admin_order extends CI_Controller{
 			}/* endfor */
 			
 			/*** 出力処理 ***/
-			$output = '発注明細書.xls';
+			$today = new DateTime();
+			$today = $today->format('YmdHis');
+			$output = "発注明細書{$today}.xls";
 			//$writer = PHPExcel_IOFactory::createWriter($book,'Excel5');
 			//$writer->save($output);
 			

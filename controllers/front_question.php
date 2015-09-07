@@ -28,7 +28,7 @@ class Front_question extends CI_Controller {
 		$questions = $this->Contents_question->show_list_by_category($category_id,true,true,10);
 		$this->data->title = 'よくあるご質問（FAQ）';
 		$this->h2title = 'よくあるご質問（FAQ)';
-		if(empty($category_id)){
+		if(empty($category_id) || empty($questions)){
 			$this->data->h3title = 'お問い合わせ一覧 ';
 		}else{
 			$question = reset($questions);
