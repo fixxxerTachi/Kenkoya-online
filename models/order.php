@@ -73,8 +73,24 @@ class Order extends CI_Model{
 		foreach($ids as $id)
 		{
 			$order = $this->get_by_id($id);
+			
+			if($order->payment != PAYMENT_BANK)
+			{
+				$data = array(
+					'status_flag'=>1,
+					'paid_flag'=>1
+				);
+			}
+			else
+			{
+				$data = array(
+					'status_flag'=>1,
+					'paid_flag'=>0,
+				);
+			}
+			
 			$this->db->where('id',$id);
-			$this->db->update($this->tablename,array('status_flag'=>1));
+			$this->db->update($this->tablename,$data);
 			$this->db->where('order_id',$id);
 			$this->db->update($this->detail_tablename,array('status_flag'=>1));
 			if($this->db->trans_status() === FALSE)
@@ -503,5 +519,21 @@ class Order extends CI_Model{
 		$this->db->where('id',$id);
 		$data = array('del_flag'=> 1);
 		$this->db->update($this->tablename,$data);
+	}
+	
+	public function bank_paid($id,$flag)
+	{
+		$this->db->trans_begin();
+		$this->db->where('id',$id);
+		$this->db->update($this->tablename,array('paid_flag' => $flag));
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return show_error('faild update');
+		}
+		else
+		{
+			$this->db->trans_commit();
+		}
 	}
 }

@@ -21,6 +21,7 @@ class Admin_order extends CI_Controller{
 		$this->load->model('Master_area');
 		$this->load->model('Master_payment');
 		$this->load->model('Credit');
+		$this->load->model('Mst_paid_flag');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
@@ -111,9 +112,9 @@ class Admin_order extends CI_Controller{
 		$deli_start = $this->input->post('deliver_start_date');
 		$deli_end = $this->input->post('deliver_end_date');
 		$no_deli_date = $this->input->post('no_deli_date');
-		//受付中にチェック
+		//初期　受付中にチェック
 		if(!$status_arr) $status_arr=array(
-			'0',
+			'99',
 		);
 		$form_data = array(
 			'order_number'=>$order_number,
@@ -143,6 +144,7 @@ class Admin_order extends CI_Controller{
 			,o.cource_code
 			,o.payment
 			,o.status_flag as status_flag
+			,o.paid_flag as paid_flag
 			,o.delivery_charge
 			,o.shipped_date
 			,o.total_price
@@ -202,6 +204,10 @@ class Admin_order extends CI_Controller{
 
 		}
 		$this->db->where($date_where);
+		/*
+		$result = $this->db->get()->result();
+		$this->data['result'] = $result;
+		*/
 		//検索処理
 		if($this->input->post('submit'))
 		{
@@ -221,14 +227,46 @@ class Admin_order extends CI_Controller{
 				//発注済みにするorderIDのリスト
 				$orderIds = $this->input->post('ordered');
 				$this->db->where_in('o.id',$orderIds);
-				$result = $this->db->get()->result_array();
+				$headers = array(
+					'オーダーID',
+					'オーダーNO',
+					'受注日時',
+					'店舗コード',
+					'住所',
+					'コースコード',
+					'お支払方法',
+					'状態フラグ',
+					'入金状態',
+					'配送料',
+					'配達日',
+					'合計金額(税抜)',
+					'消費税',
+					'商品オーダーID',
+					'オーダーID',
+					'商品コード',
+					'枝番',
+					'商品価格',
+					'数量',
+					'商品状態フラグ',
+					'商品配達日',
+					'商品配達時間',
+					'顧客コード',
+					'顧客名',
+					'商品名',
+					'コース名'
+				);
+					
+				$pre_result = $this->db->get()->result_array();
+				$result = $pre_result;
+				array_unshift($pre_result,$headers);
+				$csv_arr = $pre_result;
 				$csv = '';
 				$downloadCsvDir = 'download_csv/';
 				$filename = 'order' . date('Y-m-d-H-i-s') . '.csv';
 				$makeCsvFilename = $downloadCsvDir . $filename;
 				//ファイル名にディレクトリを含めるとダウンロードされるときファイル名に変換される
 				$this->load->library('csv');
-				$this->csv->setData($result);
+				$this->csv->setData($csv_arr);
 				$this->csv->getCsvMs($makeCsvFilename);
 				////受付中は受付澄みにする
 				foreach($result as $item)
@@ -247,12 +285,13 @@ class Admin_order extends CI_Controller{
 						}
 					}
 				}
-				
 				header('Content-Type: application/octet-stream');
-				header('Content-Disposition: attachment; filename=' . $filename);
-				$this->csv->getCsvMs('php://output');
+				header('Content-Disposition: attachment; filename=' . $downloadCsvDir.$filename);
+				header('Content-Transfer-Encoding: binary');
+				header('Content-Length: ' . filesize($downloadCsvDir . $filename));
+				//$this->csv->getCsvMs('php://output');
+				readfile($downloadCsvDir.$filename);
 				exit();
-				//return redirect('admin_order/list_order');
 		}
 		
 		//受付済み登録
@@ -388,6 +427,7 @@ class Admin_order extends CI_Controller{
 		}
 		$this->data['shops'] = $this->Master_area->list_area;
 		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['paid_flags'] = $this->Mst_paid_flag->paid_flags;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_order/list_order',$this->data);
 	}
@@ -399,7 +439,8 @@ class Admin_order extends CI_Controller{
 		$order_number = $this->uri->segment(3);
 		$this->data['result'] = $this->Order->get_by_order_number($order_number);
 		$this->load->view('admin_order/detail_order.php',$this->data);
-	}	
+	}
+	
 	
 	public function edit_order()
 	{
@@ -485,5 +526,21 @@ class Admin_order extends CI_Controller{
 		}
 		$this->data['success_message'] = $this->session->flashdata('success');	
 		$this->load->view('admin_order/list_payment',$this->data);
+	}
+	
+	public function change_paid()
+	{
+		$id = $this->uri->segment(3);
+		$param = $this->uri->segment(4);
+		$this->data['param'] = $param;
+		if($this->input->post('submit'))
+		{
+			$paid_flag = $this->input->post('paid');
+			$this->Order->bank_paid((int)$id,(int)$paid_flag);
+			$this->session->set_flashdata('success','登録しました');
+			return redirect("admin_order/change_paid/{$id}/{$paid_flag}");
+		}
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->load->view('admin_order/change_paid',$this->data);
 	}
 }

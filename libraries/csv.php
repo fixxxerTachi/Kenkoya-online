@@ -1,7 +1,7 @@
 <?php
 class Csv
 {
-	public $data;
+    public $data;
     function setData($data) {
         $this->data = $data;
     }

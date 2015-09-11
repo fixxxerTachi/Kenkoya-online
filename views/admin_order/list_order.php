@@ -1,11 +1,13 @@
 <?php include __DIR__ . '/../templates/meta.php' ?>
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
 <link href="<?php echo base_url() ?>css/admin_order.css" rel="stylesheet">
+<link href="<?php echo base_url() ?>css/remodal.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
 <script src="<?php echo base_url('js/calender.js')?>"></script>
 <script src="<?php echo base_url('js/alert.js') ?>"></script>
+<script src="<?php echo base_url('js/remodal.js') ?>"></script>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
 <div id="container">
@@ -61,6 +63,7 @@
 						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
 						<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
 						<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
+						<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックを外す</a></td>
 					</table>
 				</tr>
 				</table>
@@ -71,12 +74,12 @@
 					<?Php $count = count($result);?>
 				<table>
 					<tr class='base_info_header'>
-						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th>
+						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th></th>
 					</tr><tr class='base_info_header'>
-						<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>状態</th><th>変更</th><th>状態変更</th>
+						<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>入金</th><th>状態</th><th>変更</th><th>状態変更</th>
 					</tr>
 					<tr class='product_info_header'>
-						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th>
+						<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th>
 					</tr>
 					<?php for($i=0;$i < $count; $i++): ?>
 						<?php $create_date = new DateTime($result[$i]->create_date);?>
@@ -91,24 +94,41 @@
 						<td><?php echo $result[$i]->customer_code ?></td>
 						<td><?php echo $result[$i]->name ?></td>
 						<td><?php echo $result[$i]->address ?></td>
-					</tr><tr class='base_info'>
+						<td></td>
+					</tr>
+					<tr class='base_info'>
 						<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->total_price + $result[$i]->delivery_charge) ?>円</td>
 						<td><?php echo number_format($result[$i]->tax) ?>円</td>
-						<td><?php echo $payments[$result[$i]->payment]->method_name ?> <?php if($result[$i]->payment == PAYMENT_CREDIT) echo '(' . $credit->get_statuses()[$credit->search_trade($result[$i]->order_number)->status] . ')'; ?></td>
+						<td>
+							<?php echo $payments[$result[$i]->payment]->method_name ?>
+							<?php if($result[$i]->payment == PAYMENT_BANK):?>
+							<a class='edit' target='_blank' onclick="javascript:window.open('<?php echo site_url("admin_order/change_paid/{$result[$i]->orderId}/{$result[$i]->paid_flag}")?>','','width=400,height=200,toolbar=no')">入金確認</a>
+							<?php endif;?>
+						</td>
+						<td>
+							<?php if($result[$i]->payment == PAYMENT_CREDIT) echo $credit->get_statuses()[$credit->search_trade($result[$i]->order_number)->status]; ?>
+							<?php if($result[$i]->payment == PAYMENT_BANK): ?>
+								<?php if($result[$i]->paid_flag == NOPAID): ?><span style='color:orange;'><?php echo $paid_flags[$result[$i]->paid_flag] ?></span><?php endif;?>
+								<?php if($result[$i]->paid_flag == PAID): ?><span><?php echo $paid_flags[$result[$i]->paid_flag] ?></span><?php endif;?>
+							<?php endif;?>
+						</td>
 						<td><?php echo $order_status[$result[$i]->status_flag] ?></td>
 						<td><a class='edit' href='<?php echo base_url("/admin_order/edit_order/{$result[$i]->orderId}") ?>'>変更</a></td>
 						<td>
 					<?php if($result[$i]->status_flag == NOORDER):?>
-							<input type='checkbox' name='recieved[]' id='recieved_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked'>
+							<input type='checkbox' name='recieved[]' id='recieved_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked' class='ckbox'>
 							<label for='recieved_<?php echo $result[$i]->orderId ?>'>受付済みにする</label>
 					<?php endif;?>
 					<?php if($result[$i]->status_flag == RECIEVED):?>
-							<input type='checkbox' name='ordered[]' id='ordered_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked'>
+						<?php //銀行振込で未入金は表示しない ?>
+						<?php if($result[$i]->paid_flag != NOPAID):?>
+							<input type='checkbox' name='ordered[]' id='ordered_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' checked='checked' class='ckbox'>
 							<label for='ordered_<?php echo $result[$i]->orderId ?>'>発注済みにする</label>
+						<?php endif;?>
 					<?php endif;?>
 					<?php if($result[$i]->status_flag == ORDERED):?>
-							<input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>'>
+							<input type='checkbox' name='shipped[]' id='shipped_<?php echo $result[$i]->orderId ?>' value='<?php echo $result[$i]->orderId ?>' class='ckbox'>
 							<label for='shipped_<?php echo $result[$i]->orderId ?>'>出荷済みにする</label>
 					<?php endif;?>
 					<?php if($result[$i]->status_flag == DELIVERED):?>
@@ -117,7 +137,7 @@
 					<?php endif;?>
 							</td>
 					</tr>
-						<?php endif;?>
+					<?php endif;?>
 					<tr class='product_info'>
 						<td><?php echo $result[$i]->product_code ?></td>
 						<td><?php echo $result[$i]->branch_code ?></td>
@@ -126,11 +146,12 @@
 						<td><?php echo $result[$i]->sale_price ?>円</td>
 						<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
 						<td></td>
+						<td></td>
 					</tr>
 					<?php endfor;?>
 				</table>
 				<?php else: ?>
-					<p>登録されていません</p>
+					<p></p>
 				<?php endif; ?>
 			</form>
 		</div>
@@ -138,4 +159,22 @@
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
+<script>
+var button = $('#remove_check');
+var items = $('.ckbox');
+button.on('click',function(){
+	if(button.hasClass('checked'))
+	{
+		items.prop({'checked':true});
+		button.removeClass('checked');
+		button.text('全てのチェックを外す');
+	}
+	else
+	{
+		items.prop({'checked':false});
+		button.addClass('checked');
+		button.text('全てのチェックを付ける');
+	}
+});
+</script>
 </html>

@@ -38,6 +38,7 @@ class Mypage extends CI_Controller{
 		$this->load->model('Master_payment');
 		$this->load->model('Bread');
 		$this->load->model('Master_address');
+		$this->load->model('Mst_paid_flag');
 		$this->data['customer'] = $this->session->userdata('customer');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
@@ -412,6 +413,8 @@ class Mypage extends CI_Controller{
 		for($i=0; $i < $count; $i++){
 			$orders[$i]->details = $this->Order->get_detail_by_order_id($orders[$i]->id);
 		}
+
+		$this->data['paid_flags'] = $this->Mst_paid_flag->array_lists();
 		$this->data['orders'] = $orders;
 		$this->data['form_data'] = $form_data;
 		$this->data['order_status'] = $this->Master_order_status->order_status;

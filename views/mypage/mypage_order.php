@@ -46,6 +46,9 @@
 							<td rowspan='<?php echo $count ?>'>
 								<ul>
 									<li><?php echo $order_status[$order->status_flag] ?></li>
+								<?php if($order->payment == PAYMENT_BANK): //銀行振込の場合入金情報を表示 ?>
+									<li><?php echo $paid_flags[$order->paid_flag] ?></li>
+								<?php endif;?>
 							<?php if($order->status_flag == NOORDER): //受付中はキャンセルボタン表示 ?>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/cancel/{$order->id}/") ?>'>注文キャンセル</a></li>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>

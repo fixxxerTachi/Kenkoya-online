@@ -1,21 +1,4 @@
 <?php
-/*
-class Master_payment{
-	public $method;
-	public $text;
-	
-	public function __construct()
-	{
-		$this->method = array(
-			1 => 'クレジットカード',
-			//'convini'=> 'コンビニエンスストア',
-			2=> '銀行振込',
-			3=>'代引引換',
-			4=>'ご登録口座からの引落し',
-		);
-	}
-}
-*/
 
 class Master_payment extends CI_Model{
 	public $tablename;

@@ -59,9 +59,48 @@ define('TEMP_ICE',4);
 //最大梱包重量
 define('MAX_WEIGHT',15000);
 
+/* 重量サンプル　*/
+define('SAMPLE_VOLUME',4551050);
+define('SAMPLE_WEIGHT',461);
 //温度帯
 //define('NORMAL',1);
 //define('COLD',2);
 //define('FREEZE',3);
 //define('ICE',4);
+
+/*　商品状態 */
+define('ONSALE',1);
+define('DISCON',0);
+
+/* 商品の受注状態 */
+define('NOORDER',0);
+define('RECIEVED',1);
+define('CANCELED',2);
+define('ORDERED',3);
+define('DELIVERED',4);
+
+/* 入金　*/
+define('NOPAID',0);
+define('PAID',1);
+
+/*PATH*/
+define('IMAGE_PATH','products/');
+define('PRODUCT_IMAGE_PATH','images/products/');
+define('ICON_PATH','icon/');
+define('AD_IMAGE_PATH','images/advertise/');
+define('DELIVERY_IMAGE_PATH','images/delivery/');
+define('MAINVISUAL_IMAGE_PATH','images/mainvisual/');
+define('BANNER_IMAGE_PATH','images/banner/');
+define('INFORMATION_IMAGE_PATH','images/information/');
+define('AD_PRODUCT_IMAGE_PATH','images/ad_products/');
+
+/*MAIL*/
+define('ORDER_TEMPLATE_FOR_USER',3);
+define('ORDER_TEMPLATE_FOR_ADMIN',4);
+define('ACCOUNT_CHANGE_FOR_USER',5);
+define('ACCOUNT_CHANGE_FOR_ADMIN',6);
+define('QUESTION_FOR_USER',1);
+define('QUESTION_FOR_ADMIN',2);
+define('ORDER_CHANGE_FOR_USER',7);
+define('ORDER_CHANGE_FOR_ADMIN',8);
 
