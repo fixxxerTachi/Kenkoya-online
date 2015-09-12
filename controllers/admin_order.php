@@ -108,14 +108,17 @@ class Admin_order extends CI_Controller{
 		$customer_name = $this->input->post('customer_name');
 		$start = $this->input->post('start_date');
 		$end = $this->input->post('end_date');
-		$status_arr = $this->input->post('status');
 		$deli_start = $this->input->post('deliver_start_date');
 		$deli_end = $this->input->post('deliver_end_date');
 		$no_deli_date = $this->input->post('no_deli_date');
-		//初期　受付中にチェック
-		if(!$status_arr) $status_arr=array(
-			'99',
-		);
+		if($this->input->post('status'))
+		{
+			$status_arr = $this->input->post('status') ?: array('99',);
+		}
+		else
+		{
+			$status_arr = $this->uri->segment(3) ? unserialize(urldecode($this->uri->segment(3))) : array('99',);
+		}
 		$form_data = array(
 			'order_number'=>$order_number,
 			'customer_code'=>$customer_code,
@@ -290,6 +293,7 @@ class Admin_order extends CI_Controller{
 				header('Content-Transfer-Encoding: binary');
 				header('Content-Length: ' . filesize($downloadCsvDir . $filename));
 				//$this->csv->getCsvMs('php://output');
+				ob_clean();
 				readfile($downloadCsvDir.$filename);
 				exit();
 		}
@@ -300,9 +304,10 @@ class Admin_order extends CI_Controller{
 			$result = $this->db->get()->result();
 			$this->data['result'] = $result;
 			$ids = $this->input->post('recieved');
+			$status_arr = urlencode(serialize($this->input->post('status')));
 			$message = $this->Order->change_recieved($ids);
 			$this->session->set_flashdata('success','更新しました');
-			return redirect('admin_order/list_order');
+			return redirect("admin_order/list_order/{$status_arr}");
 		}
 		
 		//出荷済み登録

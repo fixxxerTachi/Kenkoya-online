@@ -23,6 +23,7 @@
 				<?php if(!empty($error_message)):?>
 				<p class='error'><?php echo $error_message ?></p>
 				<?php endif; ?>
+			<div id='talbe_menu'>
 				<?php echo form_open() ?>
 				<table class='detail'>
 				<tr>
@@ -67,6 +68,8 @@
 					</table>
 				</tr>
 				</table>
+			</div>
+			<div id='product_list'>
 				<?php if(!empty($result)): ?>
 				<!--
 				<p>売上高:<?php echo number_format($total_price) ?>円</p>
@@ -154,11 +157,23 @@
 					<p></p>
 				<?php endif; ?>
 			</form>
+			</div>
 		</div>
 	</div>
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
+<style type='text/css'>
+/*
+#talbe_menu{
+	position: fixed;
+	background: #fff;
+}
+#product_list{
+	margin-top: 300px;
+}
+*/
+</style>
 <script>
 var button = $('#remove_check');
 var items = $('.ckbox');
