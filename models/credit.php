@@ -86,7 +86,7 @@ class Credit extends CI_Model{
 			}
 			foreach($errorList as $errorInfo)
 			{
-				$message = $errorHandle->getMessage($errorInfo->getErrInfo()).'('.$errorInfo->getErrInfo().')';
+				$message = 'credit: '. $this->order_id . ' ' . $errorHandle->getMessage($errorInfo->getErrInfo()).'('.$errorInfo->getErrInfo().')';
 //var_dump($this->expire);var_dump($errorInfo->getErrInfo());exit;
 				$classname =  $this->router->fetch_class();
 				$methodname = $this->router->fetch_method();
@@ -111,7 +111,7 @@ class Credit extends CI_Model{
 		}
 		$message = array();
 		foreach($errorList as $errorInfo){
-			$message[] = $errorHandle->getMessage($errorInfo->getErrInfo());
+			$message[] = $errorHandle->getMessage($errorInfo->getErrInfo()) . '(' . $errorInfo->getErrInfo() . ')';
 		}
 		return $message;
 	}
@@ -139,7 +139,7 @@ class Credit extends CI_Model{
 				$errorList = $output->getErrList();
 				foreach($errorList as $errorInfo)
 				{
-					$message = $errorHandle->getMessage($errorInfo->getErrInfo());
+					$message = 'credit: '. $order_number . ' ' . $errorHandle->getMessage($errorInfo->getErrInfo());
 					$classname = $this->router->fetch_class();
 					$methodname = $this->router->fetch_method();
 					log_message('error',$message . ':' . $classname . ':' . $methodname . ':' . __LINE__);
@@ -177,7 +177,7 @@ class Credit extends CI_Model{
 				$errorList = $output->getErrList();
 				foreach($errorList as $errorInfo)
 				{
-					$message = $errorHandle->getMessage($errorInfo->getErrInfo());
+					$message = 'credit: '. $order_number . ' ' . $errorHandle->getMessage($errorInfo->getErrInfo());
 					$classname = $this->router->fetch_class();
 					$methodname = $this->router->fetch_method();
 					log_message('error',$message . ':' . $classname . ':' . $methodname . ':' . __LINE__);
@@ -218,7 +218,7 @@ class Credit extends CI_Model{
 				$errorList = $result->getErrList();
 				foreach($errorList as $errorInfo)
 				{
-					$message = $errorHandle->getMessage($errorInfo->getErrInfo());
+					$message = 'credit: '. $order_number . ' ' . $errorHandle->getMessage($errorInfo->getErrInfo());
 					$classname = $this->router->fetch_class();
 					$methodname = $this->router->fetch_method();
 					log_message('error',$message . ':' . $classname . ':' . $methodname . ':' . __LINE__);

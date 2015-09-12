@@ -603,3 +603,491 @@ ERROR - 2015-09-12 12:08:01 --> Severity: 8192  --> Function split() is deprecat
 ERROR - 2015-09-12 12:08:01 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
 ERROR - 2015-09-12 12:08:01 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
 ERROR - 2015-09-12 12:08:01 --> 404 Page Not Found --> css
+DEBUG - 2015-09-12 14:11:22 --> Config Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Hooks Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Utf8 Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> UTF-8 Support Enabled
+DEBUG - 2015-09-12 14:11:22 --> URI Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Router Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Output Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Security Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Input Class Initialized
+DEBUG - 2015-09-12 14:11:22 --> Global POST and COOKIE data sanitized
+DEBUG - 2015-09-12 14:11:22 --> Language Class Initialized
+DEBUG - 2015-09-12 14:11:23 --> Config Class Initialized
+DEBUG - 2015-09-12 14:11:23 --> Hooks Class Initialized
+DEBUG - 2015-09-12 14:11:23 --> Utf8 Class Initialized
+DEBUG - 2015-09-12 14:11:23 --> UTF-8 Support Enabled
+DEBUG - 2015-09-12 14:11:23 --> URI Class Initialized
+DEBUG - 2015-09-12 14:11:23 --> Router Class Initialized
+ERROR - 2015-09-12 14:11:23 --> 404 Page Not Found --> favicon.ico
+DEBUG - 2015-09-12 14:12:00 --> Config Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Hooks Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Utf8 Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> UTF-8 Support Enabled
+DEBUG - 2015-09-12 14:12:00 --> URI Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Router Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Output Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Security Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Input Class Initialized
+DEBUG - 2015-09-12 14:12:00 --> Global POST and COOKIE data sanitized
+DEBUG - 2015-09-12 14:12:00 --> Language Class Initialized
+ERROR - 2015-09-12 14:14:43 --> test_error/index/37
+ERROR - 2015-09-12 14:18:23 --> error_message:test_error/index/37line
+ERROR - 2015-09-12 14:20:50 --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:20:50 --> 404 Page Not Found --> みつかりません
+ERROR - 2015-09-12 14:21:10 --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:21:10 --> 404 Page Not Found --> みつかりません
+ERROR - 2015-09-12 14:21:44 --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:21:44 --> 404 Page Not Found --> みつかりません
+ERROR - 2015-09-12 14:22:42 --> 404 Page Not Found --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:26:08 --> 404 Page Not Found --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:26:43 --> 404 Page Not Found --> error_message:test_error/index/36line
+ERROR - 2015-09-12 14:26:44 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 14:33:46 --> 404 Page Not Found --> test_exception
+ERROR - 2015-09-12 14:36:32 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 14:36:44 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 14:43:05 --> Severity: Notice  --> Undefined property: Test_error::$metdname D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\controllers\test_error.php 49
+ERROR - 2015-09-12 14:43:05 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:11:31 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:11:32 --> カード番号が最大文字数を超えています。(E01170003):test_error:test_gmo:93
+ERROR - 2015-09-12 15:11:32 --> カード番号が10桁～16桁の範囲ではありません。(E01170011):test_error:test_gmo:93
+ERROR - 2015-09-12 15:11:32 --> エラーコード表をご確認ください。(E01460008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:16:56 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:17:47 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:26 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:19:44 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:29 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:20:32 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:33 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:20:33 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:11 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:28:12 --> Severity: Notice  --> Undefined variable: errorHandole D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\models\credit.php 114
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:28:43 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:44 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:28:44 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:29:25 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:26 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:29:26 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:35:07 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:08 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:35:08 --> 既にオーダーIDが存在しています。(E01040010):test_error:test_gmo:93
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:39:10 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:11 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:39:11 --> カード番号が最大文字数を超えています。(E01170003):test_error:test_gmo:93
+ERROR - 2015-09-12 15:39:11 --> カード番号が10桁～16桁の範囲ではありません。(E01170011):test_error:test_gmo:93
+ERROR - 2015-09-12 15:39:11 --> エラーコード表をご確認ください。(E01460008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:44:18 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:19 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:44:19 --> credit: 809800805 カード番号が最大文字数を超えています。(E01170003):test_error:test_gmo:93
+ERROR - 2015-09-12 15:44:19 --> credit: 809800805 カード番号が10桁～16桁の範囲ではありません。(E01170011):test_error:test_gmo:93
+ERROR - 2015-09-12 15:44:19 --> credit: 809800805 エラーコード表をご確認ください。(E01460008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:46:46 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:47 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:46:47 --> credit: 809800809 カード番号が最大文字数を超えています。(E01170003):test_error:test_gmo:93
+ERROR - 2015-09-12 15:46:47 --> credit: 809800809 カード番号が10桁～16桁の範囲ではありません。(E01170011):test_error:test_gmo:93
+ERROR - 2015-09-12 15:46:47 --> credit: 809800809 セキュリティーコードの書式が正しくありませ。(E01460008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: Notice  --> Use of undefined constant PGCARD_SHOP_ID - assumed 'PGCARD_SHOP_ID' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\models\credit.php 50
+ERROR - 2015-09-12 15:56:55 --> Severity: Notice  --> Use of undefined constant PGCARD_SHOP_PASS - assumed 'PGCARD_SHOP_PASS' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\models\credit.php 51
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\ConnectUrlMap.php 56
+ERROR - 2015-09-12 15:56:55 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:56 --> Severity: 8192  --> Function split() is deprecated D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo\com\gmo_pg\client\common\Log.php 76
+ERROR - 2015-09-12 15:56:56 --> credit: 809800809 入力内容に誤りがあります。(E01010008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:56:56 --> credit: 809800809 入力内容に誤りがあります。(E01020008):test_error:test_gmo:93
+ERROR - 2015-09-12 15:56:56 --> credit: 809800809 指定されたIDとパスワードのショップが存在しません。(E01030002):test_error:test_gmo:93
+ERROR - 2015-09-12 16:10:53 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:11:28 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:11:32 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:11:55 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:11:55 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 16:12:55 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:13:48 --> 404 Page Not Found --> fafd
+ERROR - 2015-09-12 16:14:11 --> 404 Page Not Found --> hoge
+ERROR - 2015-09-12 16:18:54 --> 404 Page Not Found --> FDSAF
+ERROR - 2015-09-12 16:18:54 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 30
+ERROR - 2015-09-12 16:19:11 --> 404 Page Not Found --> SITE_URL
+ERROR - 2015-09-12 16:19:11 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 30
+ERROR - 2015-09-12 16:19:14 --> 404 Page Not Found --> SITE_URL
+ERROR - 2015-09-12 16:19:14 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 30
+ERROR - 2015-09-12 16:20:32 --> 404 Page Not Found --> FDSAF
+ERROR - 2015-09-12 16:20:32 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:32 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:32 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:20:36 --> 404 Page Not Found --> FDSAF
+ERROR - 2015-09-12 16:20:36 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:36 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:36 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:20:47 --> 404 Page Not Found --> FDSAF
+ERROR - 2015-09-12 16:20:47 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:47 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:20:47 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:21:12 --> 404 Page Not Found --> FDSAF
+ERROR - 2015-09-12 16:21:12 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:21:12 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:21:39 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:21:39 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:21:39 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:21:39 --> Severity: Notice  --> Use of undefined constant SITE_URL - assumed 'SITE_URL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:24:15 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:24:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:24:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:24:15 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:24:36 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:24:36 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:24:36 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:24:36 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:25:04 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:25:04 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:25:04 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:25:04 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:27:15 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:27:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:27:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:27:15 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:27:15 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 32
+ERROR - 2015-09-12 16:27:38 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:27:38 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:27:38 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:27:38 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:28:05 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:28:05 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:28:05 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:28:05 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:28:24 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:28:24 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:28:24 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:28:24 --> Severity: Notice  --> Use of undefined constant SITEURL - assumed 'SITEURL' D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 31
+ERROR - 2015-09-12 16:28:53 --> 404 Page Not Found --> HOGEJ
+ERROR - 2015-09-12 16:28:53 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:28:53 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:52 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:35:52 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:53 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:35:53 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:53 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:53 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:53 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:35:53 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:35:53 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:01 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:02 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:36:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:02 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:36:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:41 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:36:41 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:41 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:41 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:36:41 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:41 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:36:42 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:37 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:37:37 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:37 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:37:38 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:39:34 --> 404 Page Not Found --> test_
+ERROR - 2015-09-12 16:39:34 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:39:34 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:06 --> 404 Page Not Found --> test_
+ERROR - 2015-09-12 16:47:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:12 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:47:12 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:12 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:13 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:47:13 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:13 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:13 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:47:13 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:13 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:15 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:16 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:47:16 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:47:16 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:01 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:48:01 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:01 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:02 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> 404 Page Not Found --> test_error/css
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:06 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:07 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:48:07 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:07 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:10 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:48:10 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:10 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:10 --> 404 Page Not Found --> favicon.ico
+ERROR - 2015-09-12 16:48:10 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:10 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:25 --> 404 Page Not Found --> test_erro
+ERROR - 2015-09-12 16:48:25 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:25 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:28 --> 404 Page Not Found --> test_erro
+ERROR - 2015-09-12 16:48:28 --> Severity: Warning  --> include(D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php): failed to open stream: No such file or directory D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:48:28 --> Severity: Warning  --> include(): Failed opening 'D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors/../config/define.php' for inclusion (include_path='.;D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\libraries\gmo;D:\TACHIBANA\xampp2\php\pear') D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 1
+ERROR - 2015-09-12 16:54:01 --> 404 Page Not Found --> test_erro
+ERROR - 2015-09-12 16:54:01 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 16:54:06 --> 404 Page Not Found --> test_erro
+ERROR - 2015-09-12 16:54:06 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 16:54:12 --> 404 Page Not Found --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:54:12 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 16:54:12 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:54:12 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 16:58:55 --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:58:55 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_general.php 11
+ERROR - 2015-09-12 16:58:56 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:58:56 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 16:59:58 --> error_message:test_error/index/37line
+ERROR - 2015-09-12 16:59:58 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_general.php 11
+ERROR - 2015-09-12 16:59:59 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 16:59:59 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11
+ERROR - 2015-09-12 17:00:12 --> error_message:test_error/index/37line
+ERROR - 2015-09-12 17:00:12 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_general.php 11
+ERROR - 2015-09-12 17:00:13 --> 404 Page Not Found --> test_error/images
+ERROR - 2015-09-12 17:00:13 --> Severity: Notice  --> Undefined variable: ite_url D:\TACHIBANA\xampp2\www\CodeIgniter_2.2.0\application_admin\errors\error_404.php 11

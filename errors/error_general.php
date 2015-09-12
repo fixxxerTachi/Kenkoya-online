@@ -1,62 +1,37 @@
+<?php $site_url = "https://sixcore.localhost.com/";?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-<title>Error</title>
-<style type="text/css">
-
-::selection{ background-color: #E13300; color: white; }
-::moz-selection{ background-color: #E13300; color: white; }
-::webkit-selection{ background-color: #E13300; color: white; }
-
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
-
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	-webkit-box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="robots" content="noarchive">
+	<title>宅配スーパー健康屋 | メンテナンス</title>
+	<link rel='stylesheet' href='<?php echo $site_url . 'css/main.css' ?>'>
+	<link rel='stylesheet' href='<?php echo $site_url . 'css/maintenance.css'?>'>
+	<link rel="shortcut icon" href="<?php echo $ite_url . 'images/icon/favicon.ico' ?>" >
 </head>
 <body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+<div id = 'header-wrapper'>
+	<div id='header-inner-wrapper'>
+		<div id='header' class='clearfix'>
+			<div id='logo'><img src='<?php echo $site_url . "images/kenkoya_logo.jpg' width='248' height='101' alt='宅配スーパー健康屋'" ?>'></div>
+			<h1>幸福と健康をお届けする宅配ス―パー健康屋</h1>
+			<div id='tel'><img src='<?php echo $site_url . "images/tel.jpg' alt='0120-383-333'" ?>'></div>
+		</div>
 	</div>
+</div>
+<div id="container">
+	<div id="content">
+		<h2>お探しのページがみつかりませんでした。</h2>
+		<div class='content-inner'>
+			<p>お探しのページは一時的にアクセスできない状況にあるか、問題が発生したため表示できません。</p>
+			<?php if(isset($message)):?><p style='color:orange'>エラーメッセージ: <?php echo $message;?></p><?php endif;?>
+			<p></p>
+			<p>お手数ではございますがトップページから再度アクセスして下さい。</p>
+			<p></p>
+			<p id='back_top'><a href='<?php echo $site_url ?>'>トップページに戻る</a></p>
+		</div>
+	</div>
+</div>
 </body>
 </html>
