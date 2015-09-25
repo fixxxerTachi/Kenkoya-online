@@ -48,11 +48,12 @@ class Banner extends CI_Model{
 	{
 		$this->db->insert($this->tablename, $data);
 	}
+	
 	public function get_by_id($id=null)
 	{
 		$this->db->where('id',$id);
 		$query = $this->db->get($this->tablename);
-		$result =  $query->result();
+		$result =  $query->row();
 		return $result;
 	}
 	

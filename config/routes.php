@@ -37,10 +37,52 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+/* front_area */
+$route['area/check_area/:any'] = 'front_area/check_area';
+$route['area/search_area'] = 'front_area/search_area';
+/* front_customer */
+$route['customer/show_policy'] = 'front_customer/show_policy';
+$route['customer/show_policy/:any'] = 'front_customer/show_policy';
+$route['customer/confirm_customer'] = 'front_customer/confirm_customer';
+$route['customer/confirm_customer/:any'] = 'front_customer/confirm_customer';
+$route['customer/complete_register'] = 'front_customer/complete_register';
+$route['customer/login_action'] = 'front_customer/login_action';
+$route['customer/login_action/:any'] = 'front_customer/login_action';
+$route['customer/set_username'] = 'front_customer/set_username';
+$route['customer/notice/:any'] = 'front_customer/notice';
+$route['customer/reset_password'] = 'front_customer/reset_password';
+$route['customer/set_password'] = 'front_customer/set_password';
+$route['customer/renew_user'] = 'front_customer/renew_user';
+/* front_cart */
+$route['cart/show_cart'] = 'front_cart/show_cart';
+$route['cart/empty_cart'] = 'front_cart/empty_cart';
+$route['cart/change_quantity/:num'] ='front_cart/change_quantity';
+$route['cart/change_quantity/:num/:any'] = 'front_cart/change_quantity';
+$route['cart/delete_item/:num'] = 'front_cart/delete_item';
+$route['cart/delete_item/:num/:any'] = 'front_cart/delete_item';
+/* front_advertise */
+$route['yotsuba'] = 'front_advertise/index';
+$route['yotsuba/detail_advertise/:any'] = 'front_advertise/detail_advertise';
+/* front_order */
+$route['order/delivery_info'] = 'front_order/delivery_info';
+$route['order/input_payment'] = 'front_order/input_payment';
+$route['order/confirm_order'] = 'front_order/confirm_order';
+$route['order/complete'] = 'front_order/complete';
+$route['order/order_process'] = 'front_order/order_process';
+$route['order/complete'] = 'front_order/complete';
+/*front_contact*/
+$route['contact'] = 'front_contact/index';
+$route['contact/contact'] = 'front_contact/contact';
+$route['contact/confirm_contact'] = 'front_contact/confirm_contact';
+$route['contact/complete'] = 'front_contact/complete';
+/*qustion*/
+$route['question'] = 'front_question';
+$route['question/index/:num'] = 'front_question/index';
+$route['question/detail/:num'] = 'front_question/detail';
 
 $route['default_controller'] = "index";
 $route['404_override'] = '';
-
+$route['customer/add_customer'] = 'front_customer/add_customer';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -38,7 +38,7 @@
 						<th>質問内容 <span class='logo_pink'>必須</span></th><td><textarea name='content' rows='10' cols='100' id='content'><?php echo $form_data->content ?></textarea></td>
 					</tr>
 					<tr>
-						<td class='no-border'></td><td><input type='submit' name='submit' id='submit_button' value='入力内容を確認する'><a class='edit_back' href='<?php echo base_url('front_contact/index') ?>'>戻る</a></td>
+						<td class='no-border'></td><td><input type='submit' name='submit' id='submit_button' value='入力内容を確認する'><a class='edit_back' href='<?php echo site_url('contact') ?>'>戻る</a></td>
 					</tr>
 				</form>
 			</table>

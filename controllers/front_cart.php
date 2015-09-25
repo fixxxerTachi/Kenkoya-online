@@ -41,40 +41,38 @@ class Front_cart extends CI_Controller{
 	
 	public function input_cart()
 	{
-		if($this->input->post('submit'))
+		try
 		{
-			$carts=array();
-			reset($carts);
-			if($this->session->userdata('carts')){
-				$carts = $this->session->userdata('carts');
-			}
-			$product_id = $this->input->post('product_id');
-			$sale_price = $this->input->post('sale_price');
-			$ad_id = $this->input->post('advertise_id');
-			$qt = $this->input->post('quantity');
-			$product_code = $this->input->post('product_code');
-			$branch_code = $this->input->post('branch_code');
-			////カートに入る商品が販売可能商品かどうか,商品別販売可能期間かどうか
-			$this->load->model('Advertise_product');
-			if(!$this->Advertise_product->check_on_sale($product_id) || !$this->Advertise_product->validate_sale_period($product_id))
+			if($this->input->post('submit'))
 			{
-				$product = $this->Advertise_product->get_by_id($product_id);
-				$this->session->set_flashdata('success',"申し訳ございません。現在【{$product[0]->product_name}】はお取扱いしていない商品です");
-				return redirect(base_url('front_cart/show_cart'));
-			}
-			
-			$cart = $this->Cart;
-			$cart->product_id = $product_id;
-			$cart->advertise_id = $ad_id;
-			$cart->sale_price = $sale_price;
-			$cart->branch_code = $branch_code;
-			$cart->product_code = $product_code;
-			$cart->quantity = $qt;
-			//$form_data->quantity = $qt;
-			$carts[] = serialize($cart);
-			$this->session->set_userdata('carts',$carts);
-			$this->session->set_flashdata('success','カートに入れました');
-			return redirect(site_url('front_cart/show_cart'));
+				$carts=array();
+				reset($carts);
+				if($this->session->userdata('carts')){
+					$carts = $this->session->userdata('carts');
+				}
+				$product_id = $this->input->post('product_id');
+				$sale_price = $this->input->post('sale_price');
+				$ad_id = $this->input->post('advertise_id');
+				$qt = $this->input->post('quantity');
+				$product_code = $this->input->post('product_code');
+				$branch_code = $this->input->post('branch_code');
+				////カートに入る商品が販売可能商品かどうか,商品別販売可能期間かどうか
+				$result = $this->Advertise_product->validate_sale_target($product_id);
+				///最大サイズが範囲内かどうか
+				$result = $this->Advertise_product->validate_max_sale_size($product_id,$qt);
+				
+				$cart = $this->Cart;
+				$cart->product_id = $product_id;
+				$cart->advertise_id = $ad_id;
+				$cart->sale_price = $sale_price;
+				$cart->branch_code = $branch_code;
+				$cart->product_code = $product_code;
+				$cart->quantity = $qt;
+				//$form_data->quantity = $qt;
+				$carts[] = serialize($cart);
+				$this->session->set_userdata('carts',$carts);
+				$this->session->set_flashdata('success','カートに入れました');
+				return redirect(site_url('cart/show_cart'));
 				//ajaxで遷移してきたとき販売期間がいなどの商品が登録されるようなばあいエラーを表示させる
 				/*
 				if($this->input->is_ajax_request()){
@@ -83,6 +81,12 @@ class Front_cart extends CI_Controller{
 					$this->session->set_flashdata('success','カートに入れました');
 					return redirect(base_url('front_cart/show_cart'));
 				}*/
+			}
+		}
+		catch(Exception $e)
+		{
+			$this->session->set_flashdata('success',$e->getMessage());
+			return redirect(site_url('cart/show_cart'));
 		}
 	}
 	
@@ -91,9 +95,9 @@ class Front_cart extends CI_Controller{
 		if($this->session->userdata('carts')){
 			$this->session->unset_userdata('carts');
 			$this->session->set_flashdata('success','カートを空にしました');
-			return redirect(base_url('front_cart/show_cart'));
+			return redirect(base_url('cart/show_cart'));
 		}
-		return redirect(base_url('front_cart/show_cart'));
+		return redirect(base_url('cart/show_cart'));
 	}
 	
 	public function show_cart()
@@ -128,7 +132,7 @@ class Front_cart extends CI_Controller{
 		$carts = $this->session->userdata('carts');
 		if(empty($carts))
 		{
-			return redirect(site_url('front_cart/show_cart'));
+			return redirect(site_url('cart/show_cart'));
 		}
 		$item = unserialize($carts[$key]);
 		$product_result = $this->Advertise->get_product_by_id_with_product($item->product_id);
@@ -139,9 +143,9 @@ class Front_cart extends CI_Controller{
 			$this->session->set_userdata('carts',$carts);
 			$this->session->set_flashdata('success','数量を変更しました');
 			if($from == 'confirm'){
-				return redirect('front_order/confirm_order');
+				return redirect('order/confirm_order');
 			}
-			return redirect(site_url('front_cart/show_cart'));
+			return redirect(site_url('cart/show_cart'));
 		}
 		$this->data['quantity'] = $item->quantity;
 		$this->data['select_quantity'] = $this->Master_quantity->quantity;
@@ -160,9 +164,9 @@ class Front_cart extends CI_Controller{
 		$this->session->set_userdata('carts',$carts);
 		$this->session->set_flashdata('success','カートから削除しました');
 		if($from == 'confirm'){
-			return redirect('front_order/confirm_order');
+			return redirect('order/confirm_order');
 		}
-		return redirect(site_url('front_cart/show_cart'));
+		return redirect(site_url('cart/show_cart'));
 	}
 	
 	public function error_item()

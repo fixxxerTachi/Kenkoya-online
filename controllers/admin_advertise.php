@@ -541,6 +541,7 @@ class Admin_advertise extends CI_Controller{
 					'additive'=>$this->data['form_data']->additive,
 					'allergen'=>$this->data['form_data']->allergen,
 					'calorie'=>$this->data['form_data']->calorie,
+					'max_quantity'=>$this->data['form_data']->max_quantity,
 					'on_sale'=>$this->data['form_data']->on_sale,
 					'note'=>$this->data['form_data']->note,
 					'note1'=>$this->data['form_data']->note1,
@@ -1009,6 +1010,10 @@ class Admin_advertise extends CI_Controller{
 		$this->data['hour_list'] = $this->Master_hour->hour;
 		$this->data['h2title'] = 'バナー変更';
 		$id = $this->uri->segment(3);
+		if(!is_numeric($id))
+		{
+			return show_404();
+		}
 		$form_data = $this->Banner->get_by_id($id);
 		$this->data['form_data'] = $form_data;
 		$image_path = BANNER_IMAGE_PATH;

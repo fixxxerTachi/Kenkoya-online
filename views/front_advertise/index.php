@@ -16,7 +16,7 @@
 			<div class='ad_list clearfix'>
 	<?php foreach($result as $row):?>
 				<ul class='ad_left'>
-					<li><a href='<?php echo base_url("front_advertise/detail_advertise/{$row->id}") ?>'><img src='<?php echo base_url(AD_IMAGE_PATH . $row->image_name) ?>' width='300' height='210' alt='<?php echo $row->title ?>'></a></li>
+					<li><a href='<?php echo site_url("yotsuba/detail_advertise/{$row->id}") ?>'><img src='<?php echo base_url(AD_IMAGE_PATH . $row->image_name) ?>' width='300' height='210' alt='<?php echo $row->title ?>'></a></li>
 				</ul>
 				<ul class='ad_right'>
 					<li><h3><?php echo $row->title ?></h3></li>

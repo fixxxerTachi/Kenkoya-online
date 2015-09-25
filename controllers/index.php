@@ -50,7 +50,6 @@ class Index extends CI_Controller {
 		}else{
 			$this->load->view('index',$this->data);
 		}
-
 	}
 	
 	public function category()

@@ -7,7 +7,7 @@
 	<?php foreach($categories as $item):?>
 			<tr>
 				<th><span class='logo'><?php echo $item->short_name ?></span></th>
-				<td><a href='<?php echo base_url("front_question/index/{$item->id}") ?>'><?php echo $item->name ?></a></td>
+				<td><a href='<?php echo site_url("question/index/{$item->id}") ?>'><?php echo $item->name ?></a></td>
 			</tr>
 	<?php endforeach;?>
 		</table>

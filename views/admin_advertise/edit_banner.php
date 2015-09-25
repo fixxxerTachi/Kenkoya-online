@@ -2,6 +2,7 @@
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
+<script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
 <div id="container">
@@ -55,9 +56,5 @@
 	</div>
 </div>
 <?php include __DIR__ . '/../templates/footer.php' ?>
-<script>
-$('#start_date').datepicker({dateFormat:'yy/mm/dd'});
-$('#end_date').datepicker({dateFormat:'yy/mm/dd'});
-</script>
 </body>
 </html>

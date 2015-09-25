@@ -10,10 +10,11 @@
 <script src="<?php echo base_url('js/remodal.js') ?>"></script>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
-<div id="wrapper">
-	<div class='container'>
+<div id="container">
+	<div id="body">
+		<div class='contents'>
 				<?php if(!empty($h2title)):?>
-				<h2><span class='logo_pink'>order</span> <?php echo $h2title ?></h2>
+				<h2><?php echo $h2title ?></h2>
 				<?php endif; ?>
 				<?php if(!empty($success_message)):?>
 				<p class='success'><?php echo $success_message; ?></p>
@@ -21,62 +22,59 @@
 				<?php if(!empty($error_message)):?>
 				<p class='error'><?php echo $error_message ?></p>
 				<?php endif; ?>
+			<div id='talbe_menu'>
 				<?php echo form_open() ?>
 				<table class='detail'>
-					<tr>
-						<th><label for='order_number'>注文番号</label></th><td><input type='text' name='order_number' id='order_number' value='<?php echo $form_data->order_number ?>'></td>
-					</tr>
-					<tr>
-						<th><label for='customer_name'>お客様名</label></th><td><input type='text' name='customer_name' id='customer_name' value='<?php echo $form_data->customer_name ?>'></td>
-						<th><label for='customer_code'>お客様コード</label></th><td><input type='text' name='customer_code' id='customer_code' value='<?php echo $form_data->customer_code ?>'></td>
-					</tr>
-					<tr>
-						<th>受注日</th>
-						<td><label for='start_date'>開始</label><input type='text' name='start_date' id='start_date' value='<?php echo $form_data->start_date ?>'></td>
-						<th class='no-border' style='background: #fff'>~</th>
-						<td><label for='end_date'>終了</label><input type='text' name='end_date' id='end_date' value='<?php echo $form_data->end_date ?>'></td>
-					</tr>
-					<tr>
-						<th>配達予定日</th>
-						<td><label for='deliver_start_date'>開始</label><input type='text' name='deliver_start_date' id='deliver_start_date' value='<?php echo $form_data->deliver_start_date ?>'></td>
-						<th class='no-border' style='background: #fff'>~</th>
-						<td><label for='deliver_end_date'>終了</label><input type='text' name='deliver_end_date' id='deliver_end_date' value='<?php echo $form_data->deliver_end_date ?>'>
-					</tr>
-					<tr>
-						<th class='no-border'></th>
-						<td></td>
-						<td></td>
-						<td><input type='checkbox' name='no_deli_date' id='no_deli_date' value='1'><label for='no_deli_date'>日付指定なしを含める</label></td>
-					</tr>
+				<tr>
+					<th><label for='order_number'>注文番号</label></th><td><input type='text' name='order_number' id='order_number' value='<?php echo $form_data->order_number ?>'></td>
+				</tr>
+				<tr>
+					<th><label for='customer_name'>お客様名</label></th><td><input type='text' name='customer_name' id='customer_name' value='<?php echo $form_data->customer_name ?>'></td>
+					<th><label for='customer_code'>お客様コード</label></th><td><input type='text' name='customer_code' id='customer_code' value='<?php echo $form_data->customer_code ?>'></td>
+				</tr>
+				<tr>
+					<th>受注日</th>
+					<td><label for='start_date'>開始</label><input type='text' name='start_date' id='start_date' value='<?php echo $form_data->start_date ?>'></td>
+					<th style='background: #fff'>~</th>
+					<td><label for='end_date'>終了</label><input type='text' name='end_date' id='end_date' value='<?php echo $form_data->end_date ?>'></td>
+				</tr>
+				<tr>
+					<th>配達予定日</th>
+					<td><label for='deliver_start_date'>開始</label><input type='text' name='deliver_start_date' id='deliver_start_date' value='<?php echo $form_data->deliver_start_date ?>'></td>
+					<th style='background: #fff'>~</th>
+					<td><label for='deliver_end_date'>終了</label><input type='text' name='deliver_end_date' id='deliver_end_date' value='<?php echo $form_data->deliver_end_date ?>'></td>
+					<td><input type='checkbox' name='no_deli_date' id='no_deli_date' value='1' checked='checked'></td>
+					<td><label for='no_deli_date'>日付指定なしを含める</label></td>
+				</tr>
+				<tr><th>受付状態</th><td>
+				<input type='checkbox' name='status[]' id='wait' value='0' <?php if(in_array(NOORDER,$form_data->status_arr)) echo 'checked=checked' ?>><label for='wait'>受付中</label>
+				<input type='checkbox' name='status[]' id='done' value='1'  <?php if(in_array(RECIEVED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='done'>受付済</label>
+				<input type='checkbox' name='status[]' id='cancel' value='2'  <?php if(in_array(CANCELED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='cancel'>キャンセル</label>
+				<input type='checkbox' name='status[]' id='ordered' value='3' <?php if(in_array(ORDERED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='ordered'>発注リスト発行済み</label>
+				<input type='checkbox' name='status[]' id='shipped' value='4' <?php if(in_array(DELIVERED,$form_data->status_arr)) echo 'checked=checked' ?>><label for='shipped'>出荷済み</label>
+				</td></tr>
+				<tr>
+					<table>
+						<td width='100px'></td>
+						<td><input type='submit' name='submit' value='検索'></td>
+						<td width='200px'></td>
+						<td><input type='submit' name='reg_order' value='受付登録'><br><a class='desc_btn' id='recieved_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='makecsv' value='発注用CSV作成'><br><a class='desc_btn' id='order_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
+						<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
+						<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
+						<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックを外す</a></td>
+					</table>
+				</tr>
 				</table>
-				<table class='detail'>
-					<tr>
-						<th>受付状態</th>
-						<td>
-							<input type='checkbox' name='status[]' id='wait' value='0' <?php if(in_array(NOORDER,$form_data->status_arr)) echo 'checked=checked';?>><label for='wait'>受付中</label>
-							<input type='checkbox' name='status[]' id='done' value='1'  <?php if(in_array(RECIEVED,$form_data->status_arr)) echo 'checked=checked';?>><label for='done'>受付済</label>
-							<input type='checkbox' name='status[]' id='cancel' value='2'  <?php if(in_array(CANCELED,$form_data->status_arr)) echo 'checked=checked';?>><label for='cancel'>キャンセル</label>
-							<input type='checkbox' name='status[]' id='ordered' value='3' <?php if(in_array(ORDERED,$form_data->status_arr)) echo 'checked=checked';?>><label for='ordered'>発注リスト発行済み</label>
-							<input type='checkbox' name='status[]' id='shipped' value='4' <?php if(in_array(DELIVERED,$form_data->status_arr)) echo 'checked=checked';?>><label for='shipped'>出荷済み</label>
-						</td>
-					</tr>
-					<tr>
-						<table>
-							<td width='100px'></td>
-							<td><input type='submit' name='submit' value='検索'></td>
-							<td width='200px'></td>
-							<td><input type='submit' name='reg_order' value='受付登録'><br><a class='desc_btn' id='recieved_desc' href='javascript:void(0)'>説明</a></td>
-							<td><input type='submit' name='makecsv' value='発注用CSV作成'><br><a class='desc_btn' id='order_desc' href='javascript:void(0)'>説明</a></td>
-							<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
-							<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
-							<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
-							<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックを外す</a></td>
-						</table>
-					</tr>
-				</table>
+			</div>
+			<div id='product_list'>
 				<?php if(!empty($result)): ?>
-				<?php $count = count($result);?>
-				<table class='list'>
+				<!--
+				<p>売上高:<?php echo number_format($total_price) ?>円</p>
+				-->
+					<?Php $count = count($result);?>
+				<table>
 					<tr class='base_info_header'>
 						<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th></th>
 					</tr><tr class='base_info_header'>
@@ -157,10 +155,24 @@
 				<?php else: ?>
 					<p></p>
 				<?php endif; ?>
-				</form>
+			</form>
+			</div>
+		</div>
 	</div>
 </div>
+<?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
+<style type='text/css'>
+/*
+#talbe_menu{
+	position: fixed;
+	background: #fff;
+}
+#product_list{
+	margin-top: 300px;
+}
+*/
+</style>
 <script>
 var button = $('#remove_check');
 var items = $('.ckbox');

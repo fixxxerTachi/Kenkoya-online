@@ -52,7 +52,7 @@
 	<?php $ssdatetime = $row->sale_start_datetime ? new DateTime($row->sale_start_datetime) : new DateTime('1000-01-01 00:00:00');?>
 	<?php $sedatetime = $row->sale_end_datetime ? new DateTime($row->sale_end_datetime) : new DateTime('9999-12-31 23:59:59');?>
 	<?php if($ssdatetime <= $today && $sedatetime > $today):?>
-				<li>数量 <?php echo form_dropdown('quantity',$select_quantity) ?></li>
+				<li>数量 <?php echo form_dropdown('quantity',$select_quantity,'1','size=1') ?></li>
 				<li><input class='cart_button' name='submit' type='submit' value='カートに入れる'></li>
 	<?php else:?>
 				<li>申し訳ありません。現在お取扱いしておりません。</li>

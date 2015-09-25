@@ -97,6 +97,10 @@
 					<table class='detail detail-right'>
 						<caption>その他情報</caption>
 						<tr>
+							<th><label for='max_quantity'>最大販売数量</label></th>
+							<td><input type='text' name='max_quantity' id='max_quantity' size='4' maxlength='4' value='<?php echo $form_data->max_quantity ?>'></td>
+						</tr>
+ 						<tr>
 							<th><label for='on_sale'>販売中</label></th>
 							<td>
 								<select name='on_sale'>

@@ -5,14 +5,14 @@
 			<div id='header-menu' class='clearfix'>
 				<ul>
 				<!--
-					<li><a href='<?php echo base_url('index') ?>'><img src='<?php echo base_url('images/menu/kenkoya_on.jpg') ?>' alt='健康屋宅配サイトとは'></a></li>
-					<li><a href='<?php echo base_url('front_advertise')?>'><img src='<?php echo base_url('images/menu/advertise_on.jpg') ?>' alt='チラシを見る'></a></li>
-					<li><a href='<?php echo base_url('front_question') ?>'><img src='<?php echo base_url('images/menu/qa_on.jpg') ?>' alt='よくあるご質問'></a></li>
-					<li><a href='<?php echo base_url('front_contact') ?>'><img src='<?php echo base_url('images/menu/question_on.jpg') ?>' alt='お問い合わせ'></a></li>
+					<li><a href='<?php echo site_url('index') ?>'><img src='<?php echo base_url('images/menu/kenkoya_on.jpg') ?>' alt='健康屋宅配サイトとは'></a></li>
+					<li><a href='<?php echo site_url('advertise')?>'><img src='<?php echo base_url('images/menu/advertise_on.jpg') ?>' alt='チラシを見る'></a></li>
+					<li><a href='<?php echo site_url('question') ?>'><img src='<?php echo base_url('images/menu/qa_on.jpg') ?>' alt='よくあるご質問'></a></li>
+					<li><a href='<?php echo site_url('contact') ?>'><img src='<?php echo base_url('images/menu/question_on.jpg') ?>' alt='お問い合わせ'></a></li>
 				-->
-					<li><a href='<?php echo base_url('front_advertise')?>'>よつば通信を見る</a></li>
-					<li><a href='<?php echo base_url('front_question') ?>'>よくあるご質問</a></li>
-					<li><a href='<?php echo base_url('front_contact') ?>'>お問い合わせ</a></li>
+					<li><a href='<?php echo site_url('yotsuba')?>'>よつば通信を見る</a></li>
+					<li><a href='<?php echo site_url('question') ?>'>よくあるご質問</a></li>
+					<li><a href='<?php echo site_url('contact') ?>'>お問い合わせ</a></li>
 				</ul>
 			</div>
 			<h1>幸福と健康をお届けする宅配ス―パー健康屋</h1>

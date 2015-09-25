@@ -2,7 +2,7 @@
 <html lang = "ja">
 <head>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
-<link rel='stylesheet' href='<?php echo base_url('css/cart.css') ?>'>
+<link rel='stylesheet' href='<?php echo site_url('css/cart.css') ?>'>
 </head>
 <body>
 <div id='wrapper'>
@@ -33,8 +33,8 @@
 				<td><?php echo number_format($p->sale_price) ?>円</td>
 				<td>数量:<?php echo $p->quantity ?></td>
 				<td>
-					<a class='edit' href='<?php echo base_url("front_cart/change_quantity/{$k}")?>'>数量を変更する</a>
-					<a class='edit' href='<?php echo base_url("front_cart/delete_item/{$k}")?>'>カートから削除する</a>
+					<a class='edit' href='<?php echo site_url("cart/change_quantity/{$k}")?>'>数量を変更する</a>
+					<a class='edit' href='<?php echo site_url("cart/delete_item/{$k}")?>'>カートから削除する</a>
 				</td>
 			</tr>
 			<?php endforeach;?>
@@ -46,17 +46,17 @@
 		<?php if(!empty($list_product)):?>
 				<tr>
 					<td>
-						<a class='edit' href='<?php echo base_url("index/index")?>'>お買い物を続ける</a>
+						<a class='edit' href='<?php echo site_url("index/index")?>'>お買い物を続ける</a>
 					</td>
 					<td>
-						<a class='edit' href='<?php echo base_url('front_cart/empty_cart')?>'>カートを空にする</a>
+						<a class='edit' href='<?php echo site_url('cart/empty_cart')?>'>カートを空にする</a>
 					</td>
 					<td>
-						<a class='cart_proceed' href='<?php echo base_url('front_customer/login_action/process')?>'>購入処理に進む</a>
+						<a class='cart_proceed' href='<?php echo site_url('customer/login_action/process')?>'>購入処理に進む</a>
 					</td>
 				</tr>
 		<?php else:?>
-				<tr><td><a class='edit' href='<?php echo base_url("index/index")?>'>お買い物を続ける</a></td></tr>
+				<tr><td><a class='edit' href='<?php echo site_url("index/index")?>'>お買い物を続ける</a></td></tr>
 		<?php endif;?>
 			</table>
 		</div>

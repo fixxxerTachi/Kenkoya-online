@@ -34,7 +34,7 @@
 				<h3>よつば通信・週刊クローバーの案内</h3>
 				<p class='note'>新鮮なお野菜、お魚から日用品まで、あなたに必要なものが必ず見つかります。</p>
 				<p class='note'>また毎週、当店スタッフが厳選したお買得商品を掲載した「週間クローバー」を発行しています。</p>
-				<p><a href='<?php echo base_url("front_advertise") ?>'><img src='<?php echo base_url('images/advertise/yotsuba05_1_1.jpg') ?>' width='300' height='210' alt='よつば通信'></a></p>
+				<p><a href='<?php echo site_url("yotsuba") ?>'><img src='<?php echo base_url('images/advertise/yotsuba05_1_1.jpg') ?>' width='300' height='210' alt='よつば通信'></a></p>
 			</div>
 			<div class='inner-small'>
 				<h3>宅配牛乳の案内</h3>
@@ -45,11 +45,11 @@
 				<h3>宅配サービスご利用可能地域について</h3>
 				<p class='note'>宅配スーパー健康屋の宅配サービスのご利用可能地域の検索はこちらから。</p>
 				<p class='note_one'>宅配サービスご利用可能地域以外の方は、宅急便で配送いたします。</p>
-				<p><a href='<?php echo base_url('front_area/search_area') ?>'><img src='<?php echo base_url('images/map_small.jpg') ?>' width='300' height='216' alt='宅配サービスのお届けエリア'></a></p>
+				<p><a href='<?php echo site_url('area/search_area') ?>'><img src='<?php echo base_url('images/map_small.jpg') ?>' width='300' height='216' alt='宅配サービスのお届けエリア'></a></p>
 			</div>
 			<div class='inner-small'>
 				<h3>宅配サービスのご利用規約</h3>
-				<p><a class='new-window' href='<?php echo base_url('takuhai_service/show_policy') ?>' target='_blank'>宅配スーパー健康屋の利用案内</a></p>
+				<p><a class='new-window' href='<?php echo site_url('takuhai_service/show_policy') ?>' target='_blank'>宅配スーパー健康屋の利用案内</a></p>
 			</div>
 		</div>
 	</div>

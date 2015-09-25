@@ -55,7 +55,7 @@ class Front_contact extends CI_Controller{
 			if(!$this->form_validation->run() === FALSE){
 				if($form_data->email_confirm == $form_data->email){
 					$this->session->set_userdata('contact',$form_data);
-					return redirect(base_url('front_contact/confirm_contact'));
+					return redirect(base_url('contact/confirm_contact'));
 				}else{
 					$this->data['error_message'] = 'メールアドレスと確認用メールアドレスが異なります';
 				}
@@ -83,7 +83,7 @@ class Front_contact extends CI_Controller{
 			if($this->send_mail($form_data)){
 				$this->session->unset_userdata('contact');
 				$this->session->set_flashdata('success','ご質問を承りました');
-				return redirect(base_url('front_contact/complete'));
+				return redirect(base_url('contact/complete'));
 			}else{
 				$this->data['error_message'] = 'メールの送信に失敗しました<br>メールアドレスをお確かめのうえ再度やりなおしてください。';
 			}

@@ -28,7 +28,7 @@
 			<p class='error'><?php echo $err ?></p>
 			<?php endforeach;?>
 			<?php endif;?>
-			<?php echo form_open('front_order/order_process') ?>
+			<?php echo form_open('order/order_process') ?>
 <?php if(!empty($list_product)):?>
 				<h3>カートに入れた商品</h3>
 				<table class='contact_form'>
@@ -40,8 +40,8 @@
 					<td><?php echo $p->quantity ?>個</td>
 					<td><?php echo number_format($p->subtotal) ?>円</td>
 					<td>
-						<a class='button' href='<?php echo base_url("front_cart/change_quantity/{$k}/confirm")?>'>数量を変更する</a>
-						<a class='button' href='<?php echo base_url("front_cart/delete_item/{$k}/confirm")?>'>カートから削除する</a>
+						<a class='button' href='<?php echo site_url("cart/change_quantity/{$k}/confirm")?>'>数量を変更する</a>
+						<a class='button' href='<?php echo site_url("cart/delete_item/{$k}/confirm")?>'>カートから削除する</a>
 					</td>
 				</tr>
 				<?php endforeach;?>
@@ -50,7 +50,7 @@
 <!------ ポイント処理は後回し　
 	<?php if(isset($point)):?>
 					<td>
-						<a class='button' href='<?php echo base_url('front_order/use_point') ?>'>ポイントを使う</a> ご利用可能ポイント残高: <?php echo $point ?>ポイント
+						<a class='button' href='<?php echo site_url('front_order/use_point') ?>'>ポイントを使う</a> ご利用可能ポイント残高: <?php echo $point ?>ポイント
 					</td>
 				</tr>
 				<tr><td></td><td></td><td></td><td>ポイント使用</td><td><?php echo $total->use_point ?>ポイント</td></tr>
@@ -98,7 +98,7 @@
 			<?php else:?>
 						<td>日付指定しない</td><td><?php echo $takuhai_hours[$form_data->delivery_hour] ?></td>
 			<?php endif;?>
-						<td><a class='button' href='<?php echo base_url("front_order/delivery_info")?>'>配達日を変更する</a></td>
+						<td><a class='button' href='<?php echo site_url("order/delivery_info")?>'>配達日を変更する</a></td>
 					</tr>
 				</table>
 				<h3>お支払方法</h3>
@@ -109,13 +109,13 @@
 			<?php if($form_data->payment ==PAYMENT_CREDIT):?>
 					<tr><td>カード番号: <?php echo $card_number ?></td>
 			<?php endif;?>
-						<td><a class='button' href='<?php echo base_url("front_order/delivery_info") ?>'>お支払方法を変更する</a></td>
+						<td><a class='button' href='<?php echo site_url("order/delivery_info") ?>'>お支払方法を変更する</a></td>
 					</tr>
 				</table>
 				<table class='contact_form' id='cart_menu'>
 					<tr>
 						<td class='no-border'></td>
-						<td><input type='submit' name='submit' value='購入する' ><a class='edit_back' href='<?php echo base_url("front_order/delivery_info{$param}") ?>'>戻る</a></td>
+						<td><input type='submit' name='submit' value='購入する' ><a class='edit_back' href='<?php echo site_url("order/delivery_info{$param}") ?>'>戻る</a></td>
 					</tr>
 				</table>
 			</form>

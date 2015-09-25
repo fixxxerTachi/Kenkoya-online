@@ -1,12 +1,10 @@
-<?php include __DIR__ . '/../templates/meta.php' ?>
+<?php include __DIR__ . '/../templates/meta_materialize.php' ?>
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
-<div id="container">
-<?php include __DIR__ . '/../templates/side.php' ?>
-	<div id="body">
-		<div class='contents'>
-		<h2><?php echo $h2title ?></h2>
+<div id="wrapper">
+		<div class='container'>
+			<h2><span class='logo_pink'>title</span> <?php echo $h2title ?></h2>
 			<?php if(!empty($message)):?>
 			<p class='message'><?php echo $message ?></p>
 			<?php endif;?>
@@ -17,7 +15,7 @@
 			<p class='error'><?php echo $error_message ?></p>
 			<?php endif; ?>
 			<?php echo form_open() ?>
-				<table class='detail' cellpadding='0' cellspacing='10'>
+				<table class='detail'>
 					<tr>
 						<th><label for='username'>ユーザー名</label></th>
 						<td><input type='text' id='username' name='username' value='' size='40' maxlength='40'></td>
@@ -33,9 +31,7 @@
 				</table>
 			</form>
 		</div>
-	</div>
 </div>
-<?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
 <script>
 function del_confirm(template_name , id){

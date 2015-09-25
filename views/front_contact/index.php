@@ -12,14 +12,14 @@
 	<div id='container-inner'>
 		<div class='content'>
 			<h2><span class='logo_pink'>contact</span> 皆さまからのご要望・ご意見をお待ちしております</h2>
-			<p class='note'>みなさまからよくいただくご質問やご意見へのお答えをご紹介しています。  <a class='button' href='<?php echo base_url('front_question') ?>'>よくあるご質問</a></p>
+			<p class='note'>みなさまからよくいただくご質問やご意見へのお答えをご紹介しています。  <a class='button' href='<?php echo site_url('question') ?>'>よくあるご質問</a></p>
 			<div class='content-inner'>
 				<h3><span class='logo'>TEL</span> お電話でのお問い合わせ</h3>
 				<p><span class='tel'>0120-383-333</span> &nbsp;営業時間 : 月曜日～金曜日（9:00 ~ 18:00)</p>
 			</div>
 			<div class='content-inner'>
 				<h3><span class='logo'>MAIL</span> メールでのお問い合わせ</h3>
-				<p><a class='button' href='<?php echo base_url('front_contact/contact') ?>'>お問い合わせフォーム</a></span>からお問い合わせください</p>
+				<p><a class='button' href='<?php echo site_url('contact/contact') ?>'>お問い合わせフォーム</a></span>からお問い合わせください</p>
 			</div>
 		</div>
 	</div>

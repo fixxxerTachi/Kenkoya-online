@@ -18,7 +18,7 @@
 			<?php foreach($questions as $info):?>
 				<ul class = 'inner-information'>
 					<li>
-						<a href='<?php echo site_url("front_question/detail/{$info->id}") ?>'><span class='logo_q'>Q</span> <?php echo $info->question ?></a>
+						<a href='<?php echo site_url("question/detail/{$info->id}") ?>'><span class='logo_q'>Q</span> <?php echo $info->question ?></a>
 					</li>
 				</ul>
 			<?php endforeach;?>

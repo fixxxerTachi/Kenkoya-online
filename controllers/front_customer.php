@@ -91,7 +91,7 @@ class Front_customer extends CI_Controller{
 					}
 				//カートからの遷移はdelivery_infoに移動
 					if($ref == 'process'){
-						return redirect('front_order/delivery_info');
+						return redirect('order/delivery_info');
 					}
 				//それ以外はトップページへ移動
 					return redirect(base_url('/'));

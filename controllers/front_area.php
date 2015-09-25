@@ -72,7 +72,7 @@ class Front_area extends CI_Controller{
 		);
 		$area_id = $this->uri->segment(3);
 		$city = $this->uri->segment(4);
-		if(empty($area_id)){ return redirect(base_url('front_area/search_area')); }
+		if(empty($area_id)){ return redirect(base_url('area/search_area')); }
 		$area_name = $this->Master_area->list_area_id[(int)$area_id];
 		$cities = $this->Area->list_area_by_area_id($area_id);
 		if(!empty($city)){
@@ -91,7 +91,7 @@ class Front_area extends CI_Controller{
 		$bread->link = base_url('takuhai_service');
 		$bread->text = '宅配サービスとは';
 		$bread1 = new StdClass();
-		$bread1->link = base_url('front_area/search_area');
+		$bread1->link = base_url('area/search_area');
 		$bread1->text = '宅配サービス利用可能エリア検索';
 		$bread2 = new StdClass();
 		$bread2->text = $this->data['h2title'];
@@ -114,13 +114,13 @@ class Front_area extends CI_Controller{
 		$bread->link = base_url('takuhai_service');
 		$bread->text = '宅配サービスとは';
 		$bread1 = new StdClass();
-		$bread1->link = base_url('front_area/search_area');
+		$bread1->link = base_url('area/search_area');
 		$bread1->text = '宅配サービス利用可能エリア検索';
 		$area_id = $result->area_id;
 		$area_name = $this->Master_area->list_area_id[(int)$area_id];
 		$bread2 = new StdClass();
 		$bread2->text = "{$area_name}の配達エリア";
-		$bread2->link = base_url("front_area/show_area/{$area_id}/");
+		$bread2->link = base_url("area/show_area/{$area_id}/");
 		$bread3 = new StdClass();
 		$bread3->text  = $this->data['h2title'];
 		$this->data['breads'] = $this->Bread->create_bread($bread,$bread1,$bread2,$bread3);
@@ -161,9 +161,9 @@ class Front_area extends CI_Controller{
 			//配達エリア内だったら会員登録をお勧めする。
 			$member_link->recommend_text = '健康屋宅配サービスエリア内ですので会員登録していただくと商品を0円～配送できます。';
 			$member_link->member_text = '会員登録する';
-			$member_link->member_url = 'front_customer/show_policy/nav';
+			$member_link->member_url = 'customer/show_policy/nav';
 			$member_link->text = '会員登録せずに購入処理を進める';
-			$member_link->url = 'front_customer/show_policy/no-member';
+			$member_link->url = 'customer/show_policy/no-member';
 		//マイページ内の住所変更からのアクセス
 		}else if($uri_flag == 'mypage'){
 			$member_link->recommend_text = '健康屋宅配サービスエリア内ですので会員登録していただくと商品を0円～配送できます。';
@@ -174,15 +174,15 @@ class Front_area extends CI_Controller{
 		//会員登録したいひと ナビゲーションリンクからのアクセス //param: navはいらないかも
 		}else if($uri_flag == 'nav'){
 			$member_link->member_text = '会員登録を進める';
-			$member_link->member_url = 'front_customer/show_policy';
+			$member_link->member_url = 'customer/show_policy';
 			$member_link->text = '戻る';
-			$member_link->url = 'front_customer/login_action';
+			$member_link->url = 'customer/login_action';
 		//会員登録したいひと　カートからのアクセス
 		}else{
 			$member_link->member_text = '会員登録を進める';
-			$member_link->member_url = 'front_customer/show_policy';
+			$member_link->member_url = 'customer/show_policy';
 			$member_link->text = '戻る';
-			$member_link->url = 'front_customer/login_action';
+			$member_link->url = 'customer/login_action';
 		}
 		$this->data['member_link'] = $member_link;
 		$this->data['form_data'] = $form_data;

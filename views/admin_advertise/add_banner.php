@@ -40,7 +40,7 @@
 					<td><a class='edit' onclick='del_confirm("<?php echo $row->image_name ?>" , <?php echo $row->id ?>)'>削除</a></td>
 					</tr>
 			<?php endforeach;?>
-				<tr class='no-back'><td></td><td></td><td></td><td><input type='submit' name='change_order' value='掲載順変更'></td></tr>
+				<tr class='no-back'><td></td><td></td><td></td><td><td></td><input type='submit' name='change_order' value='掲載順変更'></td></tr>
 			</table>
 			</form>
 			<?php else:?>

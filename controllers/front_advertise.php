@@ -105,7 +105,7 @@ class Front_advertise extends CI_Controller{
 			$carts[] = serialize($cart);
 			$this->session->set_userdata('carts',$carts);
 			$this->session->set_flashdata('success','カートに入れました');
-			return redirect("front_advertise/detail_product/{$product_id}/{$ad_id}/{$qt}");
+			return redirect("yotsuba/detail_product/{$product_id}/{$ad_id}/{$qt}");
 		}
 		//$this->data['ad_result'] = $ad_result[0];
 		$quantity = $this->uri->segment(5);

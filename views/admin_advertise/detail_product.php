@@ -93,6 +93,10 @@
 					<table class='detail detail-right'>
 						<caption>その他情報</caption>
 						<tr>
+							<th>最大販売数量</th>
+							<td><?php echo $result->max_quantity ?>個</td>
+						</tr>
+						<tr>
 							<th>販売中</th>
 							<td><?php if($result->on_sale == ONSALE): ?>販売中<?php elseif($result->on_sale == DISCON):?><span style='color:orange'>販売中止</span><?php endif;?></td>
 						</tr>

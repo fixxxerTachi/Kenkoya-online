@@ -17,7 +17,7 @@
 		<div class='content'>
 			<h2><span class='logo_pink'>login</span> <?php echo $h2title ?></h2>
 				<p class='note'>今までに宅配スーパー健康屋をご利用いただいた方でで、初めてウェブからから注文される方は、オンライン会員登録が必要です
-					<a class='edit' href='<?php echo base_url('front_customer/renew_user') ?>'>オンライン会員登録</a>
+					<a class='edit' href='<?php echo site_url('customer/renew_user') ?>'>オンライン会員登録</a>
 				</p>
 			<?php echo form_open() ?>
 				<table class='contact_form' cellpadding='0' cellspacing='10'>
@@ -48,8 +48,8 @@
 					<tr>
 						<td></td>
 						<td>
-							<a class='button' href='<?php echo base_url("front_customer/set_username");?>'>ユーザー名を忘れた場合はこちら</a>
-							<a class='button' href='<?php echo base_url("front_customer/set_password");?>'>パスワードを忘れた場合はこちら</a>
+							<a class='button' href='<?php echo site_url("customer/set_username");?>'>ユーザー名を忘れた場合はこちら</a>
+							<a class='button' href='<?php echo site_url("customer/set_password");?>'>パスワードを忘れた場合はこちら</a>
 						</td>
 					</tr>
 				</table>

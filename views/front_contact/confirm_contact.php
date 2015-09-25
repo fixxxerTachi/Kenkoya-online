@@ -35,7 +35,7 @@
 					</tr>
 					<tr></tr>
 					<tr>
-						<td></td><td><input id='submit_button' type='submit' name='submit' value='この内容で問い合わせる'><a class='edit_back' href='<?php echo base_url('front_contact/contact') ?>'>入力内容を変更する</a></td>
+						<td></td><td><input id='submit_button' type='submit' name='submit' value='この内容で問い合わせる'><a class='edit_back' href='<?php echo site_url('contact/contact') ?>'>入力内容を変更する</a></td>
 					</tr>
 				</form>
 			</table>

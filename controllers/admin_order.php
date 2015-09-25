@@ -1,10 +1,11 @@
 <?php
+/*
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/Classes/PHPExcel.php';
 include __DIR__.'/../libraries/Classes/PHPExcel/IOFactory.php';
 include __DIR__.'/../libraries/define_flag.php';
-
+*/
 //include __DIR__.'/../libraries/common.php';
 //include __DIR__.'/../libraries/Csv.php';
 
@@ -37,7 +38,7 @@ class Admin_order extends CI_Controller{
 	
 	public function index()
 	{
-		$this->data['h2title'] = 'メニューを選択';
+		$this->data['h2title'] = '受注管理';
 		$this->load->view('index_admin',$this->data);
 	}
 	public function download()
@@ -99,7 +100,7 @@ class Admin_order extends CI_Controller{
 	
 	public function list_order()
 	{
-		$this->data['h2title'] = '受注リスト';
+		$this->data['h2title'] = '受注リスト一覧・検索';
 		$this->data['order_status'] = $this->Master_order_status->order_status;
 		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
 		$this->data['credit'] = $this->Credit;

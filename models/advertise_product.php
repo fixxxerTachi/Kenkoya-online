@@ -56,6 +56,25 @@ class Advertise_product extends CI_Model{
 		}
 	}
 	
+	/** 最大販売数量を取得
+	*@param int product_id
+	*@return int max_quantity
+	*/
+	public function get_max_sale_quantity($product_id)
+	{
+		$this->db->select('max_quantity')->from($this->tablename);
+		$this->db->where('id',(int)$product_id);
+		$row = $this->db->get()->row();
+		if(!empty($row))
+		{
+			return (!is_null($row->max_quantity)) ? (int)$row->max_quantity : MAX_SALE_QUANTITY;
+		}
+		else
+		{
+			throw new Exception('対象となる商品がありません。');
+		}
+	}
+	
 	/** product_sizeと連結したデータを取得
 	* @param int product_id
 	* @return object Product_size
@@ -436,7 +455,7 @@ class Advertise_product extends CI_Model{
 		if($del_flag){
 			$this->db->where('del_flag',0);
 		}
-		$result =  $query->result();
+		$result =  $query->row();
 		return $result;
 	}
 	
@@ -536,5 +555,38 @@ class Advertise_product extends CI_Model{
 	{
 		$this->db->where('product_id',$product_id);
 		$this->db->update('takuhai_product_image',$data);
+	}
+	
+	/*　販売可能か、販売対象期間かどうかチェック
+	*@param int product_id
+	*@param object product
+	*@return Exception
+	*/
+	public function validate_sale_target($product_id)
+	{
+		if(!$this->check_on_sale($product_id) || !$this->validate_sale_period($product_id))
+		{	
+			$product = $this->get_by_id($product_id);
+			throw new Exception("申し訳ございません。現在【{$product->product_name}】はお取扱いしておりません。");
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	/* 販売最大個数の範囲内かどうか */
+	public function validate_max_sale_size($product_id,$qt)
+	{
+		$max_size = $this->get_max_sale_quantity($product_id);
+		if($qt <= $max_size)
+		{
+			return TRUE;
+		}
+		else
+		{
+			$product = $this->get_by_id($product_id);
+			throw new Exception("申し訳ございません。{$product->product_name}は{$max_size}までのご注文となっております。");
+		}
 	}
 }

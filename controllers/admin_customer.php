@@ -1,10 +1,11 @@
 <?php
+/*
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
 include __DIR__.'/../libraries/csv.php';
-
+*/
 class Admin_customer extends CI_Controller{
 	public $data = array();
 	public function __construct()
@@ -123,7 +124,7 @@ class Admin_customer extends CI_Controller{
 				$db_data = $input_data;
 				$this->Customer->save($db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_customer'));
+				redirect(site_url('/admin_customer/list_customer'));
 			}		
 		}
 		$this->data['succsss_message'] = $this->session->flashdata('success');
@@ -154,7 +155,7 @@ class Admin_customer extends CI_Controller{
 			$offset = $this->uri->segment(5);
 			$config['uri_segment'] = 5;
 			$config['per_page'] = 20;
-			$config['base_url'] = base_url('admin_customer/list_customer') . '/-/-/';
+			$config['base_url'] = site_url('admin_customer/list_customer') . '/-/-/';
 			$this->data['result'] = $this->Customer->show_list_where($config['per_page'],$offset);
 			$config['total_rows'] = $this->Customer->num_rows();
 			$config['last_link'] = false;
@@ -218,7 +219,7 @@ class Admin_customer extends CI_Controller{
 				$db_data = $input_data;
 				$this->Customer->update($id, $db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_customer'));
+				redirect(site_url('/admin_customer/list_customer'));
 			}		
 		}
 		$this->load->view('admin_customer/add_customer',$this->data);
@@ -230,7 +231,7 @@ class Admin_customer extends CI_Controller{
 		$this->Customer->delete($id);
 		$this->Personal->delete_with_user_id($id);
 		$this->session->set_flashdata('success','削除しました');
-		redirect(base_url('/admin_customer/list_customer'));
+		redirect(site_url('/admin_customer/list_customer'));
 	}
 	
 	public function add_personal()
@@ -264,7 +265,7 @@ class Admin_customer extends CI_Controller{
 				$db_data = $input_data;
 				$this->Personal->save($db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_customer'));
+				redirect(site_url('/admin_customer/list_customer'));
 			}
 		}
 		$this->data['message'] = "{$customer->familyname} {$customer->firstname}様の情報";
@@ -313,7 +314,7 @@ class Admin_customer extends CI_Controller{
 			$db_data = $input_data;
 			$this->Personal->update_with_user_id($id,$db_data);
 			$this->session->set_flashdata('success','登録しました');
-			redirect(base_url('/admin_customer/list_personal'));
+			redirect(site_url('/admin_customer/list_personal'));
 		}
 		$this->load->view('admin_customer/add_personal',$this->data);		
 	}
@@ -342,7 +343,7 @@ class Admin_customer extends CI_Controller{
 				$db_data = $input_data;
 				$this->Customer->update($id,$db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_personal'));
+				redirect(site_url('/admin_customer/list_personal'));
 			}
 		}
 		$this->data['message'] = "{$customer->name}様のお支払情報登録";
@@ -389,7 +390,7 @@ class Admin_customer extends CI_Controller{
 			echo $e->getMessage();
 		}
 		$this->session->set_flashdata('success','登録しました');
-		redirect(base_url('/admin_customer/list_personal'));
+		redirect(site_url('/admin_customer/list_personal'));
 	}
 	
 	public function add_personal_mail_magazine()
@@ -406,7 +407,7 @@ class Admin_customer extends CI_Controller{
 			);
 			$this->Customer->update($id ,$input_data);
 			$this->session->set_flashdata('success','登録しました');
-			redirect(base_url('/admin_customer/list_personal'));
+			redirect(site_url('/admin_customer/list_personal'));
 		}
 		$this->data['message'] = "{$customer->name}様の情報";
 		$this->load->view('admin_customer/add_personal_mail_magazine',$this->data);
@@ -497,7 +498,7 @@ class Admin_customer extends CI_Controller{
 				}
 				//$this->data['db_message']= "{$counter} 件データベースに登録しました";
 				$this->session->set_flashdata('success',"{$counter} 件データベースに登録しました");
-				redirect(base_url('/admin_customer/upload'));
+				redirect(site_url('/admin_customer/upload'));
 			}catch(Exception $e){
 				$this->data['error_message'] = $e->getMessage();
 			}
@@ -530,7 +531,7 @@ class Admin_customer extends CI_Controller{
 				$db_data['create_date'] = date('Y-m-d H:i:s');
 				$result = $this->Customer_info->save($db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_info'));
+				redirect(site_url('/admin_customer/list_info'));
 			}
 		}
 		$this->load->view('admin_customer/add_customer_info',$this->data);
@@ -555,7 +556,7 @@ class Admin_customer extends CI_Controller{
 				$this->Customer_info->update($obj->id,$db_data);
 			}
 			$this->session->set_flashdata('success','表示順を変更しました');
-			redirect(base_url('/admin_customer/list_info'));
+			redirect(site_url('/admin_customer/list_info'));
 		}
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_customer/list_customer_info',$this->data);
@@ -585,7 +586,7 @@ class Admin_customer extends CI_Controller{
 				$db_data = $input_data;
 				$result = $this->Customer_info->update($id,$db_data);
 				$this->session->set_flashdata('success','登録しました');
-				redirect(base_url('/admin_customer/list_info'));
+				redirect(site_url('/admin_customer/list_info'));
 			}
 		}
 		$this->load->view('admin_customer/add_customer_info',$this->data);
@@ -596,7 +597,7 @@ class Admin_customer extends CI_Controller{
 		$id = $this->uri->segment(3);
 		$this->Customer_info->delete($id);
 		$this->session->set_flashdata('success','削除しました');
-		redirect(base_url('/admin_customer/list_info'));
+		redirect(site_url('/admin_customer/list_info'));
 	}
 	public function change_show_flag_customer_info()
 	{

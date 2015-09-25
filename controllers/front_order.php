@@ -51,7 +51,7 @@ class Front_order extends CI_Controller{
 	{
 		try{
 			if(!$carts = $this->session->userdata('carts')){
-				return redirect('front_cart/show_cart');
+				return redirect('cart/show_cart');
 			}
 			$messages = array();
 			//お届け日限定商品があるかどうか
@@ -92,7 +92,7 @@ class Front_order extends CI_Controller{
 			$takuhai_select_days  = $this->Area->delivery_select_date_for_takuhai($this->deliver_possible_day,$this);
 			$customer = $this->my_class->_checklogin($this->data['customer']);
 			if($customer->username == 'no-member'){
-				return redirect('front_order/delivery_info_no_member');
+				return redirect('order/delivery_info_no_member');
 			}
 			$this->data['h2title'] = 'お支払/ 配送情報登録';
 			$this->data['title'] = '配送情報';
@@ -224,9 +224,9 @@ class Front_order extends CI_Controller{
 					
 					//クレジットカード決済はカード入力画面に遷移させる,session:order_infoが格納されていたら遷移しない
 					if($payment == PAYMENT_CREDIT){
-						return redirect('front_order/input_payment');
+						return redirect('order/input_payment');
 					}
-					return redirect(base_url('front_order/confirm_order'));
+					return redirect(base_url('order/confirm_order'));
 				}else{
 					$this->data['form_data'] = (object)$this->input->post();
 				}
@@ -248,7 +248,7 @@ class Front_order extends CI_Controller{
 	public function delivery_info_no_member()
 	{
 		if(!$this->session->userdata('carts')){
-			return redirect('front_cart/show_cart');
+			return redirect('cart/show_cart');
 		}
 		$this->data['h2title'] = 'お支払/ 配送情報登録';
 		$this->data['title'] = '配送情報';
@@ -271,7 +271,7 @@ class Front_order extends CI_Controller{
 		}
 		$this->data['is_area'] = FALSE;
 		if(!$this->session->userdata('no-member')){
-			return redirect('front_customer/login_action');
+			return redirect('customer/login_action');
 		}
 		$userdata = $this->session->userdata('no-member');
 		$select_days = $this->Area->delivery_select_date_for_takuhai($this->deliver_possible_day,$this);
@@ -303,9 +303,9 @@ class Front_order extends CI_Controller{
 				$order_info->destination = 0;
 				$this->session->set_userdata('order_info',$order_info);
 				if($order_info->payment == PAYMENT_CREDIT){
-					return redirect('front_order/input_payment');
+					return redirect('order/input_payment');
 				}
-				return redirect(base_url('front_order/confirm_order'));
+				return redirect(base_url('order/confirm_order'));
 			}else{
 				$this->data['form_data'] = (object)$this->input->post();
 			}
@@ -346,7 +346,7 @@ class Front_order extends CI_Controller{
 				$card_info->expire = $form_data->expire_year . $form_data->expire_month;
 				$card_info->security_code = $form_data->security_code;
 				$this->session->set_userdata('card_info',$card_info);
-				return redirect('front_order/confirm_order');
+				return redirect('order/confirm_order');
 			}
 		}
 		$this->data['error_message'] = $this->session->flashdata('error');
@@ -358,11 +358,11 @@ class Front_order extends CI_Controller{
 	{
 		if(!$order_info = $this->session->userdata('order_info'))
 		{
-			return redirect('front_order/delivery_info');
+			return redirect('order/delivery_info');
 		}
 		if(!$carts = $this->session->userdata('carts'))
 		{
-			return redirect('front_order/delivery_info');
+			return redirect('order/delivery_info');
 		}
 		$customer = $this->my_class->_checklogin($this->data['customer']);
 		$userdata = $this->Customer->get_by_username($customer);
@@ -383,7 +383,7 @@ class Front_order extends CI_Controller{
 					//order_info::pointにセットする
 					$order_info->point = (int)$form_data->use_point;
 					$this->session->set_userdata('order_info',$order_info);
-					return redirect('front_order/confirm_order');
+					return redirect('order/confirm_order');
 				}
 			}catch(Exception $e){
 				$this->data['error_message'] = $e->getMessage();
@@ -402,11 +402,11 @@ class Front_order extends CI_Controller{
 		$this->data['payments'] = $this->Master_payment->method;
 		if(!$carts = $this->session->userdata('carts')){
 			$this->session->set_flashdata('error','カートにはなにも入っていません');
-			return redirect(base_url('front_cart/show_cart'));
+			return redirect(base_url('cart/show_cart'));
 		}
 		if(!$order_info = $this->session->userdata('order_info')){
 			$this->session->set_flashdata('error','配達情報が入力されていません');
-			return redirect(base_url('front_order/delivery_info'));
+			return redirect(base_url('order/delivery_info'));
 		}
 		
 		
@@ -414,7 +414,7 @@ class Front_order extends CI_Controller{
 		if($order_info->payment == PAYMENT_CREDIT){
 			if(!$card_info = $this->session->userdata('card_info')){
 				$this->session->set_flashdata('error','カード情報が入力されていません');
-				return redirect(base_url('front_order/input_payment'));
+				return redirect(base_url('order/input_payment'));
 			}
 		}
 		
@@ -539,18 +539,18 @@ class Front_order extends CI_Controller{
 			$customer = $this->my_class->_checklogin($this->data['customer']);
 			if(!$carts = $this->session->userdata('carts')){
 				$this->session->set_flashdata('error','カートにはなにも入っていません');
-				return redirect('front_cart/show_cart');
+				return redirect('cart/show_cart');
 			}
 			
 			if(!$order_info = $this->session->userdata('order_info')){
 				$this->session->set_flashdata('error','配達情報が入力されていません');
-				return redirect(base_url('front_order/delivery_info'));
+				return redirect(base_url('order/delivery_info'));
 			}
 			
 			if($order_info->payment == PAYMENT_CREDIT){
 				if(!$card_info = $this->session->userdata('card_info')){
 					$this->session->set_flashdata('error','クレジットカード情報が入力されていません');
-					return redirect('front_order/delivery_info');
+					return redirect('order/delivery_info');
 				}
 			}
 			
@@ -558,11 +558,14 @@ class Front_order extends CI_Controller{
 			foreach($carts as $cart)
 			{
 				$c = unserialize($cart);
+				/*
 				if(!$this->Advertise_product->check_on_sale($c->product_id) || !$this->Advertise_product->check_on_sale($c->product_id))
 				{
 					$this->session->set_flashdata('error','ご購入いただけない商品があります。カートから削除してください。');
-					return redirect('front_order/confirm_order');
+					return redirect('order/confirm_order');
 				}
+				*/
+				//配達可能期間かどうか
 				if($order_info->delivery_date!= 0)
 				{
 					$deli_date = new DateTime($order_info->delivery_date);
@@ -574,9 +577,13 @@ class Front_order extends CI_Controller{
 						$sstr = $sdate ? $sdate->format('m月d日') : '';
 						$estr = $edate ? $edate->format('m月d日') : '';
 						$this->session->set_flashdata('error',"{$product->product_name}は{$sstr}~{$estr}の間にお届けする商品です。配達指定日を変更して下さい。");
-						return redirect('front_order/confirm_order');
+						return redirect('order/confirm_order');
 					}
 				}
+				//販売可能期間かどうか
+				$checked = $this->Advertise_product->validate_sale_target($c->product_id);
+				//限界販売数量範囲内かどうか
+				$checked = $this->Advertise_product->validate_max_sale_size($c->product_id,$c->quantity);
 			}
 			$point = isset($order_info->point) ? $order_info->point : 0;
 
@@ -584,7 +591,7 @@ class Front_order extends CI_Controller{
 			//健康屋の配達で別の配送先が指定されていないこと
 			if(!$order_info->takuhai){
 				if(!empty($order_info->destination)){
-					return redirect('front_order/delvery_info');
+					return redirect('order/delvery_info');
 				}
 			}
 			
@@ -607,7 +614,7 @@ class Front_order extends CI_Controller{
 					if($output->isErrorOccurred()){
 						$messages = $this->Credit->getErrorMessages($output);
 						$this->session->set_flashdata('error',$messages);
-						return redirect('front_order/input_payment');
+						return redirect('order/input_payment');
 					}
 				}
 			
@@ -762,12 +769,13 @@ class Front_order extends CI_Controller{
 					$result = $this->my_mail->order_mail($customer,$text_items);
 					$this->session->set_flashdata('success','注文を確定しました');
 					$this->session->set_userdata('order',$order);
-					return redirect(base_url('front_order/complete'));
+					return redirect(base_url('order/complete'));
 				}
 			}
 		}catch(Exception $e){
+			$this->session->set_flashdata('error',$e->getMessage());
 			log_message('error',$e->getMessage());
-			show_404();
+			return redirect('order/delivery_info');
 		}
 	}
 	

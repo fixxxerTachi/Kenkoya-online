@@ -78,7 +78,7 @@
 					<tr>
 						<th rowspan='8'>
 							お支払方法 <span class='logo_pink'>必須</span><br>
-							 詳細は<a class='new-window' href='<?php echo base_url('front_question/detail/1') ?>' target='_blank'>こちらから</a>
+							 詳細は<a class='new-window' href='<?php echo site_url('question/detail/1') ?>' target='_blank'>こちらから</a>
 						</th>
 		<?php foreach($payments as $key => $val):?>
 						<td>
@@ -96,7 +96,7 @@
 					<tr>
 						<th class='no-back'></td>
 						<td class='no-border'></td>
-						<td><input type='submit' name='submit' value='ご注文の最終確認画面へ' id='submit'><a class='edit_back' href='<?php echo site_url("front_customer/login_action/proceed") ?>'>戻る</a></td>
+						<td><input type='submit' name='submit' value='ご注文の最終確認画面へ' id='submit'><a class='edit_back' href='<?php echo site_url("customer/login_action/proceed") ?>'>戻る</a></td>
 					</tr>
 				</table>
 			</form>
