@@ -1,5 +1,7 @@
+<?php include __DIR__ . '/../templates/doctype.php' ?>
+<head>
 <?php include __DIR__ . '/../templates/meta_materialize.php' ?>
-<script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
+</head>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
 <div id="wrapper">

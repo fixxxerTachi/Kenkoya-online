@@ -1,13 +1,7 @@
+<?php include __DIR__ . '/../templates/doctype.php' ?>
+<head>
 <?php include __DIR__ . '/../templates/meta_materialize.php' ?>
-<link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>css/admin_order.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>css/remodal.css" rel="stylesheet">
-<script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
-<script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
-<script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
-<script src="<?php echo base_url('js/calender.js')?>"></script>
-<script src="<?php echo base_url('js/alert.js') ?>"></script>
-<script src="<?php echo base_url('js/remodal.js') ?>"></script>
+</head>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
 <div id="wrapper">
@@ -70,7 +64,7 @@
 							<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
 							<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
 							<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
-							<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックを外す</a></td>
+							<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックをつける</a></td>
 						</table>
 					</tr>
 				</table>

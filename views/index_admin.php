@@ -1,4 +1,6 @@
-<?php include 'templates/meta_materialize.php' ?>
+<?php include __DIR__.'/templates/doctype.php' ?>
+<head>
+<?php include __DIR__.'/templates/meta_materialize.php' ?>
 <body>
 <div id='wrapper'>
 <?php include 'templates/header.php' ?>
