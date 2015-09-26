@@ -11,6 +11,7 @@
 <link rel='stylesheet' href='<?php echo base_url('css/admin.css') ?>'>
 <link href="<?php echo base_url() ?>css/admin_order.css" rel="stylesheet">
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
 <script src='<?php echo base_url('js/datepicker-ja.js') ?>'></script>

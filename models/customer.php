@@ -66,7 +66,6 @@ class Customer extends CI_Model{
 		}
 	}
 	
-	
 	public function check_username($str,$del_flag=True)
 	{
 		if($del_flag){

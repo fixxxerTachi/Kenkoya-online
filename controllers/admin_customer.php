@@ -11,7 +11,7 @@ class Admin_customer extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination'));
+		$this->load->library(array('session','form_validation','pagination','my_validation'));
 		$this->load->helper('form');
 		$this->load->model('Customer');
 		$this->load->model('Customer_info');
@@ -116,7 +116,11 @@ class Admin_customer extends CI_Controller{
 				'account_number'=>$this->input->post('account_number'),
 				'create_date' => date('Y-m-d H:i:s'),
 			);
-			$this->form_validation->set_rules('name','姓','required');
+			$this->form_validation->set_rules('name','お名前','required');
+			$this->form_validation->set_rules('address1','住所','required');
+			$this->form_validation->set_rules('tel','電話番号','required');
+			$this->my_validation->validation_message();
+			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
 			if($this->form_validation->run() === FALSE){
 				$this->data['error_message'] = '未入力項目があります';
 				$form_data = (object)$input_data;
@@ -133,7 +137,7 @@ class Admin_customer extends CI_Controller{
 	
 	public function list_customer()
 	{
-		$this->data['h2title'] = '会員一覧';
+		$this->data['h2title'] = '会員検索';
 		$show_detail = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
 		$form_data = array(
@@ -203,7 +207,7 @@ class Admin_customer extends CI_Controller{
 				//'address2' => $this->input->post('address2'),
 				'tel' => $this->input->post('tel'),
 				'tel2' => $this->input->post('tel2'),
-				'birthday' => $birthday,
+				'birthday' => $this->input->post('birthday'),
 				'point'=>$this->input->post('point'),
 				'rank'=>$this->input->post('rank'),
 				'bank_name'=>$this->input->post('bank_name'),
@@ -212,6 +216,10 @@ class Admin_customer extends CI_Controller{
 			);
 		//add_validateion
 			$this->form_validation->set_rules('name','お名前','required');
+			$this->form_validation->set_rules('address1','住所','required');
+			$this->form_validation->set_rules('tel','電話番号','required');
+			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
+			$this->my_validation->validation_message();
 			if($this->form_validation->run() === FALSE){
 				$this->data['error_message'] = '未入力項目があります';
 				$this->data['form_data'] = (object)$input_data;
@@ -510,31 +518,73 @@ class Admin_customer extends CI_Controller{
 	
 	public function add_info()
 	{
-		$this->data['h2title'] = '会員お知らせ登録';
-		$form_data = $this->Customer_info;
-		$this->data['hour_list'] = $this->Master_hour->hour;
-		$this->data['form_data'] = $form_data;
-		if($this->input->post('submit')){
-			$input_data = array(
-				'title' => $this->input->post('title'),
-				'contents' => $this->input->post('contents'),
-				'start_datetime' => $this->input->post('start_date') . ' ' . $this->input->post('start_time'),
-				'end_datetime' => $this->input->post('end_date') . ' ' . $this->input->post('end_time'),
-			);
-			$this->form_validation->set_rules('title','タイトル','required');
-			if($this->form_validation->run() === FALSE){
-				$this->data['error_message'] = '未入力項目があります';
-				$form_data = (object)$input_data;
-				$this->data['form_data'] = $form_data;
-			}else{
-				$db_data = $input_data;
-				$db_data['create_date'] = date('Y-m-d H:i:s');
-				$result = $this->Customer_info->save($db_data);
-				$this->session->set_flashdata('success','登録しました');
-				redirect(site_url('/admin_customer/list_info'));
+		try
+		{
+			$this->data['h2title'] = '会員お知らせ登録・一覧';
+			/*** おしらせ一覧取得情報 ***/
+			$this->data['result'] = $this->Customer_info->show_list_sorted();
+			$this->data['show_flag'] = $this->Master_show_flag->show_flag;
+			$detail_flag = $this->uri->segment(3);
+			$id = $this->uri->segment(4);
+			if($detail_flag)
+			{
+				$detail_result = $this->Customer_info->get_by_id($id);
+				$this->data['detail_flag'] = $detail_flag;
+				$this->data['detail_result'] = $detail_result;
 			}
+			if($this->input->post('change_order'))
+			{
+				$this->Customer_info->db->trans_begin();
+				foreach($this->data['result'] as $obj)
+				{
+					$sort_num = $this->input->post("sort_order{$obj->id}");
+					$db_data = array('sort_order'=>$sort_num);
+					$this->Customer_info->update($obj->id,$db_data);
+				}
+				if($this->db->trans_status() === FALSE)
+				{
+					$this->Customer_info->db->trans_rollback();
+					throw new Exception('登録に失敗しました');
+				}
+				else
+				{
+					$this->Customer_info->db->trans_commit();
+					$this->session->set_flashdata('success','表示順を変更しました');
+					return redirect(site_url('admin_customer/add_info'));
+				}
+			}
+			/*** ここまでお知らせ一覧取得 ***/
+			$form_data = $this->Customer_info;
+			$this->data['hour_list'] = $this->Master_hour->hour;
+			$this->data['form_data'] = $form_data;
+			if($this->input->post('submit')){
+				$input_data = array(
+					'title' => $this->input->post('title'),
+					'contents' => $this->input->post('contents'),
+					'start_datetime' => $this->input->post('start_date') . ' ' . $this->input->post('start_time'),
+					'end_datetime' => $this->input->post('end_date') . ' ' . $this->input->post('end_time'),
+				);
+				$this->form_validation->set_rules('title','タイトル','required');
+				if($this->form_validation->run() === FALSE){
+					$this->data['error_message'] = '未入力項目があります';
+					$form_data = (object)$input_data;
+					$this->data['form_data'] = $form_data;
+				}else{
+					$db_data = $input_data;
+					$db_data['create_date'] = date('Y-m-d H:i:s');
+					$result = $this->Customer_info->save($db_data);
+					$this->session->set_flashdata('success','登録しました');
+					return redirect(site_url('/admin_customer/add_info'));
+				}
+			}
+			$this->data['success_message'] = $this->session->flashdata('success');
+			$this->load->view('admin_customer/add_customer_info',$this->data);
 		}
-		$this->load->view('admin_customer/add_customer_info',$this->data);
+		catch(Exception $e)
+		{
+			$this->session->set_flashdata('success',$e->getMessage());
+			return redirect(site_url('admin_customer/list_info'));
+		}
 	}
 	
 	public function list_info()
@@ -544,6 +594,7 @@ class Admin_customer extends CI_Controller{
 		$this->data['show_flag'] = $this->Master_show_flag->show_flag;
 		$detail_flag = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
+		
 		if($detail_flag){
 			$detail_result = $this->Customer_info->get_by_id($id);
 			$this->data['detail_flag'] = $detail_flag;
@@ -567,6 +618,8 @@ class Admin_customer extends CI_Controller{
 		$this->data['h2title'] = '会員お知らせ変更';
 		$this->data['message'] = '内容を修正して登録ボタンを押して下さい';
 		$this->data['hour_list'] = $this->Master_hour->hour;
+		$this->data['result'] = $this->Customer_info->show_list_sorted();
+		$this->data['show_flag'] = $this->Master_show_flag->show_flag;
 		$id = $this->uri->segment(3);
 		$result = $this->Customer_info->get_by_id($id);
 		$this->data['form_data'] = $result;
@@ -597,7 +650,7 @@ class Admin_customer extends CI_Controller{
 		$id = $this->uri->segment(3);
 		$this->Customer_info->delete($id);
 		$this->session->set_flashdata('success','削除しました');
-		redirect(site_url('/admin_customer/list_info'));
+		redirect(site_url('/admin_customer/add_info'));
 	}
 	public function change_show_flag_customer_info()
 	{
@@ -607,7 +660,7 @@ class Admin_customer extends CI_Controller{
 		$db_data = array('show_flag'=> $data);
 		$result  = $this->Customer_info->update($id,$db_data);
 		$this->session->set_flashdata('success','変更しました');
-		redirect('admin_customer/list_info');
+		redirect('admin_customer/add_info');
 	}
 	
 	public function show_new_member()
@@ -674,6 +727,17 @@ class Admin_customer extends CI_Controller{
 			}
 		}
 		$this->load->view('admin_customer/show_change_member',$this->data);
+	}
+	
+	//メールアドレスの重複をチェック
+	public function email_check($str)
+	{
+		if($this->Customer->check_email($str)){
+			return TRUE;
+		}else{
+			$this->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
+			return FALSE;
+		}
 	}
 	
 	/*

@@ -23,6 +23,7 @@ class Admin_urls extends CI_Model{
 		$this->db->from('admin_users_urls as uu');
 		$this->db->join($this->tablename . ' as u','u.id = uu.url_id','left');
 		$this->db->where('uu.user_id',$user_id);
+		$this->db->order_by('sort_order','asc');
 		$query=$this->db->get();
 		return $query->result();
 	}

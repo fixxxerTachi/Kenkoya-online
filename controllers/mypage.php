@@ -16,6 +16,7 @@ class Mypage extends CI_Controller{
 		$this->load->library(array('session','form_validation','pagination','encrypt'));
 		$this->load->library('my_mail');
 		$this->load->library('my_validation');
+		$this->load->library('my_class');
 		$this->load->helper('form');
 		if(!$this->session->userdata('customer')){
 			return redirect('front_customer/login_action/mypage');
@@ -76,6 +77,7 @@ class Mypage extends CI_Controller{
 		$this->data['form_data'] = $form_data;
 		$type = $this->uri->segment(3);
 		//住所変更の場合注意事項があるので注意事項を表示
+		/*
 		if($type == 'address')
 		{
 			$agreed = $this->uri->segment(4);
@@ -83,6 +85,7 @@ class Mypage extends CI_Controller{
 				return redirect('mypage/address_notice');
 			}
 		}
+		*/
 		$this->data['type'] = $type;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('mypage/mypage_account',$this->data);
@@ -100,6 +103,7 @@ class Mypage extends CI_Controller{
 		$customer = $customer;
 		$form_data = $customer;
 		$this->data['type'] = $type;
+		
 		if($type == 'name'){
 			if($this->input->post('submit')){
 				$form_data = array(
@@ -108,8 +112,10 @@ class Mypage extends CI_Controller{
 					//'new_member_flag'=>2,
 					'change_info'=>'name',
 				);
-				$this->form_validation->set_rules('furigana','フリガナ','required|max_length[100]');
-				$this->form_validation->set_rules('name','お名前','required|max_length[100]');
+				$form_data['name'] = $this->my_class->convert_kana($form_data['name']);
+				$form_data['furigana'] = $this->my_class->convert_space($form_data['furigana']);
+				$this->form_validation->set_rules('name','お名前','required|max_length[50]');
+				$this->form_validation->set_rules('furigana','フリガナ','required|max_length[100]|callback_kana_check');
 				$this->validation_message();
 				if(!$this->form_validation->run() == FALSE){
 					$old_info = "{$customer->name}({$customer->furigana})";
@@ -744,6 +750,18 @@ class Mypage extends CI_Controller{
 		$this->data['title'] = '住所変更にあたってのご注意';
 		$this->load->view('mypage/address_notice',$this->data);
 	}
+	
+	//全角かたかなチェック
+	public function kana_check($str)
+	{
+		if(preg_match("/^[ァ-ヶー　\s]+$/u", $str)) {
+			return TRUE;
+		}else{
+			$this->form_validation->set_message('kana_check','%sは全角カタカナで入力してください');
+			return FALSE;
+		}
+	}
+
 	/*
 	public function logout()
 	{

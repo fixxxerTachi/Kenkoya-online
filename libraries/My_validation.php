@@ -10,6 +10,8 @@ class My_validation{
 	public function validation_message(){
 		$this->ci->form_validation->set_message('required','%sを入力してください');
 		$this->ci->form_validation->set_message('numeric','%sは半角数字で入力してください');
+		$this->ci->form_validation->set_message('alpha_numeric','%sは半角英数字で入力してください');
+		$this->ci->form_validation->set_message('alpha_dash','%sは数字とハイフン(―)で入力してください');
 		$this->ci->form_validation->set_message('max_length',mb_convert_encoding('%sは%s文字以内で入力してください','utf-8'));
 		$this->ci->form_validation->set_message('min_length',mb_convert_encoding('%sは%s文字以上で入力してください','utf-8'));
 		$this->ci->form_validation->set_message('valid_email',mb_convert_encoding('%sは正しい形式で入力してください','utf-8'));
@@ -23,12 +25,13 @@ class My_validation{
 		$this->ci->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email');
 		$this->ci->form_validation->set_rules('email','メールアドレス(確認用)','required|max_length[100]|valid_email');
 		//$this->form_validation->set_rules('zipcode','郵便番号','required');
-		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required');
-		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required');
+		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required|numeric');
+		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required|numeric');
 		$this->ci->form_validation->set_rules('prefecture','県名','required|max_length[10]');
 		$this->ci->form_validation->set_rules('address1','住所','required|max_length[200]');
 		/*$this->form_validation->set_rules('street','住所、番地','required|max_length[100]');*/
-		$this->ci->form_validation->set_rules('tel','電話番号','required|max_length[15]');
+		$this->ci->form_validation->set_rules('tel','電話番号','required|alpha_dash|max_length[15]|callback_tel_check|callback_tel_format_check');
+		$this->ci->form_validation->set_rules('tel2','携帯電話番号','alpha_dash|max_length[15]|callback_tel_check|callback_tel_format_check');
 		/*
 		if($this->input->post('member')){
 			$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]');

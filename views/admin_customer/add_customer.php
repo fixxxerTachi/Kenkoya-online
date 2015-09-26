@@ -1,11 +1,15 @@
-<?php include __DIR__ . '/../templates/meta.php' ?>
+<?php include __DIR__ . '/../templates/doctype.php' ?>
+<head>
+<?php include __DIR__ . '/../templates/meta_materialize.php' ?>
+<script src='<?php echo base_url('js/jquery.ah-placeholder.js') ?>'></script>
+<script src='<?php echo base_url('js/placeholder.js')?>'></script>
+</head>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
-<div id="container">
-<?php include __DIR__ . '/../templates/side.php' ?>
-	<div id="body">
+<div id="wrapper">
+	<div class="container">
 		<div class='contents'>
-		<h2><?php echo $h2title ?></h2>
+		<h2><span class='logo_pink'>member</span> <?php echo $h2title ?></h2>
 			<?php if(!empty($message)):?>
 			<p class='message'><?php echo $message ?></p>
 			<?php endif;?>
@@ -15,6 +19,7 @@
 			<?php if(!empty($error_message)):?>
 			<p class='error'><?php echo $error_message ?></p>
 			<?php endif; ?>	
+			<?php echo validation_errors('<p class="error">','</p>');?>
 			<?php echo form_open() ?>
 				<table class='detail' cellpadding='0' cellspacing='10'>
 					<tr>
@@ -56,28 +61,12 @@
 							<?php if(!empty($no_area_data)) echo "<span>{$no_area_data}</span>" ?>
 					</td>
 					</tr>
-<!--
-					<tr>
-						<th><label for='prefecture'>県名</label></th>
-						<td>
-							<input type='text' name='prefecture' id='prefecture' value='<?php echo $form_data->prefecture ?>' size='10' maxlength='10'>
-						</td>
-					</tr>
--->
 					<tr>
 						<th><label for='address1'>住所</label></th>
 						<td>
 							<input type='text' name='address1' id='address1' value='<?php echo $form_data->address1 ?>' size='60' maxlength='60'>
 						</td>
 					</tr>
-<!--
-					<tr>
-						<th><label for='address2'>建物・アパート名</label></th>
-						<td>
-							<input type='text' name='address2' id='address2' value='<?php echo $form_data->address2 ?>' size='60' maxlength='60'>
-						</td>
-					</tr>
--->
 					<tr>
 						<th><label for='tel'>電話番号</label></th>
 						<td>
@@ -91,9 +80,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th><label for='age'>生年月日</label></th>
+						<th><label for='birthday'>生年月日</label></th>
 						<td>
-							<input type='text' name='birthday' id='birthday' value='<?php echo $form_data->birthday ?>' size='10' maxlength='10'>
+							<input placeholder="2000-01-01 01"type='text' name='birthday' id='birthday' value='<?php echo $form_data->birthday ?>' size='10' maxlength='10'>
 						</td>
 					</tr>
 					<tr>
@@ -108,6 +97,7 @@
 							<input type='rank' name='rank' id='rank' value='<?php echo $form_data->rank ?>' size='2' maxlength='2'>
 						</td>
 					</tr>
+					<!--
 					<tr>
 						<th><label for='bank_name'>銀行名</label></th>
 						<td><input type='text' name='bank_name' id='bank_name' value='<?php echo $form_data->bank_name ?>'>
@@ -123,6 +113,7 @@
 						<th><label for='account_number'>口座番号</label></th>
 						<td><input type='text' name='account_number' id='account_number' value='<?php echo $form_data->account_number ?>'>
 					</tr>
+					-->
 					<tr>
 						<th class='no-border'></th>
 						<td><input type='submit' name='submit' value='登録する'><a class='edit_back' href='<?php echo site_url('admin_customer/list_customer') ?>'>戻る</a></td>
@@ -132,6 +123,5 @@
 		</div>
 	</div>
 </div>
-<?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
 </html>

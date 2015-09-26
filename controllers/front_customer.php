@@ -189,12 +189,17 @@ class Front_customer extends CI_Controller{
 			//フリガナ変換
 			//$form_data->furigana = $this->myclass->convert_kana($form_data->furigana);
 			//$from_data->email = $this->myclass->convert_alpha($form_data->email);
-			$form_data->email_confirm = $this->my_class->convert_alpha($form_data->email_confirm);
-			$form_data->name = $this->my_class->convert_space($form_data->name);
+			//$form_data->email = $this->my_class->convert_alpha($form_data->email);
+			//$form_data->email_confirm = $this->my_class->convert_alpha($form_data->email_confirm);
+			$form_data->tel = $this->my_class->convert_alpha($form_data->tel);
+			$form_data->tel2 = $this->my_class->convert_alpha($form_data->tel2);
+			$form_data->name = $this->my_class->convert_kana($form_data->name);
+			$form_data->furigana = $this->my_class->convert_space($form_data->furigana);
 			
 			$this->my_validation->validation_rules();
 			if($no_member != 'no-member'){
 				$this->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
+				$this->form_validation->set_rules('tel','電話番号','required|alpha_dash|max_length[15]|callback_tel_check');
 			}
 			if($this->form_validation->run() === FALSE){
 				//
@@ -703,6 +708,34 @@ class Front_customer extends CI_Controller{
 			return TRUE;
 		}else{
 			$this->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
+			return FALSE;
+		}
+	}
+	
+	//電話番号の重複チェック
+	public function tel_check($str)
+	{
+		if($this->Customer->check_tel($str))
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('tel_check','%sはすでに登録されている電話番号です');
+			return FALSE;
+		}
+	}
+	
+	//電話番号のフォーマットチェック
+	public function tel_format_check($str)
+	{
+		if (preg_match("/^([0-9]{2,5})\-([0-9]{2,5})\-([0-9]{4,5})$/", $str))
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('tel_format_check','%sは正しい形式で入力してください');
 			return FALSE;
 		}
 	}

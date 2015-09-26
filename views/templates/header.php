@@ -28,7 +28,7 @@
 	<ul id='nav-mobile' class='side-nav fixed' style='width:230px; left; -250px'>
 			<h1><li class='logo'><a target='blank' href='<?php echo site_url() ?>'><img src='<?php echo base_url() ?>images/kenkoya_logo.jpg' alt='宅配スーパー健康屋' width='198' height='80'></a></li></h1>
 		<?php if(!empty($side)):?>
-		<?php asort($side);?>
+		<?php //asort($side);?>
 		<?php foreach($side as $key => $value):?>
 			<?php if($key == 'admin'):?>
 			<?php foreach($value as $k => $v):?>
