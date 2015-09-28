@@ -24,14 +24,17 @@ class My_validation{
 		$this->ci->form_validation->set_rules('furigana','フリガナ','required|max_length[100]|callback_kana_check');
 		$this->ci->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email');
 		$this->ci->form_validation->set_rules('email','メールアドレス(確認用)','required|max_length[100]|valid_email');
-		//$this->form_validation->set_rules('zipcode','郵便番号','required');
+		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required|max_length[3]|numeric');
+		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required|max_length[4]|numeric');
 		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required|numeric');
 		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required|numeric');
 		$this->ci->form_validation->set_rules('prefecture','県名','required|max_length[10]');
 		$this->ci->form_validation->set_rules('address1','住所','required|max_length[200]');
-		/*$this->form_validation->set_rules('street','住所、番地','required|max_length[100]');*/
 		$this->ci->form_validation->set_rules('tel','電話番号','required|alpha_dash|max_length[15]|callback_tel_check|callback_tel_format_check');
 		$this->ci->form_validation->set_rules('tel2','携帯電話番号','alpha_dash|max_length[15]|callback_tel_check|callback_tel_format_check');
+		$this->ci->form_validation->set_rules('year','誕生日(年)','max_length[4]|numeric');
+		$this->ci->form_validation->set_rules('month','誕生日(月)','max_length[2]|numeric');
+		$this->ci->form_validation->set_rules('day','誕生日(日)','max_length[2]|numeric');
 		/*
 		if($this->input->post('member')){
 			$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]');
@@ -86,38 +89,74 @@ class My_validation{
 		$this->ci->form_validation->set_rules('security_code','セキュリティーコード','required|numeric');
 		$this->validation_message();
 	}
-	/**** 以下はコントローラから呼び出し 
-	
 	//ユーザー名の重複をチェック
 	public function username_check($str)
 	{
-		if($this->Customer->check_username($str)){
+		if($this->ci->Customer->check_username($str)){
 			return TRUE;
 		}else{
-			$this->form_validation->set_message('username_check','%sはすでに登録されています');
+			$this->ci->form_validation->set_message('username_check','%sはすでに登録されています');
 			return FALSE;
 		}
 	}
 	//メールアドレスの重複をチェック
 	public function email_check($str)
 	{
-		if($this->Customer->check_email($str)){
+		if($this->ci->Customer->check_email($str)){
 			return TRUE;
 		}else{
-			$this->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
+			$this->ci->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
 			return FALSE;
+		}
+	}
+	
+	//電話番号の重複チェック
+	public function tel_check($str)
+	{
+		if(!empty($str))
+		{
+			if($this->ci->Customer->check_tel($str))
+			{
+				return TRUE;
+			}
+			else
+			{
+				$this->ci->form_validation->set_message('tel_check','%sはすでに登録されている電話番号です');
+				return FALSE;
+			}
+		}
+
+	}
+	
+	//電話番号のフォーマットチェック
+	public function tel_format_check($str)
+	{
+		if(!empty($str))
+		{
+			if (preg_match("/^([0-9]{2,5})\-([0-9]{2,5})\-([0-9]{4,5})$/", $str))
+			{
+				return TRUE;
+			}
+			else
+			{
+				$this->ci->form_validation->set_message('tel_format_check','%sは正しい形式で入力してください');
+				return FALSE;
+			}
+		}
+		else
+		{
+			return TRUE;
 		}
 	}
 	
 	//全角かたかなチェック
 	public function kana_check($str)
 	{
-		if(preg_match("/^[a]+$/u", $str)) {
+		if(preg_match("/^[ァ-ヶー　\s]+$/u", $str)) {
 			return TRUE;
 		}else{
-			$this->form_validation->set_message('kana_check','%sは全角カタカナで入力してください');
+			$this->ci->form_validation->set_message('kana_check','%sは全角カタカナで入力してください');
 			return FALSE;
 		}
 	}
-	******************/
 }

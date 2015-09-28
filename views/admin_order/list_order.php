@@ -1,10 +1,14 @@
 <?php include __DIR__ . '/../templates/doctype.php' ?>
 <head>
 <?php include __DIR__ . '/../templates/meta_materialize.php' ?>
+<script src='<?php echo base_url('js/alert.js') ?>'></script>
 </head>
 <body>
 <?php include __DIR__ . '/../templates/header.php' ?>
-<div id="wrapper">
+<div class="container">
+	<a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="mdi-navigation-menu"></i></a>
+</div>
+<main>
 	<div class='container'>
 				<?php if(!empty($h2title)):?>
 				<h2><span class='logo_pink'>order</span> <?php echo $h2title ?></h2>
@@ -153,7 +157,7 @@
 				<?php endif; ?>
 				</form>
 	</div>
-</div>
+</main>
 </body>
 <script>
 var button = $('#remove_check');

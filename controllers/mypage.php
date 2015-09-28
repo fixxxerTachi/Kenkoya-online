@@ -91,7 +91,6 @@ class Mypage extends CI_Controller{
 		$this->load->view('mypage/mypage_account',$this->data);
 	}
 	
-	
 	public function mypage_change()
 	{
 		$this->data['title'] = '会員情報変更';
@@ -138,10 +137,15 @@ class Mypage extends CI_Controller{
 					'email'=>$this->input->post('email'),
 				);
 				$form_data = (object)$form_data;
-				$this->form_validation->set_rules('email','メールアドレス','required|max_length[50]');
+				$form_data->email_confirm = $this->my_class->convert_space($form_data->email_confirm);
+				$form_data->email = $this->my_class->convert_space($form_data->email);
+				$this->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
+				$this->form_validation->set_rules('email','メールアドレス（確認用)','required|max_length[100]|valid_email');
 				$this->validation_message();
 				if(!$this->form_validation->run() == FALSE){
-					if($form_data->email_confirm == $form_data->email){
+					//if($form_data->email_confirm == $form_data->email)
+					if($this->my_validation->check_email_confirm($form_data) !== FALSE)
+					{
 						$db_data = array(
 							'email'=>$form_data->email,
 							//'new_member_flag'=>2,							
@@ -162,6 +166,7 @@ class Mypage extends CI_Controller{
 				}
 			}
 		}
+		
 		if($type == 'address'){
 			try{
 				if(!$address = $this->session->userdata('address')){
@@ -195,16 +200,20 @@ class Mypage extends CI_Controller{
 						'address2'=>$this->input->post('address2'),
 					);
 					$form_data = (object)$form_data;
+					$form_data->prefecture = $this->my_class->convert_space($this->form_data->prefecture);
+					$form_data->address1 = $this->my_class->convert_space($this->form_data->address1);
+					$form_data->street = $this->my_class->convert_space($this->form_data->street);
+					$form_data->address2 = $this->my_class->convert_space($this->form_data->address2);
 					if(isset($this->data['no_address'])){
 						$form_data->zipcode = $form_data->zipcode1 . $form_data->zipcode2;
 					}
 					if(!isset($this->data['no_address'])){
-						$this->form_validation->set_rules('zipcode','郵便番号','required|max_length[8]');
+						$this->form_validation->set_rules('zipcode','郵便番号','required|max_length[8]|alpha_dash');
 						$this->form_validation->set_rules('prefecture','県名','required|max_length[10]');
 						$this->form_validation->set_rules('street','住所','required|max_length[255]');
 					}else{
-						$this->form_validation->set_rules('zipcode1','郵便番号','required|maxlength[3]');
-						$this->form_validation->set_rules('zipcode2','郵便番号','required|maxlength[4]');
+						$this->form_validation->set_rules('zipcode1','郵便番号','required|maxlength[3]|numeric');
+						$this->form_validation->set_rules('zipcode2','郵便番号','required|maxlength[4]|numeric');
 						$this->form_validation->set_rules('address1','住所','required|maxlength[255]');
 					}
 					$this->validation_message();
@@ -267,7 +276,8 @@ class Mypage extends CI_Controller{
 					'tel2'=>$this->input->post('tel2'),
 				);
 				$form_data = (object)$form_data;
-				$this->form_validation->set_rules('tel','電話番号','required|max_length[14]');
+				$this->form_validation->set_rules('tel','電話番号','required|max_length[15]|alpha_dash|callback_tel_check|callback_tel_format_check');
+				$this->form_validation->set_rules('tel2','携帯電話番号','max_length[15]|alpha_dash|callback_tel_check|callback_tel_format_check');
 				$this->validation_message();
 				if(!$this->form_validation->run() === FALSE){
 					$db_data = array(
@@ -751,15 +761,34 @@ class Mypage extends CI_Controller{
 		$this->load->view('mypage/address_notice',$this->data);
 	}
 	
+	//ユーザー名の重複をチェック
+	public function username_check($str)
+	{
+		return $this->my_validation->username_check($str);
+	}
+	
+	//メールアドレスの重複をチェック
+	public function email_check($str)
+	{
+		return $this->my_validation->email_check($str);
+	}
+	
+	//電話番号の重複チェック
+	public function tel_check($str)
+	{
+		return $this->my_validation->tel_check($str);
+	}
+	
+	//電話番号のフォーマットチェック
+	public function tel_format_check($str)
+	{
+		return $this->my_validation->tel_format_check($str);
+	}
+	
 	//全角かたかなチェック
 	public function kana_check($str)
 	{
-		if(preg_match("/^[ァ-ヶー　\s]+$/u", $str)) {
-			return TRUE;
-		}else{
-			$this->form_validation->set_message('kana_check','%sは全角カタカナで入力してください');
-			return FALSE;
-		}
+		return $this->my_validation->kana_check($str);
 	}
 
 	/*

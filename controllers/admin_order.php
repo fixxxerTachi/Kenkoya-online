@@ -1,6 +1,6 @@
 <?php
-/*
 include __DIR__.'/../libraries/define.php';
+/*
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/Classes/PHPExcel.php';
 include __DIR__.'/../libraries/Classes/PHPExcel/IOFactory.php';
@@ -41,6 +41,8 @@ class Admin_order extends CI_Controller{
 		$this->data['h2title'] = '受注管理';
 		$this->load->view('index_admin',$this->data);
 	}
+	
+	
 	public function download()
 	{
 		$this->data['h2title'] = '受注リストダウンロード';

@@ -191,10 +191,16 @@ class Front_customer extends CI_Controller{
 			//$from_data->email = $this->myclass->convert_alpha($form_data->email);
 			//$form_data->email = $this->my_class->convert_alpha($form_data->email);
 			//$form_data->email_confirm = $this->my_class->convert_alpha($form_data->email_confirm);
-			$form_data->tel = $this->my_class->convert_alpha($form_data->tel);
-			$form_data->tel2 = $this->my_class->convert_alpha($form_data->tel2);
+			/* nameは半角カナ半角スペースがあったら全角カナ、スペースに変換 */
 			$form_data->name = $this->my_class->convert_kana($form_data->name);
 			$form_data->furigana = $this->my_class->convert_space($form_data->furigana);
+			$form_data->email_confirm = $this->my_class->convert_space($form_data->email_confirm);
+			$form_data->email = $this->my_class->convert_space($form_data->email);
+			$form_data->prefecture = $this->my_class->convert_space($form_data->prefecture);
+			$form_data->address1 = $this->my_class->convert_space($form_data->address1);
+			$form_data->address2 = $this->my_class->convert_space($form_data->address2);			
+			$form_data->tel = $this->my_class->convert_space($form_data->tel);
+			$form_data->tel2 = $this->my_class->convert_space($form_data->tel2);
 			
 			$this->my_validation->validation_rules();
 			if($no_member != 'no-member'){
@@ -234,6 +240,36 @@ class Front_customer extends CI_Controller{
 		$this->data['form_data'] = $form_data;
 		$this->data['succsss_message'] = $this->session->flashdata('success');
 		$this->load->view('front_customer/add_customer.php',$this->data);
+	}
+	
+	//ユーザー名の重複をチェック
+	public function username_check($str)
+	{
+		return $this->my_validation->username_check($str);
+	}
+	
+	//メールアドレスの重複をチェック
+	public function email_check($str)
+	{
+		return $this->my_validation->email_check($str);
+	}
+	
+	//電話番号の重複チェック
+	public function tel_check($str)
+	{
+		return $this->my_validation->tel_check($str);
+	}
+	
+	//電話番号のフォーマットチェック
+	public function tel_format_check($str)
+	{
+		return $this->my_validation->tel_format_check($str);
+	}
+	
+	//全角かたかなチェック
+	public function kana_check($str)
+	{
+		return $this->my_validation->kana_check($str);
 	}
 	
 	public function confirm_customer()
@@ -353,8 +389,6 @@ class Front_customer extends CI_Controller{
 		$this->session->set_flashdata('success','ログアウトしました');
 		return redirect('front_customer/login_action');
 	}
-
-	
 	
 	public function member_policy()
 	{
@@ -690,65 +724,6 @@ class Front_customer extends CI_Controller{
 			$this->data['error_message'] = $e->getMessage();
 		}
 		$this->load->view('front_customer/renew_input',$this->data);
-	}
-	//ユーザー名の重複をチェック
-	public function username_check($str)
-	{
-		if($this->Customer->check_username($str)){
-			return TRUE;
-		}else{
-			$this->form_validation->set_message('username_check','%sはすでに登録されています');
-			return FALSE;
-		}
-	}
-	//メールアドレスの重複をチェック
-	public function email_check($str)
-	{
-		if($this->Customer->check_email($str)){
-			return TRUE;
-		}else{
-			$this->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
-			return FALSE;
-		}
-	}
-	
-	//電話番号の重複チェック
-	public function tel_check($str)
-	{
-		if($this->Customer->check_tel($str))
-		{
-			return TRUE;
-		}
-		else
-		{
-			$this->form_validation->set_message('tel_check','%sはすでに登録されている電話番号です');
-			return FALSE;
-		}
-	}
-	
-	//電話番号のフォーマットチェック
-	public function tel_format_check($str)
-	{
-		if (preg_match("/^([0-9]{2,5})\-([0-9]{2,5})\-([0-9]{4,5})$/", $str))
-		{
-			return TRUE;
-		}
-		else
-		{
-			$this->form_validation->set_message('tel_format_check','%sは正しい形式で入力してください');
-			return FALSE;
-		}
-	}
-	
-	//全角かたかなチェック
-	public function kana_check($str)
-	{
-		if(preg_match("/^[ァ-ヶー　\s]+$/u", $str)) {
-			return TRUE;
-		}else{
-			$this->form_validation->set_message('kana_check','%sは全角カタカナで入力してください');
-			return FALSE;
-		}
 	}
 	
 /*

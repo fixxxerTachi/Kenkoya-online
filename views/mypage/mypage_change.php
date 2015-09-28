@@ -27,13 +27,13 @@
 				<table class='contact_form' cellpadding='0' cellspacing='10'>
 			<?php if($type=='name'):?>
 					<tr>
-						<th><label for='name' name='name'>お名前</label></th>
+						<th><label for='name' name='name'>お名前 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 							<input type='text' id='name' name='name' value='<?php echo $form_data->name ?>' size='60' maxlength='60'>
 						</td>
 					</tr>
 					<tr>
-						<th><label for='furigana'>フリガナ</label></th>
+						<th><label for='furigana'>フリガナ <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 							<input type='text' id='furigana' name='furigana' value='<?php echo $form_data->furigana ?>' size='60' maxlength='60'>
 						</td>
@@ -41,13 +41,13 @@
 			<?php endif;?>
 			<?php if($type == 'mail'):?>
 					<tr>
-						<th><label for='email_confirm'>メールアドレス</label></th>
+						<th><label for='email_confirm'>メールアドレス <span class='logo_pink'>必須</span> <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='text' name='email_confirm' id='email_confirm' value='<?php echo $form_data->email_confirm ?>' size='60' maxlength='60'>
 						</td>
 					</tr>
 					<tr>
-						<th><label for='email'>メールアドレス(確認)</label></th>
+						<th><label for='email'>メールアドレス(確認) <span class='logo_pink'>必須</span> <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='text' name='email' id='email' value='<?php echo $form_data->email ?>' size='60' maxlength='60'>
 						</td>
@@ -67,7 +67,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th><label for='street'>住所</label></th>
+						<th><label for='street'>住所　 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 							<?php echo $form_data->address1 ?><input type='text' name='street' id='street' value='<?php echo $form_data->street ?>' size='60' maxlength='60'>
 							<input type='hidden' name='address1' value='<?php echo $form_data->address1 ?>'>
@@ -85,7 +85,7 @@
 						<td><input type='text' name='zipcode1' id='zipcode1' value='<?php echo $form_data->zipcode1 ?>' size='3' maxlength='3'>-<input type='text' name='zipcode2' id='zipcode2' value='<?php echo $form_data->zipcode2 ?>' size='4' maxlength='4'> <a class='button' id='search_zip'>郵便番号で住所検索</a></td>
 					</tr>
 					<tr>
-						<th><label for='address1'>住所・番地</label></th>
+						<th><label for='address1'>住所・番地 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td><input type='text' name='address1' id='address1' value='<?php echo $form_data->address1 ?>' size='80' maxlength='80'></td>
 					</tr>
 					<tr>
@@ -96,7 +96,7 @@
 			<?php endif;?>
 			<?php if($type == 'tel'):?>
 					<tr>
-						<th><label for='tel'>電話番号</label></th>
+						<th><label for='tel'>電話番号 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 							<input type='text' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='14' maxlength='14'>
 						</td>

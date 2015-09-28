@@ -77,7 +77,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th><label for='street'>住所,番地 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
+						<th><label for='address1'>住所,番地 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 	<?php if($is_master_area):?>
 							<?php echo $form_data->address ?><input type='text' name='address1' id='address1' value='<?php echo $form_data->address1 ?>' size='30' maxlength='30'>

@@ -1,30 +1,32 @@
 <?php
 class My_Class{
+	/* 前後のスペースを取り除く　*/
+	public function trim_space($str)
+	{
+		//前の半角、全角スペースを取り除く
+		$str = preg_replace('/^[ 　]+/u', '', $str);
+		// 最後の半角、全角スペースを、空文字に置き換える
+		$str = preg_replace('/[ 　]+$/u', '', $str);
+		return $str;
+	}
 	/* 英数字変換 */
 	public function convert_alpha($str)
 	{
 		$result = mb_convert_kana($str,'a','UTF-8');
-		//空白を取り除く
 		return $result;
 	}
-	/*　半角カナと半角スペースを全角にする */
+	/*　文字列中の半角カナと半角スペースを全角にする */
 	public function convert_kana($str)
 	{
-		//前後の空を取り除く
-		$str = preg_replace('/^[ 　]+/u', '', $str);
-		// 最後の半角、全角スペースを、空文字に置き換える
-		$str = preg_replace('/[ 　]+$/u', '', $str);
+		$str = $this->trim_space($str);
 		$result = mb_convert_kana($str,'KVS','UTF-8');
 		return $result;
 	}
 	
-	/*　お名前で空白がある場合全角空白に変換して統一する　*/
+	/*　名前などで文字中にで空白がある場合全角空白に変換して統一する　*/
 	public function convert_space($str)
 	{
-		//前後の空を取り除く
-		$str = preg_replace('/^[ 　]+/u', '', $str);
-		// 最後の半角、全角スペースを、空文字に置き換える
-		$str = preg_replace('/[ 　]+$/u', '', $str);
+		$str = $this->trim_space($str);
 		$result = mb_convert_kana($str,'S','UTF-8');
 		return $result;
 	}

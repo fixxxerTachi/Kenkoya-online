@@ -53,6 +53,7 @@ $route['customer/notice/:any'] = 'front_customer/notice';
 $route['customer/reset_password'] = 'front_customer/reset_password';
 $route['customer/set_password'] = 'front_customer/set_password';
 $route['customer/renew_user'] = 'front_customer/renew_user';
+$route['customer/logout_action'] = 'front_customer/logout_action';
 /* front_cart */
 $route['cart/show_cart'] = 'front_cart/show_cart';
 $route['cart/empty_cart'] = 'front_cart/empty_cart';
