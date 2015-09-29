@@ -40,6 +40,8 @@ class Mypage extends CI_Controller{
 		$this->load->model('Bread');
 		$this->load->model('Master_address');
 		$this->load->model('Mst_paid_flag');
+		$this->load->model('Master_customer_item');
+		$this->load->model('Customer_history');
 		$this->data['customer'] = $this->session->userdata('customer');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
@@ -102,6 +104,8 @@ class Mypage extends CI_Controller{
 		$customer = $customer;
 		$form_data = $customer;
 		$this->data['type'] = $type;
+		/* 変更するcustomer_itemを取得 */
+		$lists = $this->Master_customer_item->list_items();
 		
 		if($type == 'name'){
 			if($this->input->post('submit')){
@@ -119,11 +123,34 @@ class Mypage extends CI_Controller{
 				if(!$this->form_validation->run() == FALSE){
 					$old_info = "{$customer->name}({$customer->furigana})";
 					$new_info = "{$form_data['name']}({$form_data['furigana']})";
+					/* trans_start */
+					$this->Customer->db->trans_begin();
 					$this->Customer->update($sess_customer->id,$form_data);
-					$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'お名前の変更');
-					$this->session->set_flashdata('success','お名前を変更しました');
-					$this->Customer->re_session_userdata($sess_customer->id);
-					return redirect("mypage/mypage_account/{$type}");
+					$h_customer = $this->Customer_history;
+					$h_customer->customer_id = $sess_customer->id;
+					$h_customer->customer_code = $customer->code;
+					$h_customer->item_id = $lists['name'];
+					$h_customer->content = $customer->name;
+					$this->Customer_history->save($h_customer);
+					$f_customer = $this->Customer_history;
+					$f_customer->customer_id = $sess_customer->id;
+					$f_customer->customer_code = $customer->code;
+					$f_customer->item_id = $lists['furigana'];
+					$f_customer->content = $customer->furigana;
+					$this->Customer_history->save($f_customer);
+					if($this->Customer->db->trans_status() === FALSE)
+					{
+						$this->Customer->db->rollback();
+					   	return show_404();
+					}
+					else
+					{
+						$this->Customer->db->trans_commit();
+						$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'お名前の変更');
+						$this->session->set_flashdata('success','お名前を変更しました');
+						$this->Customer->re_session_userdata($sess_customer->id);
+						return redirect("mypage/mypage_account/{$type}");
+					}
 				}else{
 					$form_data = (object)$form_data;
 				}
@@ -151,13 +178,29 @@ class Mypage extends CI_Controller{
 							//'new_member_flag'=>2,							
 							'change_info'=>'email',
 							);
+						$this->Customer->db->trans_begin();
 						$this->Customer->update($sess_customer->id,$db_data);
-						$old_info = $customer->email;
-						$new_info = $form_data->email;
-						$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'メールアドレスの変更');
-						$this->session->set_flashdata('success','メールアドレスを変更しました');
-						$this->Customer->re_session_userdata($sess_customer->id);
-						return redirect("mypage/mypage_account/{$type}");
+						$h_customer = $this->Customer_historoy;
+						$h_customer->customer_id = $sess_customer->id;
+						$h_customer->customer_code = $sess_customer->code;
+						$h_customer->item_id = $lists['email'];
+						$h_customer->content = $customer->email;
+						$this->Customer_history->save($h_customer);
+						if($this->Customer->db->trans_status() === FALSE)
+						{
+							$this->Customer->db->rollback();
+							return show_404();
+						}
+						else
+						{
+							$this->Customer->db->trans_commit();	
+							$old_info = $customer->email;
+							$new_info = $form_data->email;
+							$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'メールアドレスの変更');
+							$this->session->set_flashdata('success','メールアドレスを変更しました');
+							$this->Customer->re_session_userdata($sess_customer->id);
+							return redirect("mypage/mypage_account/{$type}");
+						}
 					}else{
 						$this->data['error_message'] = '新しいメールアドレスと新しいメールアドレス（確認用）が異なります';
 					}

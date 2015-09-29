@@ -8,7 +8,7 @@
 	<title>宅配スーパー健康屋 | メンテナンス</title>
 	<link rel='stylesheet' href='<?php echo $site_url . 'css/main.css' ?>'>
 	<link rel='stylesheet' href='<?php echo $site_url . 'css/maintenance.css'?>'>
-	<link rel="shortcut icon" href="<?php echo $ite_url . 'images/icon/favicon.ico' ?>" >
+	<link rel="shortcut icon" href="<?php echo $site_url . 'images/icon/favicon.ico' ?>" >
 </head>
 <body>
 <div id = 'header-wrapper'>
