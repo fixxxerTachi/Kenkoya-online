@@ -49,4 +49,18 @@ class Test_customer extends CI_Controller {
 			echo $this->unit->run('1','1','Customer_history::save');
 		}
 	}
+
+	public function test_check_tel()
+	{
+		$tel = $this->uri->segment(3);
+		if(empty($tel))
+		{
+			header('Content-Type:text/html;Charset="utf-8"');
+			echo '電話番号のパラメータを入力してください';
+		}
+		else
+		{
+			var_dump($this->Customer->check_tel($tel));
+		}
+	}
 }

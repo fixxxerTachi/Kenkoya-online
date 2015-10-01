@@ -58,8 +58,8 @@ class My_validation{
 	
 	public function validation_login()
 	{
-		$this->ci->form_validation->set_rules('username','ユーザーID','required|max_length[50]');
-		$this->ci->form_validation->set_rules('password','パスワード','required|max_length[50]');
+		$this->ci->form_validation->set_rules('username','ユーザーID','required|min_length[8]|callback_username_format_check|max_length[50]');
+		$this->ci->form_validation->set_rules('password','パスワード','required|alpha_numeric|min_length[8]|max_length[50]');
 		$this->validation_message();
 	}
 	
@@ -125,7 +125,10 @@ class My_validation{
 				return FALSE;
 			}
 		}
-
+		else
+		{
+			return TRUE;
+		}
 	}
 	
 	//電話番号のフォーマットチェック
@@ -159,4 +162,20 @@ class My_validation{
 			return FALSE;
 		}
 	}
+	
+	/** usernameの形式チェック（半角英数字-_ **/
+	/*
+	public function username_format_check($str)
+	{
+		if(preg_match("/^[a-zA-Z0-9_-]+$/u",$str))
+		{
+			return TRUE;
+		}
+		else
+		{	
+			$this->ci->form_validation->set_message('username_format_check','%sは半角英数字,-,_のみ使用できます。');
+			return FALSE;
+		}
+	}
+	*/
 }

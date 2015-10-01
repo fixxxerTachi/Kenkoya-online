@@ -3,7 +3,7 @@
 <head>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
 <link rel='stylesheet' href='<?php echo base_url('css/mypage.css')?>'>
-<script src="http://ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script></head>
+<script src="//ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script></head>
 </head>
 <body>
 <div id='wrapper'>
@@ -96,13 +96,13 @@
 			<?php endif;?>
 			<?php if($type == 'tel'):?>
 					<tr>
-						<th><label for='tel'>電話番号 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
+						<th><label for='tel'>電話番号 <span class='logo_pink'>必須</span> <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='text' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='14' maxlength='14'>
 						</td>
 					</tr>
 					<tr>
-						<th><label for='tel2'>携帯電話番号</label></th>
+						<th><label for='tel2'>携帯電話番号 <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='text' name='tel2' id='tel2' value='<?php echo $form_data->tel2 ?>' size='14' maxlength='14'>
 						</td>
@@ -122,8 +122,8 @@
 						<th class='no-back'></th>
 						<td>
 							<ul>
-								<li><input type='submit' name='submit' id='submit' value='変更する'></li>
 								<li><a class='edit_back' href='<?php echo site_url('mypage') ?>'>戻る</a></li>
+								<li><input type='submit' name='submit' id='submit' value='変更する'></li>
 							</ul>
 						</td>
 					</tr>

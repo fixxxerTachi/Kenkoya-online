@@ -28,7 +28,7 @@
 				<table class='contact_form' cellpadding='0' cellspacing='10'>
 				<?php if($type == 'username'):?>
 					<tr>
-						<th><label for='current_pw' name='current_pw'>現在のパスワードを入力してください</label></th>
+						<th><label for='current_pw' name='current_pw'>現在のパスワードを入力してください <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='password' name='current_pw' id='current_pw'>
 						</td>
@@ -37,29 +37,29 @@
 						<td colspan='2'><input type='checkbox' name='user_email' id='user_email' value='1' <?php if(!empty($form_data->user_email) && $form_data->user_email == '1') echo "checked=checked"; ?>><label for='user_email'>ユーザーIDにメールアドレスを使用する</label>
 					</tr>
 					<tr>
-						<th>現在のユーザー名</th>
+						<th>現在のユーザー名 <span class='logo_green'>半角</span></th>
 						<td><?php echo $form_data->current_username ?></td>
 					</tr>
 					<tr>
-						<th><label for='username'>新しいユーザーID</label></td>
+						<th><label for='username'>新しいユーザーID <span class='logo_pink'>8文字以上</span> <span class='logo_green'>半角英数字のみ</span></label></td>
 						<td><input type='text' name='username' id='username' value='<?php echo $form_data->username ?>' size='50' maxlength='50'></td>
 					</tr>
 				<?php endif;?>
 				<?php if($type == 'password'):?>
 					<tr>
-						<th><label for='current_pw' name='current_pw'>現在のパスワードを入力してください</label></th>
+						<th><label for='current_pw' name='current_pw'>現在のパスワードを入力してください <span class='logo_green'>半角</span></label></th>
 						<td>
 							<input type='password' name='current_pw' id='current_pw'>
 						</td>
 					</tr>
 					<tr>
-						<th><label for='pw_confirm' name='pw_confirm'>新しいパスワードを入力してください （8文字以上16文字以内）</label></th>
+						<th><label for='pw_confirm' name='pw_confirm'>新しいパスワードを入力してください <span class='logo_pink'>8文字以上16文字以内</span> <span class='logo_green'>半角英数字のみ</span></label></th>
 						<td>
 							<input type='password' name='pw_confirm' id='pw_confirm'>
 						</td>
 					</tr>
 					<tr>
-						<th><label for='new_pw' name='new_pw'>新しいパスワードを入力してください(確認)</label></th>
+						<th><label for='new_pw' name='new_pw'>新しいパスワードを入力してください(確認) <span class='logo_pink'>8文字以上16文字以内</span> <span class='logo_green'>半角英数字のみ</span></label></th>
 						<td>
 							<input type='password' name='new_pw' id='new_pw'>
 						</td>
@@ -71,8 +71,8 @@
 						<th class='no-back'></th>
 						<td>
 							<ul>
-								<li><input type='submit' name='submit' id='submit' value='変更する'></li>
 								<li><a class='edit_back' href='<?php echo site_url('mypage') ?>'>戻る</a></li>
+								<li><input type='submit' name='submit' id='submit' value='変更する'></li>
 							</ul>
 						</td>
 					</tr>

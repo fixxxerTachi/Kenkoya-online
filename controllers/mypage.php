@@ -69,9 +69,7 @@ class Mypage extends CI_Controller{
 	{
 		$this->data['title'] = '会員情報の編集';
 		$customer = $this->_checklogin($this->data['customer']);
-//var_dump($this->session->userdata('customer'));
 		$this->data['h2title'] = 'マイページ：会員情報の編集';
-		//$sess_customer = $this->session->userdata('customer');
 		$customer = $this->Customer->get_by_username($customer);
 		$form_data = $customer;
 		$form_data->zipcode1 = substr($form_data->zipcode,0,3);
@@ -119,7 +117,7 @@ class Mypage extends CI_Controller{
 				$form_data['furigana'] = $this->my_class->convert_space($form_data['furigana']);
 				$this->form_validation->set_rules('name','お名前','required|max_length[50]');
 				$this->form_validation->set_rules('furigana','フリガナ','required|max_length[100]|callback_kana_check');
-				$this->validation_message();
+				$this->my_validation->validation_message();
 				if(!$this->form_validation->run() == FALSE){
 					$old_info = "{$customer->name}({$customer->furigana})";
 					$new_info = "{$form_data['name']}({$form_data['furigana']})";
@@ -137,7 +135,7 @@ class Mypage extends CI_Controller{
 					$f_customer->customer_code = $customer->code;
 					$f_customer->item_id = $lists['furigana'];
 					$f_customer->content = $customer->furigana;
-					$this->Customer_history->save($f_customer);
+					$f_customer->save();
 					if($this->Customer->db->trans_status() === FALSE)
 					{
 						$this->Customer->db->rollback();
@@ -168,7 +166,7 @@ class Mypage extends CI_Controller{
 				$form_data->email = $this->my_class->convert_space($form_data->email);
 				$this->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
 				$this->form_validation->set_rules('email','メールアドレス（確認用)','required|max_length[100]|valid_email');
-				$this->validation_message();
+				$this->my_validation->validation_message();
 				if(!$this->form_validation->run() == FALSE){
 					//if($form_data->email_confirm == $form_data->email)
 					if($this->my_validation->check_email_confirm($form_data) !== FALSE)
@@ -182,10 +180,10 @@ class Mypage extends CI_Controller{
 						$this->Customer->update($sess_customer->id,$db_data);
 						$h_customer = $this->Customer_historoy;
 						$h_customer->customer_id = $sess_customer->id;
-						$h_customer->customer_code = $sess_customer->code;
+						$h_customer->customer_code = $customer->code;
 						$h_customer->item_id = $lists['email'];
 						$h_customer->content = $customer->email;
-						$this->Customer_history->save($h_customer);
+						$h_customer->save();
 						if($this->Customer->db->trans_status() === FALSE)
 						{
 							$this->Customer->db->rollback();
@@ -219,7 +217,7 @@ class Mypage extends CI_Controller{
 				//エリアマスタに登録されている場合session　addressに住所がある
 				if($address->is_master_area){
 					//$form_data->zipcode = substr($address->zipcode,0,3) . '-' . substr($address->zipcode,3,6);
-					$form_data->zipcode = $address->zipcode;
+					$form_data->zipcode = $this->$address->zipcode;
 					$form_data->prefecture = $address->prefecture;
 					$form_data->address1 = $address->city . $address->address;
 					$form_data->street = '';
@@ -243,10 +241,10 @@ class Mypage extends CI_Controller{
 						'address2'=>$this->input->post('address2'),
 					);
 					$form_data = (object)$form_data;
-					$form_data->prefecture = $this->my_class->convert_space($this->form_data->prefecture);
-					$form_data->address1 = $this->my_class->convert_space($this->form_data->address1);
-					$form_data->street = $this->my_class->convert_space($this->form_data->street);
-					$form_data->address2 = $this->my_class->convert_space($this->form_data->address2);
+					$form_data->prefecture = $this->my_class->convert_space($form_data->prefecture);
+					$form_data->address1 = $this->my_class->convert_space($form_data->address1);
+					$form_data->street = $this->my_class->convert_space($form_data->street);
+					$form_data->address2 = $this->my_class->convert_space($form_data->address2);
 					if(isset($this->data['no_address'])){
 						$form_data->zipcode = $form_data->zipcode1 . $form_data->zipcode2;
 					}
@@ -259,7 +257,7 @@ class Mypage extends CI_Controller{
 						$this->form_validation->set_rules('zipcode2','郵便番号','required|maxlength[4]|numeric');
 						$this->form_validation->set_rules('address1','住所','required|maxlength[255]');
 					}
-					$this->validation_message();
+					$this->my_validation->validation_message();
 					if(!$this->form_validation->run() === FALSE){
 						//エリア内
 						if(!isset($this->data['no_address'])){
@@ -290,21 +288,40 @@ class Mypage extends CI_Controller{
 								'cource_code'=>0,
 							);
 						}
+						/*** trans_begin() ***/
+						$this->Customer->db->trans_begin();
 						$this->Customer->update($sess_customer->id , $db_data);
-						$new_customer = $this->Customer->get_by_username($customer);
-						$old_zipcode = substr($customer->zipcode,0,3) . '-' . substr($customer->zipcode,3,6);
-						$old_info = "〒{$old_zipcode}\n";
-						$old_info .= "{$customer->address1}{$customer->address2}\n";
-						//$old_info .= "電話番号: {$customer->tel}\n";
-						$new_zipcode = substr($new_customer->zipcode,0,3) . '-' . substr($new_customer->zipcode,3,6);
-						$new_info = "\n〒{$new_zipcode}\n";
-						$new_info .= "{$new_customer->address1}{$new_customer->address2}\n";
-						//$new_info .= "電話番号: {$form_data->tel}\n";
-						$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'住所の変更');
-						$this->session->unset_userdata('address');
-						$this->Customer->re_session_userdata($sess_customer->id);
-						$this->session->set_flashdata('success','住所を変更しました');
-						return redirect("mypage/mypage_account/{$type}/agreed");
+						$h_customer = $this->Customer_history;
+						$h_customer->customer_id = $sess_customer->id;																																																																																																																																																																																																																																																																																																																																																																							$sess_customer->id;
+						$h_customer->customer_code = $customer->code;
+						$h_customer->item_id = $lists['name'];
+						//住所を連結して格納
+						$content = $db_data['zipcode'] . $db_data['address1']. $db_data['address2'];
+						$h_customer->content = $content;
+						$h_customer->save();
+						if($this->Customer->db->trans_status() === FALSE)
+						{
+							$this->Customer->db->rollback();
+							return show_404();
+						}
+						else
+						{
+							$this->Customer->db->trans_commit();
+							$new_customer = $this->Customer->get_by_username($customer);
+							$old_zipcode = substr($customer->zipcode,0,3) . '-' . substr($customer->zipcode,3,6);
+							$old_info = "〒{$old_zipcode}\n";
+							$old_info .= "{$customer->address1}{$customer->address2}\n";
+							//$old_info .= "電話番号: {$customer->tel}\n";
+							$new_zipcode = substr($new_customer->zipcode,0,3) . '-' . substr($new_customer->zipcode,3,6);
+							$new_info = "\n〒{$new_zipcode}\n";
+							$new_info .= "{$new_customer->address1}{$new_customer->address2}\n";
+							//$new_info .= "電話番号: {$form_data->tel}\n";
+							$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'住所の変更');
+							$this->session->unset_userdata('address');
+							$this->Customer->re_session_userdata($sess_customer->id);
+							$this->session->set_flashdata('success','住所を変更しました');
+							return redirect("mypage/mypage_account/{$type}/agreed");
+						}
 					}
 				}
 			}catch(Exception $e){
@@ -319,10 +336,14 @@ class Mypage extends CI_Controller{
 					'tel2'=>$this->input->post('tel2'),
 				);
 				$form_data = (object)$form_data;
-				$this->form_validation->set_rules('tel','電話番号','required|max_length[15]|alpha_dash|callback_tel_check|callback_tel_format_check');
-				$this->form_validation->set_rules('tel2','携帯電話番号','max_length[15]|alpha_dash|callback_tel_check|callback_tel_format_check');
-				$this->validation_message();
+				$form_data->tel = $this->my_class->convert_space($form_data->tel);
+				$form_data->tel2 = $this->my_class->convert_space($form_data->tel2);
+				$this->form_validation->set_rules('tel','電話番号','required|max_length[15]|alpha_dash|callback_tel_format_check');
+				$this->form_validation->set_rules('tel2','携帯電話番号','max_length[15]|alpha_dash|callback_tel_format_check');
+				$this->my_validation->validation_message();
 				if(!$this->form_validation->run() === FALSE){
+					/*** trans_begin ***/
+					$this->Customer->db->trans_begin();
 					$db_data = array(
 						'tel'=>$form_data->tel,
 						'tel2'=>$form_data->tel2,
@@ -330,20 +351,41 @@ class Mypage extends CI_Controller{
 						'change_info'=>'tel',
 					);
 					$this->Customer->update($sess_customer->id,$db_data);
-					$old_info = "電話番号: {$customer->tel}\n";
-					$old_info .= "携帯電話番号: {$customer->tel2}\n";
-					$new_info = "電話番号: {$form_data->tel}\n";
-					$new_info .= "携帯電話番号: {$form_data->tel2}\n";
-					$this->my_mail->send_mail_change_info($customer, $new_info, $old_info, 'お電話番号の変更');
-					$this->session->set_flashdata('success','お電話番号を変更しました');
-					$this->Customer->re_session_userdata($sess_customer->id);
-					return redirect("mypage/mypage_account/{$type}");
+					$h_customer = $this->Customer_history;
+					$h_customer->customer_id = $sess_customer->id;
+					$h_customer->customer_code = $customer->code;
+					$h_customer->item_id = $lists['tel'];
+					$h_customer->content = $customer->tel;
+					$h_customer->save();
+					$i_customer = $this->Customer_history;
+					$i_customer->customer_id = $sess_customer->id;
+					$i_customer->customer_code = $customer->code;
+					$i_customer->item_id = $lists['tel'];
+					$i_customer->content = $customer->tel2;
+					$i_customer->save();
+					if($this->Customer->db->trans_status() === FALSE)
+					{
+						$this->Customer->db->rollback();
+						return show_404();
+					}
+					else
+					{
+						$this->Customer->db->trans_commit();
+						$old_info = "電話番号: {$customer->tel}\n";
+						$old_info .= "携帯電話番号: {$customer->tel2}\n";
+						$new_info = "電話番号: {$form_data->tel}\n";
+						$new_info .= "携帯電話番号: {$form_data->tel2}\n";
+						$this->my_mail->send_mail_change_info($customer, $new_info, $old_info, 'お電話番号の変更');
+						$this->session->set_flashdata('success','お電話番号を変更しました');
+						$this->Customer->re_session_userdata($sess_customer->id);
+						return redirect("mypage/mypage_account/{$type}");
+					}
 				}else{
 					$form_data = (object)$form_data;
 				}
 			}
 		}
-		
+		/*
 		if($type == 'maga'){
 			if($this->input->post('submit')){
 				$maga = $this->input->post('maga');
@@ -362,7 +404,7 @@ class Mypage extends CI_Controller{
 				$this->Customer->re_session_userdata($sess_customer->id);
 				return redirect("mypage/mypage_account/{$type}");
 			}
-		}
+		}*/
 		$this->data['form_data']  = $form_data;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('mypage/mypage_change',$this->data);
@@ -376,6 +418,8 @@ class Mypage extends CI_Controller{
 		$sess_customer = $this->session->userdata('customer');
 		$customer = $this->Customer->get_by_username($sess_customer);
 		$this->data['type'] = $type;
+		/* customer_histroyの項目一覧*/
+		$lists = $this->Master_customer_item->list_items();
 		if($type == 'username'){
 			$this->data['h2title'] = 'ユーザーIDの変更';
 			$form_data = new StdClass();
@@ -385,8 +429,15 @@ class Mypage extends CI_Controller{
 			if($this->input->post('submit'))
 			{
 				$this->form_validation->set_rules('current_pw','現在のパスワード','required|max_length[16]');
-				$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]||callback_username_check');
-				$this->validation_message();
+				if($this->input->post('user_email'))
+				{
+					$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]|min_length[8]|valid_email|callback_username_check');
+				}
+				else
+				{
+					$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]|min_length[8]|alpha_dash|callback_username_check');
+				}
+				$this->my_validation->validation_message();
 				if(!$this->form_validation->run() === FALSE){
 					$form_data = array(
 						'current_pw'=>$this->input->post('current_pw'),
@@ -397,13 +448,32 @@ class Mypage extends CI_Controller{
 					if($this->Customer->check_password($sess_customer,$customer,$form_data))
 					{
 						$db_data = array(
-							'username'=>$form_data->username,
+							'username'=>$this->my_class->convert_space($form_data->username),
 							'new_member_flag'=>2,
 						);
+						$this->Customer->db->trans_begin();
 						$this->Customer->update($sess_customer->id,$db_data);
-						$this->session->set_flashdata('success','ユーザーIDを変更しました');
-						$this->Customer->re_session_userdata($sess_customer->id);
-						return redirect('mypage/change_auth/username');
+						$h_customer = $this->Customer_history;
+						$h_customer->customer_id = $sess_customer->id;
+						$h_customer->customer_code = $customer->code;
+						$h_customer->item_id = $lists['username'];
+						$h_customer->content = $customer->username;
+						$h_customer->save();
+						if($this->Customer->db->trans_status() === FALSE)
+						{
+							$this->Customer->db->rollback();
+							return show_404();
+						}
+						else
+						{
+							$this->Customer->db->trans_commit();							
+							$this->session->set_flashdata('success','ユーザーIDを変更しました');
+							$old_info = $customer->username;
+							$new_info = $form_data->username;
+							$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'ユーザー名の変更');
+							$this->Customer->re_session_userdata($sess_customer->id);
+							return redirect('mypage/change_auth/username');
+						}
 					}else{
 						$this->data['error_message'] = 'パスワードが違います';
 					}
@@ -414,10 +484,10 @@ class Mypage extends CI_Controller{
 			$this->data['h2title'] = 'パスワードの変更';
 			$form_data = new StdClass();
 			if($this->input->post('submit')){
-				$this->form_validation->set_rules('current_pw','現在のパスワード','required|min_length[8]|max_length[100]');
-				$this->form_validation->set_rules('pw_confirm','新しいパスワード','required|min_length[8]|max_length[16]');
-				$this->form_validation->set_rules('new_pw','新しいパスワード(確認)','required|min_length[8]|max_length[16]');
-				$this->validation_message();
+				$this->form_validation->set_rules('current_pw','現在のパスワード','required|min_length[8]|alpha_numeric|max_length[100]');
+				$this->form_validation->set_rules('pw_confirm','新しいパスワード','required|min_length[8]|alpha_numeric|max_length[16]');
+				$this->form_validation->set_rules('new_pw','新しいパスワード(確認)','required|min_length[8]|alpha_numeric|max_length[16]');
+				$this->my_validation->validation_message();
 				if(!$this->form_validation->run() === FALSE){
 					$form_data = array(
 						'current_pw'=>$this->input->post('current_pw'),
@@ -429,14 +499,35 @@ class Mypage extends CI_Controller{
 						if($this->Customer->check_password($sess_customer,$customer,$form_data))
 						{
 							$db_data = array(
-								'password'=>$this->encrypt->encode($form_data->password),
+								'password'=>$this->encrypt->encode($this->my_class->convert_space($form_data->password)),
 								'new_member_flag'=>2,
 							);
+							$this->Customer->db->trans_begin();
 							$this->Customer->update($sess_customer->id,$db_data);
-							$this->session->set_flashdata('success','パスワードを変更しました');
-							$this->Customer->re_session_userdata($sess_customer->id);
-							return redirect('mypage/change_auth/password');
-						}else{
+							$h_customer = $this->Customer_history;
+							$h_customer->customer_id = $sess_customer->id;
+							$h_customer->customer_code = $customer->code;
+							$h_customer->item_id = $lists['password'];
+							$h_customer->content = 'change_password';
+							$h_customer->save();
+							if($this->Customer->db->trans_status() === FALSE)
+							{
+								$this->Customer->db->rollback();
+								return show_404();
+							}
+							else
+							{
+								$this->Customer->db->trans_commit();
+								$old_info = '表示できません';
+								$new_info = '表示できません。マイページよりご確認ください。';
+								$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'パスワードの変更');
+								$this->session->set_flashdata('success','パスワードを変更しました');
+								$this->Customer->re_session_userdata($sess_customer->id);
+								return redirect('mypage/change_auth/password');
+							}
+						}
+						else
+						{
 							$this->data['error_message'] = 'パスワードが違います';
 						}
 					}else{
@@ -816,12 +907,14 @@ class Mypage extends CI_Controller{
 		return $this->my_validation->email_check($str);
 	}
 	
+	/*
 	//電話番号の重複チェック
 	public function tel_check($str)
 	{
 		return $this->my_validation->tel_check($str);
 	}
-	
+	*/	
+
 	//電話番号のフォーマットチェック
 	public function tel_format_check($str)
 	{
@@ -832,6 +925,12 @@ class Mypage extends CI_Controller{
 	public function kana_check($str)
 	{
 		return $this->my_validation->kana_check($str);
+	}
+	
+	//usernameの形式チェック
+	public function username_format_check($str)
+	{
+		return $this->my_validation->username_format_check($str);
 	}
 
 	/*
