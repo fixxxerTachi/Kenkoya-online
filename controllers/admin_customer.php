@@ -218,7 +218,7 @@ class Admin_customer extends CI_Controller{
 			$this->form_validation->set_rules('name','お名前','required');
 			$this->form_validation->set_rules('address1','住所','required');
 			$this->form_validation->set_rules('tel','電話番号','required');
-			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
+			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email');
 			$this->my_validation->validation_message();
 			if($this->form_validation->run() === FALSE){
 				$this->data['error_message'] = '未入力項目があります';

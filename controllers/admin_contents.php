@@ -242,6 +242,7 @@ class Admin_contents extends CI_Controller{
 		}
 		return true;
 	}
+	
 	public function mail_test()
 	{
 		$this->data['h2title'] = 'メール送信テスト';
@@ -262,6 +263,7 @@ class Admin_contents extends CI_Controller{
 	public function list_mail_template()
 	{
 		$this->data['h2title'] = 'メールテンプレート管理';
+		/*** メール一覧の処理 ***/
 		$this->data['result'] = $this->Mail_template->show_list();
 		$show_detail = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
@@ -270,7 +272,42 @@ class Admin_contents extends CI_Controller{
 			$this->data['show_detail'] = $show_detail;
 			$this->data['detail_result'] = $detail_result;
 		}
+		/*** メール追加の処理 ***/
+		$form_data= (object)array(
+			'template_name'=>'',
+			'for_customer'=>'',
+			'mail_title'=>'',
+			'mail_body'=>'',
+		);
+		if($this->input->post('submit')){
+			$template_name = $this->input->post('template_name');
+			$for_customer = $this->input->post('for_customer');
+			$mail_title = $this->input->post('mail_title');
+			$mail_body = $this->input->post('mail_body');
+			$this->form_validation->set_rules('template_name','表示名','required');
+			$this->form_validation->set_rules('mail_title','件名','required');
+			$this->form_validation->set_rules('mail_body','メール本文','required');
+			$this->form_validation->set_message('required','%sが未入力です');	
+			if($this->form_validation->run() == FALSE){
+				$this->data['error_message'] = '未入力項目があります';
+				$form_data->template_name = $this->input->post('template_name');
+				$form_data->for_customer = $this->input->post('for_customer');
+				$form_data->mail_title = $this->input->post('mail_title');
+				$form_data->mail_body = $this->input->post('mail_body');
+			}else{
+				$data = array(
+					'template_name'=>$template_name,
+					'for_customer'=>$for_customer,
+					'mail_title'=>$mail_title,
+					'mail_body'=>$mail_body,
+				);
+				$result=$this->Mail_template->save($data);
+				$this->session->set_flashdata('success','登録しました');
+				redirect(base_url('admin_contents/list_mail_template'));
+			}
+		}
 		$this->data['reciever'] = $this->Master_mail_reciever->reciever;
+		$this->data['form_data'] = $form_data;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_contents/admin_mail_template.php',$this->data);
 	}
@@ -309,7 +346,7 @@ class Admin_contents extends CI_Controller{
 		}
 		$this->load->view('admin_contents/admin_add_mail_template',$this->data);
 	}
-		
+	/*
 	public function add_mail_template()
 	{
 		$this->data['h2title'] = 'メールテンプレートの追加';
@@ -338,6 +375,7 @@ class Admin_contents extends CI_Controller{
 				$form_data->for_customer = $this->input->post('for_customer');
 				$form_data->mail_title = $this->input->post('mail_title');
 				$form_data->mail_body = $this->input->post('mail_body');
+			*/
 			/*
 				$form_data = (object)array(
 					'template_name'=>$this->input->post('template_name'),
@@ -347,6 +385,7 @@ class Admin_contents extends CI_Controller{
 				);
 				$this->data['form_data'] = $form_data;
 			*/
+		/*
 			}else{
 				$data = array(
 					'template_name'=>$template_name,
@@ -363,7 +402,7 @@ class Admin_contents extends CI_Controller{
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_contents/admin_add_mail_template.php',$this->data);		
 	}
-	
+	*/
 	public function delete_mail_template()
 	{
 		$id = $this->uri->segment(3);
@@ -372,6 +411,7 @@ class Admin_contents extends CI_Controller{
 		redirect(base_url('/admin_contents/list_mail_template'));
 	}
 	
+	/*
 	public function add_information()
 	{
 		$this->data['hour_list'] = $this->Master_hour->hour;
@@ -429,7 +469,8 @@ class Admin_contents extends CI_Controller{
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_contents/add_information',$this->data);
 	}
-
+	*/
+	
 	public function edit_information()
 	{
 		$this->data['hour_list'] = $this->Master_hour->hour;
@@ -489,9 +530,68 @@ class Admin_contents extends CI_Controller{
 	
 	public function list_information()
 	{
+		/** お知らせ一覧表示処理 **/
 		$this->data['h2title'] = 'お知らせ一覧';
 		$this->data['result'] = $this->Information->show_list();
 		$this->data['show_flag'] = $this->Master_show_flag->show_flag;
+		/** お知らせ詳細表示処理 **/
+		$id = $this->uri->segment(3);
+		$this->data['show_detail'] = $this->Information->get_by_id($id);
+		/** お知らせ追加処理 **/
+		$this->data['hour_list'] = $this->Master_hour->hour;
+		$this->data['h2title'] = 'お知らせ登録';
+		$form_data = $this->Information;
+		$this->data['form_data'] = $form_data;
+		$image_path = INFORMATION_IMAGE_PATH;
+		if($this->input->post('submit')){
+			$form_data=array(
+				'title'=>$this->input->post('title'),
+				'content'=>$this->input->post('content'),
+				'url'=>$this->input->post('url'),
+				'image_name'=>$this->input->post('image_name'),
+				'image_description'=>$this->input->post('image_description'),
+				'start_datetime'=>$this->input->post('start_date') . ' ' . $this->input->post('start_time'),
+				'end_datetime'=>$this->input->post('end_date') . ' ' . $this->input->post('end_time'),
+				'create_date'=>date('Y-m-d H:i:s'),
+				'sort_order'=>$this->Information->sort_order,
+			);
+			if(!empty($form_data['image_name']) && !$this->extentioncheck($form_data['image_name'])){
+				$this->data['error_message'] = 'jpgもしくはpng形式の画像名を入力してください';
+				$this->data['form_data'] = (object)$form_data;
+			}else{
+				$this->form_validation->set_rules('title','タイトル','required');
+				if($this->form_validation->run() === FALSE){
+					$this->data['error_message'] = '未入力項目があります';
+					$this->data['form_data'] = (object)$form_data;
+				}else{
+					if(!empty($_FILES['image']['name'])){
+						if(is_uploaded_file($_FILES['image']['tmp_name'])){
+							if(move_uploaded_file($_FILES['image']['tmp_name'],$image_path.$_FILES['image']['name'])){
+								if(!empty($form_data['image_name'])){
+									rename($image_path.$_FILES['image']['name'],$image_path.$form_data['image_name']);
+								}else{
+									$form_data['image_name'] = $_FILES['image']['name'];
+								}
+								$result = $this->Information->save($form_data);
+								$this->session->set_flashdata('success','登録しました');
+								redirect(base_url('/admin_contents/list_information'));
+							}else{
+								$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+								unlink($_FILES['image']['tmp_name']);
+							}
+						}else{
+							$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+						}
+					}else{
+						$result = $this->Information->save($form_data);
+						$this->session->set_flashdata('success','登録しました');
+						redirect(base_url('/admin_contents/list_information'));
+					}
+				}
+			}
+		}
+
+		/** 表示順変更処理 **/
 		if($this->input->post('change_order')){
 			foreach($this->data['result'] as $obj){
 				$sort_num = $this->input->post("sort_order{$obj->id}");
@@ -505,6 +605,7 @@ class Admin_contents extends CI_Controller{
 		$this->load->view('admin_contents/list_information',$this->data);
 	}
 	
+	/*
 	public function detail_information()
 	{
 		$this->data['h2title'] = 'おしらせ詳細';
@@ -513,6 +614,7 @@ class Admin_contents extends CI_Controller{
 		$this->data['result'] = $result;
 		$this->load->view('admin_contents/detail_information',$this->data);
 	}
+	*/
 	
 	public function delete_information()
 	{
@@ -542,6 +644,7 @@ class Admin_contents extends CI_Controller{
 				redirect('admin_contents/question_category');
 			}
 		}
+		$this->data['success_message'] = '登録しました';
 		$this->load->view('admin_contents/question_category',$this->data);
 	}
 
@@ -650,7 +753,7 @@ class Admin_contents extends CI_Controller{
 		$this->data['h2title'] = 'よくあるしつもん詳細';
 		$id =$this->uri->segment(3);
 		$result = $this->Contents_question->get_by_id($id);
-		$this->data['result'] = $result[0];
+		$this->data['result'] = $result;
 		$this->load->view('admin_contents/detail_contents_question',$this->data);
 	}
 	public function delete_contents_question()
