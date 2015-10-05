@@ -939,6 +939,7 @@ class Admin_advertise extends CI_Controller{
 		$this->load->view('admin_advertise/admin_category.php',$this->data);
 	}
 	
+	/*
 	public function add_banner()
 	{
 		$this->data['result'] = $this->Banner->show_list();
@@ -1097,6 +1098,7 @@ class Admin_advertise extends CI_Controller{
 		$this->session->set_flashdata('success','変更しました');
 		redirect('admin_advertise/add_banner');
 	}
+	*/
 	
 	public function add_admin_mail()
 	{

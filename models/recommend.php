@@ -79,6 +79,7 @@ class Recommend extends CI_Model{
 		$this->db->select('r.*
 			,ad.id as ad_id
 			,ad.title as ad_title
+			,ad_pro.id as ad_pro_id
 			,ad_pro.code as ad_code
 			,ad_pro.product_code as ad_pro_code
 			,ad_pro.product_name as ad_pro_product_name
@@ -107,6 +108,7 @@ class Recommend extends CI_Model{
 			,p.sale_price as p_sale_price
 			,ad.id as ad_id
 			,ad.title as ad_title
+			,ad_pro.id as ad_pro_id
 			,ad_pro.code as ad_code
 			,ad_pro.product_code as ad_pro_code
 			,ad_pro.product_name as ad_pro_product_name
@@ -121,10 +123,10 @@ class Recommend extends CI_Model{
 		if($del_flag){
 			$this->db->where('r.del_flag',0);
 		}
-		$this->db->where('r.id',$id);
+		$this->db->where('ad_pro.id',$id);
 		$this->db->order_by('sort_order','asc');
 		$query= $this->db->get();
-		return $query->result();
+		return $query->row();
 	}
 
 	public function show_list_with_image()

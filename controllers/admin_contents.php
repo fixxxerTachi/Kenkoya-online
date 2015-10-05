@@ -21,6 +21,7 @@ class Admin_contents extends CI_Controller{
 		$this->load->model('Advertise');
 		$this->load->model('Recommend');
 		$this->load->model('Top10');
+		$this->load->model('Banner');
 		$this->load->model('Master_show_flag');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
@@ -644,7 +645,7 @@ class Admin_contents extends CI_Controller{
 				redirect('admin_contents/question_category');
 			}
 		}
-		$this->data['success_message'] = '登録しました';
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_contents/question_category',$this->data);
 	}
 
@@ -863,7 +864,7 @@ class Admin_contents extends CI_Controller{
 		$this->data['h2title'] = 'おすすめ商品情報詳細';
 		$id = $this->uri->segment(3);
 		$form_data = $this->Recommend->show_list_with_advertise_and_product_by_id($id);
-		$this->data['form_data'] = $form_data[0];
+		$this->data['form_data'] = $form_data;
 		$this->data['result'] = $this->Recommend->show_list_with_advertise_and_product();
 		$this->data['ad_list'] = $this->Advertise->show_list_arr();
 		$this->load->view('admin_contents/detail_recommend',$this->data);
@@ -1043,5 +1044,168 @@ class Admin_contents extends CI_Controller{
 		$this->session->set_flashdata('success','変更しました');
 		redirect('admin_contents/add_recommend');
 	}
+	
+		public function add_banner()
+	{
+		$this->data['result'] = $this->Banner->show_list();
+		$this->data['hour_list'] = $this->Master_hour->hour;
+		$this->data['h2title'] = 'バナー登録';
+		$this->data['show_flag'] = $this->Master_show_flag->show_flag;
+		$form_data = $this->Banner;
+		$this->data['form_data'] = $form_data;
+		$image_path = BANNER_IMAGE_PATH;
+		if($this->input->post('submit')){
+			if(!$this->input->post('end_date')){
+				$end_date = '9999-12-31';
+			}else{
+				$end_date = $this->input->post('end_date');
+			}
+			$form_data=array(
+				'image_name'=>$this->input->post('image_name'),
+				'description'=>$this->input->post('description'),
+				'start_datetime'=>$this->input->post('start_date') . ' ' . $this->input->post('start_time'),
+				'end_datetime'=>$end_date . ' ' . $this->input->post('end_time'),
+				'url'=>$this->input->post('url'),
+				'inside_url'=>$this->input->post('inside_url'),
+				'create_datetime'=>date('Y-m-d H:i:s'),
+				'sort_order'=>$this->Banner->sort_order,
+			);
+			if(!empty($form_data['image_name']) && !$this->extentioncheck($form_data['image_name'])){
+				$this->data['error_message'] = 'jpgもしくはpng形式の画像名を入力してください';
+				$this->data['form_data'] = (object)$form_data;
+			}else{
+				if(!empty($_FILES['image']['name'])){
+					if(is_uploaded_file($_FILES['image']['tmp_name'])){
+						if(move_uploaded_file($_FILES['image']['tmp_name'],$image_path.$_FILES['image']['name'])){
+							if(!empty($form_data['image_name'])){
+								rename($image_path.$_FILES['image']['name'],$image_path.$form_data['image_name']);
+							}else{
+								$form_data['image_name'] = $_FILES['image']['name'];
+							}
+							$result = $this->Banner->save($form_data);
+							$this->session->set_flashdata('success','登録しました');
+							redirect(base_url('/admin_advertise/add_banner'));
+						}else{
+							$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+							unlink($_FILES['image']['tmp_name']);
+						}
+					}else{
+						$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+					}
+				}else{
+					$this->data['error_message'] = 'ファイルが選択されていません';
+					$this->data['form_data'] = (object)$form_data;
+				}
+			}
+		}
+		if($this->input->post('change_order')){
+			foreach($this->data['result'] as $obj){
+				$sort_num = $this->input->post("sort_order{$obj->id}");
+				$db_data = array('sort_order'=>$sort_num);
+				$this->Banner->update($obj->id,$db_data);
+			}
+			$this->session->set_flashdata('success','表示順を変更しました');
+			redirect(base_url('/admin_advertise/add_banner'));
+		}
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->load->view('admin_advertise/add_banner',$this->data);
+	}
+
+	public function edit_banner()
+	{
+		$this->data['hour_list'] = $this->Master_hour->hour;
+		$this->data['h2title'] = 'バナー変更';
+		$id = $this->uri->segment(3);
+		if(!is_numeric($id))
+		{
+			return show_404();
+		}
+		$form_data = $this->Banner->get_by_id($id);
+		$this->data['form_data'] = $form_data;
+		$image_path = BANNER_IMAGE_PATH;
+		$old_image = $image_path . $this->data['form_data']->image_name;
+		if($this->input->post('submit')){
+			if(!$this->input->post('end_date')){
+				$end_date = '9999-12-31';
+			}else{
+				$end_date = $this->input->post('end_date');
+			}
+			$form_data=array(
+				'image_name'=>$this->input->post('image_name'),
+				'description'=>$this->input->post('description'),
+				'url'=>$this->input->post('url'),
+				'inside_url'=>$this->input->post('inside_url'),
+				'start_datetime'=>$this->input->post('start_date') . ' ' . $this->input->post('start_time'),
+				'end_datetime'=>$this->input->post('end_date') . ' ' . $this->input->post('end_time'),
+			);
+			if(!empty($form_data['image_name']) && !$this->extentioncheck($form_data['image_name'])){
+				$this->data['error_message'] = 'jpgもしくはpng形式の画像名を入力してください';
+			}else{
+				if(!empty($_FILES['image']['name'])){
+					if(is_uploaded_file($_FILES['image']['tmp_name'])){
+						if(move_uploaded_file($_FILES['image']['tmp_name'],$image_path.$_FILES['image']['name'])){
+							if(!empty($form_data['image_name'])){
+								rename($image_path.$_FILES['image']['name'],$image_path.$form_data['image_name']);
+							}else{
+								$form_data['image_name'] = $_FILES['image']['name'];
+							}
+							//前の画像名と登録画像名が異なる場合古い画像を削除
+							if($old_image != $image_path . $form_data['image_name']){
+								unlink($old_image);
+							}
+							$result = $this->Banner->update($id,$form_data);
+							$this->session->set_flashdata('success','登録しました');
+							redirect(base_url('/admin_advertise/add_banner'));
+						}else{
+							$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+							unlink($_FILES['image']['tmp_name']);
+						}
+					}else{
+						$this->data['error_message'] = 'ファイルのアップロードに失敗しました';
+					}
+				}else{
+					//画像がアップロードされない場合画像名変更
+					rename($old_image,$image_path . $form_data['image_name']);
+					$result = $this->Banner->update($id,$form_data);
+					$this->session->set_flashdata('success','登録しました');
+					redirect(base_url('/admin_advertise/add_banner'));
+				}
+			}
+			$this->data['form_data'] = (object)$form_data;
+		}
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->load->view('admin_advertise/edit_banner',$this->data);	
+	}
+	
+	public function delete_banner()
+	{
+		$id = $this->uri->segment(3);
+		$this->Banner->delete($id);
+		$this->session->set_flashdata('success','削除しました');
+		redirect(base_url('/admin_advertise/add_banner'));
+	}
+	
+	/*
+	private function extentioncheck($data='')
+	{
+		$check = substr($data,strpos($data,'.')+1);
+		if(!in_array($check,array('jpg','jpeg','png'))){
+			return false;
+		}
+		return true;
+	}
+	*/
+	
+	public function change_show_flag_banner()
+	{
+		$str = $this->uri->segment(3);
+		$id = substr($str,strpos($str,'_')+1);
+		$data = $this->uri->segment(4);
+		$db_data = array('show_flag'=> $data);
+		$result  = $this->Banner->update($id,$db_data);
+		$this->session->set_flashdata('success','変更しました');
+		redirect('admin_advertise/add_banner');
+	}
+
 
 }

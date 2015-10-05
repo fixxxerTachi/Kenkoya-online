@@ -3,7 +3,7 @@
 			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_order/') ?>">受注管理</a>
 			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_customer/') ?>">会員管理</a>
 			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_contents/') ?>">コンテンツ管理</a>
-			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_advertise/') ?>">広告管理</a>
+			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_advertise/') ?>">チラシ管理</a>
 			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_product/') ?>">商品管理</a>
 			<a class='mdl-navigation__link' href="<?php echo base_url('/admin_admin/') ?>">管理メニュー</a>
 			<div class="mdl-layout-spacer"></div>
