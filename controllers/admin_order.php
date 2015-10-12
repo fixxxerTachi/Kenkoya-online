@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/../libraries/define.php';
+//include __DIR__.'/../libraries/define.php';
 /*
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/Classes/PHPExcel.php';

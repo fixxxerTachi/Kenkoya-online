@@ -31,9 +31,21 @@ class Contact extends CI_Model{
 		return $arr;
 	}
 
-	public function show_list()
+	public function show_list($offset = null, $limit = null, $no_reply = null)
 	{
-		$this->db->order_by('update_datetime','desc');
+		if(is_null($offset) && !is_null($limit))
+		{
+			$this->db->limit($limit);
+		}
+		if(!is_null($offset) && !is_null($limit))
+		{
+			$this->db->limit($limit, $offset);
+		}
+		if(!is_null($no_reply))
+		{
+			$this->db->where('reply_flag',0);
+		}
+		$this->db->order_by('create_datetime','desc');
 		$query= $this->db->get($this->tablename);
 		return $query->result();
 	}

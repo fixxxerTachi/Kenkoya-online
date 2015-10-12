@@ -1,9 +1,10 @@
 <?php
+/*
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
-
+*/
 class Admin_contents extends CI_Controller{
 	public $data = array();
 	public function __construct()

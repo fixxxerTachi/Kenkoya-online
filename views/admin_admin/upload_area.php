@@ -8,13 +8,15 @@
 		<main class="mdl-layout__content mdl-color--grey-100">
 			<div class="mdl-grid demo-content">
 				<div class='container'>
-					<h2><span class='logo_pink'>order_list</span> <?php echo $h2title ?></h2>
+					<h2><span class='logo_pink'>area</span> <?php echo $h2title ?></h2>
 					<?php echo form_open_multipart() ?>
 					<dl class='csv_menu'>
 						<dt class='message'><?php echo $message ?></dt>
-						<dd><input type='checkbox' name='trancate' id='trancate'>
+						<dd>
+							<input type='checkbox' name='trancate' id='trancate'>
 							<label for='trancate'>既存のデータを破棄して新たにデータを作成します。既存のデータに追加する場合チェックをはずしてください</label>
 						</dd>
+						<dd><label for='shop_id'><?php echo form_dropdown('shop_id',$shops,'','id="shop_id"')?></dd>
 						<dd><input type='file' name='csvfile'></dd>
 						<dt></dt>
 						<dd><input type='submit' value='登録' class='input'></dd>

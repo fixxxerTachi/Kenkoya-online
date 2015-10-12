@@ -83,4 +83,9 @@ class Tax extends CI_Model{
 		$this->db->update($this->tablename,$data);
 	}
 	
+	public function save(array $data)
+	{
+		$this->db->insert($this->tablename,$data);
+	}
+	
 }

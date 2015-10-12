@@ -18,7 +18,7 @@
 					<?php if(!empty($error_message)):?>
 					<p class='error'><?php echo $error_message ?></p>
 					<?php endif; ?>
-					<?php if(count($result) > 0):?>
+	<?php if(count($result) > 0):?>
 						<table class='mdl-data-table mdl-js-data-table'>
 							<tr><th>ID</th><th>タイトル</th><th>販売開始</th><th>販売終了</th><th>登録画像数</th><th>登録商品数</th><th></th><th></th><th></th><th></th></tr>
 		<?php foreach($result as $row):?>
@@ -34,13 +34,10 @@
 								<td><a href='<?php echo base_url("/admin_advertise/upload_code/{$row->id}")?>'>商品コード登録</a></td>
 								<td><a href='<?php echo base_url("/admin_advertise/edit_advertise/{$row->id}")?>'>チラシデータ修正</a></td>
 								<td><a href='<?php echo base_url("/admin_advertise/list_product/{$row->id}")?>'>登録商品リスト</a></td>
-								<td><a class='edit' href='<?php echo base_url("/admin_advertise/delete_advertise/{$row->id}")?>'>削除</a></td>
+								<td><a class='edit' onclick='del_confirm("<?php echo $row->title ?>",<?php echo $row->id ?>)' href='javascript:void(0)'>削除</a></td>
 							</tr>
 					<?php endforeach;?>
 						</table>
-<?php else:?>
-				<p>登録されていません</p>
-<?php endif;?>
 				</div>
 				<div class='container'>
 					<?php echo form_open() ?>
@@ -103,8 +100,21 @@
 						</table>
 					</form>
 				</div>
+<?php else:?>
+				<p>登録されていません</p>
+<?php endif;?>
 			</div>
 		</main>
 	</div>
 </body>
+<script>
+function del_confirm(template_name , id){
+	var template_name = template_name;
+	var id = id;
+	if(window.confirm(template_name + 'を削除してもよろしいですか')){
+		location.href='<?php echo site_url("admin_advertise/delete_advertise") ?>'  + '/' + id;
+		return false;
+	}
+}
+</script>
 </html>

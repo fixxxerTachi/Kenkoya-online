@@ -8,7 +8,7 @@
 		<main class="mdl-layout__content mdl-color--grey-100">
 			<div class="mdl-grid demo-content-large">
 				<div class='class="mdl-cell mdl-cell--12-col"'>
-					<h2><?php echo $h2title ?></h2>
+					<h2><span class='logo_pink'>advertise</span> <?php echo $h2title ?></h2>
 					<?php if(!empty($message)):?>
 					<p><?php echo $message ?></p>
 					<?php endif;?>
@@ -34,7 +34,7 @@
 					</table>
 					<?php if(!empty($result) > 0):?>
 						<p class='links'><?php echo $links ?></p>
-						<table class='mdl-data-table mdl-js-data-table'>
+						<table class='list'>
 							<tr>
 								<th class="mdl-data-table__cell--non-numeric">画像</th>
 								<th class="mdl-data-table__cell--non-numeric" style='width:80px;'>商品番号</th>
@@ -73,7 +73,7 @@
 								<td><a class='edit' href='<?php echo base_url("/admin_advertise/edit_product/{$row->id}/{$ad_id}") ?>'>変更</a></td>
 							</tr>
 							<?php endforeach;?>
-							<tr class='no-back'><td></td><td><a class='edit' href='<?php echo base_url('admin_advertise/add_advertise') ?>'>リストに戻る</a></td>
+							<tr class='no-back'><td></td><td colspan='2'><a class='edit' href='<?php echo base_url('admin_advertise/add_advertise') ?>'>チラシデータに戻る</a></td>
 						</table>
 					<?php else: ?>
 						<p>登録されていません</p>

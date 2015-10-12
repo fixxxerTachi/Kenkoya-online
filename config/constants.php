@@ -46,6 +46,10 @@ define('PAYMENT_CASH'  ,2);
 define('PAYMENT_CONVINI',3);
 define('PAYMENT_MEMBER',4);
 
+//表示非表示
+define('SHOW_ITEM',1);
+define('HIDE_ITEM',0);
+
 //最大販売数量の初期値(DBの初期値 adveteise_product:max_quantity)
 define('MAX_SALE_QUANTITY',30);
 

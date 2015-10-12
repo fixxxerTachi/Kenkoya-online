@@ -3,9 +3,9 @@ class Cource extends CI_Model{
 	public $tablename;
 	public $cource_code;
 	public $cource_name;
-	public $shop_code;
+	public $shop_id;
 	public $cource_type_id;
-	//public $takuhai_day;
+	public $takuhai_day;
 	public $delivery_person_id;
 	
 	public function __construct()
@@ -13,31 +13,35 @@ class Cource extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->tablename = 'takuhai_master_cource';
-		$this->account_number = '';
-		$max_cource_id = $this->get_max('cource_code');
-		$this->cource_code = (int)$max_cource_id + 1;
+		$this->takuhai_day = $this->cource_type_id;
 	}
-	
+		
 	public function get_delivery_day($customer)
 	{
-		$shop_code = $customer->shop_code;
+		$shop_id = $customer->shop_id;
 		$cource_code = $customer->cource_code;
 		$this->db->select('t.takuhai_day,t.first,t.second');
 		$this->db->from($this->tablename . ' as c');
 		$this->db->join('master_cource_type as t','t.id = c.cource_type_id','left');
-		$this->db->where('c.shop_code',$shop_code);
+		$this->db->where('c.shop_id',$shop_id);
 		$this->db->where('c.cource_code',$cource_code);
 		$result = $this->db->get()->row();
 		return $result;
 	}
 	
-	public function show_list($del_flag=TRUE)
+	public function show_list($shop_id = Null,$del_flag=TRUE)
 	{
-		if($del_flag){
+		if($del_flag)
+		{
 			$this->db->where('del_flag','0');
 		}
+		if($shop_id)
+		{
+			$this->db->where('shop_id',$shop_id);
+		}
 		$query= $this->db->get($this->tablename);
-		return $query->result();
+		$result = $query->result();
+		return $result;
 	}
 	
 	public function show_list_with_delivery_person($del_flag=TRUE)
@@ -46,7 +50,7 @@ class Cource extends CI_Model{
 		$this->db->from($this->tablename.' as c');
 		$this->db->join('delivery_person as d','c.delivery_person_id = d.id','left');
 		if($del_flag){
-			$this->db->where('del_flag',0);
+			$this->db->where('c.del_flag',0);
 		}
 		$query=$this->db->get();
 		return $query->result();
@@ -60,12 +64,19 @@ class Cource extends CI_Model{
 		}
 	}
 	
-	public function show_list_for_dropdown()
+	public function show_list_for_dropdown($shop_id = null)
 	{
 		$arr = array();
-		$result = $this->show_list(false);
+		if($shop_id)
+		{
+			$result = $this->show_list($shop_id);
+		}
+		else
+		{
+			$result = $this->show_list();
+		}
 		foreach($result as $row){
-			$arr[$row->cource_code] = $row->cource_name;
+			$arr[$row->id] = $row->cource_name;
 		}
 		return $arr;
 	}
@@ -119,7 +130,7 @@ class Cource extends CI_Model{
 	
 	public function show_list_with_cource()
 	{
-		$this->db->select('a.id,a.zipcode,a.prefecture,a.city,a.address,a.cource_id,c.cource_name,c.takuhai_day');
+		$this->db->select('a.id,a.zipcode,a.prefecture,a.city,a.address,a.cource_id,c.cource_name as cource_name,c.takuhai_day');
 		$this->db->from("{$this->tablename} as a");
 		$this->db->join('master_cource as c','c.cource_id = a.cource_id','left');
 		return $this->db->get()->result();
@@ -143,7 +154,7 @@ class Cource extends CI_Model{
 	{
 		$this->db->where('id',$id);
 		$query = $this->db->get($this->tablename);
-		$result =  $query->result();
+		$result =  $query->row();
 		return $result;
 	}
 	

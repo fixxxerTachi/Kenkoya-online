@@ -6,6 +6,7 @@ class Master_payment extends CI_Model{
 	public $method_name;
 	public $notice;
 	public $description;
+	public $show_flag;
 	public $method;
 
 	public function __construct()
@@ -66,6 +67,15 @@ class Master_payment extends CI_Model{
 			$arr[$i] = $arr_list[$i]->method_name;
 		}
 		return $arr;
+	}
+	
+	/*** 表示非表示のドロップダウンリストのリスト***/
+	public function list_show_flag()
+	{
+		return array(
+			'0'=>'非表示',
+			'1'=>'表示',
+		);
 	}
 
 }

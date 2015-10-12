@@ -15,9 +15,13 @@ class Payment extends CI_Model{
 		$this->method = $this->show_list_arr();
 	}
 	
-	public function show_list()
+	public function show_list($show_flag = TRUE)
 	{
 		$this->db->where('del_flag',0);
+		if($show_flag)
+		{
+			$this->db->where('show_flag',1);
+		}
 		$result = $this->db->get($this->tablename)->result();
 		return $result;
 	}
@@ -68,4 +72,5 @@ class Payment extends CI_Model{
 		}
 		return $arr;
 	}
+	
 }

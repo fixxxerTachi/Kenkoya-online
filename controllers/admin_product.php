@@ -1,9 +1,10 @@
 <?php
+/*
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/csv.php';
-
+*/
 class Admin_product extends CI_Controller{
 	public $data = array();
 	public $new_tablename = 'takuhai_jan_size';

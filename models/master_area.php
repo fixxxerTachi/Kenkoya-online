@@ -14,8 +14,8 @@ class Master_area{
 		);
 		
 		$this->list_area_id = array(
-			'1'=>'金沢地区',
-			'2'=>'能登地区',
+			'2'=>'金沢地区',
+			'1'=>'能登地区',
 		);
 		
 		$this->list_select = array(

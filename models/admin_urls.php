@@ -206,7 +206,7 @@ class Admin_urls extends CI_Model{
 		}
 		$this->db->where('id',$id);
 		$query = $this->db->get($this->tablename);
-		$result =  $query->result();
+		$result =  $query->row();
 		return $result;
 	}
 	

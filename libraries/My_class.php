@@ -1,4 +1,5 @@
 <?php
+include __DIR__.'/../libraries/define.php';
 class My_Class{
 	/* 前後のスペースを取り除く　*/
 	public function trim_space($str)

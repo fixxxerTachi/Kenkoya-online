@@ -1,24 +1,26 @@
-<?php include __DIR__ . '/../templates/meta.php' ?>
-<link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
-<script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
-<script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
+<?php include __DIR__ . '/../templates/doctype.php' ?>
+<head>
+<?php include __DIR__ . '/../templates/meta_materialize.php' ?>
+</head>
 <body>
-<?php include __DIR__ . '/../templates/header.php' ?>
-<div id="container">
-<?php include __DIR__ . '/../templates/side.php' ?>
-	<div id="body">
-		<div class='contents'>
-			<h2><?php echo $h2title ?></h2>
-				<?php if(!empty($message)):?>
-				<p><?php echo $message ?></p>
-				<?php endif;?>
-				<?php if(!empty($success_message)):?>
-				<p class='success'><?php echo $success_message; ?></p>
-				<?php endif; ?>
-				<?php if(!empty($error_message)):?>
-				<p class='error'><?php echo $error_message ?></p>
-				<?php endif; ?>
-				<?php echo form_open_multipart() ?>
+	<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+	<?php include __DIR__ . '/../templates/header.php' ?>
+		<main class="mdl-layout__content mdl-color--grey-100">
+			<div class="mdl-grid demo-content">
+				<div class="mdl-cell mdl-cell--12-col">
+					<h2><span class='logo_pink'>advertise</span> <?php echo $h2title ?></h2>
+					<?php if(!empty($message)):?>
+					<p><?php echo $message ?></p>
+					<?php endif;?>
+					<?php if(!empty($success_message)):?>
+					<p class='success'><?php echo $success_message; ?></p>
+					<?php endif; ?>
+					<?php if(!empty($error_message)):?>
+					<p class='error'><?php echo $error_message ?></p>
+					<?php endif; ?>
+				</div>
+				<div class="mdl-cell mdl-cell--6-col">
+					<?php echo form_open_multipart() ?>
 					<table class='detail detail-left'>
 						<caption>商品台帳</caption>
 						<tr>
@@ -94,6 +96,8 @@
 							<td><?php echo number_format($form_data->volume) ?>g</td>
 						</tr>
 					</table>
+				</div>
+				<div class="mdl-cell mdl-cell--6-col">
 					<table class='detail detail-right'>
 						<caption>その他情報</caption>
 						<tr>
@@ -179,7 +183,7 @@
 						</tr>	
 						<tr>
 							<th class='no-border'></th>
-							<td><input type='submit' name='submit' value='登録する'><a class='edit_back' href='<?php echo base_url('admin_advertise/list_product/' . $form_data->advertise_id) ?>'>戻る</a></td>
+							<td><input type='submit' name='submit' value='登録する' class='submit_button'><a class='edit_back' href='<?php echo base_url('admin_advertise/list_product/' . $form_data->advertise_id) ?>'>戻る</a></td>
 						</tr>
 					</table>
 <!--
@@ -250,18 +254,10 @@
 						</tr>
 					</table>
 -->
-				</form>
-		</div>
+					</form>
+				</div>
+			</div>
+		</main>
 	</div>
-</div>
-<?php include __DIR__ . '/../templates/footer.php' ?>
 </body>
-<script>
-$('#sale_start_date,#sale_end_date,#delivery_start_date,#delivery_end_date').datepicker({
-	dateFormat:'yy/mm/dd',
-	monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-    dayNames: ['日', '月', '火', '水', '木', '金', '土'],
-    dayNamesMin: ['日', '月', '火', '水', '木', '金', '土'],
-});
-</script>
 </html>

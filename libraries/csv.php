@@ -6,6 +6,38 @@ class Csv
         $this->data = $data;
     }
 
+	function convertCsvToDb($filename){	
+		$file = $filename;
+		$data = file_get_contents($file);
+		$data = mb_convert_encoding($data,'UTF-8','sjis-win');
+		$temp = tmpfile();
+		fwrite($temp,$data);
+		rewind($temp);
+		while(($data = fgetcsv($temp,0,',')) !== FALSE){
+			$csv[]=$data;
+		}
+		fclose($temp);
+		return $csv;
+	}
+
+	function uploadCsv($file = 'csvfile'){
+		$message = '';
+		if(is_uploaded_file($_FILES[$file]['tmp_name'])){
+			if(move_uploaded_file($_FILES[$file]['tmp_name'], 'uploaded_csv/' . $_FILES[$file]['name'])){
+				$message =  'ファイルをアップロードしました';
+				//var_dump($_FILES);
+			}else{
+				throw new Exception('ファイルをアップロードできませんでした');
+			}
+		}else{
+			throw new Exception('ファイルが選択されていません');
+		}
+		return array(
+			'uploaded_file_name' => 'uploaded_csv/' . $_FILES[$file]['name'],
+			'message' => $message,
+		);
+	}
+
     function getCsv($filename,$is_ms = false) {
         $fp = fopen($filename, "w");
         if (true === $is_ms) {

@@ -191,9 +191,11 @@ class Area extends CI_Model{
 	
 	public function show_list_with_cource($city = Null,$zipcode=null)
 	{
-		$this->db->select('a.id,a.zipcode,a.prefecture,a.city,a.address,a.cource_code,a.cource_name,a.takuhai_day');
+		$this->db->select('a.id,a.zipcode,a.prefecture,a.city,a.address,a.cource_id,c.cource_name as cource_name,t.takuhai_day as takuhai_day');
 		$this->db->from("{$this->tablename} as a");
-		$this->db->join('master_cource as c','c.cource_code = a.cource_code','left');
+		$this->db->join('master_cource as c','c.id = a.cource_id','left');
+		$this->db->join('master_cource_type as t','t.id = c.cource_type_id','left');
+		$this->db->where('a.shop_id = c.shop_id');
 		if($city){
 			$this->db->like('a.city',$city);
 		}
