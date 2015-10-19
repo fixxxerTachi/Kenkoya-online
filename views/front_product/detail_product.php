@@ -38,7 +38,7 @@
 				<tr><th><span class='logo'>カロリー</span></th><td><?php echo $row->note ?></td></tr>
 				<tr><th><span class='logo'>アレルゲン</span></th><td><?php echo $row->allergen ?></td></tr>
 				<tr><th><span class='logo'>価格(税抜)</span></th><td><?php echo number_format($row->sale_price) ?>円</td></tr>
-				<tr><th><span class='logo'>配送</span></th><td><?php echo $short_names[$row->temp_zone_id] ?></td></tr>
+				<tr><th><span class='logo'>配送</span></th><td><?php if($is_yamato):?><?php echo $short_names[$row->temp_zone_id] ?><?php else:?><span style='color:red;'>健康屋宅配サービス専用商品です。<br>クロネコヤマト宅急便ではお届けしていません。</span><?php endif;?></td></tr>
 			</table>
 			<ul class='cart clearfix'>
 			<?php echo form_open('front_cart/input_cart') ?>

@@ -72,10 +72,12 @@
 </div>
 </body>
 <script>
+/*
 	document.getElementById('zipcode1').onkeyup = function(){
 		if(this.value.length == 3){
 			document.getElementById('zipcode2').focus();
 		}
 	}
+*/
 </script>
 </html>

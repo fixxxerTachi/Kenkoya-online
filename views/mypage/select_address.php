@@ -91,7 +91,7 @@
 						<td class='no-border'></td>
 						<td>
 <?php if(empty($edit_flag)):?>
-							<input type='submit' name='submit' value='確認画面へ'>		
+							<input type='submit' name='submit' value='確認画面へ'>
 <?php else:?>
 							<input type='submit' name='submit' value='登録する'>
 <?php endif;?>
@@ -114,6 +114,3 @@ search_zip.onclick = function(){
 };
 </script>
 </html>
-<?php echo 'cart:';var_dump($this->session->userdata('carts'));?>
-<?php echo 'customer:';var_dump($this->session->userdata('customer'));?>
-<?php echo 'address:';var_dump($this->session->userdata('address'));?>

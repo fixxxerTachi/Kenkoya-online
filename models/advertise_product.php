@@ -88,7 +88,34 @@ class Advertise_product extends CI_Model{
 		$this->db->join('temp_zone as tmp','tmp.id = ap.temp_zone_id','left');
 		$this->db->where('ap.id',$product_id);
 		return $this->db->get()->row();
-	}		
+	}
+	
+	/*** 宅急便で配送可能かどうか 
+	* @param int product_id
+	* @return bool
+	*/
+	public function is_yamato($product_id)
+	{
+		if(empty($product_id))
+		{
+			throw new Exception('no argument');
+		}
+		$this->db->select('ap.id')->from($this->tablename.' as ap');
+		$this->db->join('jan_size as s','s.product_code = ap.product_code','left');
+		$this->db->where('ap.id',(int)$product_id);
+		$this->db->where('ap.yamato_flag',1);
+		$this->db->where('s.weight is not null');
+		$this->db->where('s.weight <> 0');
+		$row = $this->db->get()->row();
+		if(!empty($row))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 	
 	public function all_data($category_id)
 	{
@@ -216,6 +243,7 @@ class Advertise_product extends CI_Model{
 			ad_p.delivery_start_datetime as delivery_start_datetime,
 			ad_p.delivery_end_datetime as delivery_end_datetime,
 			ad_p.temp_zone_id,
+			ad_p.yamato_flag,
 			ad.title,
 			ad_p.category_id,
 		');

@@ -179,7 +179,7 @@ class Admin_advertise extends CI_Controller{
 		$result = $this->Advertise->get_by_id($id);
 		$this->data['result'] = $result;
 		$this->data['category'] = $this->Category->show_list_array();
-		$this->data['db'] = getDb();
+		$this->data['db'] = $this->my_class->getDb();
 		$this->data['h2title'] = "{$result->title} : 商品データ一括登録";
 		
 //ここから		
@@ -198,6 +198,7 @@ class Admin_advertise extends CI_Controller{
 				}
 				$stmt = $dbh->prepare('insert into takuhai_advertise_product(
 					code,
+					branch_code,
 					product_code,
 					maker,
 					product_name,
@@ -221,10 +222,12 @@ class Admin_advertise extends CI_Controller{
 					page,
 					create_date,
 					advertise_id,
-					category_id
+					category_id,
+					yamato_flag
 				) values(
 					:code,
 					:product_code,
+					:branch_code
 					:maker,
 					:product_name,
 					:size,
@@ -247,36 +250,39 @@ class Admin_advertise extends CI_Controller{
 					:page,
 					:create_date,
 					:advertise_id,
-					:category_id
+					:category_id,
+					:yamato_flag
 				)');
 
 				$error_arr=array();
 				foreach($csv as $row){
 					$stmt->bindValue(':code',$row[0]);
 					$stmt->bindValue(':product_code',$row[1]);
-					$stmt->bindValue(':maker',$row[2]);
-					$stmt->bindValue(':product_name',$row[3]);
-					$stmt->bindValue(':size',$row[4]);
-					$stmt->bindValue(':cost_price',$row[5]);
-					$stmt->bindValue(':sale_price',$row[6]);
-					$stmt->bindValue(':profit',$row[7]);
-					$stmt->bindValue(':profit_ratio',$row[8]);
-					$stmt->bindValue(':freshness_date',$row[9]);
-					$stmt->bindValue(':additive',$row[10]);
-					$stmt->bindValue(':allergen',$row[11]);
-					$stmt->bindValue(':calorie',$row[12]);
-					$stmt->bindValue(':note',$row[13]);
-					$stmt->bindValue(':note1',$row[14]);
-					$stmt->bindValue(':note2',$row[15]);
-					$stmt->bindValue(':image_group',$row[16]);
-					$stmt->bindValue(':page_x',$row[17]);
-					$stmt->bindValue(':page_y',$row[18]);
-					$stmt->bindValue(':width',$row[19]);
-					$stmt->bindValue(':height',$row[20]);
-					$stmt->bindValue(':page',$row[21]);
+					$stmt->bindValue(':branch_code',$row[2]);
+					$stmt->bindValue(':maker',$row[3]);
+					$stmt->bindValue(':product_name',$row[4]);
+					$stmt->bindValue(':size',$row[5]);
+					$stmt->bindValue(':cost_price',$row[6]);
+					$stmt->bindValue(':sale_price',$row[7]);
+					$stmt->bindValue(':profit',$row[8]);
+					$stmt->bindValue(':profit_ratio',$row[9]);
+					$stmt->bindValue(':freshness_date',$row[10]);
+					$stmt->bindValue(':additive',$row[11]);
+					$stmt->bindValue(':allergen',$row[12]);
+					$stmt->bindValue(':calorie',$row[13]);
+					$stmt->bindValue(':note',$row[14]);
+					$stmt->bindValue(':note1',$row[15]);
+					$stmt->bindValue(':note2',$row[16]);
+					$stmt->bindValue(':image_group',$row[17]);
+					$stmt->bindValue(':page_x',$row[18]);
+					$stmt->bindValue(':page_y',$row[19]);
+					$stmt->bindValue(':width',$row[20]);
+					$stmt->bindValue(':height',$row[21]);
+					$stmt->bindValue(':page',$row[22]);
 					$stmt->bindValue(':create_date',date('Y-m-d H:i:s'));
 					$stmt->bindValue(':advertise_id',$id);
-					$stmt->bindValue(':category_id',$row[22]);
+					$stmt->bindValue(':category_id',$row[23]);
+					$smtm->bindValue(':yamato_flag',$row[24]);
 					$stmt->execute();
 					$error_info=$stmt->errorInfo();
 					$error_arr[] = $stmt->errorInfo();

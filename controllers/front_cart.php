@@ -105,6 +105,8 @@ class Front_cart extends CI_Controller{
 		$this->data['h2title'] = 'カートの中身を見る';
 		$this->data['title'] = 'カート';
 		$carts = $this->session->userdata('carts');
+		$judge = TRUE; 
+		$no_yamato_name = '';
 		if(empty($carts)){
 			$carts = null;
 		}else{
@@ -115,11 +117,22 @@ class Front_cart extends CI_Controller{
 				//数量を追加する
 				$product->quantity = $c->quantity;
 				$list_product[] = $product;
+				//宅急便で配達可能かどうか調べる
+				$is_yamato = $this->Advertise_product->is_yamato($c->product_id);
+				if(!$is_yamato)
+				{
+					$no_yamato_name = $product->product_name;
+				}
+				$judge = $judge && $is_yamato;
 			}
 		
 		$this->data['list_product'] = $list_product;
 		}
 		$this->data['success_message']  = $this->session->flashdata('success');
+		if(!$judge)
+		{
+			$this->data['error_message'] = "「{$no_yamato_name}」は宅配スーパー健康屋屋お届け専用商品です。。<br>クロネコヤマト宅急便ではお届け出来ませんのでご注意ください。";
+		}
 		$this->load->view('front_cart/show_cart',$this->data);
 	}
 	

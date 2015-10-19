@@ -25,7 +25,7 @@
 								<label for='trancate'>既存のデータを破棄して新たにデータを作成します。既存のデータに追加する場合チェックをはずしてください</label>
 							</dd>
 							<dd>csvファイルの項目</dd>
-							<dt>A0:注文番号,B1:(商品コード),C2:メーカー,D3:商品名,E4:規格,F5:原価,G6:売価,H7:利益,I8:利益率,J9:賞味期限,K10:添加物,L11:アレルゲン,M12:カロリー,N13:備考,O14:備考,P15:備考,Q16:イメージグループ,R17:x座標,S18:Y座標,T19:width,U20:height,V21:掲載ページ,W22:カテゴリマスタ番号</dt>
+							<dt>A0:注文番号,B1:(商品コード),C2:(枝番),D3:メーカー,E4:商品名,F5:規格,G6:原価,H7:売価,I8:利益,J9:利益率,K10:賞味期限,L11:添加物,M12:アレルゲン,N13:カロリー,O14:備考,P15:備考,Q16:備考,R17:イメージグループ,S18:x座標,T19:Y座標,u20:width,V21:height,W22:掲載ページ,X23:カテゴリマスタ番号,Y:24:宅急便販売可能フラグ</dt>
 							<dd><input type='file' name='csvfile'></dd>
 							<dt></dt>
 							<dd><input type='submit' value='登録' class='input' style='margin-right: 30px'><a class='edit_back' href='<?php echo base_url('admin_advertise/add_advertise') ?>'>戻る</a></dd>

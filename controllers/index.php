@@ -48,7 +48,7 @@ class Index extends CI_Controller {
 		if($this->data->agent != 'others'){
 			$this->load->view('mobile/index',$this->data);
 		}else{
-			$this->load->view('index',$this->data);
+			$this->load->view('index_material',$this->data);
 		}
 	}
 	
@@ -119,6 +119,8 @@ class Index extends CI_Controller {
 				throw new Exception('no decimal');
 			}
 			$result = $this->Advertise_product->get_by_product_id($id);
+			$is_yamato = $this->Advertise_product->is_yamato($id);
+			$this->data->is_yamato = $is_yamato;
 			$this->data->row= $result;
 			$this->data->title = '商品詳細';
 			$this->data->h2title = "{$result->product_name}";

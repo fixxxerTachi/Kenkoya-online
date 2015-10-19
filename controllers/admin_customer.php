@@ -19,8 +19,11 @@ class Admin_customer extends CI_Controller{
 		$this->load->model('Master_hour');
 		$this->load->model('Personal');
 		$this->load->model('Master_show_flag');
-		$this->load->model('Master_area');
+		//$this->load->model('Master_area');
+		$this->load->model('Master_shop');
 		$this->load->model('Master_change_info');
+		$this->load->model('Cource');
+		$this->load->model('Customer_history');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
@@ -42,7 +45,9 @@ class Admin_customer extends CI_Controller{
 	{
 		$this->data['h2title'] = '会員新規登録';
 		$this->data['message'] = '下記の情報を入力して登録ボタンを押してください';
+		$this->data['shops'] = $this->Master_shop->array_lists(TRUE);
 		$form_data = $this->Customer;
+		/*
 		$sess_data = $this->session->userdata('result');
 		$this->session->unset_userdata('result');
 		if($sess_data == FALSE){
@@ -54,11 +59,15 @@ class Admin_customer extends CI_Controller{
 			$form_data->prefecture = $sess_data->prefecture;
 			$form_data->address1 = $sess_data->city . $sess_data->address;
 		}
+		*/
 		$this->data['form_data'] = $form_data;
+		$this->data['cource_list'] = $this->Cource->show_list_for_dropdown(0,TRUE);
+		/*
 		if($this->input->post('post_zip')){
 			$zipcode = $this->input->post('zipcode');
 			$address  = $this->Customer->get_area_by_zip($zipcode);
 			$input_data=array(
+				'cource_id'=>$this->input->post('cource_id'),
 				'code'=>$this->input->post('code'),
 				'zipcode'=>$this->input->post('zipcode'),
 				'name'=>$this->input->post('name'),
@@ -67,11 +76,11 @@ class Admin_customer extends CI_Controller{
 				'tel'=>$this->input->post('tel'),
 				'tel2'=>$this->input->post('tel2'),
 				'birthday'=>$this->input->post('birthday'),
-				'point'=>$this->input->post('point'),
-				'rank'=>$this->input->post('rank'),
-				'bank_name'=>$this->input->post('bank_name'),
-				'type_account'=>$this->input->post('type_account'),
-				'account_number'=>$this->input->post('account_number'),
+				//'point'=>$this->input->post('point'),
+				//'rank'=>$this->input->post('rank'),
+				//'bank_name'=>$this->input->post('bank_name'),
+				//'type_account'=>$this->input->post('type_account'),
+				//'account_number'=>$this->input->post('account_number'),
 			);
 			$form_data= (object)$input_data;
 			if(!empty($address)){
@@ -88,43 +97,48 @@ class Admin_customer extends CI_Controller{
 			$form_data=(object)$form_data;
 			$this->data['form_data'] = $form_data;
 		}
+		*/
 		if($this->input->post('submit')){
+			/*
 			if($this->input->post('birthday')){
 				$birthday = new DateTime();
 				$birthday = $birthday->format('Y-m-d');
 			}else{
 				$birthday = '';
-			}
-			$input_data = array(
-				'shop_code'=>$this->input->post('shop_code'),
-				'cource_code'=>$this->input->post('cource_code'),
-				'code'=>$this->input->post('code'),
-				'name' => $this->input->post('name'),
-				'furigana' => mb_convert_kana($this->input->post('furigana'),'KCs'),
-				'email' =>$this->input->post('email'),
-				'zipcode' => $this->input->post('zipcode'),
-				'prefecture' => $this->input->post('prefecture'),
-				'address1' => $this->input->post('address1'),
-				//'address2' => $this->input->post('address2'),
-				'tel' => $this->input->post('tel'),
-				'tel2'=> $this->input->post('tel2'),
-				'birthday' => $birthday,
-				'point'=>$this->input->post('point'),
-				'rank'=>$this->input->post('rank'),
-				'bank_name'=>$this->input->post('bank_name'),
-				'type_account'=>$this->input->post('type_account'),
-				'account_number'=>$this->input->post('account_number'),
-				'create_date' => date('Y-m-d H:i:s'),
-			);
-			$this->form_validation->set_rules('name','お名前','required');
-			$this->form_validation->set_rules('address1','住所','required');
-			$this->form_validation->set_rules('tel','電話番号','required');
+			}*/
+			$this->my_validation->validation_add_customer();
+			$this->form_validation->set_rules('code','顧客コード','callback_code_check');
+			$this->form_validation->set_rules('tel','電話番号','callback_tel_check');
+			$this->form_validation->set_rules('tel2','携帯電話番号','callback_tel_check');
+			$this->form_validation->set_rules('email','メールアドレス','callback_email_check');
 			$this->my_validation->validation_message();
-			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
-			if($this->form_validation->run() === FALSE){
-				$this->data['error_message'] = '未入力項目があります';
-				$form_data = (object)$input_data;
-			}else{
+			if($this->form_validation->run() === FALSE)
+			{
+				$this->data['form_data'] = (object)$this->input->post();
+			}
+			else
+			{
+				$input_data = array(
+					//'shop_code'=>$this->input->post('shop_code'),
+					'cource_id'=>$this->input->post('cource_id'),
+					'code'=>$this->input->post('code'),
+					'name' => $this->input->post('name'),
+					'furigana' => mb_convert_kana($this->input->post('furigana'),'KCs'),
+					'email' =>$this->input->post('email'),
+					'zipcode' => $this->input->post('zipcode'),
+					//'prefecture' => $this->input->post('prefecture'),
+					'address1' => $this->input->post('address1'),
+					'address2' => $this->input->post('address2'),
+					'tel' => $this->input->post('tel'),
+					'tel2'=> $this->input->post('tel2'),
+					'birthday' => $birthday,
+					//'point'=>$this->input->post('point'),
+					//'rank'=>$this->input->post('rank'),
+					//'bank_name'=>$this->input->post('bank_name'),
+					//'type_account'=>$this->input->post('type_account'),
+					//'account_number'=>$this->input->post('account_number'),
+					'create_date' => date('Y-m-d H:i:s'),
+				);
 				$db_data = $input_data;
 				$this->Customer->save($db_data);
 				$this->session->set_flashdata('success','登録しました');
@@ -132,7 +146,36 @@ class Admin_customer extends CI_Controller{
 			}		
 		}
 		$this->data['succsss_message'] = $this->session->flashdata('success');
+		$this->data['error_message'] = $this->session->flashdata('error');
 		$this->load->view('admin_customer/add_customer.php',$this->data);
+	}
+	public function code_length($str)
+	{
+		return $this->my_validation->code_length($str);
+	}
+	public function zipcode_length($str)
+	{
+		return $this->my_validation->zipcode_length($str);
+	}
+	public function email_check($str)
+	{
+		return $this->my_validation->email_check($str);
+	}
+	public function tel_check($str)
+	{
+		return $this->my_validation->tel_check($str);
+	}
+	public function code_check($str)
+	{
+		return $this->my_validation->code_check($str);
+	}
+	public function kana_check($str)
+	{
+		return $this->my_validation->kana_check($str);
+	}
+	public function birthday_format_check($str)
+	{
+		return $this->my_validation->birthday_format_check($str);
 	}
 	
 	public function list_customer()
@@ -141,19 +184,27 @@ class Admin_customer extends CI_Controller{
 		$show_detail = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
 		$form_data = array(
+			'shop_id'=>0,
 			'code'=>'',
 			'name'=>'',
+			'address1'=>'',
+			'address2'=>'',
+			'tel'=>'',
 		);
-		$this->data['shops'] = $this->Master_area->list_area;
+		//$this->data['shops'] = $this->Master_area->list_area;
+		$this->data['shops'] = $this->Master_shop->array_lists(TRUE);
 		$this->data['selected'] = '';
 		if($this->input->post('search')){
 			$form_data = array(
-				'shop_code'=>$this->input->post('shop_code'),
+				'shop_id'=>$this->input->post('shop_id'),
 				'name'=> $this->input->post('name'),
+				'address1'=>$this->input->post('address1'),
+				'address2'=>$this->input->post('address2'),
 				'code'=>$this->input->post('code'),
+				'tel'=>$this->input->post('tel'),
 			);
 			$form_data = (object)$form_data;
-			$this->data['selected'] = $form_data->shop_code;
+			$this->data['selected'] = $form_data->shop_id;
 			$this->data['result'] = $this->Customer->show_list_conditions($form_data);
 		}else{
 			$offset = $this->uri->segment(5);
@@ -180,9 +231,10 @@ class Admin_customer extends CI_Controller{
 	{
 		$id = $this->uri->segment(3);
 		$detail_result = $this->Customer->get_by_id($id);
-		$this->data['shops'] = $this->Master_area->list_area;
+		//$this->data['shops'] = $this->Master_area->list_area;
 		$this->data['detail_result'] = $detail_result;
 		$this->data['h2title'] = "{$this->data['detail_result']->name}さんの詳細情報";
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_customer/detail_customer',$this->data);
 	}
 
@@ -190,46 +242,90 @@ class Admin_customer extends CI_Controller{
 	{
 		$this->data['h2title'] = '会員情報の変更';
 		$this->data['message'] = '内容を修正して登録ボタンを押してください';
+		$this->data['shops'] = $this->Master_shop->array_lists(TRUE);
 		$id = $this->uri->segment(3);
 		$result= $this->Customer->get_by_id($id);
+		$this->data['cource_list'] = $this->Cource->show_list_for_dropdown($result->shop_id,TRUE);
 		$this->data['form_data'] = $result;
 		if($this->input->post('submit')){
-			$input_data = array(
-				'shop_code'=>$this->input->post('shop_code'),
-				'cource_code'=>$this->input->post('cource_code'),
-				'code'=>$this->input->post('code'),
-				'name' => $this->input->post('name'),
-				'furigana' => $this->input->post('furigana'),
-				'email' =>$this->input->post('email'),
-				'zipcode' => $this->input->post('zipcode'),
-				//'prefecture' => $this->input->post('prefecture'),
-				'address1' => $this->input->post('address1'),
-				//'address2' => $this->input->post('address2'),
-				'tel' => $this->input->post('tel'),
-				'tel2' => $this->input->post('tel2'),
-				'birthday' => $this->input->post('birthday'),
-				'point'=>$this->input->post('point'),
-				'rank'=>$this->input->post('rank'),
-				'bank_name'=>$this->input->post('bank_name'),
-				'type_account'=>$this->input->post('type_account'),
-				'account_number'=>$this->input->post('account_number'),
-			);
 		//add_validateion
-			$this->form_validation->set_rules('name','お名前','required');
-			$this->form_validation->set_rules('address1','住所','required');
-			$this->form_validation->set_rules('tel','電話番号','required');
-			$this->form_validation->set_rules('email','メールアドレス','required|max_length[100]|valid_email');
+			$this->my_validation->validation_add_customer();
 			$this->my_validation->validation_message();
 			if($this->form_validation->run() === FALSE){
 				$this->data['error_message'] = '未入力項目があります';
-				$this->data['form_data'] = (object)$input_data;
+				$this->data['form_data'] = (object)$this->input->post();
 			}else{
+				if(!$this->Customer->check_email($this->input->post('email'),TRUE,$id))
+				{
+					$this->session->set_flashdata('error','メールアドレスは既に登録されています。');
+					return redirect("admin_customer/edit_customer/{$id}");
+				}
+				if(!$this->Customer->check_tel($this->input->post('tel'),TRUE,$id)
+					|| !$this->Customer->check_tel($this->input->post('tel2'),TRUE,$id))
+				{
+					$this->session->set_flashdata('error','電話番号は既に登録されています。');
+					return redirect("admin_customer/edit_customer/{$id}");
+				}
+				if(!$this->Customer->check_code($this->input->post('code'),TRUE,$id))
+				{
+					$this->session->set_flashdata('error','顧客コードはすでに登録されています');
+					return redirect("admin_customer/edit_customer/{$id}");
+				}
+				$input_data = array(
+					'cource_id'=>$this->input->post('cource_id'),
+					'code'=>$this->input->post('code'),
+					'name' => $this->input->post('name'),
+					'furigana' => $this->input->post('furigana'),
+					'email' =>$this->input->post('email'),
+					'zipcode' => $this->input->post('zipcode'),
+					'address1' => $this->input->post('address1'),
+					'address2' => $this->input->post('address2'),
+					'tel' => $this->input->post('tel'),
+					'tel2' => $this->input->post('tel2'),
+					'birthday' => $this->input->post('birthday'),
+				);
 				$db_data = $input_data;
+				//変更前情報の格納
+				$old = $this->Customer_history;
+				$count = $old->get_count();
+				$old_data = array(
+					1 => $result->name,
+					2 => $result->furigana,
+					3 => $result->zipcode,
+					4 => $result->address1 . $result->address2,
+					5 => $result->tel,
+					6 => $result->tel2,
+					7 => $result->email,
+					10=> $result->birthday,
+					11=> $result->cource_id,
+					12=> $result->code,
+				);
+				$this->Customer->db->trans_begin();
 				$this->Customer->update($id, $db_data);
-				$this->session->set_flashdata('success','登録しました');
-				redirect(site_url('/admin_customer/list_customer'));
-			}		
+				$admin = $this->session->userdata('admin');
+				foreach($old_data as $k => $v)
+				{
+					$old->customer_id = $id;
+					$old->customer_code = $result->code;
+					$old->username = $admin->username;
+					$old->item_id = $k;
+					$old->content = $v;
+					$old->save();
+				}
+				if($this->Customer->db->trans_status() == FALSE)
+				{
+					$this->Customer->db->rollback();
+					$this->data['error_message'] = '保存に失敗しました';
+				}
+				else
+				{
+					$this->Customer->db->trans_commit();
+					$this->session->set_flashdata('success','登録しました');
+					redirect(site_url("admin_customer/detail_customer/{$id}"));
+				}
+			}
 		}
+		$this->data['error_message'] = $this->session->flashdata('error');
 		$this->load->view('admin_customer/add_customer',$this->data);
 	}
 		
@@ -729,43 +825,6 @@ class Admin_customer extends CI_Controller{
 		$this->load->view('admin_customer/show_change_member',$this->data);
 	}
 	
-	//メールアドレスの重複をチェック
-	public function email_check($str)
-	{
-		if($this->Customer->check_email($str)){
-			return TRUE;
-		}else{
-			$this->form_validation->set_message('email_check','%sはすでに登録されいるメールアドレスです');
-			return FALSE;
-		}
-	}
 	
-	/*
-	public function new_customer()
-	{
-		$this->data['h2title'] = '新規ユーザー、ユーザー番号割り当て';
-		$customers = $this->Customer->new_customer();
-		if($this->input->post('search')){
-			$name = $this->input->post('name');
-			$customers = $this->Customer->new_customer($name);
-		}
-		if($this->input->post('submit')){
-			$count = $this->input->post('count');
-			for($i = 1; $i <= $count; $i++){
-				$code = $this->input->post("code_{$i}");
-				$id = $this->input->post("id_{$i}");
-				if(!empty($code)){
-					$this->Customer->update($id,array('code'=>$code));
-				}else{
-					$this->data['error_message'] = 'コードが入力されていません';
-				}
-			}
-			$this->session->set_flashdata('success','登録しました');
-			return redirect('admin_customer/list_customer');
-		}
-		$this->data['result'] = $customers;
-		$this->load->view('admin_customer/new_customer',$this->data);
-	}
-	*/
 	
 }

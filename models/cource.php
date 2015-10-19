@@ -18,13 +18,13 @@ class Cource extends CI_Model{
 		
 	public function get_delivery_day($customer)
 	{
-		$shop_id = $customer->shop_id;
-		$cource_code = $customer->cource_code;
+		//$shop_id = $customer->shop_id;
+		$cource_id = $customer->cource_id;
 		$this->db->select('t.takuhai_day,t.first,t.second');
 		$this->db->from($this->tablename . ' as c');
 		$this->db->join('master_cource_type as t','t.id = c.cource_type_id','left');
-		$this->db->where('c.shop_id',$shop_id);
-		$this->db->where('c.cource_code',$cource_code);
+		//$this->db->where('c.shop_id',$shop_id);
+		$this->db->where('c.id',$cource_id);
 		$result = $this->db->get()->row();
 		return $result;
 	}

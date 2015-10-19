@@ -65,6 +65,9 @@
 						<td>
 							<?php echo $form_data->prefecture ?><input type='hidden' name='prefecture' value='<?php echo $form_data->prefecture ?>'>
 						</td>
+						<input type='hidden' name='zipcode' value='<?php echo $form_data->zipcode ?>'>
+						<input type='hidden' name='zipcode1' value='<?php echo $form_data->zipcode1 ?>'>
+						<input type='hidden' name='zipcode2' value='<?php echo $form_data->zipcode2 ?>'>
 					</tr>
 					<tr>
 						<th><label for='street'>住所　 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
@@ -82,6 +85,7 @@
 				<?php else:?>
 					<tr>
 						<th><label for='zipcode'>郵便番号</label></th>
+							<input type='hidden' name='zipcode' value='<?php echo $form_data->zipcode ?>'>
 						<td><input type='text' name='zipcode1' id='zipcode1' value='<?php echo $form_data->zipcode1 ?>' size='3' maxlength='3'>-<input type='text' name='zipcode2' id='zipcode2' value='<?php echo $form_data->zipcode2 ?>' size='4' maxlength='4'> <a class='button' id='search_zip'>郵便番号で住所検索</a></td>
 					</tr>
 					<tr>

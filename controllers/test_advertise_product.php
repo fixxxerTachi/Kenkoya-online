@@ -62,5 +62,23 @@ class Test_advertise_product extends CI_Controller {
 		//数量がNULLの場合は初期値30個
 		$result = $this->Advertise_product->validate_max_sale_size($id_30,30);
 		echo $this->unit->run($result,TRUE,'validate_max_size_null');
+		
+		//yamato_flag=0（賞味期限が当日)もしくはサイズが登録されていないものは宅急便でお買上不可、それ以外は宅急便で配送可能)
+		$both_ok = 2881;//yamato_flag=1,weight ok
+		$no_yamato = 2104;//yamato_flag=0,weight ?
+		$no_size = 2882; //yamato=1 weight = 0;
+		$null_size = 2884; //yamato=1 weight is null
+		try
+		{
+			 echo $this->unit->run($this->Advertise_product->is_yamato($both_ok),TRUE,'yamto_ok');
+			 echo $this->unit->run($this->Advertise_product->is_yamato($no_yamato),FALSE,'no_yamato');
+			 echo $this->unit->run($this->Advertise_product->is_yamato($no_size),FALSE,'no_yamato_no_size');
+			 echo $this->unit->run($this->Advertise_product->is_yamato($null_size),FALSE,'no_yamato_null_size');
+			 //echo $this->Advertise_product->db->last_query();
+		}
+		catch(Exception $e)
+		{
+			log_message('error',$this->router->class . '/' . $this->router->method . '/' . $e->getMessage());
+		}
 	}
 }

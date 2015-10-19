@@ -124,6 +124,7 @@ class Admin_order extends CI_Controller{
 		{
 			$status_arr = $this->uri->segment(3) ? unserialize(urldecode($this->uri->segment(3))) : array('99',);
 		}
+var_dump($status_arr);
 		$form_data = array(
 			'order_number'=>$order_number,
 			'customer_code'=>$customer_code,
@@ -147,7 +148,6 @@ class Admin_order extends CI_Controller{
 			o.id as orderId
 			,o.order_number
 			,o.create_date
-			,o.shop_code
 			,o.address
 			,o.cource_code
 			,o.payment
@@ -178,8 +178,7 @@ class Admin_order extends CI_Controller{
 		//とりあえずcustomer_idで連結しておく,customer_codeとshop_codeのほうが良いかも
 		$this->db->join('customers as c','c.id = o.customer_id','left');
 		$this->db->join('advertise_product as ad_pro','ad_pro.id = od.advertise_product_id','left');
-		$this->db->join('master_cource as ca','ca.cource_code = o.cource_code');
-		$this->db->where('c.shop_code = ca.shop_code');
+		$this->db->join('master_cource as ca','ca.id = o.cource_id');
 		$this->db->order_by('o.id','desc');
 		
 		//条件絞り込み
@@ -197,17 +196,17 @@ class Admin_order extends CI_Controller{
 		{
 			$date_where = "(o.create_date >= '{$start_datetime}'
 					and o.create_date < '{$end_datetime}'
-					and ((od.delivery_date >= '{$deli_start_datetime}'
-					and od.delivery_date < '{$deli_end_datetime}')
-					or od.delivery_date = '0000-00-00 00:00:00')
+					and ((o.delivery_date >= '{$deli_start_datetime}'
+					and o.delivery_date < '{$deli_end_datetime}')
+					or o.delivery_date = '1000-01-01 00:00:00')
 			)";
 		}
 		else
 		{
 			$date_where = "(o.create_date >= '{$start_datetime}'
 					and o.create_date < '{$end_datetime}'
-					and od.delivery_date >= '{$deli_start_datetime}'
-					and od.delivery_date < '{$deli_end_datetime}'
+					and o.delivery_date >= '{$deli_start_datetime}'
+					and o.delivery_date < '{$deli_end_datetime}'
 			)";
 
 		}
@@ -220,6 +219,7 @@ class Admin_order extends CI_Controller{
 		if($this->input->post('submit'))
 		{
 			$result = $this->db->get()->result();
+log_message('error',$this->db->last_query());
 			$this->data['result'] = $result;
 			$subtotal = array();
 			foreach($result as $row){
@@ -228,6 +228,7 @@ class Admin_order extends CI_Controller{
 				$this->data['total_price'] = array_sum($subtotal);
 			}
 		}
+var_dump($this->input->post());
 		
 		//csvの作成
 		if($this->input->post('makecsv'))

@@ -33,6 +33,7 @@ class Admin_admin extends CI_Controller{
 		$this->load->model('Master_cource_type');
 		$this->load->model('Master_shop');
 		$this->load->model('Master_payment');
+		$this->load->model('Master_delivery_span');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->data['user'] = $this->Admin_login->check_login();
@@ -942,7 +943,7 @@ class Admin_admin extends CI_Controller{
 		}
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->data['form_data'] = $form_data;
-		$this->data['show_flags'] = $this->Master_payment->list_show_flag();
+		$this->data['show_flag'] = $this->Master_show_flag->show_flag;
 		$this->load->view('admin_admin/payment',$this->data);
 	}
 	
@@ -952,7 +953,7 @@ class Admin_admin extends CI_Controller{
 		$id = $this->uri->segment(3);
 		$this->Payment->delete($id);
 		$this->session->set_flashdata('success','削除しました');
-		return redirect(base_url('admin_admin/payment'));	
+		return redirect(base_url('admin_admin/payment'));
 	}
 
 	/*** 都道府県住所マスタアップロード ***/
@@ -1151,8 +1152,34 @@ class Admin_admin extends CI_Controller{
 			}
 			$dbh = null;
 		}
-		$this->data['success_message'] = $this->session->flashdata('success');			
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_admin/upload_nohin',$this->data);
+	}
+	
+	
+	/*** 配達日の間隔は時間指定できる間隔を変更する **/
+	public function edit_span()
+	{
+		$this->data['h2title'] = '配達日間隔変更';
+		$result = $this->Master_delivery_span->get_span();
+		$this->data['result'] = $result;
+		
+		//変更 
+		$id = $this->uri->segment(3);
+		$edit_flag = !empty($id) ? TRUE : FALSE;
+		if($this->input->post('submit'))
+		{
+			$db_data = array(
+				'span' => $this->input->post('span'),
+				'takuhai_span' => $this->input->post('takuhai_span'),
+			);
+			$this->Master_delivery_span->update($id,$db_data);
+			$this->session->set_flashdata('success','更新しました');
+			return redirect('admin_admin/edit_span');
+		}
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->data['edit_flag'] = $edit_flag;
+		$this->load->view('admin_admin/edit_span',$this->data);
 	}
 
 	private function send_mail($data = null , $order = null)

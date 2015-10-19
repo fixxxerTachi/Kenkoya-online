@@ -15,6 +15,7 @@ class Order extends CI_Model{
 	public $shop_code;
 	public $customer_code;
 	public $cource_code;
+	public $cource_id;
 	public $access_id;
 	public $access_pass;
 	//public $csv_flag;
@@ -168,8 +169,10 @@ class Order extends CI_Model{
 	public function create_order_number(StdClass $customer)
 	{
 		if($customer->username != 'no-member'){
-			$this->db->select('shop_code,code')->from('customers');
-			$this->db->where('username',$customer->username);
+			$this->db->select('s.code as shop_code,c.code as code')->from('customers as c');
+			$this->db->join('master_cource as co','co.id = c.cource_id','left');
+			$this->db->join('master_shop as s','s.id = co.shop_id','left');
+			$this->db->where('c.username',$customer->username);
 			$result = $this->db->get()->row();
 			//エリア外の場合shop_codeは0なので3ケタ表示する
 			$shop_code = sprintf("%03d",$result->shop_code);
@@ -268,8 +271,8 @@ class Order extends CI_Model{
 			,o.create_date
 			,o.shop_code
 			,o.address
-			,o.cource_code,
-			od.id as order_id
+			,o.cource_code
+			,od.id as order_id
 			,od.product_code
 			,od.branch_code
 			,od.sale_price

@@ -3,7 +3,7 @@
 <?php include __DIR__.'/templates/meta_materialize.php' ?>
 </head>
 <body>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+	<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 <?php include 'templates/header.php' ?>
 <main>
 	<div class="mdl-grid demo-content">

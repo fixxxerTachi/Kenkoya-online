@@ -24,27 +24,27 @@
 					<?php echo form_open() ?>
 						<table class='detail' cellpadding='0' cellspacing='10'>
 							<tr>
-								<th><label for='shop_code'>店舗コード</label></th>
-								<td><input type='text' name='shop_code' id='shop_code' value='<?php echo $form_data->shop_code ?>' size='3' maxlength='3'></td>
+								<th><label for='shop_id'>店舗コード</label> <span class='logo_pink'>必須</span></th>
+								<td><?php echo form_dropdown('shop_id',$shops,$form_data->shop_id,'id="shop_id"') ?></td>
 							</tr>
 							<tr>
-								<th><label for='cource_code'>コース番号</label></th>
-								<td><input type='text' name='cource_code' id='cource_code' value='<?php echo $form_data->cource_code ?>' size='3' maxlength='3'></td>
+								<th><label for='cource_id'>コース名 <span class='logo_pink'>必須</span></label></th>
+								<td><?php echo form_dropdown('cource_id',$cource_list,$form_data->cource_id,'id="cource_id"') ?></td>
 							</tr>
 							<tr>
-								<th><label for='code'>お客様コード</label></th>
+								<th><label for='code'>顧客コード <span class='logo_pink'>必須</span></label></th>
 								<td>
 									<input type='text' name='code' id='code' value='<?php echo $form_data->code ?>' size='6' maxlength='6'>
 								</td>
 							</tr>
 							<tr>
-								<th><label for='name' name='name'>お名前</label></th>
+								<th><label for='name' name='name'>お名前 <span class='logo_pink'>必須</span></label></th>
 								<td>
 									<input type='text' id='name' name='name' value='<?php echo $form_data->name ?>' size='60' maxlength='60'>
 								</td>
 							</tr>
 							<tr>
-								<th><label for='furigana'>フリガナ</label></th>
+								<th><label for='furigana'>フリガナ <span class='logo_pink'>必須</span></label></th>
 								<td>
 									<input type='text' id='furigana' name='furigana' value='<?php echo $form_data->furigana ?>' size='60' maxlength='60'>
 								</td>
@@ -56,27 +56,31 @@
 								</td>
 							</tr>
 							<tr>
-								<th><label for='zipcode'>郵便番号(-なしの7ケタ)</label></th>
+								<th><label for='zipcode'>郵便番号 <span class='logo_pink'>必須</span></label></th>
 								<td>
-									<input type='text' name='zipcode' id='zipcode' value='<?php echo $form_data->zipcode ?>' size='7' maxlength='7'>
+									<input type='text' name='zipcode' id='zipcode' value='<?php echo $form_data->zipcode ?>' size='7' maxlength='7'>(-なしの7ケタ)
 								</td>
 							</tr>
 							<tr>
-								<th><label for='address1'>住所</label></th>
+								<th><label for='address1'>住所</label> <span class='logo_pink'>必須</span></th>
 								<td>
 									<input type='text' name='address1' id='address1' value='<?php echo $form_data->address1 ?>' size='60' maxlength='60'>
 								</td>
 							</tr>
 							<tr>
-								<th><label for='tel'>電話番号</label></th>
+								<th><label for='address2'>建物名</label></th>
+								<td><input type='text' name='address2' id='address2' value='<?php echo $form_data->address2 ?>' size='60' maxlength='60'>
+							</tr>
+							<tr>
+								<th><label for='tel'>電話番号</label> <span class='logo_pink'>必須</span></th>
 								<td>
-									<input type='text' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='15' maxlength='15'>
+									<input type='text' placeholder='0335430001' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='15' maxlength='15'>
 								</td>
 							</tr>
 							<tr>
-								<th><label for='tel'>電話番号2</label></th>
+								<th><label for='tel'>携帯電話番号</label></th>
 								<td>
-									<input type='text' name='tel2' id='tel2' value='<?php echo $form_data->tel2 ?>' size='15' maxlength='15'>
+									<input type='text' placeholder='0335430002' name='tel2' id='tel2' value='<?php echo $form_data->tel2 ?>' size='15' maxlength='15'>
 								</td>
 							</tr>
 							<tr>
@@ -85,6 +89,7 @@
 									<input placeholder="2000-01-01 01"type='text' name='birthday' id='birthday' value='<?php echo $form_data->birthday ?>' size='10' maxlength='10'>
 								</td>
 							</tr>
+							<!--
 							<tr>
 								<th><label for='point'>ポイント</label></th>
 								<td>
@@ -97,7 +102,6 @@
 									<input type='rank' name='rank' id='rank' value='<?php echo $form_data->rank ?>' size='2' maxlength='2'>
 								</td>
 							</tr>
-							<!--
 							<tr>
 								<th><label for='bank_name'>銀行名</label></th>
 								<td><input type='text' name='bank_name' id='bank_name' value='<?php echo $form_data->bank_name ?>'>
@@ -125,4 +129,21 @@
 		</main>
 	</div>
 </body>
+<script>
+$('#shop_id').on('change',function()
+{
+	$('#cource_id').empty();
+	var id = $(this).val();
+	$.getJSON(
+		'<?php echo site_url('admin_admin/show_cource')?>' + '/' + id,
+		function(data){
+			var items = [];
+			$.each(data,function(k,v){
+				items.push('<option value="' + k + '">' + v + '</option>');
+			});
+			$('#cource_id').append(items.join());
+		}
+	);
+});
+</script>
 </html>

@@ -2,9 +2,10 @@
 class Customer extends CI_Model{
 	public $tablename;
 	public $id;
-	public $shop_code;
-	public $cource_code;
+	public $shop_id;
+	public $cource_id;
 	public $code;
+	public $customer_code;
 	public $name;
 	public $furigana;
 	public $birthday;
@@ -40,6 +41,7 @@ class Customer extends CI_Model{
 		$this->tablename = 'takuhai_customers';
 		$this->account_number = '';
 		$this->member_flag = 1;
+		$this->cource_id = NO_DELI_AREA;
 	}
 	
 	//宅配料金算出の為pref_idを取得
@@ -52,12 +54,21 @@ class Customer extends CI_Model{
 	}
 	
 	//check_email,tel,usernameは重複してはいけない為、存在したらfalse
-	public function check_email($email)
+	public function check_email($email, $del_falg = TRUE, $customer_id = NULL)
 	{
+		//customer_idが渡されている場合、その顧客以外で
+		if(!empty($customer_id))
+		{
+			$this->db->where('id <> ',$customer_id);
+		}
 		$this->db->select('email');
 		$this->db->from($this->tablename);
 		$this->db->where('email',$email);
 		$this->db->where('code is not null',null,false);
+		if($del_falg)
+		{
+			$this->db->where('del_flag',0);
+		}
 		$result = $this->db->get()->row();
 		if(!empty($result->email)){
 			return FALSE;
@@ -66,8 +77,13 @@ class Customer extends CI_Model{
 		}
 	}
 	
-	public function check_username($str,$del_flag=True)
+	public function check_username($str,$del_flag=True, $customer_id = NULL)
 	{
+		//customer_idが渡されている場合、その顧客以外で
+		if(!empty($customer_id))
+		{
+			$this->db->where('id <> ',$customer_id);
+		}
 		if($del_flag){
 			$this->db->where('del_flag',0);
 		}
@@ -82,19 +98,45 @@ class Customer extends CI_Model{
 		}
 	}
 	
-	public function check_tel($str,$del_flag=True)
+	public function check_tel($str,$del_flag=True, $customer_id = NULL)
 	{
+		//customer_idが渡されている場合、その顧客以外で
+		if(!empty($customer_id))
+		{
+			$this->db->where('id <> ',$customer_id);
+		}
 		if($del_flag){
 			$this->db->where('del_flag',0);
 		}
-		$this->db->where('tel',$str);
-		$this->db->or_where('tel2',$str);
+		$this->db->where("(tel = {$str} or tel2 = {$str})");
 		$query = $this->db->get($this->tablename);
 		$result = $query->row();
-
 		if(!empty($result)){
 			return FALSE;
 		}else{
+			return TRUE;
+		}
+	}
+	
+	public function check_code($code, $del_flag = TRUE, $customer_id = NULL)
+	{
+		//customer_idが渡される場合はその顧客を除外
+		if(!empty($customer_id))
+		{
+			$this->db->where('id <> ' , $customer_id);
+		}
+		if($del_flag)
+		{
+			$this->db->where('del_flag',0);
+		}
+		$this->db->where('code',$code);
+		$result = $this->db->get($this->tablename)->row();
+		if(!empty($result))
+		{
+			return FALSE;
+		}
+		else
+		{
 			return TRUE;
 		}
 	}
@@ -138,14 +180,16 @@ class Customer extends CI_Model{
 		}
 	}
 	
-	/** shp_code,codeのみ取得する
+	/** shop_code,codeのみ取得する
 	 * @param object Customer
 	 * @return  string shop . code
 	 */
 	public function get_code($obj)
 	{
-		$this->db->select('shop_code,code')->from('customers');	
-		$this->db->where('username',$obj->username);
+		$this->db->select('s.code as shop_code,c.code as code')->from('customers as c');
+		$this->db->join('master_cource as co','co.id = c.cource_id','left');
+		$this->db->join('master_shop as s','s.id = co.shop_id','left');
+		$this->db->where('c.username',$obj->username);
 		$result = $this->db->get()->row();
 		return $result->shop_code . $result->code;
 	}
@@ -346,10 +390,25 @@ class Customer extends CI_Model{
 	*/
 	public function show_list_where($limit=null,$offset=null,$obj=null,$del_flag=True)
 	{
-		$this->db->select('c.*,ca.cource_name');
+		$this->db->select('
+			c.cource_id as cource_id
+			,c.code as customer_code
+			,c.id as id
+			,c.name
+			,c.tel
+			,c.tel2
+			,c.zipcode
+			,c.pref_id
+			,c.address1
+			,c.address2
+			,ca.cource_name as cource_name
+			,s.shop_name as shop_name
+		');
 		$this->db->from($this->tablename . ' as c');
-		$this->db->join('master_cource as ca','ca.cource_code = c.cource_code','left');
-		$this->db->where('c.shop_code = ca.shop_code');
+		//$this->db->join('master_cource as ca','ca.cource_code = c.cource_code','left');
+		//$this->db->where('c.shop_id = ca.shop_id');
+		$this->db->join('master_cource as ca','ca.id = c.cource_id','left');
+		$this->db->join('master_shop as s','s.id = ca.shop_id','left');
 		if($del_flag){
 			$this->db->where('c.del_flag','0');
 		}
@@ -369,20 +428,44 @@ class Customer extends CI_Model{
 	
 	public function show_list_conditions($obj)
 	{
-		$this->db->select('c.*,ca.cource_name');
+		$this->db->select('
+			c.cource_id as cource_id
+			,c.code as customer_code
+			,c.id as id
+			,c.name
+			,c.furigana
+			,c.tel
+			,c.tel2
+			,c.zipcode
+			,c.pref_id
+			,c.address1
+			,c.address2
+			,ca.cource_name as cource_name
+			,s.shop_name as shop_name
+			,s.id as shop_id
+		');
 		$this->db->from($this->tablename . ' as c');
-		$this->db->join('master_cource as ca','ca.cource_code = c.cource_code','left');
-		$this->db->where('c.shop_code = ca.shop_code');
+		$this->db->join('master_cource as ca','ca.id = c.cource_id','left');
+		$this->db->join('master_shop as s','s.id = ca.shop_id','left');
 		$this->db->where('c.del_flag','0');
 		if(!empty($obj)){
-			if($obj->shop_code !== ''){
-				$this->db->where('c.shop_code',$obj->shop_code);
+			if($obj->shop_id != 0){
+				$this->db->where('c.shop_id',$obj->shop_id);
 			}
 			if(!empty($obj->name)){
 				$this->db->like('c.name',$obj->name);
 			}
 			if(!empty($obj->code)){
 				$this->db->like('c.code',$obj->code);
+			}
+			if(!empty($obj->tel)){
+				$this->db->like('c.tel',$obj->tel);
+			}
+			if(!empty($obj->address1)){
+				$this->db->like('c.address1',$obj->address1);
+			}
+			if(!empty($obj->address2)){
+				$this->db->like('c.address2',$obj->address2);
 			}
 		}
 		$query= $this->db->get();
@@ -452,10 +535,27 @@ class Customer extends CI_Model{
 	
 	public function get_by_id($id=null , $del_flag = True)
 	{
-		$this->db->select('c.*,ca.cource_name');
+		$this->db->select('
+			c.cource_id as cource_id
+			,c.code as code
+			,c.id as id
+			,c.name
+			,c.furigana
+			,c.birthday
+			,c.tel
+			,c.tel2
+			,c.email
+			,c.zipcode
+			,c.address1
+			,c.address2
+			,c.username
+			,ca.cource_name
+			,s.shop_name
+			,s.id as shop_id
+		');
 		$this->db->from($this->tablename . ' as c');
-		$this->db->join('master_cource as ca','ca.cource_code = c.cource_code','left');
-		$this->db->where('c.shop_code = ca.shop_code');
+		$this->db->join('master_cource as ca','ca.id = c.cource_id','left');
+		$this->db->join('master_shop as s','s.id = ca.shop_id','left');
 		$this->db->where('c.id',$id);
 		$query = $this->db->get();
 		$result =  $query->row();
@@ -607,7 +707,7 @@ class Customer extends CI_Model{
 	{
 		$this->db->select('a.*,ct.takuhai_day');
 		$this->db->from('master_area as a');
-		$this->db->join('master_cource as c','c.cource_code = a.cource_code','left');
+		$this->db->join('master_cource as c','c.id = a.cource_id','left');
 		$this->db->join('master_cource_type as ct','ct.id = c.cource_type_id','left');
 		$this->db->where('a.zipcode',$zipcode);
 		$query=$this->db->get();

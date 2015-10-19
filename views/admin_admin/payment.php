@@ -26,8 +26,8 @@
 						<?php foreach($result as $item):?>
 							<tr>
 								<td>
-<?php if($item->show_flag == SHOW_ITEM) echo '<span style="color:orange">表示中</span>' ?>
-<?php if($item->show_flag == HIDE_ITEM) echo '<span>非表示</span>' ?>
+<?php if($item->show_flag == SHOW_ITEM) echo '<span style="color:orange">公開</span>' ?>
+<?php if($item->show_flag == HIDE_ITEM) echo '<span>非公開</span>' ?>
 								</td>
 								<td><?php echo $item->id ?></td>
 								<td><?php echo $item->method_name ?></td>
@@ -61,7 +61,7 @@
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric">掲載・非軽鎖</span>
 							<td>
-								<?php echo form_dropdown('show_flag',$show_flags,$form_data->show_flag) ?>
+								<?php echo form_dropdown('show_flag',$show_flag,$form_data->show_flag) ?>
 							</td>
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric"></th>

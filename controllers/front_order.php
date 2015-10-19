@@ -1,4 +1,5 @@
 <?php
+/*
 include __DIR__.'/../libraries/define.php';
 include __DIR__.'/../libraries/define_mail.php';
 include __DIR__.'/../libraries/define_config.php';
@@ -6,10 +7,11 @@ include __DIR__.'/../libraries/define_size.php';
 include __DIR__.'/../libraries/common.php';
 include __DIR__.'/../libraries/sendmail.php';
 include __DIR__.'/../libraries/csv.php';
+*/
 
 class Front_order extends CI_Controller{
 	public $data = array();
-	public $deliver_possible_day = '+3 days';
+	public $deliver_possible_day = '';
 	public function __construct()
 	{
 		parent::__construct();
@@ -38,6 +40,9 @@ class Front_order extends CI_Controller{
 		$this->load->model('Box');
 		$this->load->model('Takuhai_charge');
 		$this->load->model('Charge_kenkoya');
+		$this->load->model('Master_delivery_span');
+		$span = $this->Master_delivery_span->span;
+		$this->deliver_possible_day = '+' . $span . ' days';
 		$this->data['customer'] = $this->session->userdata('customer') ? $this->session->userdata('customer'): $this->session->userdata('no-member');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
@@ -130,7 +135,7 @@ class Front_order extends CI_Controller{
 			}
 			$this->data['address'] = $address;
 			//エリア内の会員であるかどうか
-			$is_area = $userdata->shop_code != 0 && $userdata->cource_code !=0;
+			$is_area = ($userdata->cource_id !== NO_DELI_AREA);
 			$this->data['is_area'] = $is_area;
 			//エリア内は健康屋の配達可能日のリスト作成
 			if($is_area){
@@ -493,6 +498,7 @@ class Front_order extends CI_Controller{
 		
 		//個々の商品が販売可能かどうかしらべる。もし販売対象以外のがあればエラーメッセージ
 		//配達日が指定されている場合で、商品に配達期間が指定されている場合のチェック
+		//クロネコヤマト宅急便で配送指定されている場合、クロネコヤマト宅急便で配送不可商品がないか
 		$error_messages = array();
 		foreach($this->data['list_product'] as $item)
 		{
@@ -512,6 +518,15 @@ class Front_order extends CI_Controller{
 					$sstr = $sddate ? $sddate->format('Y年m月d日') : '';
 					$estr = $eddate ? $eddate->format('Y年m月d日') : '';
 					$error_messages[] = "{$item->product_name}の配達指定期間内({$sstr}~{$estr})に配達日を指定してください";
+				}
+			}
+			//宅急便で配送可能かどうか
+			if($order_info->takuhai)
+			{
+				$is_yamato = $this->Advertise_product->is_yamato($item->id);
+				if(!$is_yamato)
+				{
+					$error_messages[] = "{$item->product_name}はクロネコヤマト宅急便では配送できません。";
 				}
 			}
 		}
@@ -584,9 +599,19 @@ class Front_order extends CI_Controller{
 				$checked = $this->Advertise_product->validate_sale_target($c->product_id);
 				//限界販売数量範囲内かどうか
 				$checked = $this->Advertise_product->validate_max_sale_size($c->product_id,$c->quantity);
+				//宅急便で配達可能かどうか
+				if($order_info->takuhai)
+				{
+					$is_yamato = $this->Advertise_product->is_yamato($c->product_id);
+					if(!$is_yamato)
+					{
+						$product = $this->Advertise_product->get_by_product_id($c->product_id);
+						$this->session->set_flashdata('error',"{$product->product_name}は宅急便ではお届け出来ません");
+						return redirect('order/confirm_order');
+					}
+				}
 			}
-			$point = isset($order_info->point) ? $order_info->point : 0;
-
+			//$point = isset($order_info->point) ? $order_info->point : 0;
 			
 			//健康屋の配達で別の配送先が指定されていないこと
 			if(!$order_info->takuhai){
@@ -594,7 +619,6 @@ class Front_order extends CI_Controller{
 					return redirect('order/delvery_info');
 				}
 			}
-			
 			if($this->input->post('submit')){
 			//order_numberの生成
 				$order_number = $this->Order->create_order_number($customer);
@@ -622,11 +646,11 @@ class Front_order extends CI_Controller{
 					$userdata = $this->Customer->get_by_username($customer);
 					$data=array(
 						'customer_id'=>$userdata->id,
-						'shop_code'=>$userdata->shop_code,
+						//'shop_code'=>$userdata->shop_code,
 						'customer_code'=>$userdata->code,
 						'address'=>$userdata->address1.$userdata->address2,
 						'address_id'=>$order_info->destination,
-						'cource_code'=>$userdata->cource_code,
+						'cource_id'=>$userdata->cource_id,
 						'payment'=>$order_info->payment,
 						'order_number'=>$order_number,
 						'total_price'=>$total->total_price,
@@ -665,7 +689,7 @@ class Front_order extends CI_Controller{
 							'shop_code'=>0,
 							'address'=>$user_data['address1'].$user_data['address2'],
 							'address_id'=>0,
-							'cource_code'=>0,
+							'cource_code'=>NO_DELI_AREA,
 							'payment'=>$order_info->payment,
 							'order_number'=>$order_number,
 							'total_price'=>$total->total_price,
@@ -773,6 +797,7 @@ class Front_order extends CI_Controller{
 				}
 			}
 		}catch(Exception $e){
+			var_dump($e);exit;
 			$this->session->set_flashdata('error',$e->getMessage());
 			log_message('error',$e->getMessage());
 			return redirect('order/delivery_info');

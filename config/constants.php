@@ -53,6 +53,9 @@ define('HIDE_ITEM',0);
 //最大販売数量の初期値(DBの初期値 adveteise_product:max_quantity)
 define('MAX_SALE_QUANTITY',30);
 
+//健康屋配達エリア外地域
+define('NO_DELI_AREA',27);
+
 //配達方法
 define('DELIVER_MEMBER' ,0);
 define('DELIVER_KURONEKO',1);

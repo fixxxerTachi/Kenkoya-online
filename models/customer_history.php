@@ -4,12 +4,20 @@ class Customer_history extends CI_Model{
 	public $customer_code;
 	public $item_id;
 	public $content;
+	public $username;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 		$this->tablename = 'takuhai_customer_history';
+	}
+	
+	public function get_count()
+	{
+		$this->db->select('count(id) as count')->from('customer_items');
+		$row = $this->db->get()->row();
+		return $row->count;
 	}
 	
 	public function save()
@@ -29,6 +37,7 @@ class Customer_history extends CI_Model{
 			'item_id' => $this->item_id,
 			'content' => $this->content,
 			'create_datetime' => date('Y-m-d H:i:s'),
+			'username'=> $this->username,
 		);
 		$this->db->insert($this->tablename,$data);
 	}

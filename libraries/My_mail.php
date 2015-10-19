@@ -193,6 +193,27 @@ class My_mail{
 			$mail_template->mail_body
 		);
 		$result = $this->sendMail($obj->email,$mail_template->mail_title,$mail_body,$send_address,$this->ci->Mail_template->sender);
+		//管理者用メール送信処理
+		if($result){
+			$admin_mails = $this->ci->Admin_mail->show_list();
+			$admin_mail_template = $this->ci->Mail_template->get_by_id(8);
+			$admin_mail_body = str_replace(
+				array('{{code}}','{{name}}','{{kind}}','{{content}}'),
+				array($customer->code,$customer->name,$kind,$mail_body),
+			$admin_mail_template->mail_body);
+			$admin_result = array();
+			foreach($admin_mails as $mail){
+				$admin_result[] = sendMail($mail->email,$admin_mail_template->mail_title,$admin_mail_body,$send_address,$this->Mail_template->sender);
+			}
+			if(in_array(false,$admin_result)){
+				$admin_result = false;
+			}else{
+				$admin_result = true;
+				return $admin_result;
+			}
+		}else{
+			throw new Exception("send_mail failed file:{{__FILE__}} code:{{__LINE__}}");
+		}
 	}
 	
 	public function send_mail_change_order($customer = null , $obj = null,$kind=null)

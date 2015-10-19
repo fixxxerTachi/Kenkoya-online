@@ -19,9 +19,15 @@
 					<?php endif; ?>
 					<?php echo form_open('',array('class'=>'col s12')) ?>
 						<table class='detail'>
-							<tr><th><label for='shop_code'>店舗</label></th><td><?php echo form_dropdown('shop_code',$shops,$selected,"class='browser-default'") ?></td></tr>
+							<tr><th><label for='shop_id'>店舗</label></th><td><?php echo form_dropdown('shop_id',$shops,$selected,"class='browser-default'") ?></td></tr>
 							<tr><th><label for='code'>お客様番号</label></th><td><input type='text' name='code' value='<?php echo $form_data->code ?>'></td></tr>
 							<tr><th><label for='name'>お客様名</label></th><td><input type='text' name='name' value='<?php echo $form_data->name ?>'></td></tr>
+							<tr><th><label for='tel'>お電話番号</label></th><td><input type='text' name='tel' value='<?php echo $form_data->tel ?>'></td></tr>
+							<tr>
+								<th><label>住所</label></th>
+								<td><label for='address1'>住所</label> <input type='text' name='address1' value='<?php echo $form_data->address1 ?>'></td>
+								<td><label for='address2'>建物名</label> <input type='text' name='address2' value='<?php echo $form_data->address2 ?>'></td>
+							</tr>
 							<tr><th class='no-border'></th><td><input type='submit' name='search' value='検索'></td></tr>
 						</table>
 					</form>
@@ -29,22 +35,19 @@
 					<?php if(!empty($links)):?><p class='links'><?php echo $links ?></p><?php endif;?>
 					<h2><span class='logo_pink'>member</span> 会員一覧</h2>
 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-						<tr><th>店舗</th><th>配達地域</th><th>お客様番号</th><th>名前</th><th colspan='2'>住所</th><th>tel</th><th>ポイント</th><th>ランク</th><th></th><th></th></tr>
+						<tr><th>店舗</th><th>配達地域</th><th>お客様番号</th><th>名前</th><th colspan='2'>住所</th><th>tel</th><th></th><th></th><th></th></tr>
 						<?php foreach($result as $row): ?>
 						<tr>
 							
-							<td><?php if($row->shop_code != 0):?><?php echo $shops[$row->shop_code] ?><?php else:?><span style='color: red'>未登録</span><?php endif;?></td>
-							<td><?php if($row->cource_code != 0):?><?php echo $row->cource_name ?><?php else:?><span style='color: red'>未登録</span><?php endif;?></td>
-							<td><?php echo $row->code ?><?php if(empty($row->code)):?><span style='color: red'>未登録</span><?php endif;?></td>
+							<td><?php echo $row->shop_name ?></td>
+							<td><?php echo $row->cource_name ?></td>
+							<td><?php echo $row->customer_code ?></td>
 							<td><a class='edit' href='<?php echo site_url("/admin_customer/detail_customer/{$row->id}") ?>'><?php echo html_escape($row->name) ?></a></td>
 							<td><?php echo substr($row->zipcode,0,3) . '-' . substr($row->zipcode,3,4) ?></td>
 							<td><?php echo $row->address1 ?></td>
 							<td><?php echo $row->tel ?></td>
-							<td><?php echo $row->point ?></td>
-							<td><?php echo $row->rank ?></td>
 							<td><a class='edit' href='<?php echo site_url("/admin_customer/edit_customer/{$row->id}") ?>'>変更</a></td>
 							<td><a class='edit' onclick='del_confirm("<?php echo $row->name ?>" , <?php echo $row->id ?>)'>削除</a></td>
-				
 						</tr>
 						<?php endforeach;?>
 					</table>

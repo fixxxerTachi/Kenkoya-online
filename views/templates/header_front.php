@@ -15,7 +15,7 @@
 					<li><a href='<?php echo site_url('contact') ?>'>お問い合わせ</a></li>
 				</ul>
 			</div>
-			<h1>幸福と健康をお届けする宅配ス―パー健康屋</h1>
+			<h1>宅配ス―パー健康屋は宅配サービスを通して笑顔を幸福をお届けします。</h1>
 			<div id='tel'><img src='<?php echo base_url('images/tel.jpg')?>' alt='0120-383-333'></div>
 		</div>
 	</div>

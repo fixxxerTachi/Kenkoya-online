@@ -1,10 +1,10 @@
 <?php
-include __DIR__.'/../libraries/define.php';
-include __DIR__.'/../libraries/define_config.php';
-include __DIR__.'/../libraries/define_mail.php';
-include __DIR__.'/../libraries/common.php';
-include __DIR__.'/../libraries/sendmail.php';
-include __DIR__.'/../libraries/csv.php';
+//include __DIR__.'/../libraries/define.php';
+//include __DIR__.'/../libraries/define_config.php';
+//include __DIR__.'/../libraries/define_mail.php';
+//include __DIR__.'/../libraries/common.php';
+//include __DIR__.'/../libraries/sendmail.php';
+//include __DIR__.'/../libraries/csv.php';
 
 class Front_customer extends CI_Controller{
 	public $data = array();
@@ -198,14 +198,15 @@ class Front_customer extends CI_Controller{
 			$form_data->email = $this->my_class->convert_space($form_data->email);
 			$form_data->prefecture = $this->my_class->convert_space($form_data->prefecture);
 			$form_data->address1 = $this->my_class->convert_space($form_data->address1);
-			$form_data->address2 = $this->my_class->convert_space($form_data->address2);			
+			$form_data->address2 = $this->my_class->convert_space($form_data->address2);
 			$form_data->tel = $this->my_class->convert_space($form_data->tel);
 			$form_data->tel2 = $this->my_class->convert_space($form_data->tel2);
 			
 			$this->my_validation->validation_rules();
 			if($no_member != 'no-member'){
 				$this->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
-				$this->form_validation->set_rules('tel','電話番号','required|alpha_dash|max_length[15]|callback_tel_check');
+				$this->form_validation->set_rules('tel','電話番号','required|numeric|max_length[15]|callback_tel_check');
+				$this->form_validation->set_rules('tel2','携帯電話番号','numeric|max_length[15]|callback_tel_check');
 			}
 			if($this->form_validation->run() === FALSE){
 				//
@@ -260,11 +261,13 @@ class Front_customer extends CI_Controller{
 		return $this->my_validation->tel_check($str);
 	}
 	
+	/*
 	//電話番号のフォーマットチェック
 	public function tel_format_check($str)
 	{
 		return $this->my_validation->tel_format_check($str);
 	}
+	*/
 	
 	//全角かたかなチェック
 	public function kana_check($str)
@@ -341,19 +344,22 @@ class Front_customer extends CI_Controller{
 				//配達地域内であればshop_codeとcource_codeを登録
 				$area = $this->Customer->get_area_by_zip($db_data->zipcode);
 				if(!empty($area)){
-					$db_data->shop_code = $area->shop_code;
-					$db_data->cource_code = $area->cource_code;
+					//$db_data->shop_code = $area->shop_code;
+					//$db_data->cource_code = $area->cource_code;
+					$db_data->cource_id  = $area->cource_id;
 					$db_data->code = $maxcode + 1;
 				//配達地域外であれば、エリア外ショップコードを登録でもdefault 0だからいらないかも
 				}else{
-					$db_data->shop_code = $this->no_area_shop_code;
+					//$db_data->shop_code = $this->no_area_shop_code;
+					$db_data->cource_id = NO_DELI_AREA;
 					$db_data->code = $maxcode + 1;
 				}
 				//保存する
 				$this->Customer->save($db_data);
 				//保存できたかどうか確かめてメール送信
 				$customer = $this->Customer->get_by_username_and_password($db_data);
-				if(!empty($customer)){
+				if(!empty($customer))
+				{
 					$this->my_mail->send_mail_login_info($db_data,$password);
 				}
 				$this->session->unset_userdata('customer_info');

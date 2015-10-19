@@ -135,29 +135,30 @@ class Front_area extends CI_Controller{
 		$form_data = $this->Customer;
 		$is_area = null;
 		if($this->input->post('search_zip')){
-			$form_data = array(
-				'zipcode'=>$this->my_class->convert_alpha($this->input->post('zipcode1').$this->input->post('zipcode2')),
-			);
-			$form_data = (object)$form_data;
-			if(!$this->validation_zip($form_data->zipcode) == FALSE){
+			$form_data->zipcode1 = $this->my_class->convert_alpha($this->input->post('zipcode1'));
+			$form_data->zipcode2 = $this->my_class->convert_alpha($this->input->post('zipcode2'));
+			$form_data->zipcode = $form_data->zipcode1 . $form_data->zipcode2;
+			if(!$this->validation_zip($form_data->zipcode) == FALSE)
+			{
 				//郵便番号が正しく入力されていたらエリアマスタからデータを取り出して反映
 				$result = $this->Customer->get_area_by_zip($form_data->zipcode);
 				$zipcode = $this->input->post('zipcode1').$this->input->post('zipcode2');
 				$is_area = $this->_is_area($result,$zipcode);
 				$this->data['result'] = $result;
-			}else{
+			}
+			else
+			{
 				//郵便番号の入力にエラーがある場合
 				$this->data['error_message'] = '郵便番号は正しく入力してください';
 			}
-			$form_data->zipcode1 = $this->input->post('zipcode1');
-			$form_data->zipcode2 = $this->input->post('zipcode2');
 			$this->data['is_area'] = $is_area;
 		}
 
 		$member_link = new StdClass();
 		
 		//会員登録しない人　カートからのアクセス
-		if($uri_flag == 'no-member'){
+		if($uri_flag == 'no-member')
+		{
 			//配達エリア内だったら会員登録をお勧めする。
 			$member_link->recommend_text = '健康屋宅配サービスエリア内ですので会員登録していただくと商品を0円～配送できます。';
 			$member_link->member_text = '会員登録する';
@@ -165,20 +166,26 @@ class Front_area extends CI_Controller{
 			$member_link->text = '会員登録せずに購入処理を進める';
 			$member_link->url = 'customer/show_policy/no-member';
 		//マイページ内の住所変更からのアクセス
-		}else if($uri_flag == 'mypage'){
+		}
+		else if($uri_flag == 'mypage')
+		{
 			$member_link->recommend_text = '健康屋宅配サービスエリア内ですので会員登録していただくと商品を0円～配送できます。';
 			$member_link->member_text = '住所を変更する';
 			$member_link->member_url = 'mypage/mypage_change/address';
 			$member_link->text = '戻る';
 			$member_link->url = 'mypage/mypage';
 		//会員登録したいひと ナビゲーションリンクからのアクセス //param: navはいらないかも
-		}else if($uri_flag == 'nav'){
+		}
+		else if($uri_flag == 'nav')
+		{
 			$member_link->member_text = '会員登録を進める';
 			$member_link->member_url = 'customer/show_policy';
 			$member_link->text = '戻る';
 			$member_link->url = 'customer/login_action';
 		//会員登録したいひと　カートからのアクセス
-		}else{
+		}
+		else
+		{
 			$member_link->member_text = '会員登録を進める';
 			$member_link->member_url = 'customer/show_policy';
 			$member_link->text = '戻る';
@@ -193,6 +200,8 @@ class Front_area extends CI_Controller{
 	{
 		if(empty($zip) || !is_numeric($zip)){
 			return false;
+		}elseif(mb_strlen($zip,'UTF-8') != 7){
+			return false;
 		}else{
 			return true;
 		}
@@ -200,17 +209,21 @@ class Front_area extends CI_Controller{
 
 	private function _is_area($obj,$zipcode,$flag = FALSE)
 	{
-		if(!empty($obj) && $obj->cource_code != 0){
+		//配達コースがセットされていたら
+		if(!empty($obj) && $obj->cource_id != 0){
 			$flag = TRUE;
 			$obj->is_master_area = TRUE;
 			$this->session->set_userdata('address',$obj);
-		}elseif(!empty($obj) && $obj->cource_code == 0){
+		//配達コースがセットされていても配達圏外
+		}elseif(!empty($obj) && $obj->cource_id == 0){
 			$obj->is_master_area = TRUE;
 			$this->session->set_userdata('address',$obj);
 			$flag = FALSE;
+		//配達コースマスタなし
 		}elseif(empty($obj)){
 			$newobj = new StdClass();
 			$newobj->is_master_area = FALSE;
+			$newobj->zipcode = $zipcode;
 			$newobj->zipcode1 = substr($zipcode,0,3);
 			$newobj->zipcode2 = substr($zipcode,3,4);
 			$this->session->set_userdata('address',$newobj);
