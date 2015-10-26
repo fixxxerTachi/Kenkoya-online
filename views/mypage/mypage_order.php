@@ -6,6 +6,8 @@
 <link href="<?php echo base_url() ?>js/jquery-ui/jquery-ui.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>js/jquery-ui/external/jquery/jquery.js"></script>
 <script src="<?php echo base_url() ?>js/jquery-ui/jquery-ui.js"></script>
+<script src="<?php echo base_url() ?>js/calender.js"></script>
+<script src="<?php echo base_url() ?>js/datepicker-ja.js"></script>
 </head>
 <body>
 <div id='wrapper'>
@@ -85,12 +87,14 @@
 </div>
 </body>
 <script>
+/*
 $('#start_date,#end_date').datepicker({
 	dateFormat:'yy/mm/dd',
 	monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     dayNames: ['日', '月', '火', '水', '木', '金', '土'],
     dayNamesMin: ['日', '月', '火', '水', '木', '金', '土'],
 });
+*/
 $('#clear').on('click',function(){
 	$('#start_date').val('');
 	$('#end_date').val('');

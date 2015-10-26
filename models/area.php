@@ -92,7 +92,7 @@ class Area extends CI_Model{
 			$select_date[] = $date_after->modify($self->Master_days->edays[$first])->format('Y-m-d H:i:s'); 
 			$select_date[] = $date_after->modify($self->Master_days->edays[$second])->format('Y-m-d H:i:s'); 
 		}
-		//配達指定曜日が配達日２と1の間にあったら1番目の配達日から3日分の日付をしゅとくして配列化
+		//配達指定曜日が配達日２と1の間にあったら1番目の配達日から3日分の日付を取得して配列化
 		if($possible_day > $second || $possible_day < $first){
 			$select_date[] = $date_after->modify($self->Master_days->edays[$first])->format('Y-m-d H:i:s');
 			$select_date[] = $date_after->modify($self->Master_days->edays[$second])->format('Y-m-d H:i:s');

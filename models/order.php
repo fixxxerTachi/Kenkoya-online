@@ -194,9 +194,7 @@ class Order extends CI_Model{
 		$this->db->select("
 			o.order_number,
 			o.create_date,
-			o.shop_code,
 			o.address,
-			o.cource_code,
 			o.payment,
 			o.total_price,
 			o.tax,
@@ -205,14 +203,15 @@ class Order extends CI_Model{
 			o.delivery_charge,
 			c.code,
 			ca.cource_name,
+			s.code as shop_code
 		");
 		$this->db->from('order as o');
 		$this->db->join('order_detail as od','od.order_id = o.id','left');
 		$this->db->join('customers as c','c.id = o.customer_id','left');
-		$this->db->join('master_cource as ca','ca.cource_code = o.cource_code');
-		$this->db->where('c.shop_code = ca.shop_code');
+		$this->db->join('master_cource as ca','ca.id = o.cource_id');
+		$this->db->join('master_shop as s','s.id = ca.shop_id','left');
 		$this->db->where('o.id ',$order_id);
-		$this->db->where('o.customer_id',$customer_id);
+		//$this->db->where('o.customer_id',$customer_id);
 		$row = $this->db->get()->row();
 		return $row;
 	}
@@ -344,7 +343,6 @@ class Order extends CI_Model{
 			,od.advertise_id
 			,od.advertise_product_id
 			,od.quantity
-			,od.cancel_flag
 			,p.id as product_id
 			,p.product_name
 			,p.sale_price
@@ -509,7 +507,7 @@ class Order extends CI_Model{
 		$this->db->update('order_detail',$data);
 	}
 	
-	public function update_order_detail_flag(object $order_obj, array $data)
+	public function update_order_detail_flag($order_obj,  $data)
 	{
 		foreach($order_obj as $obj)
 		{

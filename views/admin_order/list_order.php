@@ -78,16 +78,17 @@
 					<table class='list'>
 						<tr class='base_info_header'>
 							<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th></th>
-						</tr><tr class='base_info_header'>
+						</tr>
+						<tr class='base_info'>
 							<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>入金</th><th>状態</th><th>変更</th><th>状態変更</th>
 						</tr>
 						<tr class='product_info_header'>
 							<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th>
 						</tr>
-						<?php for($i=0;$i < $count; $i++): ?>
+					<?php for($i=0;$i < $count; $i++): ?>
 							<?php $create_date = new DateTime($result[$i]->create_date);?>
 							<?php if(($i == 0) || ($i != 0 && $result[$i]->order_number != $result[$i-1]->order_number)):?>
-						<tr class='base_info'>
+						<tr class='base_info_header'>
 							<td><?php echo $create_date->format('Y/m/d');?></td>
 						<?php $d_date = new DateTime($result[$i]->delivery_date) ?>
 						<?php $d_date = ($d_date > new DateTime('1900-01-1-01 00:00:00')) ? $d_date->format('Y/m/d') : '日付け指定なし'; ?>
@@ -141,7 +142,7 @@
 								</td>
 						</tr>
 						<?php endif;?>
-						<tr class='product_info'>
+						<tr class='product_info_header'>
 							<td><?php echo $result[$i]->product_code ?></td>
 							<td><?php echo $result[$i]->branch_code ?></td>
 							<td><?php echo $result[$i]->product_name ?></td>
@@ -151,7 +152,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<?php endfor;?>
+					<?php endfor;?>
 					</table>
 					<?php else: ?>
 						<p></p>

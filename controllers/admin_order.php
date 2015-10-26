@@ -1,5 +1,5 @@
 <?php
-//include __DIR__.'/../libraries/define.php';
+//include __DIR__.'/list../libraries/define.php';
 /*
 include __DIR__.'/../libraries/define_config.php';
 include __DIR__.'/../libraries/Classes/PHPExcel.php';
@@ -124,7 +124,6 @@ class Admin_order extends CI_Controller{
 		{
 			$status_arr = $this->uri->segment(3) ? unserialize(urldecode($this->uri->segment(3))) : array('99',);
 		}
-var_dump($status_arr);
 		$form_data = array(
 			'order_number'=>$order_number,
 			'customer_code'=>$customer_code,
@@ -219,7 +218,7 @@ var_dump($status_arr);
 		if($this->input->post('submit'))
 		{
 			$result = $this->db->get()->result();
-log_message('error',$this->db->last_query());
+//log_message('error',$this->db->last_query());
 			$this->data['result'] = $result;
 			$subtotal = array();
 			foreach($result as $row){
@@ -228,7 +227,6 @@ log_message('error',$this->db->last_query());
 				$this->data['total_price'] = array_sum($subtotal);
 			}
 		}
-var_dump($this->input->post());
 		
 		//csvの作成
 		if($this->input->post('makecsv'))
@@ -542,6 +540,8 @@ var_dump($this->input->post());
 	public function change_paid()
 	{
 		$id = $this->uri->segment(3);
+		$order = $this->Order->get_by_id($id);
+		$this->data['order_number'] = $order->order_number;
 		$param = $this->uri->segment(4);
 		$this->data['param'] = $param;
 		if($this->input->post('submit'))

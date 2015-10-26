@@ -19,7 +19,11 @@
 					<?php endif; ?>
 					<?php echo form_open('',array('class'=>'col s12')) ?>
 						<table class='detail'>
-							<tr><th><label for='shop_id'>店舗</label></th><td><?php echo form_dropdown('shop_id',$shops,$selected,"class='browser-default'") ?></td></tr>
+							<tr><th><label for='shop_id'>店舗</label></th><td><?php echo form_dropdown('shop_id',$shops,$selected,"class='browser-default' id='shop_id'") ?></td></tr>
+							<tr>
+								<th><label for='cource_id'>コースコード</label></th>
+								<td><?php echo form_dropdown('cource_id',$cource_list,$form_data->cource_id,'id="cource_id"') ?></td>
+							</tr>
 							<tr><th><label for='code'>お客様番号</label></th><td><input type='text' name='code' value='<?php echo $form_data->code ?>'></td></tr>
 							<tr><th><label for='name'>お客様名</label></th><td><input type='text' name='name' value='<?php echo $form_data->name ?>'></td></tr>
 							<tr><th><label for='tel'>お電話番号</label></th><td><input type='text' name='tel' value='<?php echo $form_data->tel ?>'></td></tr>
@@ -48,6 +52,7 @@
 							<td><?php echo $row->tel ?></td>
 							<td><a class='edit' href='<?php echo site_url("/admin_customer/edit_customer/{$row->id}") ?>'>変更</a></td>
 							<td><a class='edit' onclick='del_confirm("<?php echo $row->name ?>" , <?php echo $row->id ?>)'>削除</a></td>
+							<td><a class='edit' href='<?php echo site_url("admin_customer/list_order/{$row->id}") ?>'>注文履歴</a></td>
 						</tr>
 						<?php endforeach;?>
 					</table>
@@ -80,5 +85,22 @@ function del_confirm(name , id){
 		return false;
 	}
 }
+</script>
+<script>
+$('#shop_id').on('change',function()
+{
+	$('#cource_id').empty();
+	var id = $(this).val();
+	$.getJSON(
+		'<?php echo site_url('admin_admin/show_cource')?>' + '/' + id,
+		function(data){
+			var items = [];
+			$.each(data,function(k,v){
+				items.push('<option value="' + k + '">' + v + '</option>');
+			});
+			$('#cource_id').append(items.join());
+		}
+	);
+});
 </script>
 </html>

@@ -35,7 +35,7 @@ function show_image($product_code,$size = null){
 
 function format_date($datetime,$no_date_message=''){
 	$str_date = '';
-	if($datetime == '0000-00-00 00:00:00')
+	if($datetime < '1900-00-00 00:00:00')
 	{
 		$str_date = $no_date_message;
 	}else{

@@ -346,14 +346,14 @@ class Front_customer extends CI_Controller{
 				if(!empty($area)){
 					//$db_data->shop_code = $area->shop_code;
 					//$db_data->cource_code = $area->cource_code;
-					$db_data->cource_id  = $area->cource_id;
-					$db_data->code = $maxcode + 1;
+				//配達コースエリアに登録されていてもcource_id=0の場合、NO_DELI_AREAを挿入、そうでない場合cource_idをセット
+					$db_data->cource_id  = $area->cource_id == 0 ? NO_DELI_AREA : $area->cource_id;
 				//配達地域外であれば、エリア外ショップコードを登録でもdefault 0だからいらないかも
 				}else{
 					//$db_data->shop_code = $this->no_area_shop_code;
 					$db_data->cource_id = NO_DELI_AREA;
-					$db_data->code = $maxcode + 1;
 				}
+				$db_data->code = $maxcode + 1;
 				//保存する
 				$this->Customer->save($db_data);
 				//保存できたかどうか確かめてメール送信

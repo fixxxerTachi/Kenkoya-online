@@ -11,7 +11,7 @@ class Admin_customer extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation','pagination','my_validation'));
+		$this->load->library(array('session','form_validation','pagination','my_validation','my_mail'));
 		$this->load->helper('form');
 		$this->load->model('Customer');
 		$this->load->model('Customer_info');
@@ -19,11 +19,12 @@ class Admin_customer extends CI_Controller{
 		$this->load->model('Master_hour');
 		$this->load->model('Personal');
 		$this->load->model('Master_show_flag');
-		//$this->load->model('Master_area');
 		$this->load->model('Master_shop');
 		$this->load->model('Master_change_info');
+		$this->load->model('Master_takuhai_hours');
 		$this->load->model('Cource');
 		$this->load->model('Customer_history');
+		$this->load->model('Order');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
 		$this->load->model('Admin_login');
@@ -185,6 +186,7 @@ class Admin_customer extends CI_Controller{
 		$id = $this->uri->segment(4);
 		$form_data = array(
 			'shop_id'=>0,
+			'cource_id'=>3,
 			'code'=>'',
 			'name'=>'',
 			'address1'=>'',
@@ -194,9 +196,14 @@ class Admin_customer extends CI_Controller{
 		//$this->data['shops'] = $this->Master_area->list_area;
 		$this->data['shops'] = $this->Master_shop->array_lists(TRUE);
 		$this->data['selected'] = '';
-		if($this->input->post('search')){
+		$cource_list = $this->Cource->show_list_for_dropdown();
+		$cource_list[3] = '---';
+		$this->data['cource_list'] = $cource_list;
+		if($this->input->post('search'))
+		{
 			$form_data = array(
 				'shop_id'=>$this->input->post('shop_id'),
+				'cource_id'=>$this->input->post('cource_id'),
 				'name'=> $this->input->post('name'),
 				'address1'=>$this->input->post('address1'),
 				'address2'=>$this->input->post('address2'),
@@ -206,7 +213,9 @@ class Admin_customer extends CI_Controller{
 			$form_data = (object)$form_data;
 			$this->data['selected'] = $form_data->shop_id;
 			$this->data['result'] = $this->Customer->show_list_conditions($form_data);
-		}else{
+		}
+		else
+		{
 			$offset = $this->uri->segment(5);
 			$config['uri_segment'] = 5;
 			$config['per_page'] = 20;
@@ -235,7 +244,161 @@ class Admin_customer extends CI_Controller{
 		$this->data['detail_result'] = $detail_result;
 		$this->data['h2title'] = "{$this->data['detail_result']->name}さんの詳細情報";
 		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->data['orders'] = $orders;
 		$this->load->view('admin_customer/detail_customer',$this->data);
+	}
+	
+	public function list_order()
+	{
+		$customer_id = $this->uri->segment(3);
+		$customer = $this->Customer->get_by_id($customer_id);
+		$orders = $this->Order->get_by_customer_id($customer_id,null,5);
+		$form_data = new StdClass();
+		$form_data->start_date = '';
+		$form_data->end_date = '';
+		if($this->input->post('submit'))
+		{
+			$start = $this->input->post('start_date');
+			$end = $this->input->post('end_date');
+			$form_data->start_date = $start;
+			$form_data->end_date = $end;
+			$orders = $this->Order->get_by_customer_id($customer_id, $form_data);
+		}
+		$count = count($orders);
+		for($i = 0; $i < $count; $i++)
+		{
+			$orders[$i]->details = $this->Order->get_detail_by_order_id($orders[$i]->id);
+		}
+		$this->data['form_data'] = $form_data;
+		$this->data['h2title'] = $customer->name . ' 様の受注履歴';
+		$this->data['orders'] = $orders;
+		$this->load->model('Master_payment');
+		$this->load->model('Master_order_status');
+		$this->load->model('Master_takuhai_hours');
+		$this->load->model('Mst_paid_flag');
+		$this->data['paid_flags'] = $this->Mst_paid_flag->array_lists();
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['order_status'] = $this->Master_order_status->order_status;
+		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
+		$this->load->view('admin_customer/list_order',$this->data);
+	}
+	
+	public function cancel()
+	{
+		try{
+			$this->load->model('Master_payment');
+			//$customer = $this->_checklogin($this->data['customer']);
+			$customer_id = $this->uri->segment(4);
+			$customer = $this->Customer->get_by_id($customer_id);
+			//order情報取得
+			$order_id = $this->uri->segment(3);
+			$result = $this->Order->get_by_id($order_id);
+			//$order_detail_id = $this->uri->segment(3);
+			//$result = $this->Order->get_detail_by_id($order_detail_id);
+			//detail_orderを取得
+			$result = $this->Order->get_by_id_with_detail($order_id);
+			//status_flagが0でなかったらキャンセルできない
+			if($result[0]->status_flag != 0){
+				$this->session->set_flashdata('error','キャンセルできません。');
+				return redirect("admin_customer/list_order/{$customer_id}");
+			}else{
+				$this->data['h2title'] = 'ご注文のキャンセル';
+				$this->data['title'] = 'ご注文のキャンセル';
+				$this->data['label_message'] = 'キャンセルする';
+				$this->data['button_message'] = 'キャンセル';
+				$this->data['message'] = 'ご注文をキャンセルには、キャンセルするにチェックを入れてキャンセルボタンを押してください';
+				if($this->input->post('submit')){
+					if($this->input->post('cancel')){
+						//クレジット取消処理
+						if((int)$result[0]->payment == PAYMENT_CREDIT){
+							$output = $this->Credit->alter_tran($result[0]->order_number);
+							if($output->isErrorOccurred()){
+								$message = $this->Credit->getAlterErrorMessages($output);
+								throw new Exception($message[0]);
+							}
+						}
+						$db_data = array(
+							'status_flag'=>CANCELED
+						);
+						$this->Order->db->trans_begin();
+						$this->Order->update($order_id,$db_data);
+						$this->Order->update_order_detail_flag($result,$db_data);
+						if($this->Order->db->trans_status() !== FALSE)
+						{
+							$this->Order->db->trans_commit();
+							$result->cancel = $this->data['h2title'];
+							$send_result = $this->my_mail->send_mail_change_order($customer,$result[0],$this->data['h2title']);
+							$this->session->set_flashdata('success','注文をキャンセルしました');
+							return redirect("admin_customer/list_order/{$customer_id}");
+						}
+						else
+						{
+							$this->Order->db->trans_rollback();
+							$this->session->set_flashdata('error','キャンセル登録に失敗しました');
+						}
+					}else{
+						$this->data['error_message'] = 'キャンセルする場合はキャンセルするにチェックを入れてください。<br>
+							キャンセルしない場合は、戻るボタンを押してください';
+					}
+				}
+			}
+			/* キャンセルを取り消す場合の処理　現在取引停止中
+			if($result[0]->status_flag==2){
+				$this->data['h2title'] = 'ご注文のキャンセルの取消';
+				$this->data['title'] = 'ご注文のキャンセルの取消';
+				$this->data['label_message'] = 'キャンセルの取消';
+				$this->data['button_message'] = 'キャンセル取消';
+				$this->data['message'] = 'キャンセルを取り消す場合は,キャンセル取消にチェックをいれてください。';
+				if($this->input->post('submit')){
+					if($this->input->post('cancel')){
+						$db_data = array(
+							'status_flag'=>0
+						);
+						$this->Order->update($order_id,$db_data);
+						$this->Order->update_order_detail_flag($result,$db_data);
+						$result->cancel = $this->data['h2title'];
+						$send_result = $this->my_mail->send_mail_change_order($customer,$result,$this->data['h2title']);
+						$this->session->set_flashdata('success','キャンセルを取り消しました');
+						return redirect('mypage/mypage_order');
+					}else{
+						$this->data['error_message'] = 'キャンセルを取り消す場合はキャンセルの取消にチェックを入れてください。<br>
+							取消しない場合は、戻るボタンを押してください';
+					}
+				}
+			}
+			*/
+		}catch(Exception $e){
+			//show_404();
+			//log_message($e->getMessage());
+			$this->data['error_message'] = $e->getMessage();
+		}
+		$this->data['order'] = $result;
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
+		$this->load->view('admin_customer/cancel',$this->data);
+	}
+	
+	public function receipt()
+	{
+		$this->load->model('Base_info');
+		$base_info = $this->Base_info->get_base_info();
+		if(!$order_id = $this->uri->segment(3))
+		{
+			return show_error('不正な画面操作です');
+		}
+		$this->data['title'] = '領収書の表示';
+		$customer = $this->_checklogin($this->data['customer']);
+		$order = $this->Order->get_by_id_customer((int)$order_id,$customer->id);
+		$details = $this->Order->get_detail_by_order_id($order_id);
+		$customer = $this->Customer->get_by_id($customer->id);
+		$this->data['h2title'] = "{$customer->name} 様";
+		$this->data['customer'] = $customer;
+		$this->data['details'] = $details;
+		$this->data['order'] = $order;
+		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['takuhai_hours'] = $this->Master_takuhai_hours->hours;
+		$this->data['shop_info'] = $base_info;
+		$this->load->view('mypage/reciept',$this->data);
 	}
 
 	public function edit_customer()

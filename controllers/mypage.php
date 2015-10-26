@@ -10,7 +10,7 @@ include __DIR__.'/../libraries/define_flag.php';
 */
 class Mypage extends CI_Controller{
 	public $data = array();
-	public $deliver_possible_day = '+3 days';
+	//public $deliver_possible_day = '+3 days';
 	public function __construct()
 	{
 		parent::__construct();
@@ -874,12 +874,22 @@ class Mypage extends CI_Controller{
 						$db_data = array(
 							'status_flag'=>CANCELED
 						);
+						$this->Order->db->trans_begin();
 						$this->Order->update($order_id,$db_data);
 						$this->Order->update_order_detail_flag($result,$db_data);
-						$result->cancel = $this->data['h2title'];
-						$send_result = $this->my_mail->send_mail_change_order($customer,$result[0],$this->data['h2title']);
-						$this->session->set_flashdata('success','注文をキャンセルしました');
-						return redirect('mypage/mypage_order');
+						if($this->Order->db->trans_status() !== FALSE)
+						{
+							$this->Order->db->trans_commit();
+							$result->cancel = $this->data['h2title'];
+							$send_result = $this->my_mail->send_mail_change_order($customer,$result[0],$this->data['h2title']);
+							$this->session->set_flashdata('success','注文をキャンセルしました');
+							return redirect('mypage/mypage_order');
+						}
+						else
+						{
+							$this->Order->db->trans_rollback();
+							$this->session->set_flashdata('error','キャンセルの登録に失敗しました');
+						}
 					}else{
 						$this->data['error_message'] = 'キャンセルする場合はキャンセルするにチェックを入れてください。<br>
 							キャンセルしない場合は、戻るボタンを押してください';

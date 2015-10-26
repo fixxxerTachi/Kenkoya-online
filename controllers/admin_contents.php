@@ -40,6 +40,7 @@ class Admin_contents extends CI_Controller{
 		$this->data['h2title'] = 'メニューを選択';
 		$this->load->view('index_admin',$this->data);
 	}
+	
 	public function add_mainvisual()
 	{
 		$this->data['result'] = $this->Mainvisual->show_list();
@@ -348,6 +349,7 @@ class Admin_contents extends CI_Controller{
 		}
 		$this->load->view('admin_contents/admin_add_mail_template',$this->data);
 	}
+	
 	/*
 	public function add_mail_template()
 	{

@@ -450,7 +450,10 @@ class Customer extends CI_Model{
 		$this->db->where('c.del_flag','0');
 		if(!empty($obj)){
 			if($obj->shop_id != 0){
-				$this->db->where('c.shop_id',$obj->shop_id);
+				$this->db->where('s.id',$obj->shop_id);
+			}
+			if($obj->cource_id != 0){
+				$this->db->where('c.cource_id',$obj->cource_id);
 			}
 			if(!empty($obj->name)){
 				$this->db->like('c.name',$obj->name);

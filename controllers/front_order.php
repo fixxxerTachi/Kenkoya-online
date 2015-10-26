@@ -135,7 +135,7 @@ class Front_order extends CI_Controller{
 			}
 			$this->data['address'] = $address;
 			//エリア内の会員であるかどうか
-			$is_area = ($userdata->cource_id !== NO_DELI_AREA);
+			$is_area = ($userdata->cource_id != NO_DELI_AREA);
 			$this->data['is_area'] = $is_area;
 			//エリア内は健康屋の配達可能日のリスト作成
 			if($is_area){

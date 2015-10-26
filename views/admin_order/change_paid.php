@@ -7,12 +7,7 @@
 <div id="container">
 	<div id="body">
 		<h2>銀行振込　入金確認</h2>
-		<?php if(!empty($success_message)):?>
-		<p class='success'><?php echo $success_message; ?></p>
-		<?php endif; ?>
-		<?php if(!empty($error_message)):?>
-		<p class='error'><?php echo $error_message ?></p>
-		<?php endif; ?>
+		<p>注文番号：<?php echo $order_number ?></p>
 		<div>
 			<?php echo form_open() ?>
 			<div id='list'>

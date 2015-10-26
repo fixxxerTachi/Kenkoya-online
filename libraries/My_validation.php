@@ -32,9 +32,9 @@ class My_validation{
 		$this->ci->form_validation->set_rules('address1','住所','required|max_length[200]');
 		$this->ci->form_validation->set_rules('tel','電話番号','required|alpha_dash|max_length[14]|callback_tel_check|callback_tel_format_check');
 		$this->ci->form_validation->set_rules('tel2','携帯電話番号','alpha_dash|max_length[14]|callback_tel_check|callback_tel_format_check');
-		$this->ci->form_validation->set_rules('year','誕生日(年)','max_length[4]|numeric');
-		$this->ci->form_validation->set_rules('month','誕生日(月)','max_length[2]|numeric');
-		$this->ci->form_validation->set_rules('day','誕生日(日)','max_length[2]|numeric');
+		$this->ci->form_validation->set_rules('year','誕生日(年)','required|max_length[4]|numeric');
+		$this->ci->form_validation->set_rules('month','誕生日(月)','required|max_length[2]|numeric');
+		$this->ci->form_validation->set_rules('day','誕生日(日)','required|max_length[2]|numeric');
 		/*
 		if($this->input->post('member')){
 			$this->form_validation->set_rules('username','ユーザーID','required|max_length[50]');
@@ -75,7 +75,10 @@ class My_validation{
 		$this->ci->form_validation->set_rules('tel','電話番号','required|numeric|max_length[14]');
 		$this->ci->form_validation->set_rules('tel2','携帯電話番号','numeric|max_length[14]');
 		$this->ci->form_validation->set_rules('email','メールアドレス','max_length[100]|valid_email');
-		$this->ci->form_validation->set_rules('birthday','お誕生日','callback_birthday_format_check');
+		//$this->ci->form_validation->set_rules('birthday','お誕生日','callback_birthday_format_check');
+		$this->ci->form_validation->set_rules('year','お誕生日(西暦)','required|numeric');
+		$this->ci->form_validation->set_rules('month','お誕生日(月)','required|numeric');
+		$this->ci->form_validation->set_rules('day','お誕生日(日)','required|numeric');
 	}
 	
 	//メールアドレスと確認用メールアドレスが同一かどうか確認する

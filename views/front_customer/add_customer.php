@@ -96,19 +96,19 @@
 					<tr>
 						<th><label for='tel'>電話番号 <span class='logo_pink'>必須</span> <span class='logo_green'>半角</span></label></th>
 						<td>
-							<input placeholder='例)03-3333-33' type='text' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='20' maxlength='20'>
+							<input placeholder='例)03333333' type='text' name='tel' id='tel' value='<?php echo $form_data->tel ?>' size='15' maxlength='15'>
 							<br>ご自宅の電話番号がもしくは携帯電話番号
 						</td>
 					</tr>
 					<tr>
 						<th><label for='tel'>携帯電話番号 <span class='logo_green'>半角</span></label></th>
 						<td>
-							<input placeholder='例)090-9999-9999' type='text' name='tel2' id='tel2' value='<?php echo $form_data->tel2 ?>' size='20' maxlength='20'>
+							<input placeholder='例)09099999999' type='text' name='tel2' id='tel2' value='<?php echo $form_data->tel2 ?>' size='15' maxlength='15	'>
 						</td>
 					</tr>
 		<?php if(!$no_member == 'no_member' || $no_member == 'nav'):?>
 					<tr>
-						<th><label for='birthday'>生年月日 <span class='logo_green'>全角</span></label></th>
+						<th><label for='birthday'>生年月日 <span class='logo_pink'>必須</span> <span class='logo_green'>全角</span></label></th>
 						<td>
 							<?php echo form_dropdown('year',$birthday->set_year(),$form_data->year) ?>月<?php echo form_dropdown('month',$birthday->set_month(),$form_data->month) ?>月<?php echo form_dropdown('day',$birthday->set_day(),$form_data->day)?>日
 						</td>
