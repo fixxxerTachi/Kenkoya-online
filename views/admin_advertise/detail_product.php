@@ -91,7 +91,7 @@
 						</tr>
 						<tr>
 							<th>体積</th>
-							<td><?php echo $result->volume ?></td>
+							<td><?php echo number_format($result->volume) ?></td>
 						</tr>
 					</table>
 				</div>

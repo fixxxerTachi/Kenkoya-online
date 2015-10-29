@@ -99,12 +99,12 @@
 						<th class='no-back'></th>
 						<td>
 							<ul>
+								<li><a class='edit_back' href='<?php echo site_url('mypage') ?>'>戻る</a></li>
 							<?php if($type=='address'):?>
 								<li><a class='edit_menu' href='<?php echo site_url("front_area/check_area/mypage")?>'>住所を変更する</a></li>
 							<?php else:?>
 								<li><a class='edit_menu' href='<?php echo site_url("mypage/mypage_change/{$type}")?>'>変更する</a></li>
 							<?php endif;?>
-								<li><a class='edit_back' href='<?php echo site_url('mypage') ?>'>戻る</a></li>
 							</ul>
 						</td>
 					</tr>

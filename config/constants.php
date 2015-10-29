@@ -113,4 +113,5 @@ define('QUESTION_FOR_USER',1);
 define('QUESTION_FOR_ADMIN',2);
 define('ORDER_CHANGE_FOR_USER',7);
 define('ORDER_CHANGE_FOR_ADMIN',8);
+define('MAIL_SHIPPED',16);
 

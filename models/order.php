@@ -28,6 +28,7 @@ class Order extends CI_Model{
 		$this->tablename = 'takuhai_order';
 		$this->detail_tablename = 'takuhai_order_detail';
 		$this->account_number = '';
+		$this->load->model('Master_takuhai_hours');
 	}
 	
 	/** 出荷済みにする
@@ -62,6 +63,55 @@ class Order extends CI_Model{
 					$this->db->trans_commit();
 				}
 			}
+	}
+	
+	public function send_shipped_mail(array $ids)
+	{
+		if(!empty($ids))
+		{
+			$this->load->library('my_mail');
+			$this->load->model('Customer');
+			foreach($ids as $id)
+			{
+				$order = $this->get_by_id($id);
+				//配達完了フラグが立っていないものはでないものは送信しない
+				if($order->status_flag != DELIVERED)
+				{
+					continue;
+				}
+				$customer = $this->Customer->get_by_id($order->customer_id);
+				$details = $this->get_by_order_number($order->order_number);
+				$text = '';
+				foreach($details as $item){
+					if($item->delivery_date != '0000-00-00 00:00:00'){
+						$date = new DateTime($item->delivery_date);
+						$delivery_date = $date->format('Y年m月d日');
+					}else{
+						$delivery_date = '日付指定しない';
+					}
+					if($item->delivery_hour != 0){
+						$delivery_hour = $this->Master_takuhai_hours->hours[$item->delivery_hour];
+					}else{
+						$delivery_hour = '時間指定しない';
+					}
+					$sale_price = number_format($item->sale_price);
+					$text .= "{$item->product_name}     {$sale_price}円  数量:{$item->quantity}  配達予定日:{$delivery_date} {$delivery_hour}\n";
+				}
+				$text_items = new StdClass();
+				$text_items->order_number = $order->order_number;
+				$text_items->items = $text;
+				$text_items->total = $order->total_price;
+				$text_items->tax = $order->tax;
+				$text_items->total_price = $order->amount;
+				$text_items->address = $order->address;
+				$text_items->charge_price = $order->delivery_charge;
+				$result = $this->my_mail->mail_shipped($customer,$text_items);
+			}
+		}
+		else
+		{
+			throw new Exception('パラメータが渡されていません');
+		}
 	}
 	
 	/** 受付ずみにする
@@ -194,7 +244,8 @@ class Order extends CI_Model{
 		$this->db->select("
 			o.order_number,
 			o.create_date,
-			o.address,
+			o.customer_id,
+			o.address_id,
 			o.payment,
 			o.total_price,
 			o.tax,
@@ -214,6 +265,25 @@ class Order extends CI_Model{
 		//$this->db->where('o.customer_id',$customer_id);
 		$row = $this->db->get()->row();
 		return $row;
+	}
+	
+	/** 別のアドレスが登録されている場合は別のアドレスを取得しそうでない場合は請求先を表示する
+	* @param int address_id
+	* @return string address
+	**/
+	public function show_shipping_address(StdClass $order)
+	{
+		if($order->address_id == 0)
+		{
+			$this->load->model('Customer');
+			$address = $this->Customer->show_address((int)$order->customer_id);
+		}
+		else
+		{
+			$this->load->model('Address');
+			$address = $this->Address->get_by_id((int)$order->address_id);
+		}
+		return $address;
 	}
 
 	public function show_list($del_flag=TRUE)
@@ -302,13 +372,33 @@ class Order extends CI_Model{
 	
 	public function get_by_customer_id($customer_id = null,$formobj=null,$limit = null)
 	{
-		$this->db->select(
-			'o.*,c.name'
-		);
+		$this->db->select('
+			o.id as id
+			,o.customer_id as customer_id
+			,o.customer_code
+			,o.order_number
+			,o.address_id
+			,o.cource_code
+			,o.cource_id
+			,o.payment
+			,o.total_price
+			,o.tax
+			,o.delivery_charge
+			,o.amount
+			,o.status_flag
+			,o.paid_flag
+			,o.csv_flag
+			,o.create_date
+			,o.delivery_date
+			,o.delivery_hour
+			,o.delivery_method
+			,o.shipped_date
+			,c.name
+			');
 		$this->db->from($this->tablename . ' as o');
 		$this->db->join('customers as c','c.id = o.customer_id','left');
 		if($customer_id){
-			$this->db->where('customer_id',$customer_id);
+			$this->db->where('o.customer_id',$customer_id);
 		}
 		if($formobj){
 			if(!empty($formobj->start_date)){
@@ -456,7 +546,14 @@ class Order extends CI_Model{
 		$this->db->where('id',$id);
 		$query = $this->db->get($this->tablename);
 		$result =  $query->row();
-		return $result;
+		if(!empty($result))
+		{
+			return $result;
+		}
+		else
+		{
+			throw new Exception($this->router->class . '/'. $this->router->method . '/' . __FILE__. __LINE__ . __CLASS__ .  'パラメータが渡されていません');
+		}
 	}
 	
 	public function get_by_id_with_detail($order_id)

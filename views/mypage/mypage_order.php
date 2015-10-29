@@ -13,6 +13,7 @@
 <div id='wrapper'>
 <?php include __DIR__ . '/../templates/header_front_no_main.php' ?>
 <?php include __DIR__ . '/../templates/nav_front.php' ?>
+<?php include __DIR__ . '/../templates/breadcrumb.php' ?>
 <div id="container">
 	<div id="container-inner">
 		<div class='content'>
@@ -41,6 +42,7 @@
 									<tr><th>ご注文番号</th><td><?php echo $order->order_number ?></td></tr>
 									<tr><th>注 文 日</th><td><?php echo $create_date->format('Y年m月d日') ?></td></tr>
 									<tr><th>お支払方法</th><td><?php echo $payments[$order->payment]->method_name ?></td></tr>
+									<tr><th>配送先</th><td><?php echo $order->address ?></td></tr>
 									<tr><th>配達予定日</th><td><?php echo format_date($order->delivery_date,'日付指定なし') ?> <?php echo $takuhai_hours[$order->delivery_hour] ?></td></tr>
 									<tr><th>ご請求額</th><td><?php echo number_format((int)$order->total_price + (int)$order->tax + (int)$order->delivery_charge) ?>円(税　<?php echo number_format($order->tax) ?>円)</td></tr>
 								</table>
@@ -56,7 +58,7 @@
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
 							<?php if($order->status_flag == RECIEVED): //受付済みは明細ボタン表示 ?>
-									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$oder->id}") ?>' target='blank'>ご注文明細の表示</a></li>
+									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>
 							<?php endif;?>
 							<?php if($order->status_flag == ORDERED): //発注済みは明細ボタン表示 ?>
 									<li><a class='edit_menu' href='<?php echo site_url("/mypage/receipt/{$order->id}") ?>' target='blank'>ご注文明細の表示</a></li>

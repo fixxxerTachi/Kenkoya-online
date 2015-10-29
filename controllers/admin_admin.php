@@ -621,7 +621,7 @@ class Admin_admin extends CI_Controller{
 		}
 		/*pagination*/
 		$total_count = count($result);
-		$limit = 2;
+		$limit = 10;
 		$categories = $this->Question_category->show_list_array();
 		/*未返信のみ表示でpostされてきた場合*/
 		if($this->input->post('no-reply-param'))
@@ -660,6 +660,14 @@ class Admin_admin extends CI_Controller{
 	
 	/*** お問い合わせの返信 ****/
 	public function reply_contact(){
+		$this->load->model('Mail_footer');
+		$footer = $this->Mail_footer->content;
+		$footer = str_replace(
+			array('{{site_url}}','{{contact_url}}'),
+			array(site_url(),site_url('contact')),
+			$footer
+		);
+		$header = "いつも宅配スーパー健康屋をご利用いただき、誠にありがとうございます。";
 		$this->data['h2title'] = 'お問い合わせ:返信';
 		$id = $this->uri->segment(3);
 		$categories = $this->Question_category->show_list_array();
@@ -667,8 +675,9 @@ class Admin_admin extends CI_Controller{
 		$this->data['title'] = '【宅配スーパー健康屋】お客様サポート';
 		$category = $categories[$form_data->category_id];
 		$reply_content = str_replace("\n","\n>",$form_data->content);
-		$content = "{$form_data->name}様\n\n\n>【お問い合わせ内容】\n>{$category}\n>\n>{$reply_content}";
-		if($this->input->post('submit')){
+		$content = "{$form_data->name}様\n{$header}\n\n\n>【お問い合わせ内容】\n>{$category}\n>\n>{$reply_content}\n{$footer}";
+		if($this->input->post('submit'))
+		{
 			$form_data->title = $this->input->post('title');
 			$form_data->content = $this->input->post('content');
 			$result = $this->send_mail($form_data);
@@ -677,7 +686,7 @@ class Admin_admin extends CI_Controller{
 				$db = $this->Contact->db;
 				$db_data=array(
 					'reply_flag'=>1,
-					'reply_content'=>$form_data->content
+					'reply_content'=>$form_data->content,
 				);
 				$db->where('id',$id);
 				$db->update('question',$db_data);

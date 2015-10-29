@@ -1,22 +1,12 @@
 <?php
-//include __DIR__.'/list../libraries/define.php';
-/*
-include __DIR__.'/../libraries/define_config.php';
-include __DIR__.'/../libraries/Classes/PHPExcel.php';
-*/
 include __DIR__.'/../libraries/Classes/PHPExcel/IOFactory.php';
-/*
-include __DIR__.'/../libraries/define_flag.php';
-*/
-//include __DIR__.'/../libraries/common.php';
-//include __DIR__.'/../libraries/Csv.php';
 
 class Admin_order extends CI_Controller{
 	public $data = array();
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session','form_validation'));
+		$this->load->library(array('session','form_validation','my_mail'));
 		$this->load->helper('form');
 		$this->load->model('Base_info');
 		$this->load->model('Order');
@@ -118,11 +108,11 @@ class Admin_order extends CI_Controller{
 		$no_deli_date = $this->input->post('no_deli_date');
 		if($this->input->post('status'))
 		{
-			$status_arr = $this->input->post('status') ?: array('99',);
+			$status_arr = $this->input->post('status') ?: array();
 		}
 		else
 		{
-			$status_arr = $this->uri->segment(3) ? unserialize(urldecode($this->uri->segment(3))) : array('99',);
+			$status_arr = $this->uri->segment(3) ? unserialize(urldecode($this->uri->segment(3))) : array();
 		}
 		$form_data = array(
 			'order_number'=>$order_number,
@@ -135,9 +125,9 @@ class Admin_order extends CI_Controller{
 			'status_arr'=>$status_arr,
 		);
 		$this->data['form_data'] = (object)$form_data;
-		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('1000-01-01 00:00:00');
+		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('0000-00-00 00:00:00');
 		$end_datetime = !empty($end) ? new DateTime($end) : new DateTime('9999-12-30 23:59:59');
-		$deli_start_datetime = !empty($deli_start) ? new DateTime($deli_start) : new DateTime('1000-01-01 00:00:00');
+		$deli_start_datetime = !empty($deli_start) ? new DateTime($deli_start) : new DateTime('0000-00-00 00:00:00');
 		$deli_end_datetime = !empty($deli_end) ? new DateTime($deli_end) : new DateTime('9999-12-30 23:59:59');
 		$start_datetime = $start_datetime->format('Y-m-d 00:00:00');
 		$end_datetime = $end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
@@ -147,7 +137,6 @@ class Admin_order extends CI_Controller{
 			o.id as orderId
 			,o.order_number
 			,o.create_date
-			,o.address
 			,o.cource_code
 			,o.payment
 			,o.status_flag as status_flag
@@ -156,6 +145,8 @@ class Admin_order extends CI_Controller{
 			,o.shipped_date
 			,o.total_price
 			,o.tax
+			,o.address_id
+			,o.customer_id
 			,od.id as order_id
 			,od.order_id as orderid
 			,od.product_code
@@ -179,7 +170,7 @@ class Admin_order extends CI_Controller{
 		$this->db->join('advertise_product as ad_pro','ad_pro.id = od.advertise_product_id','left');
 		$this->db->join('master_cource as ca','ca.id = o.cource_id');
 		$this->db->order_by('o.id','desc');
-		
+
 		//条件絞り込み
 		//orderのステータス
 		if(count($status_arr) > 0) $this->db->where_in('o.status_flag',$status_arr);
@@ -189,7 +180,6 @@ class Admin_order extends CI_Controller{
 			$this->db->like('c.name',$customer_name);
 			$this->db->or_like('c.furigana',$customer_name);
 		}
-		
 		//日付け指定なしが含まれる場合
 		if($no_deli_date)
 		{
@@ -207,9 +197,10 @@ class Admin_order extends CI_Controller{
 					and o.delivery_date >= '{$deli_start_datetime}'
 					and o.delivery_date < '{$deli_end_datetime}'
 			)";
-
 		}
 		$this->db->where($date_where);
+//var_dump($this->db->get()->result());
+//var_dump($this->db->last_query());
 		/*
 		$result = $this->db->get()->result();
 		$this->data['result'] = $result;
@@ -225,6 +216,7 @@ class Admin_order extends CI_Controller{
 				$total = $row->sale_price * $row->quantity;
 				$subtotal[] = $total;
 				$this->data['total_price'] = array_sum($subtotal);
+				$row->address = $this->Order->show_shipping_address($row);
 			}
 		}
 		
@@ -327,6 +319,8 @@ class Admin_order extends CI_Controller{
 			}
 			else
 			{
+				//発送完了メール送信処理
+				$result = $this->Order->send_shipped_mail($ids);
 				$this->session->set_flashdata('success','更新しました');
 				return redirect('admin_order/list_order');
 			}
@@ -337,6 +331,10 @@ class Admin_order extends CI_Controller{
 		{
 			//商品情報の読み込み
 			$result = $this->db->get()->result();
+			foreach($result as $row)
+			{
+				$row->address = $this->Order->show_shipping_address($row);
+			}
 			//テンプレートの読み込み
 			$file = __DIR__.'/../third_party/test.xls';
 			//$file = $this->config->item('excel_template');
@@ -353,6 +351,78 @@ class Admin_order extends CI_Controller{
 			$count = count($result);
 			//商品の行を格納、order_idが変わったら0
 			$counter = 0;
+			for($i = 0; $i < $count; $i++)
+			{
+				$sheet->setCellValue('B4',$this->Base_info->shop_name);
+				$sheet->setCellValue('B5',$this->Base_info->tel);
+				if(!empty($result[$i]))
+				{
+					$page = 8;
+				// 初回だけ入力すればよい 
+					if($counter == 0)
+					{
+						$sheet->setTitle($result[$i]->order_number);
+						$sheet->setCellValueByColumnAndRow(3,2,$result[$i]->customer_code);
+						$sheet->setCellValueByColumnAndRow(4,2,$result[$i]->name);
+						$sheet->setCellValueByColumnAndRow(1,3,$result[$i]->address['address']);
+						$sheet->setCellValueByColumnAndRow(6,35,$result[$i]->tax);
+						$sheet->setCellValueByColumnAndRow(6,36,$result[$i]->delivery_charge);
+						$total_price = $result[$i]->total_price + $result[$i]->tax + $result[$i]->delivery_charge;
+						$sheet->setCellValueByColumnAndRow(6,37,$total_price);
+						//同じものを隣のセルにコピー
+						$sheet->setCellValueByColumnAndRow($page + 3,2,$result[$i]->customer_code);
+						$sheet->setCellValueByColumnAndRow($page + 4,2,$result[$i]->name);
+						$sheet->setCellValueByColumnAndRow($page + 1,3,$result[$i]->address['address']);
+						$sheet->setCellValueByColumnAndRow($page + 6,35,$result[$i]->tax);
+						$sheet->setCellValueByColumnAndRow($page + 6,36,$result[$i]->delivery_charge);
+						$total_price = $result[$i]->total_price + $result[$i]->tax + $result[$i]->delivery_charge;
+						$sheet->setCellValueByColumnAndRow($page + 6,37,$total_price);
+					}
+					//$sheet->setCellValueByColumnAndRow($page + 0,$counter+8,$result[$i]->orderId);
+					$sheet->setCellValueByColumnAndRow(1,$counter+8,$counter+1);
+					$sheet->setCellValueByColumnAndRow(2,$counter+8,$result[$i]->product_name);
+					$sheet->setCellValueByColumnAndRow(4,$counter+8,$result[$i]->sale_price);
+					$sheet->setCellValueByColumnAndRow(5,$counter+8,$result[$i]->quantity);
+					$sheet->setCellValueByColumnAndRow(6,$counter+8,$result[$i]->sale_price * $result[$i]->quantity);
+
+					$sheet->setCellValueByColumnAndRow($page + 1,$counter+8,$counter+1);
+					$sheet->setCellValueByColumnAndRow($page + 2,$counter+8,$result[$i]->product_name);
+					$sheet->setCellValueByColumnAndRow($page + 4,$counter+8,$result[$i]->sale_price);
+					$sheet->setCellValueByColumnAndRow($page + 5,$counter+8,$result[$i]->quantity);
+					$sheet->setCellValueByColumnAndRow($page + 6,$counter+8,$result[$i]->sale_price * $result[$i]->quantity);
+				}
+				$counter++;
+				//次の行があって違うオーダーなら新しいシートを挿入する
+				if(!empty($result[$i+1]))
+				{
+					if($result[$i]->orderId != $result[$i+1]->orderId)
+					{
+						//カウンターをリセット
+						$counter = 0;
+						$firstSheet = $book->getSheet(0);
+						$copied = $firstSheet->copy();
+						$copied->setTitle('');
+						$sheet = $book->addSheet($copied,null);
+						for($j=8; $j<=34; $j++)
+						{
+							$sheet->setCellValueByColumnAndRow(1,$j,'');
+							$sheet->setCellValueByColumnAndRow(2,$j,'');
+							$sheet->setCellValueByColumnAndRow(3,$j,'');
+							$sheet->setCellValueByColumnAndRow(4,$j,'');
+							$sheet->setCellValueByColumnAndRow(5,$j,'');
+							$sheet->setCellValueByColumnAndRow(6,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 1,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 2,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 3,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 4,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 5,$j,'');
+							$sheet->setCellValueByColumnAndRow($page + 6,$j,'');
+						}
+					}
+				}
+			}
+			
+			/*
 			//1シートのどのページに格納するか
 			$page = 0;
 			//シートを追加するか
@@ -363,7 +433,7 @@ class Admin_order extends CI_Controller{
 				$sheet->setCellValue('B5',$this->Base_info->tel);
 				if(!empty($result[$i]))
 				{
-				/* 初回だけ入力すればよい */
+				// 初回だけ入力すればよい 
 					if($counter == 0)
 					{
 						$sheet->setTitle($result[$i]->order_number);
@@ -375,7 +445,6 @@ class Admin_order extends CI_Controller{
 						$total_price = $result[$i]->total_price + $result[$i]->tax + $result[$i]->delivery_charge;
 						$sheet->setCellValueByColumnAndRow($page + 6,37,$total_price);
 					}
-				/*********************/
 					//$sheet->setCellValueByColumnAndRow($page + 0,$counter+8,$result[$i]->orderId);
 					$sheet->setCellValueByColumnAndRow($page + 1,$counter+8,$counter+1);
 					$sheet->setCellValueByColumnAndRow($page + 2,$counter+8,$result[$i]->product_name);
@@ -418,7 +487,8 @@ class Admin_order extends CI_Controller{
 						}
 					}
 				}
-			}/* endfor */
+			}
+			*/
 			
 			/*** 出力処理 ***/
 			$today = new DateTime();
@@ -533,7 +603,7 @@ class Admin_order extends CI_Controller{
 				return redirect('admin_order/list_payment');
 			}
 		}
-		$this->data['success_message'] = $this->session->flashdata('success');	
+		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_order/list_payment',$this->data);
 	}
 	

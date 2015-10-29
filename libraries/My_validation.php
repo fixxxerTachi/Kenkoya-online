@@ -47,12 +47,12 @@ class My_validation{
 	{
 		$this->ci->form_validation->set_error_delimiters('<p class="error">','</p>');
 		$this->ci->form_validation->set_rules('name','お名前','required|max_length[50]');
-		$this->ci->form_validation->set_rules('furigana','フリガナ','required|max_length[100]');
-		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required');
-		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required');
+		$this->ci->form_validation->set_rules('furigana','フリガナ','required|max_length[100]|callback_kana_check');
+		$this->ci->form_validation->set_rules('zipcode1','郵便番号','required|max_length[3]');
+		$this->ci->form_validation->set_rules('zipcode2','郵便番号','required|max_length[4]');
 		$this->ci->form_validation->set_rules('address1','住所','required|max_length[200]');
-		$this->ci->form_validation->set_rules('tel','電話番号','required|max_length[14]');
-		$this->ci->form_validation->set_rules('tel','電話番号','required|max_length[14]');
+		$this->ci->form_validation->set_rules('tel','電話番号','required|max_length[14]|numeric');
+		//$this->ci->form_validation->set_rules('tel2','電話番号','required|max_length[14]|numeric');
 		$this->validation_message();
 	}
 	

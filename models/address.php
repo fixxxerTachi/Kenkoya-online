@@ -16,6 +16,7 @@ class Address extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->tablename = 'takuhai_addresses';
+		$this->load->library('my_exception');
 	}
 	
 	/**　別の配送先に登録されている住所を取得
@@ -57,14 +58,24 @@ class Address extends CI_Model{
 	
 	/** 配送先住所の取得
 	* @param int address_id
-	* @reteurn string address
+	* @return array name,address
 	*/
 	public function get_by_id($address_id)
 	{
 		$this->db->where('id',$address_id);
 		$this->db->where('del_flag',0);
 		$result = $this->db->get($this->tablename)->row();
-		return $result->address1 . $result->address2;
+		if(!empty($result))
+		{
+			return array(
+				'address' => $result->address1 . $result->address2,
+				'name' => $result->name
+			);
+		}
+		else
+		{
+			throw new Exception($this->my_exception->log_info() . 'アドレス情報が取得できません(ID:' . $address_id . ')');
+		}
 	}
 	
 	/** 配送先の更新

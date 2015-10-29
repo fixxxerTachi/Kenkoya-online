@@ -404,7 +404,7 @@ class Admin_contents extends CI_Controller{
 		}
 		$this->data['result'] = $this->Mail_template->show_list();
 		$this->data['success_message'] = $this->session->flashdata('success');
-		$this->load->view('admin_contents/admin_add_mail_template.php',$this->data);		
+		$this->load->view('admin_contents/admin_add_mail_template.php',$this->data);
 	}
 	*/
 	public function delete_mail_template()
@@ -474,6 +474,22 @@ class Admin_contents extends CI_Controller{
 		$this->load->view('admin_contents/add_information',$this->data);
 	}
 	*/
+	public function edit_mail_footer()
+	{
+		$this->load->model('Mail_footer');
+		$this->data['h2title'] = 'メールフッター編集';
+		$form_data = $this->Mail_footer;
+		if($this->input->post('submit'))
+		{
+			$content = $this->input->post('content');
+			$result = $this->Mail_footer->update($content);
+			$this->session->set_flashdata('success','更新しました');
+			return redirect('admin_contents/edit_mail_footer');
+		}
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->data['form_data'] = $form_data;
+		$this->load->view('admin_contents/edit_mail_footer',$this->data);
+	}
 	
 	public function edit_information()
 	{

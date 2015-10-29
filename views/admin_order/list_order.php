@@ -97,7 +97,7 @@
 							<td><?php echo $result[$i]->order_number ?></td>
 							<td><?php echo $result[$i]->customer_code ?></td>
 							<td><?php echo $result[$i]->name ?></td>
-							<td><?php echo $result[$i]->address ?></td>
+							<td><?php echo $result[$i]->address['address'] ?></td>
 							<td></td>
 						</tr>
 						<tr class='base_info'>

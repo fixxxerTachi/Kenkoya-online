@@ -42,6 +42,7 @@ class Customer extends CI_Model{
 		$this->account_number = '';
 		$this->member_flag = 1;
 		$this->cource_id = NO_DELI_AREA;
+		$this->load->library('my_exception');
 	}
 	
 	//宅配料金算出の為pref_idを取得
@@ -100,20 +101,27 @@ class Customer extends CI_Model{
 	
 	public function check_tel($str,$del_flag=True, $customer_id = NULL)
 	{
-		//customer_idが渡されている場合、その顧客以外で
-		if(!empty($customer_id))
+		if(!empty($str))
 		{
-			$this->db->where('id <> ',$customer_id);
+			//customer_idが渡されている場合、その顧客以外で
+			if(!empty($customer_id))
+			{
+				$this->db->where('id <> ',$customer_id);
+			}
+			if($del_flag){
+				$this->db->where('del_flag',0);
+			}
+			$this->db->where("(tel = {$str} or tel2 = {$str})");
+			$query = $this->db->get($this->tablename);
+			$result = $query->row();
+			if(!empty($result)){
+				return FALSE;
+			}else{
+				return TRUE;
+			}
 		}
-		if($del_flag){
-			$this->db->where('del_flag',0);
-		}
-		$this->db->where("(tel = {$str} or tel2 = {$str})");
-		$query = $this->db->get($this->tablename);
-		$result = $query->row();
-		if(!empty($result)){
-			return FALSE;
-		}else{
+		else
+		{
 			return TRUE;
 		}
 	}
@@ -271,6 +279,25 @@ class Customer extends CI_Model{
 		$col = array('change_info'=>null);
 		$this->db->where_in('id', $ids);
 		$this->db->update($this->tablename,$col);
+	}
+	
+	/** 顧客IDから会員登録住所の表示（請求先住所)
+	*@param int customer_id
+	*@return array name,address
+	**/
+	public function show_address($customer_id)
+	{
+		$this->db->select('name,address1,address2')->from($this->tablename);
+		$this->db->where('id',$customer_id);
+		$row = $this->db->get()->row();
+		if(!empty($row))
+		{
+			return array('name'=>$row->name, 'address'=>$row->address1 . $row->address2);
+		}
+		else
+		{
+			throw new Exception($this->my_exception->log_info(). '顧客情報が存在しません(ID:' . $customer_id . ')');
+		}
 	}
 
 	public function get_by_username_and_password($obj)

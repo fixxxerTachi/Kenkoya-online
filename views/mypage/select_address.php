@@ -3,8 +3,8 @@
 <head>
 <?php include __DIR__ . '/../templates/meta_front.php' ?>
 <link rel='stylesheet' href='<?php echo base_url('css/customer.css') ?>'>
-<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
-<script src="http://ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script></head>
+<script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src="//ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script></head>
 <body>
 <div id='wrapper'>
 <?php include __DIR__ . '/../templates/header_front_no_main.php' ?>

@@ -215,7 +215,8 @@ class Mypage extends CI_Controller{
 							//新しいメールアドレスに送信
 							$customer->mail = $new_info;
 							$this->my_mail->send_mail_change_info($customer,$new_info,$old_info,'メールアドレスの変更');
-							$this->session->set_flashdata('success','メールアドレスを変更しました');
+							$message = '変更したメールアドレスに変更確認メールを送信しました。<br>メールが届いてない場合、メールアドレスの登録に誤りがあるかもしれませんので、再度登録をお願いします。';
+							$this->session->set_flashdata('success',$message);
 							$this->Customer->re_session_userdata($sess_customer->id);
 							return redirect("mypage/mypage_account/{$type}");
 						}
@@ -597,7 +598,8 @@ class Mypage extends CI_Controller{
 		$form_data = new StdClass();
 		$form_data->start_date ='';
 		$form_data->end_date = '';
-		if($this->input->post('submit')){
+		if($this->input->post('submit'))
+		{
 			$start = $this->input->post('start_date');
 			$end = $this->input->post('end_date');
 			$form_data->start_date = $start;
@@ -608,8 +610,10 @@ class Mypage extends CI_Controller{
 		$count = count($orders);
 		for($i=0; $i < $count; $i++){
 			$orders[$i]->details = $this->Order->get_detail_by_order_id($orders[$i]->id);
+			//別の配送先が指定されている場合は別の配送先を表示そうでない場合は請求先を表示
+			$orders[$i]->address = $this->Order->show_shipping_address($orders[$i])['address'];
 		}
-
+		
 		$this->data['paid_flags'] = $this->Mst_paid_flag->array_lists();
 		$this->data['orders'] = $orders;
 		$this->data['form_data'] = $form_data;
@@ -618,6 +622,13 @@ class Mypage extends CI_Controller{
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->data['error_message'] = $this->session->flashdata('error');
 		$this->data['payments'] = $this->Master_payment->method;
+		//breads
+		$bread = $this->Bread;
+		$bread->text = 'マイページ';
+		$bread->link = site_url('mypage');
+		$bread2 = new StdClass();
+		$bread2->text = 'ご注文履歴';
+		$this->data['breads'] = $this->Bread->create_bread($bread,$bread2);
 		$this->load->view('mypage/mypage_order',$this->data);
 	}
 	
@@ -633,6 +644,7 @@ class Mypage extends CI_Controller{
 		$this->data['title'] = '領収書の表示';
 		$customer = $this->_checklogin($this->data['customer']);
 		$order = $this->Order->get_by_id_customer((int)$order_id,$customer->id);
+		$order->address = $this->Order->show_shipping_address($order);
 		$details = $this->Order->get_detail_by_order_id($order_id);
 		$customer = $this->Customer->get_by_id($customer->id);
 		$this->data['h2title'] = "{$customer->name} 様";
@@ -663,6 +675,12 @@ class Mypage extends CI_Controller{
 			$form_data = $this->input->post();
 			$form_data = (object)$form_data;
 			$this->my_validation->add_address_validation_rules();
+			$form_data->name = $this->my_class->convert_kana($form_data->name);
+			$form_data->furigana = $this->my_class->convert_kana($form_data->furigana);
+			$form_data->address1 = $this->my_class->convert_kana($form_data->address1);
+			$form_data->address2 = $this->my_class->convert_kana($form_data->address2);
+			
+			
 			if(!$this->form_validation->run() === FALSE){
 				$this->session->set_userdata('my_address',$form_data);
 				return redirect('mypage/confirm_address');
@@ -725,7 +743,7 @@ class Mypage extends CI_Controller{
 		}else{
 			$this->session->set_flashdata('error','登録に失敗しました');
 		}
-		return redirect('mypage/select_address');	
+		return redirect('mypage/select_address');
 	}
 	
 	public function edit_address()
@@ -750,6 +768,10 @@ class Mypage extends CI_Controller{
 		if($this->input->post('submit'))
 		{
 			$this->my_validation->add_address_validation_rules();
+			$form_data->name = $this->my_class->convert_kana($form_data->name);
+			$form_data->furigana = $this->my_class->convert_kana($form_data->furigana);
+			$form_data->address1 = $this->my_class->convert_kana($form_data->address1);
+			$form_data->address2 = $this->my_class->convert_kana($form_data->address2);
 			if(!$this->form_validation->run() === FALSE)
 			{
 				$data = (object)$this->input->post();
@@ -800,7 +822,8 @@ class Mypage extends CI_Controller{
 		}
 	}
 	
-	private function validation_message(){
+	private function validation_message()
+	{
 		$this->form_validation->set_message('required','%sを入力してください');
 		$this->form_validation->set_message('numeric','%sは数字で入力してください');
 		$this->form_validation->set_message('max_length',mb_convert_encoding('%sは%s文字以内で入力してください','utf-8'));

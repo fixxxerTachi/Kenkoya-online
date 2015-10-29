@@ -68,6 +68,7 @@ class Front_contact extends CI_Controller{
 	
 	public function confirm_contact()
 	{
+		$this->load->library('my_mail');
 		$this->data['h2title'] = 'お問い合わせフォーム：確認画面';
 		$this->data['title'] = 'お問い合わせフォーム：確認画面';
 		$form_data = $this->session->userdata('contact');
@@ -80,7 +81,7 @@ class Front_contact extends CI_Controller{
 				'create_datetime'=>date('Y-m-d H:i:s'),
 			);
 			$this->Contact->save($db_data);
-			if($this->send_mail($form_data)){
+			if($this->my_mail->send_mail_for_contact($form_data)){
 				$this->session->unset_userdata('contact');
 				$this->session->set_flashdata('success','ご質問を承りました');
 				return redirect(base_url('contact/complete'));
@@ -93,7 +94,7 @@ class Front_contact extends CI_Controller{
 		$this->load->view('front_contact/confirm_contact',$this->data);
 	}
 	
-	
+/*
 	private function send_mail($data)
 	{
 		$send_address = $this->Mail_template->send_address;
@@ -112,6 +113,7 @@ class Front_contact extends CI_Controller{
 		$result2 = sendMail($this->Mail_template->admin_address,$template_for_admin->mail_title,$mail_body,$send_address,$this->Mail_template->sender);
 		return ($result1 && $result2);
 	}
+*/
 	
 	public function complete()
 	{

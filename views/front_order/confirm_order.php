@@ -115,7 +115,7 @@
 				<table class='contact_form' id='cart_menu'>
 					<tr>
 						<td class='no-border'></td>
-						<td><input type='submit' name='submit' value='購入する' ><a class='edit_back' href='<?php echo site_url("order/delivery_info{$param}") ?>'>戻る</a></td>
+						<td><a class='edit_back' href='<?php echo site_url("order/delivery_info{$param}") ?>'>戻る</a> <input type='submit' name='submit' value='購入する' style='margin-left:150px;'></td>
 					</tr>
 				</table>
 			</form>
@@ -145,12 +145,12 @@ $('input[type=submit]').on('click',function(){
 });
 </script>
 </html>
-<?php echo 'carts:';var_dump($this->session->userdata('carts'));echo '<br>'; ?>
-<?php foreach($this->session->userdata('carts') as $cart):?>
-<?php var_dump(unserialize($cart));?>
-<?php endforeach;?>
-<?php echo 'card_info:';var_dump($this->session->userdata('card_info'));echo '<br>';?>
-<?php echo 'order_info:';var_dump($this->session->userdata('order_info')); echo '<br>';?>
-<?php echo 'customer:';var_dump($this->session->userdata('customer')); echo '<br>';?>
-<?php echo 'destination:';var_dump($this->session->userdata('destination')); echo '<br>';?>
-<?php echo 'no-member:';var_dump($this->session->userdata('no-member')); echo '<br>';?>
+<?php //echo 'carts:';var_dump($this->session->userdata('carts'));echo '<br>'; ?>
+<?php //foreach($this->session->userdata('carts') as $cart):?>
+<?php //var_dump(unserialize($cart));?>
+<?php //endforeach;?>
+<?php //echo 'card_info:';var_dump($this->session->userdata('card_info'));echo '<br>';?>
+<?php //echo 'order_info:';var_dump($this->session->userdata('order_info')); echo '<br>';?>
+<?php //echo 'customer:';var_dump($this->session->userdata('customer')); echo '<br>';?>
+<?php //echo 'destination:';var_dump($this->session->userdata('destination')); echo '<br>';?>
+<?php //echo 'no-member:';var_dump($this->session->userdata('no-member')); echo '<br>';?>

@@ -66,4 +66,19 @@ class Test_order extends CI_Controller {
 		echo $this->unit->report();
 	}
 	
+	public function show_address()
+	{
+		try
+		{
+			$order1 = $this->Order->get_by_id(1);
+			$order2 = $this->Order->get_by_id(3);
+			echo $this->Order->show_shipping_address($order1)['name'];
+			echo $this->Order->show_shipping_address($order2)['address'];
+		}
+		catch(Exception $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+	
 }
