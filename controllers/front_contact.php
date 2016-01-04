@@ -94,6 +94,57 @@ class Front_contact extends CI_Controller{
 		$this->load->view('front_contact/confirm_contact',$this->data);
 	}
 	
+	public function takuhai_member()
+	{
+		$this->load->model('Contact_takuhai');
+		$this->load->library('my_validation');
+		$this->data['h2title'] = '宅配サービス会員登録申し込み';
+		$this->data['title'] = $this->data['h2title'];
+		$sess_member = $this->session->userdata('takuhai_member');
+		$form_data = $sess_member ?: $this->Contact_takuhai;
+		if($this->input->post('submit'))
+		{
+			$this->my_validation->validation_rules();
+			$this->form_validation->set_rules('age','年齢','max_length[3]|numeric')	;
+			if($this->form_validation->run() === FALSE)
+			{
+				$form_data = (object)$this->input->post();
+			}
+			else
+			{
+				$form_data = (object)$this->input->post();
+				$this->session->set_userdata('takuhai_member',$form_data);
+				return redirect('contact/takuhai_member_confirm');
+			}
+		}
+		$this->data['form_data'] = $form_data;
+		$this->load->view('front_contact/takuhai_contact',$this->data);
+	}
+	
+	public function takuhai_member_confirm()
+	{
+		if(!$this->session->userdata('takuhai_member'))
+		{
+			return redirect('contact/takuhai_member');
+		}
+		$this->load->model('Contact_takuhai');
+		$this->data['h2title'] = '宅配サービス会員登録申し込み入力内容確認';
+		$this->data['title'] = $this->data['h2title'];
+		$form_data = $this->session->userdata('takuhai_member');
+		$form_data->zipcode = $form_data->zipcode1 . $form_data->zipcode2;
+		if($this->input->post('submit'))
+		{
+			return redirect('contact/takuhai_member_complete');
+		}
+		$this->data['form_data'] = $form_data;
+		$this->load->view('front_contact/confirm_takuhai_contact',$this->data);
+	}
+	
+	public function takuhai_member_complete()
+	{
+		
+	}
+	
 /*
 	private function send_mail($data)
 	{
@@ -120,5 +171,12 @@ class Front_contact extends CI_Controller{
 		$this->data['title'] = 'お問い合わせ完了';
 		$this->load->view('front_contact/complete',$this->data);
 	}
-
+	
+	public function takuhai_member_complete()
+	{
+		$this->data['h2title'] = '宅配サービス会員登録申し込み受付完了';
+		$this->data['title'] = $this->data['h2title'];
+		$sess_member = $this->session->userdata('takuhai_member');
+var_dump($sess_member);
+	}
 }

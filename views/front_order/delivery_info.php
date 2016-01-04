@@ -87,7 +87,7 @@
 					</tr>
 					<tr class='payment_inner'>
 						<?php //if($key != PAYMENT_MEMBER):?>
-							<td><?php echo nl2br($val->notice);?></td>
+							<td><?php echo nl2br(sub_str($search,$replace,$val->notice));?></td>
 						<?php //endif;?>
 					</tr>
 		<?php endforeach;?>

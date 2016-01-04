@@ -9,7 +9,6 @@ class Contact extends CI_Model{
 	public $content;
 	public $reply_flag;
 	public $create_date;
-	public $del_flag;
 	
 	public function __construct()
 	{

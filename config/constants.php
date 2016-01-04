@@ -40,11 +40,11 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
 //お支払方法
-define('PAYMENT_CREDIT',0);
-define('PAYMENT_BANK'  ,1);
-define('PAYMENT_CASH'  ,2);
-define('PAYMENT_CONVINI',3);
-define('PAYMENT_MEMBER',4);
+define('PAYMENT_CREDIT',1);
+define('PAYMENT_BANK'  ,2);
+define('PAYMENT_CASH'  ,3);
+define('PAYMENT_CONVINI',4);
+define('PAYMENT_MEMBER',5);
 
 //表示非表示
 define('SHOW_ITEM',1);

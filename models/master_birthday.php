@@ -15,7 +15,7 @@ class Master_birthday{
 		$year = (int)$this->year;
 		$start_year = $year - 100;
 		$arr = array();
-		$arr[0] = '';
+		$arr[''] = '';
 		for($i = $start_year; $i < $year - 13; $i++){
 			$arr[$i] = $i;
 		}
@@ -25,7 +25,7 @@ class Master_birthday{
 	public function set_month()
 	{
 		$arr = array();
-		$arr[0] = '';
+		$arr[''] = '';
 		for($i=1; $i <= 12; $i++){ $arr[$i] = $i; }
 		return $arr;
 	}
@@ -33,7 +33,7 @@ class Master_birthday{
 	public function set_day()
 	{
 		$arr = array();
-		$arr[0] = '';
+		$arr[''] = '';
 		for($i=1; $i <= 31; $i++){ $arr[$i] = $i; }
 		return $arr;
 	}

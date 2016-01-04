@@ -919,7 +919,8 @@ class Admin_admin extends CI_Controller{
 	public function payment()
 	{
 		$this->data['h2title'] = 'お支払方法登録、変更';
-		$result = $this->Master_payment->show_list();
+		$this->data['show_flags'] = $this->Master_show_flag->show_flag;
+		$result = $this->Master_payment->show_list(FALSE);
 		$this->data['result'] = $result;
 		$id = $this->uri->segment(3);
 		$form_data = $this->Master_payment;
@@ -963,6 +964,48 @@ class Admin_admin extends CI_Controller{
 		$this->Payment->delete($id);
 		$this->session->set_flashdata('success','削除しました');
 		return redirect(base_url('admin_admin/payment'));
+	}
+	
+	/*** お振込口座登録変更 ***/
+	public function my_bank()
+	{
+		$this->data['h2title'] = '振込口座変更';
+		$this->load->model('My_bank');
+		$bank = $this->My_bank;
+		if($this->input->post('submit'))
+		{
+			$form_data = $this->input->post();
+			$form_data = (object)$form_data;
+			$this->form_validation->set_rules('name','銀行名','required');
+			$this->form_validation->set_rules('furigana','フリガナ','required');
+			$this->form_validation->set_rules('branch_name','支店名','required');
+			$this->form_validation->set_rules('branch_furigana','支店名（フリガナ)','required');
+			$this->form_validation->set_rules('type','口座種別','required');
+			$this->form_validation->set_rules('account','口座番号','required');
+			$this->form_validation->set_rules('account_name','口座名','required');
+			if($this->form_validation->run() === FALSE)
+			{
+				$this->data['error_message'] = '未入力項目があります';
+			}
+			else
+			{
+				$db_data = array(
+					'name' => $form_data->name,
+					'furigana'=>$form_data->furigana,
+					'branch_name'=>$form_data->branch_name,
+					'branch_furigana'=>$form_data->branch_furigana,
+					'type'=>$form_data->type,
+					'account'=>$form_data->account,
+					'account_name'=>$form_data->account_name,
+				);
+				$this->My_bank->update($db_data);
+				$this->session->set_flashdata('success','更新しました');
+				return redirect('admin_admin/my_bank');
+			}
+		}
+		$this->data['bank'] = $bank;
+		$this->data['success_message'] = $this->session->flashdata('success');
+		$this->load->view('admin_admin/my_bank',$this->data);
 	}
 
 	/*** 都道府県住所マスタアップロード ***/

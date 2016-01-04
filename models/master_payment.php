@@ -25,12 +25,33 @@ class Master_payment extends CI_Model{
 		return $result;
 	}
 	*/
-	
-	public function show_list()
+	public function check_payment($id)
 	{
-		/*$this->db->where('del_flag',0);*/
+		if(!array_key_exists($id,$this->show_list(TRUE)))
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	
+	public function show_list($show_flag = TRUE)
+	{
+		$this->db->where('del_flag',0);
+		if($show_flag)
+		{
+			$this->db->where('show_flag',1);
+		}
 		$result = $this->db->get($this->tablename)->result();
-		return $result;
+		$arr = array();
+		foreach($result as $v)
+		{
+			$arr[$v->id] = $v;
+		}
+		return $arr;
 	}
 	
 	public function save($data)
@@ -64,11 +85,15 @@ class Master_payment extends CI_Model{
 		$count = count($arr_list);
 		for($i = 0; $i < $count; $i++)
 		{
+			if(0 == $i)
+			{
+				$arr[$i] = '選択してください';
+			}
 			$arr[$i] = $arr_list[$i]->method_name;
 		}
 		return $arr;
 	}
-	
+		
 	/*** 表示非表示のドロップダウンリストのリスト***/
 	public function list_show_flag()
 	{

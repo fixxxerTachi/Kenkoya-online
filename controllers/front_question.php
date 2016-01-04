@@ -58,6 +58,10 @@ class Front_question extends CI_Controller {
 		$bread1 = new StdClass();
 		$bread1->text = $this->data->title;
 		$this->data->breads = $this->Bread->create_bread($bread,$bread1);
+		//銀行口座の反映
+		$this->load->model('My_bank');
+		$this->data->search = $this->My_bank->search;
+		$this->data->replace = $this->My_bank->replace;
 		$this->load->view('front_question/detail',$this->data);
 	}
 }

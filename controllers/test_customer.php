@@ -2,6 +2,7 @@
 include __DIR__.'/../libraries/define.php';
 class Test_customer extends CI_Controller {
 	public $data;
+	public $no_user;
 	
 	public function __construct()
 	{
@@ -14,6 +15,8 @@ class Test_customer extends CI_Controller {
 		$this->load->model('Customer_history');
 		$this->data['current'] = $this->router->class;
 		$this->data['current_side'] = $this->router->method;
+		$this->no_user = $this->Customer;
+		
 	}
 	
 	public function index()
@@ -88,5 +91,29 @@ class Test_customer extends CI_Controller {
 		{
 			var_dump($this->Customer->check_tel($tel));
 		}
+	}
+	
+	public function test_validation()
+	{
+		//メール重複チェック
+		$this->no_user->email = 'tekihout@hotei.com';
+		$yamada = $this->Customer->get_by_id(528);
+		echo $this->unit->run($this->Customer->check_email($this->no_user->email),TRUE,'check_email');
+		echo $this->unit->run($this->Customer->check_email($yamada->email),FALSE,'check_email');
+		//電話番号重複チェック
+		$this->no_user->tel = '45678913789';
+		$this->no_user->tel2 = '12345679';
+		echo $this->unit->run($this->Customer->check_tel($this->no_user->tel,TRUE),'check_tel');
+		echo $this->unit->run($this->Customer->check_tel($this->no_user->tel2,TRUE),'check_tel');
+		echo $this->unit->run($this->Customer->check_tel($yamada->tel),FALSE,'check_tel');
+		echo $this->unit->run($this->Customer->check_tel($yamada->tel2),FALSE,'check_tel');
+		//コード重複チェック
+		$this->no_user->code = '000000';
+		echo $this->unit->run($this->Customer->check_code($this->no_user->code),TRUE,'check_code');
+		echo $this->unit->run($this->Customer->check_code($yamada->code),FALSE,'check_code');
+		//ユーザー名重複チェック
+		$this->no_user->username = NULL;
+		echo $this->unit->run($this->Customer->check_username($this->no_user->username),TRUE,'check_usernaem');
+		echo $this->unit->run($this->Customer->check_username($yamada->username),FALSE,'check_username');
 	}
 }

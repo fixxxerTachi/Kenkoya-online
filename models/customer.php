@@ -65,7 +65,8 @@ class Customer extends CI_Model{
 		$this->db->select('email');
 		$this->db->from($this->tablename);
 		$this->db->where('email',$email);
-		$this->db->where('code is not null',null,false);
+		$this->db->where('member_flag',1);
+		//$this->db->where('code is not null',null,false);
 		if($del_falg)
 		{
 			$this->db->where('del_flag',0);
@@ -89,6 +90,7 @@ class Customer extends CI_Model{
 			$this->db->where('del_flag',0);
 		}
 		$this->db->where('username',$str);
+		$this->db->where('member_flag',1);
 		$query = $this->db->get($this->tablename);
 		$result = $query->row();
 
@@ -112,6 +114,7 @@ class Customer extends CI_Model{
 				$this->db->where('del_flag',0);
 			}
 			$this->db->where("(tel = {$str} or tel2 = {$str})");
+			$this->db->where('member_flag',1);
 			$query = $this->db->get($this->tablename);
 			$result = $query->row();
 			if(!empty($result)){
@@ -138,6 +141,7 @@ class Customer extends CI_Model{
 			$this->db->where('del_flag',0);
 		}
 		$this->db->where('code',$code);
+		$this->db->where('member_flag',1);
 		$result = $this->db->get($this->tablename)->row();
 		if(!empty($result))
 		{

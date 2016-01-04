@@ -67,5 +67,30 @@ var_dump($result);
 			echo $e->getMessage();
 		}
 	}
+	
+	public function ordered()
+	{
+		echo 'hot';
+	/*
+		$customer = array(
+			'name'=>'テスト用のお客様',
+		);
+		$customer = (object)$customer;
+		$mail_data = array(
+			'order_number '=>'123456789',
+			'items'=>'DTS UltraPC 299',
+			'total'=>1000,
+			'tax'=>80,
+			'charge_price'=>800,
+			'total_price'=>1880,
+			'address'=>'東京都文京区のとあるマンション',
+			'billing_destination'=>'東京都墨田区の川沿いのまんしょん',
+			'payment'=>'銀行振込',
+			'my_bank'=>'楽天銀行　健康屋市場店',
+		);
+		$result = $this->my_mail->order_mail($customer,$mail_data);
+		var_dump($result);
+	*/
+	}
 }
 

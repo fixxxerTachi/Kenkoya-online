@@ -41,6 +41,7 @@ class Front_order extends CI_Controller{
 		$this->load->model('Takuhai_charge');
 		$this->load->model('Charge_kenkoya');
 		$this->load->model('Master_delivery_span');
+		$this->load->model('My_bank');
 		$span = $this->Master_delivery_span->span;
 		$this->deliver_possible_day = '+' . $span . ' days';
 		$this->data['customer'] = $this->session->userdata('customer') ? $this->session->userdata('customer'): $this->session->userdata('no-member');
@@ -121,7 +122,7 @@ class Front_order extends CI_Controller{
 			$userdata = $this->Customer->get_by_username($customer);
 			//請求先住所を表示させるため$custoemr->address1に住所をセット
 			$customer->address1 = $userdata->address1.$userdata->address2;
-			$payments = $this->Master_payment->method;
+			$payments = $this->Master_payment->show_list(TRUE);
 			//配送先情報の表示
 			$address= '';
 			$destination = $this->session->userdata('destination');
@@ -245,8 +246,11 @@ class Front_order extends CI_Controller{
 		//$this->data['order_info'] = $order_info;
 		$this->data['flow_info'] = true;
 		//非会員は口座引落しない
-		unset($payments[PAYMENT_MEMBER]);
+		//unset($payments[PAYMENT_MEMBER]);
 		$this->data['payments'] = $payments;
+		//銀行口座を反映
+		$this->data['search'] = $this->My_bank->search;
+		$this->data['replace'] = $this->My_bank->replace;
 		$this->load->view('front_order/delivery_info',$this->data);
 	}
 	
@@ -323,6 +327,8 @@ class Front_order extends CI_Controller{
 		//非会員は口座引落しない
 		unset($payments[PAYMENT_MEMBER]);
 		$this->data['payments'] = $payments;
+		$this->data['search'] = $this->My_bank->search;
+		$this->data['replace'] = $this->My_bank->replace;
 		$this->load->view('front_order/delivery_info',$this->data);
 	}
 	
@@ -530,6 +536,13 @@ class Front_order extends CI_Controller{
 				}
 			}
 		}
+		
+		//お支払方法が選択可能なものかどうかチェックする
+		if($this->Master_payment->check_payment($order_info->payment) === FALSE)
+		{
+			$error_messages[] = "現在お支払できないお支払方法を選択しています。";
+		}
+		
 		if(count($error_messages)>0)
 		{
 			$this->data['error_messages'] = $error_messages;
@@ -556,7 +569,6 @@ class Front_order extends CI_Controller{
 				$this->session->set_flashdata('error','カートにはなにも入っていません');
 				return redirect('cart/show_cart');
 			}
-			
 			if(!$order_info = $this->session->userdata('order_info')){
 				$this->session->set_flashdata('error','配達情報が入力されていません');
 				return redirect(base_url('order/delivery_info'));
@@ -568,7 +580,6 @@ class Front_order extends CI_Controller{
 					return redirect('order/delivery_info');
 				}
 			}
-			
 			//商品個別の販売可否情報を取得する
 			foreach($carts as $cart)
 			{
@@ -648,7 +659,6 @@ class Front_order extends CI_Controller{
 						'customer_id'=>$userdata->id,
 						//'shop_code'=>$userdata->shop_code,
 						'customer_code'=>$userdata->code,
-						'address'=>$userdata->address1.$userdata->address2,
 						'address_id'=>$order_info->destination,
 						'cource_id'=>$userdata->cource_id,
 						'payment'=>$order_info->payment,
@@ -673,7 +683,7 @@ class Front_order extends CI_Controller{
 							'furigana'=>$customer->furigana,
 							'tel'=>$customer->tel,
 							'tel2'=>$customer->tel2,
-							'no_member_email'=>$customer->email,
+							'email'=>$customer->email,
 							'zipcode'=>$customer->zipcode,
 							'address1'=>$customer->address1,
 							'address2'=>$customer->address2,
@@ -686,8 +696,6 @@ class Front_order extends CI_Controller{
 						$user_id = $this->Customer->save($user_data);
 						$data = array(
 							'customer_id'=>$user_id,
-							'shop_code'=>0,
-							'address'=>$user_data['address1'].$user_data['address2'],
 							'address_id'=>0,
 							'cource_code'=>NO_DELI_AREA,
 							'payment'=>$order_info->payment,
@@ -772,14 +780,17 @@ class Front_order extends CI_Controller{
 					//$tax  = floor($total * $tax_rate);
 					//$total_price = $total + $tax;
 				
-					//配送先情報の取得order::address_id=0 はCustomer::address1から
-					//order::address_id!=1はAddress::addressから
-					$address = '';
+					//配送先情報の取得 
+					//別の配送先がある場合は別の配送先を表示
+					//$address = '';
+					/*
 					if($order->address_id == 0){
 						$address = $customer->address1.$customer->address2;
 					}else{
 						$address = $this->Address->get_by_id($order->address_id);
 					}
+					*/
+					//$address = $this->O
 					
 					$text_items = new StdClass();
 					$text_items->order_number = $order->order_number;
@@ -787,8 +798,23 @@ class Front_order extends CI_Controller{
 					$text_items->total = $total->total_price;
 					$text_items->tax = $total->tax_price;
 					$text_items->total_price = $total->amount;
-					$text_items->address = $address;
 					$text_items->point = $point;
+					//別の配送先がある場合は別の配送先を表示する
+					$address = $this->Order->show_shipping_address($order);
+					$text_items->address = $address['address'] . ' ' . $address['name'];
+					//請求先の表示
+					$billing_destination = $customer->address1.$customer->address2.' '.$customer->name . '様';
+					$text_items->billing_destination = $billing_destination;
+					//お支払方法の表示
+					$text_items->payment = $this->Master_payment->get_by_id($order_info->payment);
+					//銀振の場合　振込先の表示
+					$my_bank = '';
+					if($order_info->payment == PAYMENT_BANK)
+					{
+						$bank = $this->My_bank;
+						$my_bank = "【お振込先】\n{$bank->name} ({$bank->furigana})\n{$bank->branch_name} ({$bank->branch_furigana})\n{$bank->type} {$bank->account}\n{$bank->account_name} ({$bank->account_furigana})\n";
+					}
+					$text_items->my_bank = $my_bank;
 					$text_items->charge_price = $total->charge_price;
 					$result = $this->my_mail->order_mail($customer,$text_items);
 					$this->session->set_flashdata('success','注文を確定しました');
@@ -797,7 +823,7 @@ class Front_order extends CI_Controller{
 				}
 			}
 		}catch(Exception $e){
-			var_dump($e);exit;
+			//var_dump($e);exit;
 			$this->session->set_flashdata('error',$e->getMessage());
 			log_message('error',$e->getMessage());
 			return redirect('order/delivery_info');

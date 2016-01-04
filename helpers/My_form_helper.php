@@ -44,3 +44,9 @@ function format_date($datetime,$no_date_message=''){
 	}
 	return $str_date;
 }
+
+/*** テキストを置換する ***/
+function sub_str(array $s,array $d,$target)
+{
+	return str_replace($s,$d,$target);
+}

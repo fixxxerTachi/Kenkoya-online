@@ -16,7 +16,7 @@
 			<?php if(!empty($result)):?>
 				<h3><span class='logo_q'>Q</span> <?php echo $result->question ?></h3>
 				<div class='answer'>
-					<span class='logo_a'>A</span> <?php echo nl2br($result->answer) ?>
+					<span class='logo_a'>A</span> <?php echo nl2br(sub_str($search,$replace,$result->answer)) ?>
 				</div>
 			<?php else:?>
 				<p>ご質問はございません</p>

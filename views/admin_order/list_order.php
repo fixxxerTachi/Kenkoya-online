@@ -43,7 +43,7 @@
 							<th class='no-border'></th>
 							<td></td>
 							<td></td>
-							<td><input type='checkbox' name='no_deli_date' id='no_deli_date' value='1'><label for='no_deli_date'>日付指定なしを含める</label></td>
+							<td><input type='checkbox' name='no_deli_date' id='no_deli_date' value='1' <?php if($form_data->no_deli_date) echo 'checked=checked' ?>><label for='no_deli_date'>日付指定なしを含める</label></td>
 						</tr>
 					</table>
 					<table class='detail'>
@@ -64,7 +64,7 @@
 								<td width='200px'></td>
 								<td><input type='submit' name='reg_order' value='受付登録'><br><a class='desc_btn' id='recieved_desc' href='javascript:void(0)'>説明</a></td>
 								<td><input type='submit' name='makecsv' value='発注用CSV作成'><br><a class='desc_btn' id='order_desc' href='javascript:void(0)'>説明</a></td>
-								<td><input type='submit' name='makeOrderItems' value='注文明細書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
+								<td><input type='submit' name='makeOrderItems' value='納品書作成'><br><a class='desc_btn' id='items_desc' href='javascript:void(0)'>説明</a></td>
 								<td><input type='submit' name='save_shipped' value='出荷済み登録'><br><a class='desc_btn' id='shipped_desc' href='javascript:void(0)'>説明</a></td>
 								<!--<td><a class='edit_back' href='<?php echo site_url('admin_order/list_order') ?>'>更新</a></td>
 								<td><a class='edit_back' href='javascript:void(0)' id='remove_check'>全てのチェックをつける</a></td>-->
@@ -77,13 +77,13 @@
 					<?php $count = count($result);?>
 					<table class='list'>
 						<tr class='base_info_header'>
-							<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th></th>
+							<th>購入日</th><th>お届け日</th><th>お届け時間帯</th><th>注文番号</th><th>お客様<br>コード</th><th>お客様名</th><th>配送先</th><th>配達予定日</th><th>出荷日</th>
 						</tr>
 						<tr class='base_info'>
-							<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>入金</th><th>状態</th><th>変更</th><th>状態変更</th>
+							<th>配送料</th><th>合計<br>(税抜)</th><th>消費税</th><th>お支払方法</th><th>入金</th><th>状態</th><th>変更</th><th>状態変更</th><th></th>
 						</tr>
 						<tr class='product_info_header'>
-							<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th>
+							<th>商品コード</th><th>枝番</th><th>商品名</th><th>数量</th><th>販売単価</th><th>小計</th><th></th><th></th><th></th>
 						</tr>
 					<?php for($i=0;$i < $count; $i++): ?>
 							<?php $create_date = new DateTime($result[$i]->create_date);?>
@@ -91,14 +91,20 @@
 						<tr class='base_info_header'>
 							<td><?php echo $create_date->format('Y/m/d');?></td>
 						<?php $d_date = new DateTime($result[$i]->delivery_date) ?>
-						<?php $d_date = ($d_date > new DateTime('1900-01-1-01 00:00:00')) ? $d_date->format('Y/m/d') : '日付け指定なし'; ?>
+						<?php $d_date = ($d_date > new DateTime('0000-00-00 00:00:00')) ? $d_date->format('Y/m/d') : '日付け指定なし'; ?>
+						<?php if(!empty($result[$i]->s_date)):?>
+							<?php $s_date = ($s_date > new DateTime('0000-00-00 00:00:00')) ? $s_date->format('Y/m/d') : '未出荷'; ?>
+						<?php else:?>
+							<?php $s_date = '未出荷';?>
+						<?php endif;?>
 							<td><?php echo $d_date ?></td>
 							<td><?php echo $takuhai_hours[$result[$i]->delivery_hour] ?></td>
 							<td><?php echo $result[$i]->order_number ?></td>
 							<td><?php echo $result[$i]->customer_code ?></td>
 							<td><?php echo $result[$i]->name ?></td>
-							<td><?php echo $result[$i]->address['address'] ?></td>
-							<td></td>
+							<td><?php echo $result[$i]->address['address'] ?> <?php echo $result[$i]->address['name'] ?></td>
+							<td><?php echo $a_date ?></td>
+							<td><?php echo $s_date ?></td>
 						</tr>
 						<tr class='base_info'>
 							<td><?php echo number_format($result[$i]->delivery_charge) ?>円</td>
@@ -140,6 +146,7 @@
 								<?php echo $date->format('Y年m月d日') ?>出荷済み
 						<?php endif;?>
 								</td>
+								<td></td>
 						</tr>
 						<?php endif;?>
 						<tr class='product_info_header'>
@@ -149,6 +156,7 @@
 							<td><?php echo $result[$i]->quantity ?>個</td>
 							<td><?php echo $result[$i]->sale_price ?>円</td>
 							<td><?php echo number_format($result[$i]->quantity * $result[$i]->sale_price) ?>円</td>
+							<td></td>
 							<td></td>
 							<td></td>
 						</tr>

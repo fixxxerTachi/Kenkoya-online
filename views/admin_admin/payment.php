@@ -18,20 +18,19 @@
 					<?php if(!empty($error_message)):?>
 					<p class='error'><?php echo $error_message ?></p>
 					<?php endif; ?>
-					<p class='links'>
-					</p>
+					<p>注意）お支払方法は決済画面のお支払/配送情報登録画面に表示されます。変更した場合、よくある質問のお支払についてを修正して下さい。</p>
 					<?php if(!empty($result)): ?>
 						<table class='mdl-data-table mdl-js-data-table'>
 						<tr><th>ID</th><th>表示名</th><th></th><th></th><th></th></tr>
 						<?php foreach($result as $item):?>
 							<tr>
-								<td>
-<?php if($item->show_flag == SHOW_ITEM) echo '<span style="color:orange">公開</span>' ?>
-<?php if($item->show_flag == HIDE_ITEM) echo '<span>非公開</span>' ?>
-								</td>
 								<td><?php echo $item->id ?></td>
 								<td><?php echo $item->method_name ?></td>
 								<td><a class='edit' href='<?php echo site_url("/admin_admin/payment/{$item->id}") ?>'>変更</a></td>
+								<td>
+<?php if($item->show_flag == SHOW_ITEM) echo '<span style="color:orange;">公開</span>';?>
+<?php if($item->show_flag == HIDE_ITEM) echo '<span>非公開</span>';?>
+								</td>
 								<td><a class='edit' onclick ='del_confirm("<?php echo $item->method_name ?>","<?php echo $item->id ?>")'>削除</a></td>
 							</tr>
 						<?php endforeach;?>

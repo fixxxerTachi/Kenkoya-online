@@ -207,6 +207,9 @@ class Front_customer extends CI_Controller{
 				$this->form_validation->set_rules('email_confirm','メールアドレス','required|max_length[100]|valid_email|callback_email_check');
 				$this->form_validation->set_rules('tel','電話番号','required|numeric|max_length[15]|callback_tel_check');
 				$this->form_validation->set_rules('tel2','携帯電話番号','numeric|max_length[15]|callback_tel_check');
+				$this->form_validation->set_rules('year','お誕生日(西暦)','required|numeric');
+				$this->form_validation->set_rules('month','お誕生日(月)','required|numeric');
+				$this->form_validation->set_rules('day','お誕生日(日)','required|numeric');
 			}
 			if($this->form_validation->run() === FALSE){
 				//
@@ -217,7 +220,8 @@ class Front_customer extends CI_Controller{
 					//$db_data = $this->input->post();
 					$db_data = (object)$form_data;
 					//誕生日が入力が不完全だったら表示しないためのプラグ
-					if(empty($year) || empty($month) || empty($day)){
+					if(empty($year) || empty($month) || empty($day))
+					{
 						$db_data->birthday = FALSE;
 					}
 					

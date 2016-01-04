@@ -81,4 +81,19 @@ class Test_order extends CI_Controller {
 		}
 	}
 	
+	public function get_by_orderId()
+	{
+		try
+		{
+			$orer_customer_id = 2;
+			$order_no_customer_id = 3
+			
+			$order= $this->Order->get_by_orderId($order_customer_id);
+			var_dump($order);
+		}
+		catch(Exception $e)
+		{
+			echo $e->getMessage();
+		}
+	}
 }

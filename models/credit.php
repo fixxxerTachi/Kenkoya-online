@@ -67,9 +67,7 @@ class Credit extends CI_Model{
 		$input->setEntryTranInput($entryinput);
 		$input->setExecTranInput($execinput);
 		$exe = new EntryExecTran();
-
 		$output = $exe->exec($input);
-
 		/* 例外にするか画面を用意する*/
 		if($exe->isExceptionOccured()){
 			$exception = $exe->getException();

@@ -76,6 +76,8 @@ $route['contact'] = 'front_contact/index';
 $route['contact/contact'] = 'front_contact/contact';
 $route['contact/confirm_contact'] = 'front_contact/confirm_contact';
 $route['contact/complete'] = 'front_contact/complete';
+$route['contact/takuhai_member'] = 'front_contact/takuhai_member';
+$route['contact/takuhai_member_confirm'] = 'front_contact/takuhai_member_confirm';
 /*qustion*/
 $route['question'] = 'front_question';
 $route['question/index/:num'] = 'front_question/index';

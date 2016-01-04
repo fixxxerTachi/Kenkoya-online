@@ -29,11 +29,22 @@ class show_image extends CI_Controller {
 			$image_y
 		);
 		imagejpeg($canvas,null,100);
-		
+
 		/*
 		$prduct_code = $this->uri->segment(3);
 		$url = base_url("images/products/ak{$product_code}.jpg");
 		readfile($url);
 		*/
+	}
+	
+	public function test_display()
+	{
+		header('Content-type: image/jpeg');
+		$product_code = 825;
+		$width = 150;
+		$height = 150;
+		$url = base_url("images/product/ak{$product_code}.jpg");
+		list($image_x,$image_y) = getimagesize($url);
+		var_dump($image_x);
 	}
 }

@@ -126,9 +126,9 @@ class Admin_order extends CI_Controller{
 		);
 		$form_data['no_deli_date'] = $no_deli_date ?: '';
 		$this->data['form_data'] = (object)$form_data;
-		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('0000-00-00 00:00:00');
+		$start_datetime = !empty($start) ? new DateTime($start) : new DateTime('1000-01-01 00:00:00');
 		$end_datetime = !empty($end) ? new DateTime($end) : new DateTime('9999-12-30 23:59:59');
-		$deli_start_datetime = !empty($deli_start) ? new DateTime($deli_start) : new DateTime('0000-00-00 00:00:00');
+		$deli_start_datetime = !empty($deli_start) ? new DateTime($deli_start) : new DateTime('1000-01-01 00:00:00');
 		$deli_end_datetime = !empty($deli_end) ? new DateTime($deli_end) : new DateTime('9999-12-30 23:59:59');
 		$start_datetime = $start_datetime->format('Y-m-d 00:00:00');
 		$end_datetime = $end_datetime->modify('1 days')->format('Y-m-d 00:00:00');
@@ -143,7 +143,6 @@ class Admin_order extends CI_Controller{
 			,o.status_flag as status_flag
 			,o.paid_flag as paid_flag
 			,o.delivery_charge
-			,o.arrival_date
 			,o.shipped_date
 			,o.total_price
 			,o.tax
@@ -201,13 +200,21 @@ class Admin_order extends CI_Controller{
 			)";
 		}
 		$this->db->where($date_where);
+//var_dump($this->db->get()->result());
+//var_dump($this->db->last_query());
+		/*
+		$result = $this->db->get()->result();
+		$this->data['result'] = $result;
+		*/
 		//検索処理
 		if($this->input->post('submit'))
 		{
 			$result = $this->db->get()->result();
+//log_message('error',$this->db->last_query());
 			$this->data['result'] = $result;
 			$subtotal = array();
-			foreach($result as $row){
+			foreach($result as $row)
+			{
 				$total = $row->sale_price * $row->quantity;
 				$subtotal[] = $total;
 				$this->data['total_price'] = array_sum($subtotal);
@@ -515,7 +522,7 @@ class Admin_order extends CI_Controller{
 			$writer->save('php://output');
 		}
 		$this->data['shops'] = $this->Master_area->list_area;
-		$this->data['payments'] = $this->Master_payment->method;
+		$this->data['payments'] = $this->Master_payment->show_list();
 		$this->data['paid_flags'] = $this->Mst_paid_flag->paid_flags;
 		$this->data['success_message'] = $this->session->flashdata('success');
 		$this->load->view('admin_order/list_order',$this->data);

@@ -21,7 +21,12 @@
 				<p>宅配スーパー健康屋では宅急便で商品をお届けする以外にも、当店の配達員が直接商品を定期的お届けする宅配サービスを行っております。</p>
 				<p>当WEBサイトからお申込みいただくか、お電話,FAXなどでも申し込みを受け付けております。</p>
 				<p><span style='color:red'>宅配サービスを初めてご利用になられる場合、商品配送前に宅配スーパー健康屋スタッフが訪問させていただきます。</span></p>
-			</div>
+				<h3 class='no-back'><span class='logo'>AREA</span> 健康屋宅配サービスご利用可能地域の確認</h3>
+				<p class='indent'><a class='new-window' href='<?php echo site_url('area/search_area') ?>' target='_blank'>宅配サービスの配達エリアを確認する。</a></p>
+				<h3 class='no-back'><span class='logo'>TEL</span> お電話での宅配サービス会員登録お申込み</h3> 
+				<p class='indent'><span class='tel'>0120-383-333</span> &nbsp;営業時間 : 月曜日～金曜日（9:00 ~ 18:00）</p>
+				<h3 class='no-back'><span class='logo'>MAIL</span> メールでのお問い合わせ</h3>
+				<p class='indent'><a class='button' href='<?php echo site_url('contact/contact') ?>'>お問い合わせフォーム</a></span>からお問い合わせください</p>			</div>
 			<div class='inner'>
 				<h3>ご購入の流れ</h3>
 				<div>
@@ -38,7 +43,7 @@
 			</div>
 			<div class='inner-small'>
 				<h3>宅配牛乳の案内</h3>
-				<p class='note_one'>宅配牛乳の説明</p>
+				<p class='note_single'>宅配牛乳の説明</p>
 				<p><a href=''><img src='<?php echo base_url('images/banner/takuhai_milk.jpg') ?>' width='268' height='82' alt='宅配牛乳の案内'></a></p>
 			</div>
 			<div class='inner-small'>
